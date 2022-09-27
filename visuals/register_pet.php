@@ -30,6 +30,9 @@
         <label for="vaccination note"> vaccination note</label>
         <input type="file" name=" vaccionation note" placeholder="submit vac note photo" > <br>
 
+        <label for="photo/video"> Add photo/video</label>
+        <input type="file" name=" photo/video" placeholder="submit phoyo/video" > <br>
+
       
 
         
