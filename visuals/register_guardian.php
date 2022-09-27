@@ -35,7 +35,7 @@
         <input type="date" name="birthdate"></br>
 
         <input type="checkbox" name="terms_conditions" value="terms_conditions"></input>
-        <a href="etc/rick-roll.gif">I agree to the terms and conditions</a></br>
+        <a href="images/rick-roll.gif">I agree to the terms and conditions</a></br>
     
         <button type="submit">Register</button>
     </form>
