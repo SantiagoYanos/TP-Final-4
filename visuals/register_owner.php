@@ -7,7 +7,7 @@
     <title>Guardian Register</title>
 </head>
 <body>
-    <h1>Guardian Register</h1>
+    <h1>Owner Register</h1>
     <h2>Add your info: </h2><br>
 
     <form action="..." method="post">
@@ -24,12 +24,7 @@
         <label for="">Phone: </label>
         <input type="phone" name="phone" placeholder="Phone"></br>
 
-        <label for="pet_size">Pet Size Preference: </label>
-        <select name="pet_size" id="pet_size">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="big">Big</option>
-        </select></br>
+      
 
         <label for="birthdate">Birthdate: </label>
         <input type="date" name="birthdate"></br>
@@ -37,7 +32,7 @@
         <input type="checkbox" name="terms_conditions" value="terms_conditions"></input>
         <a href="etc/rick-roll.gif">I agree to the terms and conditions</a></br>
     
-        <button type="submit">Register</button>
+        <button type="submit">Continue</button>
     </form>
 </body>
 </html>
