@@ -1,0 +1,22 @@
+.role-title{
+
+    font-size: 4em;
+
+}
+
+.role-image{
+    max-height: 70%;
+}
+
+.role-image:hover{
+
+    border-style: solid;
+    border-color: green;
+    border-width: 7px;
+
+}
+
+.chooseYourSide{
+    height: 50px;
+    text-align: center;
+}
