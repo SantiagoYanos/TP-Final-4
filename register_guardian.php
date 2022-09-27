@@ -28,7 +28,7 @@
         <select name="pet_size" id="pet_size">
             <option value="small">Small</option>
             <option value="medium">Medium</option>
-            <option value="big">Large</option>
+            <option value="big">Big</option>
         </select></br>
 
         <label for="birthdate">Birthdate: </label>
