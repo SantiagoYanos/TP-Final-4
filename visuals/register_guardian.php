@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styleRegister.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nabla&display=swap" rel="stylesheet">
     <title>Guardian Register</title>
 </head>
 <body>
@@ -35,7 +38,7 @@
         <input type="date" name="birthdate"></br>
 
         <input type="checkbox" name="terms_conditions" value="terms_conditions"></input>
-        <a href="images/rick-roll.gif">I agree to the terms and conditions</a></br>
+        <a href="/images/rick-roll.gif">I agree to the terms and conditions</a></br>
     
         <button type="submit">Register</button>
     </form>
