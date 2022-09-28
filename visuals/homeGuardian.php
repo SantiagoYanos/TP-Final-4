@@ -32,18 +32,49 @@
 
         <table class="table table-striped table-bordered">
             <tr>
-                <th>Available Dates</th>
-                <th>Action</th>
+                <th >Available Dates</th>
+                <th>action</th>
+                
             </tr>
             <tr>
-                <td name="fecha">Alfreds Futterkiste</td>
-                <td name="select">Maria Anders</td>
+            <td name="monday">monday  </td>
+            <td name="monday">  <input id="preferencemonday " type="checkbox" name="monday" ></td>
             </tr>
+            <tr>
+            <td name="tuesday">tuesday  </td>
+            <td name="tuesday">  <input id="preferencetuesday " type="checkbox" name="tuesday" ></td>
+            </tr>
+
+            <tr>
+            <td name="fecha">wednesday </td>
+            <td name="fecha"><input id="preferencewednesday " type="checkbox" name="wednesday" ></td>
+            </tr>
+
+            <tr>
+            <td name="fecha">thursday  </td>
+            <td name="fecha">  <input id="preferencethursday " type="checkbox" name="thursday" ></td>
+            </tr>
+
+            <tr>
+                <td name="fecha">friday  </td>
+                <td name="fecha">  <input id="preferencefriday " type="checkbox" name="friday" ></td>
+            </tr>
+
+            <tr>
+            <td name="fecha">saturday </td>
+            <td name="fecha"><input id="preferencesaturday " type="checkbox" name="saturday" ></td>
+            </tr>
+
+            <tr>
+            <td name="fecha">sunday  </td>
+            <td name="fecha">  <input id="preferencesunday " type="checkbox" name="sunday" ></td>
+            </tr>
+
         </table>
 
         <button>Check Petitions</button>
 
-        <button class="float-end">Remove</button>
+        <button class="float-end">save changes</button>
 
     </div>
 
