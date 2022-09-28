@@ -35,9 +35,7 @@
         <h2>Owner's Information</h2>
     </div>
 
-    <table>
-        
-        
+    <table> 
         <style>
             table, th, td {
             border:1px solid black;
@@ -74,5 +72,11 @@
             <td>June 24, 1917</td>
         </tr>
     </table>
+    
+    <div>
+        <button type="">Edit</button>
+    </div>
+
+
 </body>
 </html>
