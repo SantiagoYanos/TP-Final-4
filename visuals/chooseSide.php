@@ -29,7 +29,7 @@
 
 <div class="container align-items-center border border-dark chooseYourSide">
 
-  <b class="f1">CHOOSE YOUR SIDE</b>
+  <b class="f1"> CHOOSE YOUR SIDE</b>
 
 </div>
 
