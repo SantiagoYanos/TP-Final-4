@@ -20,7 +20,7 @@
                     <th style="width: 150px;">vaccination note</th> 
                     <th style="width: 250px;">observations</th> 
                     <th style="width: 150px;">video</th> 
-                    <th style="width: 150px;">select</th> 
+                    <th style="width: 150px;">action</th> 
                    
                 </tr>
 
