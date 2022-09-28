@@ -24,13 +24,11 @@
         <label for="">Phone: </label>
         <input type="phone" name="phone" placeholder="Phone"></br>
 
-      
-
         <label for="birthdate">Birthdate: </label>
         <input type="date" name="birthdate"></br>
 
         <input type="checkbox" name="terms_conditions" value="terms_conditions"></input>
-        <a href="images/rick-roll.gif">I agree to the terms and conditions</a></br>
+        <a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>
     
         <button type="submit">Continue</button>
     </form>
