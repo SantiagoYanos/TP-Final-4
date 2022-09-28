@@ -77,6 +77,10 @@
         <button type="">Edit</button>
     </div>
 
+    </br></br>     
 
+    <div>
+        <button type="">Log Out</button>
+    </div>
 </body>
 </html>
