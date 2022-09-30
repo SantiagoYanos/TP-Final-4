@@ -37,37 +37,37 @@
                 
             </tr>
             <tr>
-            <td name="monday">monday  </td>
+            <td >monday  </td>
             <td name="monday">  <input id="preferencemonday " type="checkbox" name="monday" ></td>
             </tr>
             <tr>
-            <td name="tuesday">tuesday  </td>
+            <td >tuesday  </td>
             <td name="tuesday">  <input id="preferencetuesday " type="checkbox" name="tuesday" ></td>
             </tr>
 
             <tr>
-            <td name="fecha">wednesday </td>
-            <td name="fecha"><input id="preferencewednesday " type="checkbox" name="wednesday" ></td>
+            <td>wednesday </td>
+            <td name="wednesday"><input id="preferencewednesday " type="checkbox" name="wednesday" ></td>
             </tr>
 
             <tr>
-            <td name="fecha">thursday  </td>
-            <td name="fecha">  <input id="preferencethursday " type="checkbox" name="thursday" ></td>
+            <td >thursday  </td>
+            <td name="thursday">  <input id="preferencethursday " type="checkbox" name="thursday" ></td>
             </tr>
 
             <tr>
-                <td name="fecha">friday  </td>
-                <td name="fecha">  <input id="preferencefriday " type="checkbox" name="friday" ></td>
+                <td>friday  </td>
+                <td name="friday">  <input id="preferencefriday " type="checkbox" name="friday" ></td>
             </tr>
 
             <tr>
-            <td name="fecha">saturday </td>
-            <td name="fecha"><input id="preferencesaturday " type="checkbox" name="saturday" ></td>
+            <td>saturday </td>
+            <td name="saturday"><input id="preferencesaturday " type="checkbox" name="saturday" ></td>
             </tr>
 
             <tr>
-            <td name="fecha">sunday  </td>
-            <td name="fecha">  <input id="preferencesunday " type="checkbox" name="sunday" ></td>
+            <td >sunday  </td>
+            <td name="sunday">  <input id="preferencesunday " type="checkbox" name="sunday" ></td>
             </tr>
 
         </table>
