@@ -26,9 +26,7 @@
     </div>
 
     <div>
-        <div>
-            <input type="date"> <button> Add </button>
-        </div>
+        
 
         <table class="table table-striped table-bordered">
             <tr>
