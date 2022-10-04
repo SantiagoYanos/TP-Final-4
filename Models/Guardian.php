@@ -4,7 +4,7 @@ namespace Models;
 
 class Guardian
 {
-   
+    private $id;
     private $cuil;
     private $name;
     private $adress;
@@ -219,6 +219,26 @@ class Guardian
     public function setAvailable_date($available_date)
     {
         $this->available_date = $available_date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }
