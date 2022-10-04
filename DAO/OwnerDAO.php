@@ -145,6 +145,18 @@
             return $valuesOwner;
         }
 
+        private function GetNextId()
+        {
+            $id = 0;
+
+            foreach($this->ownerList as $owner)
+            {
+                $id = ($owner->getId() > $id) ? $owner->getId() : $id;
+            }
+
+            return $id + 1;
+        }
+
     }
 
 ?>
