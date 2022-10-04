@@ -7,7 +7,7 @@ class Review
   private $email_owner;
   private $email_guardian;
   private $date;
-  private $coment;
+  private $comment;
   private $rating;
 
   /**
@@ -73,9 +73,9 @@ class Review
   /**
    * Get the value of coment
    */ 
-  public function getComent()
+  public function getComment()
   {
-    return $this->coment;
+    return $this->comment;
   }
 
   /**
@@ -83,9 +83,9 @@ class Review
    *
    * @return  self
    */ 
-  public function setComent($coment)
+  public function setComment($comment)
   {
-    $this->coment = $coment;
+    $this->comment = $comment;
 
     return $this;
   }
