@@ -7,7 +7,7 @@ class Reservation{
     private $price;
     private $guardian_email;
     private $id_pet;
-        
+    private $id;
 
     public function getDate()
     {
@@ -50,6 +50,18 @@ class Reservation{
     public function setId_pet($id_pet)
     {
         $this->id_pet = $id_pet;
+        return $this;
+    }
+ 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
         return $this;
     }
 }
