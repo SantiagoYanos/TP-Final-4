@@ -2,8 +2,6 @@
 
 namespace Models;
 
-use Models\Owner as Owner;
-
 class Owner {
     private $name;
     private $dni;
