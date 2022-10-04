@@ -54,19 +54,26 @@
 
                 foreach($contentArray as $content)
                 {
-                    $pet = new pet();
-                    $pet->setId($content["id"]);
-                    $pet->setName($content["name"]);
-                    $pet->setSize($content["size"]);
-                    $pet->setVaccination_plan($content["vaccination_plan"]);
-                    $set->setObservation($content["observation"]);
-                    $set->setBreed($content["breed"]);
-                    $set->setGuardian_email($content["guardian_email"]);
+                    $pet = jsonToPet($content);
 
                     array_push($this->pet_list, $pet);
                 }
-
             }
+        }
+
+        private function jsonToPet($content)
+        {
+            $pet = new Pet();
+
+            $pet->setId($content["id"]);
+            $pet->setName($content["name"]);
+            $pet->setSize($content["size"]);
+            $pet->setVaccination_plan($content["vaccination_plan"]);
+            $set->setObservation($content["observation"]);
+            $set->setBreed($content["breed"]);
+            $set->setGuardian_email($content["guardian_email"]);
+
+            return $pet;
         }
 
         public function GetPetsByOwner($owner_email){
@@ -84,21 +91,30 @@
             $arrayToEncode = array();
 
             foreach($this->pet_list as $pet){
-                $valuesArray = array();
-                $valuesArray["id"] = $pet->getId();
-                $valuesArray["name"] = $pet->getName();
-                $valuesArray["size"] = $pet->getSize();
-                $valuesArray["vaccination_plan"] = $pet->getGetVaccination();
-                $valuesArray["observation"] = $pet->getObservation();
-                $valuesArray["breed"] = $pet->getBreed();
-                $valuesArray["guardian_email"] = $pet->getGuardianEmail();
-                array_push($arrayToEncode, $valuesArray);
+                
+                $petArray = PetToArray($pet);
+                
+                array_push($arrayToEncode, $petArray);
             }
             
             $fileContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
 
             file_put_contents($this->fileName, $fileContent);
 
+        }
+
+        private function PetToArray($pet)
+        {
+            $valuesPet = array();
+            $valuesPet["id"] = $pet->getId();
+            $valuesPet["name"] = $pet->getName();
+            $valuesPet["size"] = $pet->getSize();
+            $valuesPet["vaccination_plan"] = $pet->getGetVaccination();
+            $valuesPet["observation"] = $pet->getObservation();
+            $valuesPet["breed"] = $pet->getBreed();
+            $valuesPet["guardian_email"] = $pet->getGuardianEmail();
+
+            return $valuesPet;
         }
 
 

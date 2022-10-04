@@ -134,7 +134,7 @@
 
             foreach($owner.getPets() as $pet)
             {
-                $petArray = PetDAO->MascotToArray($pet);
+                $petArray = PetDAO->PetToArray($pet);
                     
                 array_push($valuesOwner["pets"], $petArray);
             }
