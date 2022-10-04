@@ -1,13 +1,17 @@
 <?php
     namespace Models;
 
-    class Mascota{
+    class Pet{
         private $name;
         private $breed;
         private $size;
         private $vaccination_plan;
         private $observation;
+<<<<<<< HEAD
         private $id;
+=======
+        private $guardian_email;
+>>>>>>> 6013a6c6b6528bca71625e8d9bce8f39b1b54bc7
 
         /*public function __constructor($name, $breed, $size, $vaccination_plan, $observation){
             $this->name = $name;
@@ -76,6 +80,16 @@
                 $this->id = $id;
 
                 return $this;
+        public function getGuardian_email()
+        {
+            return $this->guardian_email;
+        }
+
+        public function setGuardian_email($guardian_email)
+        {
+            $this->guardian_email = $guardian_email;
+
+            return $this->guardian_email;
         }
     }
 ?>
