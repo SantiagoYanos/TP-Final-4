@@ -7,11 +7,8 @@
         private $size;
         private $vaccination_plan;
         private $observation;
-<<<<<<< HEAD
         private $id;
-=======
         private $guardian_email;
->>>>>>> 6013a6c6b6528bca71625e8d9bce8f39b1b54bc7
 
         /*public function __constructor($name, $breed, $size, $vaccination_plan, $observation){
             $this->name = $name;
@@ -77,9 +74,10 @@
 
         public function setId($id)
         {
-                $this->id = $id;
-
-                return $this;
+            $this->id = $id;
+            return $this;
+        }
+        
         public function getGuardian_email()
         {
             return $this->guardian_email;
