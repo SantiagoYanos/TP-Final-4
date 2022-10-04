@@ -69,6 +69,23 @@
             }
         }
 
+        public function GetPetsByOwner($owner_email){
+            $new_pet_list = array();
+
+            foreach($this->pet_list as $pet){
+                if($pet->getOwnerEmail() == $owner_email){
+                    array_push($new_pet_list, $pet);
+                }
+            }
+
+            if(count($new_pet_list) == 0){
+                return null;
+            }
+            else{
+                return $new_pet_list;
+            }
+        }
+
         private function SaveData(){
             $arrayToEncode = array();
 

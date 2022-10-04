@@ -5,6 +5,7 @@
 
     interface IPetDAO
     {        
+        function GetPetsByOwner($owner_email);
         function Add(Pet $pet);
         function GetAll();
         function GetById($id);
