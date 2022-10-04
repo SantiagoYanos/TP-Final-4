@@ -77,12 +77,7 @@
                 return $pet->getOwnerEmail() == $owner_email;
             });
 
-            if(count($new_pet_list) == 0){
-                return null;
-            }
-            else{
-                return $new_pet_list;
-            }
+            return $new_pet_list;
         }
 
         private function SaveData(){
