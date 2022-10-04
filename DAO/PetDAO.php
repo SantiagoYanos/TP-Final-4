@@ -72,11 +72,10 @@
         public function GetPetsByOwner($owner_email){
             $new_pet_list = array();
 
-            foreach($this->pet_list as $pet){
-                if($pet->getOwnerEmail() == $owner_email){
-                    array_push($new_pet_list, $pet);
-                }
-            }
+            $new_pet_list = array_filter($new_pet_list, function($pet) use($owner_email)
+            {
+                return $pet->getOwnerEmail() == $owner_email;
+            });
 
             if(count($new_pet_list) == 0){
                 return null;
