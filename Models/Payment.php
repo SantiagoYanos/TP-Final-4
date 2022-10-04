@@ -3,11 +3,24 @@
 namespace Models;
 
 class Payment {
+    private $id;
     private $amount;
     private $date;
     private $payment_method;
     private $guardian_email;
     private $owner_email;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this->id;
+    }
  
     public function getAmount()
     {

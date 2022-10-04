@@ -8,13 +8,6 @@ class Review
   private $coment;
   private $rating;
 
-  
-
-
-
-
-
-
   /**
    * Get the value of email_owner
    */ 

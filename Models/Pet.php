@@ -1,12 +1,13 @@
 <?php
     namespace Models;
 
-    class Mascota{
+    class Pet{
         private $name;
         private $breed;
         private $size;
         private $vaccination_plan;
         private $observation;
+        private $guardian_email;
 
         /*public function __constructor($name, $breed, $size, $vaccination_plan, $observation){
             $this->name = $name;
@@ -63,6 +64,18 @@
         {
             $this->observation = $observation;
             return $this;
+        }
+
+        public function getGuardian_email()
+        {
+            return $this->guardian_email;
+        }
+
+        public function setGuardian_email($guardian_email)
+        {
+            $this->guardian_email = $guardian_email;
+
+            return $this->guardian_email;
         }
     }
 ?>
