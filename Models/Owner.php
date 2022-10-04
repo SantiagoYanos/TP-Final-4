@@ -3,6 +3,7 @@
 namespace Models;
 
 class Owner {
+    private $id;
     private $name;
     private $dni;
     private $phone;
@@ -81,6 +82,18 @@ class Owner {
 
         return $this->password;
     }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this->id;
+    }
+
 }
 
 ?>
