@@ -37,9 +37,7 @@
 
             $owners = array_filter($this->ownerList, function($owner) use ($id) {
 
-
                 return $owner->getId() == $id;
-
             });
 
             $owners = array_values($this->ownerList);
