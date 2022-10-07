@@ -17,12 +17,6 @@ class Guardian
     private $available_date;
 
 
-
-    
-
-
-
-
     /**
      * Get the value of price
      */ 
