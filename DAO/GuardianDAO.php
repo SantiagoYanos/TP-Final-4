@@ -50,6 +50,8 @@ class GuardianDAO implements IGuardianDAO
 
             return $guardian->getEmail() == $email;
         });
+
+        return (count($guardians) > 0) ? $guardians[0] : null;
     }
 
     function Remove($id)
