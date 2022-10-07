@@ -34,6 +34,11 @@
             return $this->breed;
         }
 
+        public function setBreed($breed){
+            $this->breed = $breed;
+            return $this;
+        }
+
         public function getSize()
         {
             return $this->size;

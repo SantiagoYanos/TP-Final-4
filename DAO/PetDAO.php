@@ -12,7 +12,7 @@
         function Add(pet $pet)
         {
             $this->RetrieveData();
-            $pet->set_Id($this->getNextId());
+            $pet->setId($this->getNextId());
             array_push($this->pet_list, $pet);
             $this->SaveData();
         }
@@ -48,13 +48,13 @@
 
             if(file_exists($this->fileName))
             {
-                $jsonToDecode = file_get_contects($this->fileName);
+                $jsonToDecode = file_get_contents($this->fileName);
 
                 $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
 
                 foreach($contentArray as $content)
                 {
-                    $pet = jsonToPet($content);
+                    $pet = $this->jsonToPet($content);
 
                     array_push($this->pet_list, $pet);
                 }
@@ -69,9 +69,9 @@
             $pet->setName($content["name"]);
             $pet->setSize($content["size"]);
             $pet->setVaccination_plan($content["vaccination_plan"]);
-            $set->setObservation($content["observation"]);
-            $set->setBreed($content["breed"]);
-            $set->setGuardian_email($content["guardian_email"]);
+            $pet->setObservation($content["observation"]);
+            $pet->setBreed($content["breed"]);
+            $pet->setGuardian_email($content["guardian_email"]);
 
             return $pet;
         }
@@ -92,7 +92,7 @@
 
             foreach($this->pet_list as $pet){
                 
-                $petArray = PetToArray($pet);
+                $petArray = $this->PetToArray($pet);
                 
                 array_push($arrayToEncode, $petArray);
             }
