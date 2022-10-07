@@ -48,7 +48,7 @@ class GuardianDAO implements IGuardianDAO
 
         $guardians = array_filter($this->guardianList, function ($guardian) use ($email) {
 
-            return $guardian->getId() == $email;
+            return $guardian->getEmail() == $email;
         });
     }
 
