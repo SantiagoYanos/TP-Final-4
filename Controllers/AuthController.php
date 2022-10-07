@@ -2,6 +2,9 @@
 
 namespace Controllers;
 
+use DAO\GuardianDAO as GuardianDAO;
+use DAO\OwnerDAO as OwnerDAO;
+
 class AuthController
 {
 
@@ -9,7 +12,7 @@ class AuthController
     {
     }
 
-    public function Login()
+    public function Login($email, $password)
     {
     }
 }
