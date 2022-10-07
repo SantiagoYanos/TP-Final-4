@@ -17,7 +17,7 @@ class AuthController
         if($ownerDAO->getByEmail($email) || $guardianDAO->getByEmail($email)){
             ///redirigir al index;
             ///existe el owner o guardian con el email ingresado;
-            return require_once (ROOT);
+            return require_once (VIEWS_PATH . "/register_owner.php");
         }
         else{
             $owner = new Owner();
@@ -34,7 +34,7 @@ class AuthController
 
             ///creamos la cuenta de owner.
 
-            return require_once (ROOT);
+            return require_once (VIEWS_PATH . "/login.php");
         }
     }
 
@@ -45,7 +45,7 @@ class AuthController
         if($ownerDAO->getByEmail($email) || $guardianDAO->getByEmail($email)){
             ///redirigir al index;
             ///existe el owner o guardian con el email ingresado;
-            return require_once (ROOT);
+            return require_once (VIEWS_PATH . "/register_guardian.php");
         }
         else{
             $guardian = new Guardian();
@@ -66,7 +66,7 @@ class AuthController
 
             ///creamos la cuenta de guardian.
 
-            return require_once (ROOT);
+            return require_once (VIEWS_PATH . "/login.php");
         }
     }
 
