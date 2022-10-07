@@ -128,10 +128,9 @@ class OwnerDAO implements IOwnerDAO
             $ownerArray = $this->OwnerToArray($owner); //Pasa cada Owner a un Array
 
             array_push($arrayToDecode, $ownerArray); //Agrega al Array de Owners
-
         }
 
-        $fileContent = json_encode($arrayToDecode, JSON_PRETTY_PRINT); //Lo transforma a formato JSON 
+        $fileContent = json_encode($arrayToDecode, JSON_PRETTY_PRINT); //Lo transforma a formato JSON
 
         file_put_contents($this->filename, $fileContent); //Lo carga en un archivo (o crea el archivo)
     }
