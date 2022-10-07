@@ -66,8 +66,7 @@
                      $payment = new payment();
                      $payment ->setId($content["id"]);
                      $payment ->setAmount($content["amount"]);
-                     $payment ->setDate($content["date"]);
-                     $payment ->setAdress($content["adress"]);                       
+                     $payment ->setDate($content["date"]);                     
                      $payment ->setPayment_method($content["payment_method"]);
                      $payment ->setGuardian_email($content["guardian_email"]);                     
                      $payment ->setOwner_email($content["owner_email"]);
@@ -113,4 +112,3 @@
         }
 
     }
-?>

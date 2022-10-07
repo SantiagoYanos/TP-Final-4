@@ -48,7 +48,7 @@
 
             if(file_exists($this->fileName))
             {
-                $jsonToDecode = file_get_contects($this->fileName);
+                $jsonToDecode = file_get_contents($this->fileName);
 
                 $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
 
@@ -129,4 +129,3 @@
         }
 
     }
-?>
