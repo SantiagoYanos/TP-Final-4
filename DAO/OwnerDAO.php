@@ -88,11 +88,13 @@ class OwnerDAO implements IOwnerDAO
     {
         $owner = new Owner(); //Crea un owner de tipo Owner
 
+        $pet_DAO = new PetDAO();
+
         $owner->setId($content["id"]); //Le asigna los datos con los set
         $owner->setName($content["name"]);
         $owner->setDni($content["dni"]);
         $owner->setPhone($content["phone"]);
-        $owner->setPets(PetDAO->GetPetsByOwner($content["email"])); //Ejecuta la función del DAO de Pets obteniendo todas las mascotas del dueño en formato Pet
+        $owner->setPets($pet_DAO->GetPetsByOwner($content["email"])); //Ejecuta la función del DAO de Pets obteniendo todas las mascotas del dueño en formato Pet
         $owner->setEmail($content["email"]);
         $owner->setPassword($content["password"]);
 
@@ -118,6 +120,8 @@ class OwnerDAO implements IOwnerDAO
 
     private function OwnerToArray($owner)
     {
+        $pet_DAO = new PetDAO();
+
         $valuesOwner = array();
         $valuesOwner["id"] = $owner->getId(); //Se pasa del Owner al array owner los datos
         $valuesOwner["name"] = $owner->getName();
@@ -126,7 +130,7 @@ class OwnerDAO implements IOwnerDAO
         $valuesOwner["pets"] = array();
 
         foreach ($owner->getPets() as $pet) {
-            $petArray = PetDAO->PetToArray($pet);
+            $petArray = $pet_DAO->PetToArray($pet);
 
             array_push($valuesOwner["pets"], $petArray);
         }
