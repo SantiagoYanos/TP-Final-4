@@ -49,6 +49,24 @@ class OwnerDAO implements IOwnerDAO
         }
     }
 
+    function getByEmail($email){
+
+        $this->RetrieveData();
+
+        $owners = array_filter($this->ownerList, function ($owner) use ($email) {
+                return $owner->getEmail() == $email;
+        });
+
+        $owners = array_values($this->ownerList);
+
+        if(count($owners) > 0) {
+            return $owners[0];
+        }
+        else{
+            return null;
+        }
+    }
+
     function Remove($id)
     {
         $this->RetrieveData();
