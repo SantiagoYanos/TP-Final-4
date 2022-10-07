@@ -2,14 +2,18 @@
 
 namespace Models;
 
-class Owner {
+class Owner
+{
     private $id;
     private $name;
+    private $last_name;
+    private $adress;
     private $dni;
     private $phone;
     private $pets;
     private $email;
     private $password;
+    private $birth_date;
 
     public function getName()
     {
@@ -33,6 +37,26 @@ class Owner {
         $this->dni = $dni;
 
         return $this->dni;
+    }
+
+    public function getLast_name()
+    {
+        return $this->last_name;
+    }
+
+    public function setLast_name($last_name)
+    {
+        $this->last_name =  $last_name;
+    }
+
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
     }
 
     public function getPhone()
@@ -94,6 +118,15 @@ class Owner {
         return $this->id;
     }
 
-}
+    public function getBirth_date()
+    {
+        return $this->birth_date;
+    }
 
-?>
+    public function setBirth_date($birth_date)
+    {
+        $this->birth_date = $birth_date;
+
+        return $this;
+    }
+}

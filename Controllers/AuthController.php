@@ -9,21 +9,32 @@ use Models\Owner as Owner;
 
 class AuthController
 {
-    public function RegisterOwner($id, $name, $dni, $phone, $email, $password)
+    public function ShowRegisterOwner()
+    {
+        return require_once(VIEWS_PATH . "register_owner.php");
+    }
+
+    public function ShowLogin()
+    {
+        return require_once(VIEWS_PATH . "login.php");
+    }
+
+    public function RegisterOwner($name, $last_name, $adress, $dni, $phone, $email, $password, $birth_date)
     {
         $ownerDAO = new OwnerDAO;
         $guardianDAO = new GuardianDAO;
 
-        if($ownerDAO->getByEmail($email) || $guardianDAO->getByEmail($email)){
+        if ($ownerDAO->getByEmail($email) || $guardianDAO->getByEmail($email)) {
             ///redirigir al index;
             ///existe el owner o guardian con el email ingresado;
-            return require_once (VIEWS_PATH . "/register_owner.php");
-        }
-        else{
+            return require_once(VIEWS_PATH . "/register_owner.php");
+        } else {
             $owner = new Owner();
 
-            $owner->setId($id);
             $owner->setName($name);
+            $owner->setLast_name($last_name);
+            $owner->setAdress($adress);
+            $owner->setBirth_date($birth_date);
             $owner->setDni($dni);
             $owner->setPhone($phone);
             $owner->setPets(array());
@@ -34,22 +45,22 @@ class AuthController
 
             ///creamos la cuenta de owner.
 
-            return require_once (VIEWS_PATH . "/login.php");
+            return require_once(VIEWS_PATH . "/login.php");
         }
     }
 
-    public function RegisterGuardian($id, $cuil, $name, $adress, $price, $phone, $prefered_size, $email, $password, $available_date){
+    public function RegisterGuardian($id, $cuil, $name, $adress, $price, $phone, $prefered_size, $email, $password, $available_date)
+    {
         $ownerDAO = new OwnerDAO;
         $guardianDAO = new GuardianDAO;
 
-        if($ownerDAO->getByEmail($email) || $guardianDAO->getByEmail($email)){
+        if ($ownerDAO->getByEmail($email) || $guardianDAO->getByEmail($email)) {
             ///redirigir al index;
             ///existe el owner o guardian con el email ingresado;
-            return require_once (VIEWS_PATH . "/register_guardian.php");
-        }
-        else{
+            return require_once(VIEWS_PATH . "/register_guardian.php");
+        } else {
             $guardian = new Guardian();
-            
+
             $guardian->setId($id);
             $guardian->setCuil($cuil);
             $guardian->setName($name);
@@ -66,7 +77,7 @@ class AuthController
 
             ///creamos la cuenta de guardian.
 
-            return require_once (VIEWS_PATH . "/login.php");
+            return require_once(VIEWS_PATH . "/login.php");
         }
     }
 
@@ -88,7 +99,7 @@ class AuthController
                 $_SESSION["type"] = "guardian";
 
                 //Redirigir a perfil Guardian (return)
-                return require_once("VIEWS_PATH" . "home_guardian.php");
+                return require_once(VIEWS_PATH . "home_guardian.php");
             }
         }
 
@@ -105,11 +116,11 @@ class AuthController
                 $_SESSION["type"] = "owner";
 
                 //Redirigir a perfil Owner (return)
-                return require_once("VIEWS_PATH" . "home_owner.php");
+                return require_once(VIEWS_PATH . "home_owner.php");
             }
         }
 
         //Redirigir a Login otra vez (return)
-        return require_once("VIEWS_PATH" . "login.php");
+        return require_once(VIEWS_PATH . "login.php");
     }
 }

@@ -11,7 +11,7 @@
 <body>
     <h1>PET HERO</h1>
     <div>
-        <form action="" method="post">
+        <form action="Login" method="post">
             <!-- formulario  login-->
             <div class="control-group">
 

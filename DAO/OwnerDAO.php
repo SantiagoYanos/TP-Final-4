@@ -49,20 +49,20 @@ class OwnerDAO implements IOwnerDAO
         }
     }
 
-    function getByEmail($email){
+    function getByEmail($email)
+    {
 
         $this->RetrieveData();
 
         $owners = array_filter($this->ownerList, function ($owner) use ($email) {
-                return $owner->getEmail() == $email;
+            return $owner->getEmail() == $email;
         });
 
         $owners = array_values($this->ownerList);
 
-        if(count($owners) > 0) {
+        if (count($owners) > 0) {
             return $owners[0];
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -110,11 +110,14 @@ class OwnerDAO implements IOwnerDAO
 
         $owner->setId($content["id"]); //Le asigna los datos con los set
         $owner->setName($content["name"]);
+        $owner->setLast_name($content["last_name"]);
+        $owner->setAdress($content["adress"]);
         $owner->setDni($content["dni"]);
         $owner->setPhone($content["phone"]);
         $owner->setPets($pet_DAO->GetPetsByOwner($content["email"])); //Ejecuta la función del DAO de Pets obteniendo todas las mascotas del dueño en formato Pet
         $owner->setEmail($content["email"]);
         $owner->setPassword($content["password"]);
+        $owner->setBirth_date($content["birth_date"]);
 
         return $owner;
     }
@@ -132,7 +135,7 @@ class OwnerDAO implements IOwnerDAO
 
         $fileContent = json_encode($arrayToDecode, JSON_PRETTY_PRINT); //Lo transforma a formato JSON
 
-        file_put_contents($this->filename, $fileContent); //Lo carga en un archivo (o crea el archivo)
+        file_put_contents($this->fileName, $fileContent); //Lo carga en un archivo (o crea el archivo)
     }
 
     private function OwnerToArray($owner)
@@ -142,9 +145,12 @@ class OwnerDAO implements IOwnerDAO
         $valuesOwner = array();
         $valuesOwner["id"] = $owner->getId(); //Se pasa del Owner al array owner los datos
         $valuesOwner["name"] = $owner->getName();
+        $valuesOwner["last_name"] = $owner->getLast_name();
+        $valuesOwner["adress"] = $owner->getAdress();
         $valuesOwner["dni"] = $owner->getDni();
         $valuesOwner["phone"] = $owner->getPhone();
         $valuesOwner["pets"] = array();
+        $valuesOwner["birth_date"] = $owner->getBirth_date();
 
         foreach ($owner->getPets() as $pet) {
             $petArray = $pet_DAO->PetToArray($pet);
@@ -153,7 +159,7 @@ class OwnerDAO implements IOwnerDAO
         }
 
         $valuesOwner["email"] = $owner->getEmail();
-        $valuesOwner["passport"] = $owner->getPassport();
+        $valuesOwner["password"] = $owner->getPassword();
 
         return $valuesOwner;
     }

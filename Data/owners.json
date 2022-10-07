@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "Santiago",
+        "last_name": "Nicolas",
+        "adress": "Rio Negro 6321",
+        "dni": "43855426",
+        "phone": "(223) 516-1744",
+        "pets": [],
+        "birth_date": "2022-10-03",
+        "email": "shaknerxd@gmail.com",
+        "password": "1234"
+    }
+]
