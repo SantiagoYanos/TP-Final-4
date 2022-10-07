@@ -16,13 +16,6 @@ class Guardian
     private $password;
     private $available_date;
 
-
-
-    
-
-
-
-
     /**
      * Get the value of price
      */ 
@@ -243,27 +236,3 @@ class Guardian
         return $this;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
