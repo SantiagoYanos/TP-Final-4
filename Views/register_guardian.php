@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nabla&display=swap" rel="stylesheet">
     <title>Guardian Register</title>
 </head>
+
 <body>
     <h1>Guardian Register</h1>
     <h2>Add your info: </h2><br>
@@ -35,12 +37,13 @@
         </select></br>
 
         <label for="birthdate">Birthdate: </label>
-        <input type="date" name="birthdate"></br>
+        <input type="date" name="birth_date"></br>
 
         <input type="checkbox" name="terms_conditions" value="terms_conditions" required> </input>
         <a href="./images/rick-roll.gif">I agree to the terms and conditions</a></br>
-    
+
         <button type="submit">Register</button>
     </form>
 </body>
+
 </html>
