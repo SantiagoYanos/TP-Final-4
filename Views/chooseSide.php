@@ -16,7 +16,7 @@
   <div class="row text-center">
     <div class="col-sm mt-5 border-end border-4 border-dark">
       <h1 class="role-title">Guardian<h1>
-          <a href="/registerGuardian"><img class="img-fluid role-image mt-3" src=<?php echo IMG_PATH . "Guardian.png" ?>></a>
+          <a href="/registerGuardian"><img class="img-fluid role-image mt-3" src=<?php echo "../" . IMG_PATH . "Guardian.png" ?>></a>
           <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterGuardian" ?>><button type="text"></button></a>
     </div>
     <div class="col-sm mt-5">
