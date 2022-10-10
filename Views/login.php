@@ -28,9 +28,9 @@
 
             <button type="submit">Log in</button>
 
-            <button type="text">Register</button>
-
         </form>
+
+        <p>¿Aún no tiene una cuenta? <a href=<?php echo FRONT_ROOT . "Auth/ShowChooseSide" ?>>Regístrese aquí</a></p>
 
 
 
@@ -38,4 +38,3 @@
 </body>
 
 </html>
-?>
