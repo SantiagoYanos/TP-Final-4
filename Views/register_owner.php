@@ -12,7 +12,7 @@
     <h1>Owner Register</h1>
     <h2>Add your info: </h2><br>
 
-    <form action="<?php echo FRONT_ROOT . "Auth/Register" ?>" method="post">
+    <form action="<?php echo FRONT_ROOT . "Auth/RegisterOwner" ?>" method="post">
         <label for="name">Name: </label>
         <input type="text" name="name" placeholder="Name"></br>
         <label for="">Last Name: </label>
