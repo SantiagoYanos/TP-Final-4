@@ -103,6 +103,7 @@ class GuardianDAO implements IGuardianDAO
             $valuesArray["id"] = $guardian->getId();
             $valuesArray["cuil"] = $guardian->getCuil();
             $valuesArray["name"] = $guardian->getName();
+            $valuesArray["last_name"] = $guardian->getLast_name();
             $valuesArray["adress"] = $guardian->getAdress();
             $valuesArray["phone"] = $guardian->getPhone();
             $valuesArray["prefered_size"] = $guardian->getPrefered_size();
@@ -111,6 +112,7 @@ class GuardianDAO implements IGuardianDAO
             $valuesArray["email"] = $guardian->getEmail();
             $valuesArray["password"] = $guardian->getPassword();
             $valuesArray["available_date"] = $guardian->getAvailable_date();
+            $valuesArray["birth_date"] = $guardian->getBirth_date();
             array_push($arrayToEncode, $valuesArray);
         }
 

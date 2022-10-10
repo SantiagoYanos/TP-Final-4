@@ -41,7 +41,7 @@
         <label for="birthdate">Birthdate: </label>
         <input type="date" name="birth_date"></br>
 
-        <input type="checkbox" name="terms_conditions" value="terms_conditions" required> </input>
+        <!--<input type="checkbox" name="terms_conditions" value="terms_conditions" required> </input>-->
         <a href="./images/rick-roll.gif">I agree to the terms and conditions</a></br>
 
         <button type="submit">Register</button>

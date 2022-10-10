@@ -1,2 +1,17 @@
 [
+    {
+        "id": 1,
+        "cuil": "asdasd",
+        "name": "asdasd",
+        "last_name": "asdasdasd",
+        "adress": "asdasdasd",
+        "phone": "1234564",
+        "prefered_size": "medium",
+        "reputation": "3",
+        "price": null,
+        "email": "asdasd@asdasdas",
+        "password": "xd",
+        "available_date": [],
+        "birth_date": "2022-10-03"
+    }
 ]
