@@ -87,7 +87,6 @@ class AuthController
             $guardian->setAvailable_date(array());
             $guardian->setBirth_date($birth_date);
 
-
             $guardianDAO->Add($guardian);
 
             ///creamos la cuenta de guardian.
@@ -103,7 +102,9 @@ class AuthController
 
         $user = $guardian_DAO->GetByEmail($email);
 
-        if ($user) {
+        echo "<script>console.log('Debug Objects: " . $user . "' );</script>";
+
+        if ($user != null) {
             if ($user->getPassword() == $password) {
 
                 //Crear sesión
@@ -120,7 +121,8 @@ class AuthController
 
         $user = $owner_DAO->getByEmail($email);
 
-        if ($user) {
+
+        if ($user != null) {
             if ($user->getPassword() == $password) {
 
                 //Crear sesión

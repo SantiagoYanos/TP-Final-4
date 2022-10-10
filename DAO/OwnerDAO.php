@@ -58,7 +58,7 @@ class OwnerDAO implements IOwnerDAO
             return $owner->getEmail() == $email;
         });
 
-        $owners = array_values($this->ownerList);
+        //$owners = array_values($this->ownerList);
 
         if (count($owners) > 0) {
             return $owners[0];
