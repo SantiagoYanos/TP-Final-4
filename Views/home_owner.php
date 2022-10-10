@@ -41,36 +41,38 @@
             border:1px solid black;
             }
         </style>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td><?php echo $user->getName() ?></td>
+            </tr>
 
-        <tr>
-            <th>Name</th>
-            <td>Rogelio</td>
-        </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><?php echo $user->getLast_name() ?></td>
+            </tr>
 
-        <tr>
-            <th>Last Name</th>
-            <td>Salame</td>
-        </tr>
+            <tr>
+                <th>Adress</th>
+                <td><?php echo $user->getAdress() ?></td>
+            </tr>
+            
+            <tr>
+                <th>Phone</th>
+                <td><?php echo $user->getPhone() ?></td>
+            </tr>
 
-        <tr>
-            <th>Adress</th>
-            <td>Alberti 2051</td>
-        </tr>
-        
-        <tr>
-            <th>Phone</th>
-            <td>22333333333</td>
-        </tr>
+            <tr>
+                <th>Password</th>
+                <<td>********</td>
+            </tr>
 
-        <tr>
-            <th>Password</th>
-            <td>2y2son44y2son6</td>
-        </tr>
+            <tr>
+                <th>Birth Date</th>
+                <td><?php echo $user->getBirth_date() ?></td>
+            </tr>
 
-        <tr>
-            <th>Birth Date</th>
-            <td>June 24, 1917</td>
-        </tr>
+        </tbody>
     </table>
     
     <div>
