@@ -80,9 +80,12 @@
 
         <table class="table table-striped table-bordered mt-2">
 
+            <tbody>
+                
+                
                 <tr>
                     <th>Name</th>
-                    <td>Rogelio</td>
+                    <td><?php echo $user->getName() ?></td>
                 </tr>
 
                 <tr>
@@ -114,7 +117,8 @@
                     <th>Birth Date</th>
                     <td>June 24, 1917</td>
                 </tr>
-
+                
+            </tbody>
         </table>
 
         <button class="float-end">Edit</button>
