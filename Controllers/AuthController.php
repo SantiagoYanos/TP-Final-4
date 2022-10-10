@@ -29,10 +29,7 @@ class AuthController
         return require_once(VIEWS_PATH . "login.php");
     }
 
-    public function ShowRegisterGuardian()
-    {
-        return require_once(VIEWS_PATH . "register_guardian.php");
-    }
+
 
     public function RegisterOwner($name, $last_name, $adress, $dni, $phone, $email, $password, $birth_date)
     {
