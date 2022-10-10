@@ -10,7 +10,8 @@ use Models\Owner as Owner;
 class AuthController
 {
 
-    public function ShowChooseSide(){
+    public function ShowChooseSide()
+    {
         require_once(VIEWS_PATH . "ChooseSide.php");
     }
 
@@ -61,7 +62,7 @@ class AuthController
         }
     }
 
-    public function RegisterGuardian($id, $cuil, $name, $adress, $price, $phone, $prefered_size, $email, $password, $available_date)
+    public function RegisterGuardian($cuil, $name, $last_name, $adress, $phone, $prefered_size, $email, $password, $birth_date)
     {
         $ownerDAO = new OwnerDAO;
         $guardianDAO = new GuardianDAO;
@@ -73,17 +74,19 @@ class AuthController
         } else {
             $guardian = new Guardian();
 
-            $guardian->setId($id);
             $guardian->setCuil($cuil);
             $guardian->setName($name);
+            $guardian->setLast_name($last_name);
             $guardian->setAdress($adress);
             $guardian->setPhone($phone);
             $guardian->setPrefered_size($prefered_size);
             $guardian->setReputation("3");
-            $guardian->setPrice($price);
+            $guardian->setPrice(null);
             $guardian->setEmail($email);
             $guardian->setPassword($password);
-            $guardian->setAvailable_date($available_date);
+            $guardian->setAvailable_date(array());
+            $guardian->setBirth_date($birth_date);
+
 
             $guardianDAO->Add($guardian);
 

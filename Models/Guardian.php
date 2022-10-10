@@ -7,6 +7,7 @@ class Guardian
     private $id;
     private $cuil;
     private $name;
+    private $last_name;
     private $adress;
     private $phone;
     private $prefered_size;
@@ -15,10 +16,11 @@ class Guardian
     private $email;
     private $password;
     private $available_date;
+    private $birth_date;
 
     /**
      * Get the value of price
-     */ 
+     */
     public function getPrice()
     {
         return $this->price;
@@ -28,7 +30,7 @@ class Guardian
      * Set the value of price
      *
      * 
-     */ 
+     */
     public function setPrice($price)
     {
         $this->price = $price;
@@ -38,7 +40,7 @@ class Guardian
 
     /**
      * Get the value of cuil
-     */ 
+     */
     public function getCuil()
     {
         return $this->cuil;
@@ -48,7 +50,7 @@ class Guardian
      * Set the value of cuil
      *
      * 
-     */ 
+     */
     public function setCuil($cuil)
     {
         $this->cuil = $cuil;
@@ -58,7 +60,7 @@ class Guardian
 
     /**
      * Get the value of name
-     */ 
+     */
     public function getName()
     {
         return $this->name;
@@ -68,7 +70,7 @@ class Guardian
      * Set the value of name
      *
      * 
-     */ 
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -76,9 +78,19 @@ class Guardian
         return $this;
     }
 
+    public function getLast_name()
+    {
+        return $this->last_name;
+    }
+
+    public function setLast_name($last_name)
+    {
+        $this->last_name =  $last_name;
+    }
+
     /**
      * Get the value of adress
-     */ 
+     */
     public function getAdress()
     {
         return $this->adress;
@@ -88,7 +100,7 @@ class Guardian
      * Set the value of adress
      *
      * 
-     */ 
+     */
     public function setAdress($adress)
     {
         $this->adress = $adress;
@@ -98,7 +110,7 @@ class Guardian
 
     /**
      * Get the value of phone
-     */ 
+     */
     public function getPhone()
     {
         return $this->phone;
@@ -108,7 +120,7 @@ class Guardian
      * Set the value of phone
      *
      * 
-     */ 
+     */
     public function setPhone($phone)
     {
         $this->phone = $phone;
@@ -118,7 +130,7 @@ class Guardian
 
     /**
      * Get the value of prefered_size
-     */ 
+     */
     public function getPrefered_size()
     {
         return $this->prefered_size;
@@ -128,7 +140,7 @@ class Guardian
      * Set the value of prefered_size
      *
      * 
-     */ 
+     */
     public function setPrefered_size($prefered_size)
     {
         $this->prefered_size = $prefered_size;
@@ -138,7 +150,7 @@ class Guardian
 
     /**
      * Get the value of reputation
-     */ 
+     */
     public function getReputation()
     {
         return $this->reputation;
@@ -148,7 +160,7 @@ class Guardian
      * Set the value of reputation
      *
      * 
-     */ 
+     */
     public function setReputation($reputation)
     {
         $this->reputation = $reputation;
@@ -158,7 +170,7 @@ class Guardian
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -166,7 +178,7 @@ class Guardian
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -176,7 +188,7 @@ class Guardian
      * Set the value of password
      *
      * 
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -188,7 +200,7 @@ class Guardian
      * Set the value of email
      *
      * 
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -198,7 +210,7 @@ class Guardian
 
     /**
      * Get the value of available_date
-     */ 
+     */
     public function getAvailable_date()
     {
         return $this->available_date;
@@ -208,7 +220,7 @@ class Guardian
      * Set the value of available_date
      *
      * 
-     */ 
+     */
     public function setAvailable_date($available_date)
     {
         $this->available_date = $available_date;
@@ -218,7 +230,7 @@ class Guardian
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -228,10 +240,22 @@ class Guardian
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    public function getBirth_date()
+    {
+        return $this->birth_date;
+    }
+
+    public function setBirth_date($birth_date)
+    {
+        $this->birth_date = $birth_date;
 
         return $this;
     }
