@@ -31,8 +31,8 @@
         <label for="">Phone: </label>
         <input type="phone" name="phone" placeholder="Phone"></br>
 
-        <label for="pet_size">Pet Size Preference: </label>
-        <select name="pet_size" id="pet_size">
+        <label for="prefered_size">Pet Size Preference: </label>
+        <select name="prefered_size" id="prefered_size">
             <option value="small">Small</option>
             <option value="medium">Medium</option>
             <option value="big">Big</option>
