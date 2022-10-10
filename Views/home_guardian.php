@@ -22,7 +22,7 @@
     <b class="float-end">5 stars</b>
 
     <div class="progress mb-3">
-        <div class="progress-bar" style="width:70%"></div>
+        <div class="progress-bar" style="width:<?php echo (($user->getReputation() *100)/5) ?>%"></div>
     </div>
 
     <div>
@@ -90,32 +90,32 @@
 
                 <tr>
                     <th>Last Name</th>
-                    <td>Salame</td>
+                    <td><?php echo $user->getLast_name() ?></td>
                 </tr>
 
                 <tr>
                     <th>Adress</th>
-                    <td>Alberti 2051</td>
+                    <td><?php echo $user->getAdress() ?></td>
                 </tr>
 
                 <tr>
                     <th>Phone</th>
-                    <td>2235 123456</td>
+                    <td><?php echo $user->getPhone() ?></td>
                 </tr>
 
                 <tr>
                     <th>Password</th>
-                    <td>********</td>
+                    <<td>********</td>
                 </tr>
 
                 <tr>
                     <th>Pet size reference</th>
-                    <td>Big</td>
+                    <td><?php echo $user->getPrefered_size() ?></td>
                 </tr>
 
                 <tr>
                     <th>Birth Date</th>
-                    <td>June 24, 1917</td>
+                    <td><?php echo $user->getBirth_date() ?></td>
                 </tr>
                 
             </tbody>

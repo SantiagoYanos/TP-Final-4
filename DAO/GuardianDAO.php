@@ -80,6 +80,7 @@ class GuardianDAO implements IGuardianDAO
                 $guardian->setId($content["id"]);
                 $guardian->setCuil($content["cuil"]);
                 $guardian->setName($content["name"]);
+                $guardian->setLast_name($content["last_name"]);
                 $guardian->setAdress($content["adress"]);
                 $guardian->setPhone($content["phone"]);
                 $guardian->setPrefered_size($content["prefered_size"]);
@@ -88,6 +89,7 @@ class GuardianDAO implements IGuardianDAO
                 $guardian->setEmail($content["email"]);
                 $guardian->setPassword($content["password"]);
                 $guardian->setAvailable_date($content["available_date"]);
+                $guardian->setBirth_date($content["birth_date"]);
 
                 array_push($this->guardianList, $guardian);
             }
