@@ -16,14 +16,14 @@
   <div class="row text-center">
     <div class="col-sm mt-5 border-end border-4 border-dark">
       <h1 class="role-title">Guardian<h1>
-          <a href="/registerGuardian"><img class="img-fluid role-image mt-3" src="../Views/images/Guardian.png"></a>
-          <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterGuardian" ?>><button type="text"></button></a>
+          <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterGuardian" ?>><img class="img-fluid role-image mt-3" src="../Views/images/Guardian.png"></a>
+          
     </div>
     <div class="col-sm mt-5">
 
       <h1 class="role-title">Pet Owner</h1>
-      <a href="registerOwner"><img class="img-fluid role-image mt-3" src="../Views/images/Pet_Owner.png"></a>
-      <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterOwner" ?>><button type="text"></button></a>
+      <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterOwner" ?>><img class="img-fluid role-image mt-3" src="../Views/images/Pet_Owner.png"></a>
+      
 
     </div>
   </div>
