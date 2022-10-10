@@ -9,9 +9,19 @@ use Models\Owner as Owner;
 
 class AuthController
 {
+
+    public function ShowChooseSide(){
+        require_once(VIEWS_PATH . "ChooseSide.php");
+    }
+
     public function ShowRegisterOwner()
     {
         return require_once(VIEWS_PATH . "register_owner.php");
+    }
+
+    public function ShowRegisterGuardian()
+    {
+        return require_once(VIEWS_PATH . "register_guardian.php");
     }
 
     public function ShowLogin()
