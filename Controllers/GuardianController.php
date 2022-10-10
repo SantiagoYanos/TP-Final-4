@@ -8,12 +8,14 @@ class GuardianController
 {
     public function HomeGuardian()
     {
-        require_once(FRONT_ROOT . "/Utils/validateSession.php");
+        //require_once(FRONT_ROOT . "/Utils/validateSession.php");
 
         $guardian_DAO = new GuardianDAO();
 
-        $user = $guardian_DAO->GetByEmail($_SESSION["email"]);
+        $user = $guardian_DAO->GetByEmail("juan@gmail.com");
 
         require_once VIEWS_PATH . "home_guardian.php";
     }
 }
+
+
