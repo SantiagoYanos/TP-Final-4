@@ -11,7 +11,7 @@
 <body>
     <h1>PET HERO</h1>
     <div>
-        <form action="Login" method="post">
+        <form action="<?php echo FRONT_ROOT . "Auth/Login" ?>" method="post">
             <!-- formulario  login-->
             <div class="control-group">
 
