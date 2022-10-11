@@ -9,6 +9,7 @@
         private $observation;
         private $id;
         private $guardian_email;
+        
 
         /*public function __constructor($name, $breed, $size, $vaccination_plan, $observation){
             $this->name = $name;
