@@ -71,7 +71,7 @@ class PetDAO implements IPetDAO
         $pet->setVaccination_plan($content["vaccination_plan"]);
         $pet->setObservation($content["observation"]);
         $pet->setBreed($content["breed"]);
-        $pet->setOwner_email($content["guardian_email"]);
+        $pet->setOwner_email($content["owner_email"]);
 
         return $pet;
     }
@@ -112,7 +112,7 @@ class PetDAO implements IPetDAO
         $valuesPet["vaccination_plan"] = $pet->getVaccination_plan();
         $valuesPet["observation"] = $pet->getObservation();
         $valuesPet["breed"] = $pet->getBreed();
-        $valuesPet["guardian_email"] = $pet->getOwner_email();
+        $valuesPet["Owner_email"] = $pet->getOwner_email();
 
         return $valuesPet;
     }
