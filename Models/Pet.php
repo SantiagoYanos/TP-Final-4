@@ -8,7 +8,7 @@
         private $vaccination_plan;
         private $observation;
         private $id;
-        private $guardian_email;
+        private $owner_email;
         
 
         /*public function __constructor($name, $breed, $size, $vaccination_plan, $observation){
@@ -84,16 +84,26 @@
             return $this;
         }
         
-        public function getGuardian_email()
+        
+
+        /**
+         * Get the value of owner_email
+         */ 
+        public function getOwner_email()
         {
-            return $this->guardian_email;
+                return $this->owner_email;
         }
 
-        public function setGuardian_email($guardian_email)
+        /**
+         * Set the value of owner_email
+         *
+         * @return  self
+         */ 
+        public function setOwner_email($owner_email)
         {
-            $this->guardian_email = $guardian_email;
+                $this->owner_email = $owner_email;
 
-            return $this->guardian_email;
+                return $this;
         }
     }
 ?>
