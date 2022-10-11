@@ -4,14 +4,20 @@ namespace Controllers;
 
 use DAO\GuardianDAO as GuardianDAO;
 
-
 class GuardianController
 {
-    public function HomeGuardian()
+    function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
 
-        echo "<script>console.log('Debug Objects: " . var_dump($_SESSION) . "' );</script>";
+        if ($_SESSION["type"] == "owner") {
+            header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+        }
+    }
+
+    public function HomeGuardian()
+    {
+        var_dump($_SESSION);
 
         $guardian_DAO = new GuardianDAO();
 

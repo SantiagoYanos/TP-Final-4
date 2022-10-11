@@ -6,10 +6,17 @@ use DAO\OwnerDAO as OwnerDAO;
 
 class OwnerController
 {
-    public function HomeOwner()
+    function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
 
+        if ($_SESSION["type"] == "guardian") {
+            header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+        }
+    }
+
+    public function HomeOwner()
+    {
         $owner_DAO = new OwnerDAO();
 
         $user = $owner_DAO->GetByEmail($_SESSION["email"]);
