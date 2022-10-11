@@ -8,7 +8,7 @@ use Models\Pet as Pet;
 class PetDAO implements IPetDAO
 {
     private $pet_list = array();
-    private $file_name = ROOT . "Data/pet.json";
+    private $fileName = ROOT . "Data/pet.json";
 
     function Add(pet $pet)
     {

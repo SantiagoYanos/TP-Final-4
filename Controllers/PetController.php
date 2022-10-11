@@ -38,7 +38,7 @@ class PetController
         $pet->setSize($pet_size);
         $pet->setVaccination_plan($vaccination_note);
         $pet->setGuardian_email($_SESSION["email"]);
-        ///$pet->setPhoto_video($photo_video);
+        //$pet->setPhoto_video($photo_video);
 
         $petDAO = new PetDAO();
 
