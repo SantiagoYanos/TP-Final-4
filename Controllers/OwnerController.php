@@ -9,7 +9,7 @@ class OwnerController
     public function HomeOwner()
     {
 
-        require_once(FRONT_ROOT . "/Utils/validateSession.php");
+        require_once(ROOT . "/Utils/validateSession.php");
 
         session_start();
 

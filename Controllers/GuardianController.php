@@ -9,9 +9,7 @@ class GuardianController
 {
     public function HomeGuardian()
     {
-        require_once(FRONT_ROOT . "/Utils/validateSession.php");
-
-        session_start();
+        require_once(ROOT . "/Utils/validateSession.php");
 
         echo "<script>console.log('Debug Objects: " . var_dump($_SESSION) . "' );</script>";
 
