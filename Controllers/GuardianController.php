@@ -9,11 +9,6 @@ class GuardianController
 {
     public function HomeGuardian()
     {
-
-
-
-        
-        session_start();
         require_once(FRONT_ROOT . "/Utils/validateSession.php");
 
         session_start();
