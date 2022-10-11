@@ -78,9 +78,9 @@ class PetDAO implements IPetDAO
 
     public function GetPetsByOwner($owner_email)
     {
-        $new_pet_list = array();
+        $this->RetrieveData();
 
-        $new_pet_list = array_filter($new_pet_list, function ($pet) use ($owner_email) {
+        $new_pet_list = array_filter($this->pet_list, function ($pet) use ($owner_email) {
             return $pet->getOwnerEmail() == $owner_email;
         });
 

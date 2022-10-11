@@ -114,7 +114,7 @@ class OwnerDAO implements IOwnerDAO
         $owner->setAdress($content["adress"]);
         $owner->setDni($content["dni"]);
         $owner->setPhone($content["phone"]);
-        $owner->setPets($pet_DAO->GetPetsByOwner($content["email"])); //Ejecuta la función del DAO de Pets obteniendo todas las mascotas del dueño en formato Pet
+        //$owner->setPets($pet_DAO->GetPetsByOwner($content["email"])); //Ejecuta la función del DAO de Pets obteniendo todas las mascotas del dueño en formato Pet
         $owner->setEmail($content["email"]);
         $owner->setPassword($content["password"]);
         $owner->setBirth_date($content["birth_date"]);
@@ -149,14 +149,14 @@ class OwnerDAO implements IOwnerDAO
         $valuesOwner["adress"] = $owner->getAdress();
         $valuesOwner["dni"] = $owner->getDni();
         $valuesOwner["phone"] = $owner->getPhone();
-        $valuesOwner["pets"] = array();
+        // $valuesOwner["pets"] = array();
         $valuesOwner["birth_date"] = $owner->getBirth_date();
 
-        foreach ($owner->getPets() as $pet) {
-            $petArray = $pet_DAO->PetToArray($pet);
+        // foreach ($owner->getPets() as $pet) {
+        //     $petArray = $pet_DAO->PetToArray($pet);
 
-            array_push($valuesOwner["pets"], $petArray);
-        }
+        //     array_push($valuesOwner["pets"], $petArray);
+        // }
 
         $valuesOwner["email"] = $owner->getEmail();
         $valuesOwner["password"] = $owner->getPassword();
