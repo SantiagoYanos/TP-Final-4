@@ -123,6 +123,26 @@ class GuardianDAO implements IGuardianDAO
         file_put_contents($this->fileName, $fileContent);
     }
 
+    private function UpdateAvailableDates($monday, $tuesday,$wednesday,$thursday,$friday,$saturday,$sunday)
+    {
+        $this->RetrieveData();
+        
+        
+        $valuesArray = array();
+        $valuesArray["monday"] = $monday;
+        $valuesArray["tuesday"] = $tuesday;
+        $valuesArray["wednesday"] =$wednesday;
+        $valuesArray["thursday"] = $thursday;
+        $valuesArray["friday"] = $friday;
+        $valuesArray["saturday"] = $saturday;
+        $valuesArray["sunday"] = $sunday;
+        
+        
+
+        
+        
+    }
+
     private function GetNextId()
     {
         $id = 0;
