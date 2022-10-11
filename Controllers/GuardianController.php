@@ -4,11 +4,17 @@ namespace Controllers;
 
 use DAO\GuardianDAO as GuardianDAO;
 
+
 class GuardianController
 {
     public function HomeGuardian()
     {
-        //require_once(FRONT_ROOT . "/Utils/validateSession.php");
+
+
+
+        
+        session_start();
+        require_once(FRONT_ROOT . "/Utils/validateSession.php");
 
         session_start();
 
@@ -16,7 +22,7 @@ class GuardianController
 
         $guardian_DAO = new GuardianDAO();
 
-        $user = $guardian_DAO->GetByEmail("juan@gmail.com");
+        $user = $guardian_DAO->GetByEmail($_SESSION["email"]);
 
         require_once VIEWS_PATH . "home_guardian.php";
     }
