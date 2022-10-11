@@ -10,6 +10,10 @@ class GuardianController
     {
         //require_once(FRONT_ROOT . "/Utils/validateSession.php");
 
+        session_start();
+
+        echo "<script>console.log('Debug Objects: " . var_dump($_SESSION) . "' );</script>";
+
         $guardian_DAO = new GuardianDAO();
 
         $user = $guardian_DAO->GetByEmail("juan@gmail.com");
@@ -17,5 +21,3 @@ class GuardianController
         require_once VIEWS_PATH . "home_guardian.php";
     }
 }
-
-

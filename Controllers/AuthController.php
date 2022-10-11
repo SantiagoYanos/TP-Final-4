@@ -112,8 +112,10 @@ class AuthController
 
                 $_SESSION["type"] = "guardian";
 
+                echo "<script>console.log('Debug Objects: " . var_dump(session_id()) . "' );</script>";
+
                 //Redirigir a perfil Guardian (return)
-                return require_once(VIEWS_PATH . "home_guardian.php");
+                return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
             }
         }
 
@@ -131,7 +133,7 @@ class AuthController
                 $_SESSION["type"] = "owner";
 
                 //Redirigir a perfil Owner (return)
-                return require_once(VIEWS_PATH . "home_owner.php");
+                return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
             }
         }
 
