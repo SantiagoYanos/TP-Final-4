@@ -52,7 +52,11 @@
 
 
         </table>
-        <button type="submit">Add new pet</button> <button type="submit">edit</button> <button type="submit">remove</button>
+        <div>
+        <form action="<?php echo FRONT_ROOT . "Pet/ShowRegisterPet" ?>" method="post">
+        <button type="submit">Add new pet</button> 
+        </form>
+    </div> <button type="submit">edit</button> <button type="submit">remove</button>
 
     
 >>>>>>> 5cf321b19bb14237f14fbfea387aa17d74ded63f
