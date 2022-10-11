@@ -43,8 +43,8 @@ class PetController
         $petDAO = new PetDAO();
 
         $petDAO->Add($pet);
-
-        require_once VIEWS_PATH . "home_owner.php";
+        
+        return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
 
     public function ShowRegisterPet(){
