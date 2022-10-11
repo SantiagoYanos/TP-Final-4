@@ -109,10 +109,10 @@ class PetDAO implements IPetDAO
         $valuesPet["id"] = $pet->getId();
         $valuesPet["name"] = $pet->getName();
         $valuesPet["size"] = $pet->getSize();
-        $valuesPet["vaccination_plan"] = $pet->getGetVaccination();
+        $valuesPet["vaccination_plan"] = $pet->getVaccination_plan();
         $valuesPet["observation"] = $pet->getObservation();
         $valuesPet["breed"] = $pet->getBreed();
-        $valuesPet["guardian_email"] = $pet->getGuardianEmail();
+        $valuesPet["guardian_email"] = $pet->getGuardian_email();
 
         return $valuesPet;
     }
