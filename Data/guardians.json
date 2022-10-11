@@ -1,17 +1,32 @@
 [
     {
         "id": 1,
-        "cuil": "asdasd",
-        "name": "asdasd",
-        "last_name": "asdasdasd",
-        "adress": "asdasdasd",
+        "cuil": "1234564987",
+        "name": "Juan",
+        "last_name": "Juarez",
+        "adress": "Calle Juan 1234",
         "phone": "1234564",
         "prefered_size": "medium",
         "reputation": "5",
-        "price": null,
+        "price": 500,
         "email": "juan@gmail.com",
         "password": "xd",
         "available_date": [],
         "birth_date": "2022-10-03"
+    },
+    {
+        "id": 2,
+        "cuil": "456-789-654",
+        "name": "Lucas",
+        "last_name": "Luqueti",
+        "adress": "Col\u00f3n",
+        "phone": "456789456",
+        "prefered_size": "small",
+        "reputation": "3",
+        "price": 250,
+        "email": "lucas@gmail.com",
+        "password": "lucaselmejor",
+        "available_date": [],
+        "birth_date": "2022-10-07"
     }
 ]

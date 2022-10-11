@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
+
 <body>
     <div>
         <h1>Owner's Home</h1>
@@ -16,9 +18,9 @@
             <button type="submit">View Pets</button></br>
         </form>
     </div>
-    
+
     <div>
-        <form action="..." method="post">
+        <form action="<?php echo FRONT_ROOT . "Owner/SearchGuardian" ?>" method="post">
             <button type="submit">Visualize Guardians</button></br>
         </form>
     </div>
@@ -35,10 +37,12 @@
         <h2>Owner's Information</h2>
     </div>
 
-    <table> 
+    <table>
         <style>
-            table, th, td {
-            border:1px solid black;
+            table,
+            th,
+            td {
+                border: 1px solid black;
             }
         </style>
         <tbody>
@@ -56,7 +60,7 @@
                 <th>Adress</th>
                 <td><?php echo $user->getAdress() ?></td>
             </tr>
-            
+
             <tr>
                 <th>Phone</th>
                 <td><?php echo $user->getPhone() ?></td>
@@ -74,15 +78,16 @@
 
         </tbody>
     </table>
-    
+
     <div>
         <button type="">Edit</button>
     </div>
 
-    </br></br>     
+    </br></br>
 
     <div>
         <button type="">Log Out</button>
     </div>
 </body>
+
 </html>

@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use DAO\OwnerDAO as OwnerDAO;
+use DAO\GuardianDAO as GuardianDAO;
 
 class OwnerController
 {
@@ -22,5 +23,62 @@ class OwnerController
         $user = $owner_DAO->GetByEmail($_SESSION["email"]);
 
         require_once VIEWS_PATH . "home_owner.php";
+    }
+
+    public function SearchGuardian($name = null, $rating = null, $prefered_size = null, $location = null, $price = null)
+    {
+        echo $name;
+
+        $guardian_DAO = new GuardianDAO();
+
+        $guardians = $guardian_DAO->GetAll();
+
+        $guardians = array_filter($guardians, function ($guardian) {
+
+            return $guardian->getPrice() != null;
+        });
+
+        //---------------------------------------------- Filtros de guardianes
+
+        if ($name != null) {
+            $guardians = array_filter($guardians, function ($guardian) use ($name) {
+
+                return str_starts_with($guardian->GetName(), $name);
+            });
+        };
+
+        if ($rating != null) {
+
+            $guardians = array_filter($guardians, function ($guardian) use ($rating) {
+
+                return $guardian->GetReputation() >= $rating;
+            });
+        }
+
+        if ($prefered_size != null && $prefered_size != "*") {
+
+            $guardians = array_filter($guardians, function ($guardian) use ($prefered_size) {
+
+                return $guardian->GetPrefered_size() == $prefered_size;
+            });
+        }
+
+        if ($location != null) {
+
+            $guardians = array_filter($guardians, function ($guardian) use ($location) {
+
+                return str_starts_with($guardian->GetAdress(), $location);
+            });
+        }
+
+        if ($price != null) {
+
+            $guardians = array_filter($guardians, function ($guardian) use ($price) {
+
+                return $guardian->GetPrice() <= $price;
+            });
+        }
+
+        require_once VIEWS_PATH . "guardianList.php";
     }
 }
