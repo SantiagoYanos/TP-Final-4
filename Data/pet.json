@@ -6,6 +6,15 @@
         "vaccination_plan": "",
         "observation": "Muerde mucho",
         "breed": "Galgo",
-        "guardian_email": "shaknerxd@gmail.com"
+        "owner_email": "shaknerxd@gmail.com"
+    },
+    {
+        "id": 2,
+        "name": "salame",
+        "size": "big",
+        "vaccination_plan": "",
+        "observation": "consome",
+        "breed": "golden",
+        "owner_email": "shaknerxd@gmail.com"
     }
 ]
