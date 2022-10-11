@@ -125,21 +125,33 @@ class GuardianDAO implements IGuardianDAO
         file_put_contents($this->fileName, $fileContent);
     }
 
-    private function UpdateAvailableDates($monday, $tuesday,$wednesday,$thursday,$friday,$saturday,$sunday)
+    private function UpdateAvailableDates($email,$monday=null, $tuesday=null,$wednesday=null,$thursday=null,$friday=null,$saturday=null,$sunday=null)
     {
         $this->RetrieveData();
-        
-        
-        $valuesArray = array();
-        $valuesArray["monday"] = $monday;
-        $valuesArray["tuesday"] = $tuesday;
-        $valuesArray["wednesday"] =$wednesday;
-        $valuesArray["thursday"] = $thursday;
-        $valuesArray["friday"] = $friday;
-        $valuesArray["saturday"] = $saturday;
-        $valuesArray["sunday"] = $sunday;
-        
-        
+        $this->guardianList;
+
+        $guardians = array_map(function ($guardian) use($email,$monday, $tuesday,$wednesday,$thursday,$friday,$saturday,$sunday)  {
+
+            if($guardian->getEmail()==$email)
+            {        $valuesArray = array();
+                    $valuesArray["monday"] = $monday;
+                    $valuesArray["tuesday"] = $tuesday;
+                    $valuesArray["wednesday"] =$wednesday;
+                    $valuesArray["thursday"] = $thursday;
+                    $valuesArray["friday"] = $friday;
+                    $valuesArray["saturday"] = $saturday;
+                    $valuesArray["sunday"] = $sunday;
+                    $guardian->setAvailable_date($valuesArray);
+
+            }
+
+        return $guardian;
+
+        }, $this->guardianList);
+    
+        $this->guardianList=$guardians;
+
+        $this->SaveData();
 
         
         
