@@ -8,10 +8,7 @@ class OwnerController
 {
     public function HomeOwner()
     {
-
         require_once(ROOT . "/Utils/validateSession.php");
-
-        session_start();
 
         $owner_DAO = new OwnerDAO();
 
