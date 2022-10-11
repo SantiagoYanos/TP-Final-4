@@ -36,5 +36,28 @@
         "password": "lucaselmejor",
         "available_date": [],
         "birth_date": "2022-10-07"
+    },
+    {
+        "id": 3,
+        "cuil": "22222222",
+        "name": "Lucre",
+        "last_name": "Nazan",
+        "adress": "UTN",
+        "phone": "122222",
+        "prefered_size": "small",
+        "reputation": "3",
+        "price": null,
+        "email": "lucre@gmail.com",
+        "password": "12345",
+        "available_date": {
+            "monday": "on",
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-10-02"
     }
 ]

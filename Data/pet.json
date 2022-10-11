@@ -52,5 +52,23 @@
         "observation": "finita y larga",
         "breed": "salchica",
         "Owner_email": "shaknerxd@gmail.com"
+    },
+    {
+        "id": 7,
+        "name": "Paredes",
+        "size": "small",
+        "vaccination_plan": "",
+        "observation": "rengo",
+        "breed": "manco",
+        "Owner_email": "shaknerxd@gmail.com"
+    },
+    {
+        "id": 8,
+        "name": "lucreJr",
+        "size": "medium",
+        "vaccination_plan": "",
+        "observation": "rubia",
+        "breed": "Labrador",
+        "Owner_email": "shaknerxd@gmail.com"
     }
 ]
