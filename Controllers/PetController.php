@@ -7,9 +7,17 @@ use DAO\PetDAO as PetDAO;
 
 class PetController
 {
-    public function PetList()
+    function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
+
+        if ($_SESSION["type"] == "guardian") {
+            header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+        }
+    }
+
+    public function PetList()
+    {
 
         echo "<script>console.log('Debug Objects: " . var_dump($_SESSION) . "' );</script>";
 
