@@ -12,7 +12,7 @@
     </div>
 
     <div>
-        <form action="..." method="post">
+        <form action="<?php echo FRONT_ROOT . "Pet/PetList" ?>" method="post">
             <button type="submit">View Pets</button></br>
         </form>
     </div>
