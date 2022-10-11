@@ -8,7 +8,7 @@ use Models\Pet as Pet;
 class PetDAO implements IPetDAO
 {
     private $pet_list = array();
-    private $file_name = ROOT . "Data/pet.json";
+    private $fileName = ROOT . "Data/pet.json";
 
     function Add(pet $pet)
     {
@@ -71,17 +71,17 @@ class PetDAO implements IPetDAO
         $pet->setVaccination_plan($content["vaccination_plan"]);
         $pet->setObservation($content["observation"]);
         $pet->setBreed($content["breed"]);
-        $pet->setGuardian_email($content["guardian_email"]);
+        $pet->setOwner_email($content["Owner_email"]);
 
         return $pet;
     }
 
     public function GetPetsByOwner($owner_email)
     {
+        //$new_pet_list = array();
         $this->RetrieveData();
-
         $new_pet_list = array_filter($this->pet_list, function ($pet) use ($owner_email) {
-            return $pet->getOwnerEmail() == $owner_email;
+            return $pet->getOwner_Email() == $owner_email;
         });
 
         return $new_pet_list;
@@ -109,10 +109,10 @@ class PetDAO implements IPetDAO
         $valuesPet["id"] = $pet->getId();
         $valuesPet["name"] = $pet->getName();
         $valuesPet["size"] = $pet->getSize();
-        $valuesPet["vaccination_plan"] = $pet->getGetVaccination();
+        $valuesPet["vaccination_plan"] = $pet->getVaccination_plan();
         $valuesPet["observation"] = $pet->getObservation();
         $valuesPet["breed"] = $pet->getBreed();
-        $valuesPet["guardian_email"] = $pet->getGuardianEmail();
+        $valuesPet["Owner_email"] = $pet->getOwner_email();
 
         return $valuesPet;
     }

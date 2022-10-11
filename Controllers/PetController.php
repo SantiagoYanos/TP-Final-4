@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use DAO\PetDAO as PetDAO;
+use Models\Pet as Pet;
 
 
 class PetController
@@ -26,5 +27,27 @@ class PetController
         $petList = $pet_DAO->GetPetsByOwner($_SESSION["email"]);
 
         require_once VIEWS_PATH . "view_pets.php";
+    }
+
+    public function Add($name, $breed, $observation, $pet_size, $vaccination_note, $photo_video){
+        $pet = new Pet();
+
+        $pet->setName($name);
+        $pet->setBreed($breed);
+        $pet->setObservation($observation);
+        $pet->setSize($pet_size);
+        $pet->setVaccination_plan($vaccination_note);
+        $pet->setOwner_email($_SESSION["email"]);
+        //$pet->setPhoto_video($photo_video);
+
+        $petDAO = new PetDAO();
+
+        $petDAO->Add($pet);
+        
+        return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+    }
+
+    public function ShowRegisterPet(){
+        require_once VIEWS_PATH . "register_pet.php";
     }
 }

@@ -149,14 +149,14 @@ class OwnerDAO implements IOwnerDAO
         $valuesOwner["adress"] = $owner->getAdress();
         $valuesOwner["dni"] = $owner->getDni();
         $valuesOwner["phone"] = $owner->getPhone();
-        // $valuesOwner["pets"] = array();
+        //$valuesOwner["pets"] = array();
         $valuesOwner["birth_date"] = $owner->getBirth_date();
 
-        // foreach ($owner->getPets() as $pet) {
-        //     $petArray = $pet_DAO->PetToArray($pet);
+        /*foreach ($owner->getPets() as $pet) {
+            $petArray = $pet_DAO->PetToArray($pet);
 
-        //     array_push($valuesOwner["pets"], $petArray);
-        // }
+            array_push($valuesOwner["pets"], $petArray);
+        }*/
 
         $valuesOwner["email"] = $owner->getEmail();
         $valuesOwner["password"] = $owner->getPassword();
