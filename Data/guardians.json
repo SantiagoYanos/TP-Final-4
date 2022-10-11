@@ -11,7 +11,15 @@
         "price": 500,
         "email": "juan@gmail.com",
         "password": "xd",
-        "available_date": [],
+        "available_date": {
+            "monday": "on",
+            "tuesday": null,
+            "wednesday": "on",
+            "thursday": "on",
+            "friday": "on",
+            "saturday": "on",
+            "sunday": "on"
+        },
         "birth_date": "2022-10-03"
     },
     {

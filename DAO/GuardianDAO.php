@@ -125,7 +125,7 @@ class GuardianDAO implements IGuardianDAO
         file_put_contents($this->fileName, $fileContent);
     }
 
-    private function UpdateAvailableDates($email,$monday=null, $tuesday=null,$wednesday=null,$thursday=null,$friday=null,$saturday=null,$sunday=null)
+    function UpdateAvailableDates($email,$monday, $tuesday,$wednesday,$thursday,$friday,$saturday,$sunday)
     {
         $this->RetrieveData();
         $this->guardianList;

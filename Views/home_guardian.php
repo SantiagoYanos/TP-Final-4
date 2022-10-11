@@ -26,9 +26,10 @@
     </div>
 
     <div>
-        
+        <form action=<?php echo FRONT_ROOT . "Guardian/updateAvDates" ?> method="post">
 
         <table class="table table-striped table-bordered">
+            
             <tr>
                 <th >Available Dates</th>
                 <th>action</th>
@@ -68,11 +69,16 @@
             <td name="sunday">  <input id="preferencesunday " type="checkbox" name="sunday" ></td>
             </tr>
 
+            
+            
+
         </table>
 
         <button>Check Petitions</button>
 
         <button class="submit">save changes</button>
+
+        </form>
 
     </div>
 
