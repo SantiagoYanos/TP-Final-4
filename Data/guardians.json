@@ -17,8 +17,8 @@
             "wednesday": "on",
             "thursday": "on",
             "friday": "on",
-            "saturday": "on",
-            "sunday": "on"
+            "saturday": null,
+            "sunday": null
         },
         "birth_date": "2022-10-03"
     },
