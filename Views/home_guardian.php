@@ -72,7 +72,7 @@
 
         <button>Check Petitions</button>
 
-        <button class="float-end">save changes</button>
+        <button class="submit">save changes</button>
 
     </div>
 
