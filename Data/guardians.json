@@ -136,5 +136,28 @@
             "sunday": null
         },
         "birth_date": "2022-10-03"
+    },
+    {
+        "id": 7,
+        "cuil": "1234",
+        "name": "agustin",
+        "last_name": "gk",
+        "adress": "1234",
+        "phone": "1234",
+        "prefered_size": "medium",
+        "reputation": "3",
+        "price": null,
+        "email": "agustin@gmail.com",
+        "password": "1234",
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": "on",
+            "saturday": null,
+            "sunday": "on"
+        },
+        "birth_date": "2022-03-18"
     }
 ]
