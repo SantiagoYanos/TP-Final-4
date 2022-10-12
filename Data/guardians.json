@@ -59,5 +59,51 @@
             "sunday": null
         },
         "birth_date": "2022-10-02"
+    },
+    {
+        "id": 4,
+        "cuil": "4566666",
+        "name": "manolo",
+        "last_name": "grassu",
+        "adress": "sarmiento",
+        "phone": "1295252929",
+        "prefered_size": "medium",
+        "reputation": "3",
+        "price": null,
+        "email": "mano@gmail.com",
+        "password": "123",
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-09-12"
+    },
+    {
+        "id": 5,
+        "cuil": "62529515",
+        "name": "alberto",
+        "last_name": "gutierrrez",
+        "adress": "sarmiento 22",
+        "phone": "25829625",
+        "prefered_size": "big",
+        "reputation": "3",
+        "price": null,
+        "email": "albert@gmail.com",
+        "password": "123",
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-10-04"
     }
 ]
