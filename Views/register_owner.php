@@ -44,7 +44,7 @@
             <label for="">Phone: </label>
         </div>
         <div class="txt_field">
-            <input type="date" name="birth_date" required></br>
+            <input type="date" name="birth_date"></br>
             <label for="birthdate">Birthdate: </label>
         </div>
 
