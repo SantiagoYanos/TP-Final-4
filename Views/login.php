@@ -11,6 +11,7 @@
 <body>
     <h1>PET HERO</h1>
     <div>
+        <h2>WELCOME</h2>
         <form action="<?php echo FRONT_ROOT . "Auth/Login" ?>" method="post">
             <!-- formulario  login-->
             <div class="control-group">
@@ -23,7 +24,6 @@
                 <input type="password" name="password" placeholder="Password">
             </div>
 
-            <h2>WELCOME</h2>
 
 
             <button type="submit">Log in</button>

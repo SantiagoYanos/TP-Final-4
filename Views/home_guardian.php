@@ -35,38 +35,40 @@
                 <th>action</th>
                 
             </tr>
+
             <tr>
-            <td >monday  </td>
-            <td name="monday">  <input id="preferencemonday " type="checkbox" name="monday" <?php if($user->getAvailable_date()["monday"]) { echo "checked"; } ?>></td>
-            </tr>
-            <tr>
-            <td >tuesday  </td>
-            <td name="tuesday">  <input id="preferencetuesday " type="checkbox" name="tuesday" <?php if($user->getAvailable_date()["tuesday"]) { echo "checked"; } ?> ></td>
+                <td >Monday  </td>
+                <td name="monday">  <input id="preferencemonday " type="checkbox" name="monday" <?php if($user->getAvailable_date()["monday"]) { echo "checked"; } ?>></td>
             </tr>
 
             <tr>
-            <td>wednesday </td>
-            <td name="wednesday"><input id="preferencewednesday " type="checkbox" name="wednesday" <?php if($user->getAvailable_date()["wednesday"]) { echo "checked"; } ?> ></td>
+                <td >Tuesday  </td>
+                <td name="tuesday">  <input id="preferencetuesday " type="checkbox" name="tuesday" <?php if($user->getAvailable_date()["tuesday"]) { echo "checked"; } ?> ></td>
             </tr>
 
             <tr>
-            <td >thursday  </td>
-            <td name="thursday">  <input id="preferencethursday " type="checkbox" name="thursday" <?php if($user->getAvailable_date()["thursday"]) { echo "checked"; } ?>></td>
+                <td>Wednesday </td>
+                <td name="wednesday"><input id="preferencewednesday " type="checkbox" name="wednesday" <?php if($user->getAvailable_date()["wednesday"]) { echo "checked"; } ?> ></td>
             </tr>
 
             <tr>
-                <td>friday  </td>
+                <td >Thursday  </td>
+                <td name="thursday">  <input id="preferencethursday " type="checkbox" name="thursday" <?php if($user->getAvailable_date()["thursday"]) { echo "checked"; } ?>></td>
+            </tr>
+
+            <tr>
+                <td>Friday  </td>
                 <td name="friday">  <input id="preferencefriday " type="checkbox" name="friday" <?php if($user->getAvailable_date()["friday"]) { echo "checked"; } ?>></td>
             </tr>
 
             <tr>
-            <td>saturday </td>
-            <td name="saturday"><input id="preferencesaturday " type="checkbox" name="saturday" <?php if($user->getAvailable_date()["saturday"]) { echo "checked"; } ?>></td>
+                <td>Saturday </td>
+                <td name="saturday"><input id="preferencesaturday " type="checkbox" name="saturday" <?php if($user->getAvailable_date()["saturday"]) { echo "checked"; } ?>></td>
             </tr>
 
             <tr>
-            <td >sunday  </td>
-            <td name="sunday">  <input id="preferencesunday " type="checkbox" name="sunday" <?php if($user->getAvailable_date()["sunday"]) { echo "checked"; } ?>></td>
+                <td >Sunday  </td>
+                <td name="sunday">  <input id="preferencesunday " type="checkbox" name="sunday" <?php if($user->getAvailable_date()["sunday"]) { echo "checked"; } ?>></td>
             </tr>
 
             
@@ -76,7 +78,7 @@
 
         <button>Check Petitions</button>
 
-        <button class="submit">save changes</button>
+        <button class="submit">Save Changes</button>
 
         </form>
 
@@ -111,7 +113,7 @@
 
                 <tr>
                     <th>Password</th>
-                    <<td>********</td>
+                    <td>********</td>
                 </tr>
 
                 <tr>
