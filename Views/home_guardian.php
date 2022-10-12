@@ -18,8 +18,8 @@
     <div class="container">
 
    
-    <b>0 stars</b>
-    <b class="float-end">5 stars</b>
+    <b>0 Stars</b>
+    <b class="float-end">5 Stars</b>
 
     <div class="progress mb-3">
         <div class="progress-bar" style="width:<?php echo (($user->getReputation() *100)/5) ?>%"></div>
@@ -32,7 +32,7 @@
             
             <tr>
                 <th >Available Dates</th>
-                <th>action</th>
+                <th>Select</th>
                 
             </tr>
 
