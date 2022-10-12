@@ -54,7 +54,7 @@
         "phone": "122222",
         "prefered_size": "small",
         "reputation": "3",
-        "price": null,
+        "price": 100,
         "email": "lucre@gmail.com",
         "password": "12345",
         "available_date": {
@@ -77,7 +77,7 @@
         "phone": "1295252929",
         "prefered_size": "medium",
         "reputation": "3",
-        "price": null,
+        "price": 1000,
         "email": "mano@gmail.com",
         "password": "123",
         "available_date": {
@@ -100,7 +100,7 @@
         "phone": "25829625",
         "prefered_size": "big",
         "reputation": "3",
-        "price": null,
+        "price": 150000,
         "email": "albert@gmail.com",
         "password": "123",
         "available_date": {
@@ -113,5 +113,20 @@
             "sunday": null
         },
         "birth_date": "2022-10-04"
+    },
+    {
+        "id": 6,
+        "cuil": "asdasdas",
+        "name": "Cuenta",
+        "last_name": "Cuenta2",
+        "adress": "Ejemplo 1234",
+        "phone": "456798",
+        "prefered_size": "big",
+        "reputation": "3",
+        "price": null,
+        "email": "cuenta@gmail.com",
+        "password": "ejemplo",
+        "available_date": [],
+        "birth_date": "2022-10-03"
     }
 ]

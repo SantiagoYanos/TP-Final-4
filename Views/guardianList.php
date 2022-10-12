@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-  <link href="./css/guardianList.css" rel="stylesheet">
+  <link href="../Views/css/guardianList.css" rel="stylesheet">
   <title>Guardian List</title>
 </head>
 
@@ -68,13 +68,14 @@
         function select_Day(button_id) {
 
           const dayButton = document.getElementById(button_id)
+          const buttonValue = document.getElementById(button_id + "_value")
 
-          if (dayButton.value == "") {
-            dayButton.value = "on";
+          if (buttonValue.value == "") {
+            buttonValue.value = "on";
             dayButton.style.borderColor = "blue"
 
           } else {
-            dayButton.value = "";
+            buttonValue.value = "";
             dayButton.style.borderColor = "black"
           }
 
@@ -82,13 +83,54 @@
       </script>
 
       <thead>
-        <th><button id="monday" name="monday" onClick="select_Day(this.id)" type="button" class="day-option">Monday</button></th>
-        <th><button id="tuesday" name="tuesday" onClick="select_Day(this.id)" type="button" class="day-option">Tuesday</button></th>
-        <th><button id="wednesday" name="wednesday" onClick="select_Day(this.id)" type="button" class="day-option">Wednesday</button></th>
-        <th><button id="thursday" name="thursday" onClick="select_Day(this.id)" type="button" class="day-option">Thursday</button></th>
-        <th><button id="friday" name="friday" onClick="select_Day(this.id)" type="button" class="day-option">Friday</button></th>
-        <th><button id="saturday" name="saturday" onClick="select_Day(this.id)" type="button" class="day-option">Saturday</button></th>
-        <th><button id="sunday" name="sunday" onClick="select_Day(this.id)" type="button" class="day-option">Sunday</button></th>
+        <th><button id="monday" onClick="select_Day(this.id)" type="button" <?php if ($monday == "on") {
+                                                                              echo "style='border-color:blue'";
+                                                                            } ?> class="day-option">Monday</input>
+            <input id="monday_value" name="monday" type="hidden" <?php if ($monday == "on") {
+                                                                    echo "value='on'";
+                                                                  } ?>>
+        </th>
+        <th><button id="tuesday" name="tuesday" onClick="select_Day(this.id)" type="button" <?php if ($tuesday == "on") {
+                                                                                              echo "style='border-color:blue'";
+                                                                                            } ?> class="day-option">Tuesday</input>
+            <input id="tuesday_value" name="tuesday" type="hidden" <?php if ($tuesday == "on") {
+                                                                      echo "value='on'";
+                                                                    } ?>>
+        </th>
+        <th><button id="wednesday" name="wednesday" onClick="select_Day(this.id)" type="button" <?php if ($wednesday == "on") {
+                                                                                                  echo "style='border-color:blue'";
+                                                                                                } ?> class="day-option">Wednesday</input>
+            <input id="wednesday_value" name="wednesday" type="hidden" <?php if ($wednesday == "on") {
+                                                                          echo "value='on'";
+                                                                        } ?>>
+        </th>
+        <th><button id="thursday" name="thursday" onClick="select_Day(this.id)" type="button" <?php if ($thursday == "on") {
+                                                                                                echo "style='border-color:blue'";
+                                                                                              } ?> class="day-option">Thursday</input>
+            <input id="thursday_value" name="thursday" type="hidden" <?php if ($thursday == "on") {
+                                                                        echo "value='on'";
+                                                                      } ?>>
+        </th>
+        <th><button id="friday" name="friday" onClick="select_Day(this.id)" type="button" <?php if ($friday == "on") {
+                                                                                            echo "style='border-color:blue'";
+                                                                                          } ?> class="day-option">Friday</input>
+            <input id="friday_value" name="friday" type="hidden" <?php if ($friday == "on") {
+                                                                    echo "value='on'";
+                                                                  } ?>>
+        </th>
+        <th><button id="saturday" name="saturday" onClick="select_Day(this.id)" type="button" <?php if ($saturday == "on") {
+                                                                                                echo "style='border-color:blue'";
+                                                                                              } ?> class="day-option">Saturday</input></th>
+        <input id="saturday_value" name="saturday" type="hidden" <?php if ($saturday == "on") {
+                                                                    echo "value='on'";
+                                                                  } ?>>
+        <th><button id="sunday" name="sunday" onClick="select_Day(this.id)" type="button" <?php if ($sunday == "on") {
+                                                                                            echo "style='border-color:blue'";
+                                                                                          } ?> class="day-option">Sunday</input>
+            <input id="sunday_value" name="sunday" type="hidden" <?php if ($sunday == "on") {
+                                                                    echo "value='on'";
+                                                                  } ?>>
+        </th>
       </thead>
     </table>
 
