@@ -90,6 +90,8 @@ class AuthController
 
             ///creamos la cuenta de guardian.
 
+
+
             return require_once(VIEWS_PATH . "login.php");
         }
     }
@@ -144,11 +146,9 @@ class AuthController
     public function logOut()
     {
         session_start();
-        if ($_SESSION["email"])
-        {
+        if ($_SESSION["email"]) {
             session_destroy();
             return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-
         }
     }
 }
