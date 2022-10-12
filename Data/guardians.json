@@ -113,5 +113,35 @@
             "sunday": null
         },
         "birth_date": "2022-10-04"
+    },
+    {
+        "id": 6,
+        "cuil": "",
+        "name": "",
+        "last_name": "",
+        "adress": "",
+        "phone": "",
+        "prefered_size": "small",
+        "reputation": "3",
+        "price": null,
+        "email": "",
+        "password": "",
+        "available_date": [],
+        "birth_date": ""
+    },
+    {
+        "id": 7,
+        "cuil": "123",
+        "name": "132",
+        "last_name": "123",
+        "adress": "asdsad",
+        "phone": "123213",
+        "prefered_size": "medium",
+        "reputation": "3",
+        "price": null,
+        "email": "123@123",
+        "password": "123",
+        "available_date": [],
+        "birth_date": "1997-12-18"
     }
 ]
