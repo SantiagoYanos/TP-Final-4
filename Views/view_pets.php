@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
+    
     <title>view_pets</title>
 </head>
 
 <body>
     <h1>My pets</h1>
 
-    <table style="text-align:center;" border="2">
+    <table class= "table table-striped table-bordered" style="text-align:center;" border="2">
         <thead>
             <tr>
 
@@ -32,13 +36,13 @@
             <?php foreach ($petList as $pet) {
             ?>
                 <tr>
-                    <td><img src="../images/rick-roll.gif" alt="rick" height="100" width="100"> </td>
+                    <td><img src="../Views/images/rick-roll.gif" alt="rick" height="100" width="100"> </td>
                     <td><?php echo $pet->getName() ?> </td>
                     <td><?php echo $pet->getBreed() ?> </td>
                     <td><?php echo $pet->getSize() ?></td>
                     <td><img src=<?php echo $pet->getVaccination_plan() ?> alt="vac note" height="100" width="100"></td>
                     <td><?php echo $pet->getObservation() ?> </td>
-                    <td><img src="../images/rick-roll.gif" alt="pet video" height="100" width="100"> </td>
+                    <td><img src="../Views/images/rick-roll.gif" alt="pet video" height="100" width="100"> </td>
                     <td><button type="submit">select</button></td>
                 <?php
             }
