@@ -6,9 +6,19 @@
         "adress": "Rio Negro 6321",
         "dni": "43855426",
         "phone": "(223) 516-1744",
-        "pets": [],
         "birth_date": "2022-10-03",
         "email": "shaknerxd@gmail.com",
+        "password": "1234"
+    },
+    {
+        "id": 2,
+        "name": "manu",
+        "last_name": "grassi",
+        "adress": "dadwada",
+        "dni": "858611523",
+        "phone": "51615",
+        "birth_date": "2022-10-10",
+        "email": "manu@gmail.com",
         "password": "1234"
     }
 ]
