@@ -147,7 +147,7 @@ class AuthController
         if ($_SESSION["email"])
         {
             session_destroy();
-            return require_once(VIEWS_PATH . "login.php");
+            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
 
         }
     }
