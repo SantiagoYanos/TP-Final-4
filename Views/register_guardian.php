@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="\TP-Final-4\css\styleRegister.css">
+    <link rel="stylesheet" href="..\Views\css\styleRegister.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nabla&display=swap" rel="stylesheet">
     <title>Guardian Register</title>
 </head>
 
-<body>
+<body style="background-image: url(../Views/images/rick-roll.gif)">
     <h1>Guardian Register</h1>
     <h2>Add your info: </h2><br>
 
@@ -42,7 +42,7 @@
         <input type="date" name="birth_date"></br>
 
         <!--<input type="checkbox" name="terms_conditions" value="terms_conditions" required> </input>-->
-        <a href="./images/rick-roll.gif">I agree to the terms and conditions</a></br>
+        <!--<a href="./images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
 
         <button type="submit">Register</button>
     </form>
