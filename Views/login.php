@@ -9,7 +9,7 @@
     <title>Login</title>
 </head>
 
-<body  style="background-image: url(../Views/images/ducky.jpg)">
+<body  style="background-image: url(../Views/images/ducky.jpg)" style=background-repeat:no-repeat;>
    
     <div class="center">
     <h1>PET HERO</h1>
