@@ -143,6 +143,7 @@ class AuthController
 
     public function logOut()
     {
+        session_start();
         if ($_SESSION["email"])
         {
             session_destroy();
