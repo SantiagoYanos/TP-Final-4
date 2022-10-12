@@ -136,7 +136,7 @@
 
 </form>
 
-    <button>Log out</button>
+   
 
 </body>
 </html>
