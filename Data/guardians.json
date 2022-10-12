@@ -34,7 +34,15 @@
         "price": 250,
         "email": "lucas@gmail.com",
         "password": "lucaselmejor",
-        "available_date": [],
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
         "birth_date": "2022-10-07"
     },
     {
