@@ -25,7 +25,7 @@ class OwnerController
         require_once VIEWS_PATH . "home_owner.php";
     }
 
-    public function SearchGuardian($name = null, $rating = null, $prefered_size = null, $location = null, $price = null)
+    public function SearchGuardian($name = null, $rating = null, $prefered_size = null, $location = null, $price = null, $monday = null, $tuesday = null, $wednesday = null, $thursday = null, $friday = null, $saturday = null, $sunday = null)
     {
         echo $name;
 
@@ -37,6 +37,15 @@ class OwnerController
 
             return $guardian->getPrice() != null;
         });
+
+        $valuesArray = array();
+        $valuesArray["monday"] = $monday;
+        $valuesArray["tuesday"] = $tuesday;
+        $valuesArray["wednesday"] = $wednesday;
+        $valuesArray["thursday"] = $thursday;
+        $valuesArray["friday"] = $friday;
+        $valuesArray["saturday"] = $saturday;
+        $valuesArray["sunday"] = $sunday;
 
         //---------------------------------------------- Filtros de guardianes
 
@@ -78,6 +87,24 @@ class OwnerController
                 return $guardian->GetPrice() <= $price;
             });
         }
+
+        $guardians = array_filter($guardians, function ($guardian) use ($valuesArray) {
+
+            $valid = true;
+
+            $available_dates = $guardian->getAvailable_date();
+
+            foreach ($available_dates as $day) {
+                if ($valuesArray[$day] === "on" && $available_dates[$day] === null) {
+                    $valid = false;
+                    return $valid;
+                }
+            }
+
+            return $valid;
+        });
+
+
 
         require_once VIEWS_PATH . "guardianList.php";
     }
