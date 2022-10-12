@@ -53,7 +53,6 @@ class AuthController
             $owner->setPets(array());
             $owner->setEmail($email);
             $owner->setPassword($password);
-
             $ownerDAO->add($owner);
 
             ///creamos la cuenta de owner.
@@ -139,5 +138,17 @@ class AuthController
 
         //Redirigir a Login otra vez (return)
         return require_once(VIEWS_PATH . "login.php");
+    }
+
+
+    public function logOut()
+    {
+        session_start();
+        if ($_SESSION["email"])
+        {
+            session_destroy();
+            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+
+        }
     }
 }

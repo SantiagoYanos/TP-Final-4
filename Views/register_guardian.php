@@ -20,7 +20,7 @@
         <input type="text" name="name" placeholder="Name"></br>
         <label for="">Last Name: </label>
         <input type="text" name="last_name" placeholder="Last Name"></br>
-        <label for="cuil">Name: </label>
+        <label for="cuil">Cuil: </label>
         <input type="text" name="cuil" placeholder="CUIL"></br>
         <label for="">Email: </label>
         <input type="email" name="email" placeholder="Email"></br>
