@@ -113,5 +113,28 @@
             "sunday": null
         },
         "birth_date": "2022-10-04"
+    },
+    {
+        "id": 6,
+        "cuil": "asdasdas",
+        "name": "Cuenta",
+        "last_name": "Cuenta2",
+        "adress": "Ejemplo 1234",
+        "phone": "456798",
+        "prefered_size": "big",
+        "reputation": "3",
+        "price": null,
+        "email": "cuenta@gmail.com",
+        "password": "ejemplo",
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-10-03"
     }
 ]

@@ -94,10 +94,9 @@ class OwnerController
 
             $available_dates = $guardian->getAvailable_date();
 
-            foreach ($available_dates as $day) {
+            foreach (array_keys($available_dates) as $day) {
                 if ($valuesArray[$day] === "on" && $available_dates[$day] === null) {
                     $valid = false;
-                    return $valid;
                 }
             }
 
