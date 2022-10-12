@@ -8,7 +8,7 @@
     <title>Login</title>
 </head>
 
-<body style="background-image: url(../Views/images/rick-roll.gif)">
+<body style="background-image: url(../Views/images/ducky.jpg)">
     <h1>PET HERO</h1>
     <div>
         <h2>WELCOME</h2>
