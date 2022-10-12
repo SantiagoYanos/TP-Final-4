@@ -5,37 +5,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\Views\css\styleRegisterOwner.css">
     <title>Owner Register</title>
 </head>
 
 <body>
+    <div class="center">
     <h1>Owner Register</h1>
     <h2>Add your info: </h2><br>
 
     <form action="<?php echo FRONT_ROOT . "Auth/RegisterOwner" ?>" method="post">
-        <label for="name">Name: </label>
-        <input type="text" name="name" placeholder="Name"></br>
-        <label for="">Last Name: </label>
-        <input type="text" name="last_name" placeholder="Last Name"></br>
-        <label for="">DNI: </label>
-        <input type="text" name="dni" placeholder="DNI"></br>
-        <label for="">Email: </label>
-        <input type="email" name="email" placeholder="Email"></br>
-        <label for="">Password: </label>
-        <input type="password" name="password" placeholder="Password"></br>
-        <label for="">Adress: </label>
-        <input type="text" name="adress" placeholder="Adress"></br>
-        <label for="">Phone: </label>
-        <input type="phone" name="phone" placeholder="Phone"></br>
-
-        <label for="birthdate">Birthdate: </label>
-        <input type="date" name="birth_date"></br>
+        <div class="txt_field">
+            <input type="text" name="name"></br>    
+            <label for="name">Name: </label>
+        </div>
+        <div class="txt_field">
+            <input type="text" name="last_name"></br>
+            <label for="">Last Name: </label>
+        </div>
+        <div class="txt_field">
+            <input type="text" name="dni"></br>
+            <label for="">DNI: </label>
+        </div>
+        <div class="txt_field">
+            <input type="email" name="email"></br>
+            <label for="">Email: </label>
+        </div>
+        <div class="txt_field">
+            <input type="password" name="password"></br>
+            <label for="">Password: </label>
+        </div>
+        <div class="txt_field">
+            <input type="text" name="adress"></br>
+            <label for="">Adress: </label>
+        </div>
+        <div class="txt_field">
+            <input type="phone" name="phone"></br>
+            <label for="">Phone: </label>
+        </div>
+        <div class="txt_field">
+            <input type="date" name="birth_date"></br>
+            <label for="birthdate">Birthdate: </label>
+        </div>
 
         <!--<input type="checkbox" name="terms_conditions" value="terms_conditions"></input>-->
-        <a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>
+        <!--<a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
 
         <button type="submit">Continue</button>
     </form>
+    </div>
 </body>
 
 </html>
