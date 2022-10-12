@@ -64,14 +64,31 @@
 
     <table class="table table-bordered">
 
+      <script>
+        function select_Day(button_id) {
+
+          const dayButton = document.getElementById(button_id)
+
+          if (dayButton.value == "") {
+            dayButton.value = "on";
+            dayButton.style.borderColor = "blue"
+
+          } else {
+            dayButton.value = "";
+            dayButton.style.borderColor = "black"
+          }
+
+        }
+      </script>
+
       <thead>
-        <th><button class="day-option">Monday</button></th>
-        <th><button class="day-option">Tuesday</button></th>
-        <th><button class="day-option">Wednesday</button></th>
-        <th><button class="day-option">Thursday</button></th>
-        <th><button class="day-option">Friday</button></th>
-        <th><button class="day-option">Saturday</button></th>
-        <th><button class="day-option">Sunday</button></th>
+        <th><button id="monday" name="monday" onClick="select_Day(this.id)" type="button" class="day-option">Monday</button></th>
+        <th><button id="tuesday" name="tuesday" onClick="select_Day(this.id)" type="button" class="day-option">Tuesday</button></th>
+        <th><button id="wednesday" name="wednesday" onClick="select_Day(this.id)" type="button" class="day-option">Wednesday</button></th>
+        <th><button id="thursday" name="thursday" onClick="select_Day(this.id)" type="button" class="day-option">Thursday</button></th>
+        <th><button id="friday" name="friday" onClick="select_Day(this.id)" type="button" class="day-option">Friday</button></th>
+        <th><button id="saturday" name="saturday" onClick="select_Day(this.id)" type="button" class="day-option">Saturday</button></th>
+        <th><button id="sunday" name="sunday" onClick="select_Day(this.id)" type="button" class="day-option">Sunday</button></th>
       </thead>
     </table>
 
