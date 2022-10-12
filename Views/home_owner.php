@@ -86,7 +86,9 @@
     </br></br>
 
     <div>
-        <button type="">Log Out</button>
+        <form action="<?php echo FRONT_ROOT . "Auth/LogOut" ?>" method="post">
+            <button type="logout">Logout</button></br>
+        </form>
     </div>
 </body>
 
