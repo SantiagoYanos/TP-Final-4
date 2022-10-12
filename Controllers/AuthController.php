@@ -148,4 +148,15 @@ class AuthController
         //Redirigir a Login otra vez (return)
         return require_once(VIEWS_PATH . "login.php");
     }
+
+
+    public function logOut()
+    {
+        if ($_SESSION["email"])
+        {
+            session_destroy();
+            return require_once(VIEWS_PATH . "login.php");
+
+        }
+    }
 }

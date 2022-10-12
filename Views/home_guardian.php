@@ -131,6 +131,11 @@
 
     </div>
 
+    <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
+    <button type="submit">Log out</button>
+
+</form>
+
     <button>Log out</button>
 
 </body>
