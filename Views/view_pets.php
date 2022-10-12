@@ -12,7 +12,7 @@
     <title>view_pets</title>
 </head>
 
-<body>
+<body style="background-image: url(../Views/images/gary.png)">
     <h1>My pets</h1>
 
     <table class= "table table-striped table-bordered" style="text-align:center;" border="2">
