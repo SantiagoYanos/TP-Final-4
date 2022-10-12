@@ -16,35 +16,35 @@
 
     <form action="<?php echo FRONT_ROOT . "Auth/RegisterOwner" ?>" method="post">
         <div class="txt_field">
-            <input type="text" name="name"></br>    
+            <input type="text" name="name" required></br>    
             <label for="name">Name: </label>
         </div>
         <div class="txt_field">
-            <input type="text" name="last_name"></br>
+            <input type="text" name="last_name" required></br>
             <label for="">Last Name: </label>
         </div>
         <div class="txt_field">
-            <input type="text" name="dni"></br>
+            <input type="text" name="dni" required></br>
             <label for="">DNI: </label>
         </div>
         <div class="txt_field">
-            <input type="email" name="email"></br>
+            <input type="email" name="email" required></br>
             <label for="">Email: </label>
         </div>
         <div class="txt_field">
-            <input type="password" name="password"></br>
+            <input type="password" name="password" required></br>
             <label for="">Password: </label>
         </div>
         <div class="txt_field">
-            <input type="text" name="adress"></br>
+            <input type="text" name="adress" required></br>
             <label for="">Adress: </label>
         </div>
         <div class="txt_field">
-            <input type="phone" name="phone"></br>
+            <input type="phone" name="phone" required></br>
             <label for="">Phone: </label>
         </div>
         <div class="txt_field">
-            <input type="date" name="birth_date"></br>
+            <input type="date" name="birth_date" required></br>
             <label for="birthdate">Birthdate: </label>
         </div>
 
