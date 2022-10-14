@@ -1,24 +1,13 @@
 [
     {
         "id": 1,
-        "name": "Santiago",
-        "last_name": "Nicolas",
-        "adress": "Rio Negro 6321",
-        "dni": "43855426",
-        "phone": "(223) 516-1744",
-        "birth_date": "2022-10-03",
-        "email": "shaknerxd@gmail.com",
-        "password": "1234"
-    },
-    {
-        "id": 2,
-        "name": "manu",
-        "last_name": "grassi",
-        "adress": "dadwada",
-        "dni": "858611523",
-        "phone": "51615",
-        "birth_date": "2022-10-10",
-        "email": "manu@gmail.com",
-        "password": "1234"
+        "name": "asd",
+        "last_name": "asd",
+        "adress": "asd",
+        "dni": "asd",
+        "phone": "asd",
+        "birth_date": "1000-10-10",
+        "email": "asdfg@asdfg",
+        "password": "asd"
     }
 ]
