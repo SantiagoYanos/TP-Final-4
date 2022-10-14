@@ -20,6 +20,6 @@ Router::Route(new Request());
 //require_once(VIEWS_PATH."footer.php");
 
 
-echo "Hola que tal";
-echo "todo bien jeje";
-echo "todo correcto";
+// echo "Hola que tal";
+// echo "todo bien jeje";
+// echo "todo correcto";

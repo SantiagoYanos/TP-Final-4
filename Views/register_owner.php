@@ -11,48 +11,48 @@
 
 <body>
     <div class="center">
-    <h1>Owner Register</h1>
-    <h2>Add your info: </h2><br>
+        <h1>Owner Register</h1>
+        <h2>Add your info: </h2><br>
 
-    <form action="<?php echo FRONT_ROOT . "Auth/RegisterOwner" ?>" method="post">
-        <div class="txt_field">
-            <input type="text" name="name" required></br>    
-            <label for="name">Name: </label>
-        </div>
-        <div class="txt_field">
-            <input type="text" name="last_name" required></br>
-            <label for="">Last Name: </label>
-        </div>
-        <div class="txt_field">
-            <input type="text" name="dni" required></br>
-            <label for="">DNI: </label>
-        </div>
-        <div class="txt_field">
-            <input type="email" name="email" required></br>
-            <label for="">Email: </label>
-        </div>
-        <div class="txt_field">
-            <input type="password" name="password" required></br>
-            <label for="">Password: </label>
-        </div>
-        <div class="txt_field">
-            <input type="text" name="adress" required></br>
-            <label for="">Adress: </label>
-        </div>
-        <div class="txt_field">
-            <input type="phone" name="phone" required></br>
-            <label for="">Phone: </label>
-        </div>
-        <div class="txt_field">
-            <input type="date" name="birth_date"></br>
-            <label for="birthdate">Birthdate: </label>
-        </div>
+        <form action="<?php echo FRONT_ROOT . "Auth/RegisterOwner" ?>" method="post">
+            <div class="txt_field">
+                <input type="text" name="name" required></br>
+                <label for="name">Name: </label>
+            </div>
+            <div class="txt_field">
+                <input type="text" name="last_name" required></br>
+                <label for="">Last Name: </label>
+            </div>
+            <div class="txt_field">
+                <input type="text" name="dni" required></br>
+                <label for="">DNI: </label>
+            </div>
+            <div class="txt_field">
+                <input type="email" name="email" required></br>
+                <label for="">Email: </label>
+            </div>
+            <div class="txt_field">
+                <input type="password" name="password" required></br>
+                <label for="">Password: </label>
+            </div>
+            <div class="txt_field">
+                <input type="text" name="adress" required></br>
+                <label for="">Adress: </label>
+            </div>
+            <div class="txt_field">
+                <input type="phone" name="phone" required></br>
+                <label for="">Phone: </label>
+            </div>
+            <div class="txt_field">
+                <input type="date" name="birth_date"></br>
+                <label for="birthdate">Birthdate: </label>
+            </div>
 
-        <!--<input type="checkbox" name="terms_conditions" value="terms_conditions"></input>-->
-        <!--<a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
+            <!--<input type="checkbox" name="terms_conditions" value="terms_conditions"></input>-->
+            <!--<a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
 
-        <button type="submit">Continue</button>
-    </form>
+            <button style="margin-bottom:15px" type="submit">Continue</button>
+        </form>
     </div>
 </body>
 
