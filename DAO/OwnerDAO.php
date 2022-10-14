@@ -49,7 +49,7 @@ class OwnerDAO implements IOwnerDAO
         }
     }
 
-    function getByEmail($email)
+    function GetByEmail($email)
     {
         $this->RetrieveData();
 
