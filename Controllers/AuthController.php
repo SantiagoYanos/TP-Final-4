@@ -37,7 +37,7 @@ class AuthController
         $ownerDAO = new OwnerDAO;
         $guardianDAO = new GuardianDAO;
 
-        if ($ownerDAO->getByEmail($email) || $guardianDAO->getByEmail($email)) {
+        if ($ownerDAO->getByEmail($email) || $guardianDAO->GetByEmail($email)) {
             ///redirigir al index;
             ///existe el owner o guardian con el email ingresado;
             return require_once(VIEWS_PATH . "register_owner.php");
@@ -66,7 +66,7 @@ class AuthController
         $ownerDAO = new OwnerDAO;
         $guardianDAO = new GuardianDAO;
 
-        if ($ownerDAO->getByEmail($email) || $guardianDAO->getByEmail($email)) {
+        if ($ownerDAO->getByEmail($email) || $guardianDAO->GetByEmail($email)) {
             ///redirigir al index;
             ///existe el owner o guardian con el email ingresado;
             return require_once(VIEWS_PATH . "register_guardian.php");
@@ -83,17 +83,17 @@ class AuthController
             $guardian->setPrice(null);
             $guardian->setEmail($email);
             $guardian->setPassword($password);
-            
+
             $valuesArray = array();
             $valuesArray["monday"] = null;
             $valuesArray["tuesday"] = null;
-            $valuesArray["wednesday"] =null;
+            $valuesArray["wednesday"] = null;
             $valuesArray["thursday"] = null;
             $valuesArray["friday"] = null;
             $valuesArray["saturday"] = null;
             $valuesArray["sunday"] = null;
             $guardian->setAvailable_date($valuesArray);
-            
+
             $guardian->setBirth_date($birth_date);
 
             $guardianDAO->Add($guardian);
@@ -112,6 +112,8 @@ class AuthController
         $owner_DAO = new OwnerDAO();
 
         $user = $guardian_DAO->GetByEmail($email);
+
+        echo "<script>console.log('Debug Objects: " . $user . "' );</script>";
 
         if ($user != null) {
             if ($user->getPassword() == $password) {

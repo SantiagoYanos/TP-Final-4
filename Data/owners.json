@@ -6,9 +6,30 @@
         "adress": "Rio Negro 6321",
         "dni": "43855426",
         "phone": "(223) 516-1744",
-        "pets": [],
         "birth_date": "2022-10-03",
         "email": "shaknerxd@gmail.com",
+        "password": "1234"
+    },
+    {
+        "id": 2,
+        "name": "Salamin",
+        "last_name": "Salame",
+        "adress": "Calle Salame 10",
+        "dni": "4567489798",
+        "phone": "7897456465",
+        "birth_date": "2022-10-05",
+        "email": "salamin@gmail.com",
+        "password": "789"
+    },
+    {
+        "id": 3,
+        "name": "Prueba2",
+        "last_name": "probado",
+        "adress": "asdasdsa",
+        "dni": "56456798",
+        "phone": "789654",
+        "birth_date": "2022-10-19",
+        "email": "probador@gmail.com",
         "password": "1234"
     }
 ]
