@@ -8,15 +8,15 @@
         "phone": "123",
         "prefered_size": "medium",
         "reputation": "3",
-        "price": null,
+        "price": 100,
         "email": "asd@asd",
         "password": "asd",
         "available_date": {
             "monday": null,
-            "tuesday": null,
-            "wednesday": null,
-            "thursday": null,
-            "friday": null,
+            "tuesday": "on",
+            "wednesday": "on",
+            "thursday": "on",
+            "friday": "on",
             "saturday": null,
             "sunday": null
         },
@@ -31,17 +31,17 @@
         "phone": "asd",
         "prefered_size": "medium",
         "reputation": "3",
-        "price": null,
+        "price": 100000,
         "email": "asdf@asdf",
         "password": "asd",
         "available_date": {
             "monday": null,
             "tuesday": null,
             "wednesday": null,
-            "thursday": null,
+            "thursday": "on",
             "friday": null,
-            "saturday": null,
-            "sunday": null
+            "saturday": "on",
+            "sunday": "on"
         },
         "birth_date": "1100-02-18"
     },
@@ -54,7 +54,7 @@
         "phone": "22388888",
         "prefered_size": "big",
         "reputation": "3",
-        "price": null,
+        "price": 250,
         "email": "marce@gmail.com",
         "password": "789",
         "available_date": {
@@ -77,16 +77,16 @@
         "phone": "2235918906",
         "prefered_size": "medium",
         "reputation": "3",
-        "price": null,
+        "price": 500,
         "email": "fran@gmail.com",
         "password": "456",
         "available_date": {
-            "monday": null,
+            "monday": "on",
             "tuesday": null,
             "wednesday": null,
-            "thursday": null,
-            "friday": null,
-            "saturday": null,
+            "thursday": "on",
+            "friday": "on",
+            "saturday": "on",
             "sunday": null
         },
         "birth_date": "2022-10-25"
