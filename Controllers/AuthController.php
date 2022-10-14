@@ -113,7 +113,7 @@ class AuthController
 
         $user = $guardian_DAO->GetByEmail($email);
 
-        echo "<script>console.log('Debug Objects: " . $user . "' );</script>";
+        // echo "<script>console.log('Debug Objects: " . $user . "' );</script>";
 
         if ($user != null) {
             if ($user->getPassword() == $password) {
