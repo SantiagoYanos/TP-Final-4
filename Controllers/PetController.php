@@ -20,7 +20,7 @@ class PetController
     public function PetList()
     {
 
-        echo "<script>console.log('Debug Objects: " . var_dump($_SESSION) . "' );</script>";
+        // echo "<script>console.log('Debug Objects: " . var_dump($_SESSION) . "' );</script>";
 
         $pet_DAO = new PetDAO();
 
@@ -29,7 +29,8 @@ class PetController
         require_once VIEWS_PATH . "view_pets.php";
     }
 
-    public function Add($name, $breed, $observation, $pet_size, $vaccination_note, $photo_video){
+    public function Add($name, $breed, $observation, $pet_size, $vaccination_note, $photo_video)
+    {
         $pet = new Pet();
 
         $pet->setName($name);
@@ -43,11 +44,12 @@ class PetController
         $petDAO = new PetDAO();
 
         $petDAO->Add($pet);
-        
+
         return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
 
-    public function ShowRegisterPet(){
+    public function ShowRegisterPet()
+    {
         require_once VIEWS_PATH . "register_pet.php";
     }
 }

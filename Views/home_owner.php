@@ -42,7 +42,7 @@
 
     <div>
         <table class="table table-striped table-bordered mt-2">
-    
+
             <tbody>
                 <tr>
                     <th>Name</th>
@@ -66,7 +66,7 @@
 
                 <tr>
                     <th>Password</th>
-                    <<td>********</td>
+                    <td>********</td>
                 </tr>
 
                 <tr>
