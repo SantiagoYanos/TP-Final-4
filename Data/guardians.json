@@ -44,5 +44,51 @@
             "sunday": null
         },
         "birth_date": "1100-02-18"
+    },
+    {
+        "id": 3,
+        "cuil": "28528282",
+        "name": "Marcelo",
+        "last_name": "lindo",
+        "adress": "puerto",
+        "phone": "22388888",
+        "prefered_size": "big",
+        "reputation": "3",
+        "price": null,
+        "email": "marce@gmail.com",
+        "password": "789",
+        "available_date": {
+            "monday": "on",
+            "tuesday": null,
+            "wednesday": "on",
+            "thursday": null,
+            "friday": "on",
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-09-06"
+    },
+    {
+        "id": 4,
+        "cuil": "588585",
+        "name": "francisco",
+        "last_name": "lesa",
+        "adress": "luro 122",
+        "phone": "2235918906",
+        "prefered_size": "medium",
+        "reputation": "3",
+        "price": null,
+        "email": "fran@gmail.com",
+        "password": "456",
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-10-25"
     }
 ]

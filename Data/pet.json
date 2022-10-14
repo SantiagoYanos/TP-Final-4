@@ -7,5 +7,14 @@
         "observation": "muerde",
         "breed": "husky",
         "Owner_email": "salamin@gmail.com"
+    },
+    {
+        "id": 2,
+        "name": "salame",
+        "size": "medium",
+        "vaccination_plan": "",
+        "observation": "rojo",
+        "breed": "cocker",
+        "Owner_email": "che@gmail.com"
     }
 ]

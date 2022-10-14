@@ -31,5 +31,16 @@
         "birth_date": "2022-10-19",
         "email": "probador@gmail.com",
         "password": "1234"
+    },
+    {
+        "id": 4,
+        "name": "Cheche",
+        "last_name": "kaka",
+        "adress": "constitucion 8888",
+        "dni": "52828282",
+        "phone": "22388888",
+        "birth_date": "2022-09-05",
+        "email": "che@gmail.com",
+        "password": "123"
     }
 ]
