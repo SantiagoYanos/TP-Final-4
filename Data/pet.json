@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "name": "manito",
+        "size": "medium",
+        "vaccination_plan": "",
+        "observation": "muerde",
+        "breed": "husky",
+        "Owner_email": "salamin@gmail.com"
+    }
+]
