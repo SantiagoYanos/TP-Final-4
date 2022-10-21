@@ -42,5 +42,16 @@
         "birth_date": "2022-09-05",
         "email": "che@gmail.com",
         "password": "123"
+    },
+    {
+        "id": 5,
+        "name": "345",
+        "last_name": "345",
+        "adress": "345",
+        "dni": "345",
+        "phone": "345",
+        "birth_date": "2022-10-29",
+        "email": "345@345",
+        "password": "345"
     }
 ]
