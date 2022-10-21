@@ -85,7 +85,7 @@ class GuardianDAO implements IGuardianDAO
                 $guardian->setLast_name($content["last_name"]);
                 $guardian->setAdress($content["adress"]);
                 $guardian->setPhone($content["phone"]);
-                $guardian->setPrefered_size($content["prefered_size"]);
+                $guardian->setPreferred_size($content["preferred_size"]);
                 $guardian->setPrice($content["price"]);
                 $guardian->setReputation($content["reputation"]);
                 $guardian->setEmail($content["email"]);
@@ -110,7 +110,7 @@ class GuardianDAO implements IGuardianDAO
             $valuesArray["last_name"] = $guardian->getLast_name();
             $valuesArray["adress"] = $guardian->getAdress();
             $valuesArray["phone"] = $guardian->getPhone();
-            $valuesArray["prefered_size"] = $guardian->getPrefered_size();
+            $valuesArray["preferred_size"] = $guardian->getPreferred_size();
             $valuesArray["reputation"] = $guardian->getReputation();
             $valuesArray["price"] = $guardian->getPrice();
             $valuesArray["email"] = $guardian->getEmail();
@@ -125,36 +125,31 @@ class GuardianDAO implements IGuardianDAO
         file_put_contents($this->fileName, $fileContent);
     }
 
-    function UpdateAvailableDates($email,$monday, $tuesday,$wednesday,$thursday,$friday,$saturday,$sunday)
+    function UpdateAvailableDates($email, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $sunday)
     {
         $this->RetrieveData();
         $this->guardianList;
 
-        $guardians = array_map(function ($guardian) use($email,$monday, $tuesday,$wednesday,$thursday,$friday,$saturday,$sunday)  {
+        $guardians = array_map(function ($guardian) use ($email, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $sunday) {
 
-            if($guardian->getEmail()==$email)
-            {        $valuesArray = array();
-                    $valuesArray["monday"] = $monday;
-                    $valuesArray["tuesday"] = $tuesday;
-                    $valuesArray["wednesday"] =$wednesday;
-                    $valuesArray["thursday"] = $thursday;
-                    $valuesArray["friday"] = $friday;
-                    $valuesArray["saturday"] = $saturday;
-                    $valuesArray["sunday"] = $sunday;
-                    $guardian->setAvailable_date($valuesArray);
-
+            if ($guardian->getEmail() == $email) {
+                $valuesArray = array();
+                $valuesArray["monday"] = $monday;
+                $valuesArray["tuesday"] = $tuesday;
+                $valuesArray["wednesday"] = $wednesday;
+                $valuesArray["thursday"] = $thursday;
+                $valuesArray["friday"] = $friday;
+                $valuesArray["saturday"] = $saturday;
+                $valuesArray["sunday"] = $sunday;
+                $guardian->setAvailable_date($valuesArray);
             }
 
-        return $guardian;
-
+            return $guardian;
         }, $this->guardianList);
-    
-        $this->guardianList=$guardians;
+
+        $this->guardianList = $guardians;
 
         $this->SaveData();
-
-        
-        
     }
 
     private function GetNextId()

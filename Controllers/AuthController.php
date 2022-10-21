@@ -61,7 +61,7 @@ class AuthController
         }
     }
 
-    public function RegisterGuardian($cuil, $name, $last_name, $adress, $phone, $prefered_size, $email, $password, $birth_date)
+    public function RegisterGuardian($cuil, $name, $last_name, $adress, $phone, $preferred_size, $email, $password, $birth_date)
     {
         $ownerDAO = new OwnerDAO;
         $guardianDAO = new GuardianDAO;
@@ -78,7 +78,7 @@ class AuthController
             $guardian->setLast_name($last_name);
             $guardian->setAdress($adress);
             $guardian->setPhone($phone);
-            $guardian->setPrefered_size($prefered_size);
+            $guardian->setPreferred_size($preferred_size);
             $guardian->setReputation("3");
             $guardian->setPrice(null);
             $guardian->setEmail($email);

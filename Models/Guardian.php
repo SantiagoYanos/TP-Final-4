@@ -10,7 +10,7 @@ class Guardian
     private $last_name;
     private $adress;
     private $phone;
-    private $prefered_size;
+    private $preferred_size;
     private $reputation;
     private $price;
     private $email;
@@ -131,9 +131,9 @@ class Guardian
     /**
      * Get the value of prefered_size
      */
-    public function getPrefered_size()
+    public function getPreferred_size()
     {
-        return $this->prefered_size;
+        return $this->preferred_size;
     }
 
     /**
@@ -141,9 +141,9 @@ class Guardian
      *
      * 
      */
-    public function setPrefered_size($prefered_size)
+    public function setPreferred_size($prefered_size)
     {
-        $this->prefered_size = $prefered_size;
+        $this->preferred_size = $prefered_size;
 
         return $this;
     }
