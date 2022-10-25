@@ -133,8 +133,13 @@
                     </tr>
 
                     <tr>
-                        <th>Pet size reference</th>
+                        <th>Dog size reference</th>
                         <td><?php echo $user->getPreferred_size() ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>Cat size reference</th>
+                        <td><?php echo $user->GetPreferred_size_cat() ?></td>
                     </tr>
 
                     <tr>
