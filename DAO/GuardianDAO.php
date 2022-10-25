@@ -56,6 +56,20 @@ class GuardianDAO implements IGuardianDAO
         return (count($guardians) > 0) ? $guardians[0] : null;
     }
 
+    function GetByCUIL($cuil)
+    {
+        $this->RetrieveData();
+
+        $guardians = array_filter($this->guardianList, function ($guardian) use ($cuil) {
+
+            return $guardian->GetCuil() == $cuil;
+        });
+
+        $guardians = array_values($guardians);
+
+        return (count($guardians) > 0) ? $guardians[0] : null;
+    }
+
     function Remove($id)
     {
         $this->RetrieveData();
