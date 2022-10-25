@@ -25,7 +25,7 @@ class OwnerController
         require_once VIEWS_PATH . "home_owner.php";
     }
 
-    public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $location = null, $price = null, $monday = null, $tuesday = null, $wednesday = null, $thursday = null, $friday = null, $saturday = null, $sunday = null)
+    public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $preferred_size_cat = null, $location = null, $price = null, $monday = null, $tuesday = null, $wednesday = null, $thursday = null, $friday = null, $saturday = null, $sunday = null)
     {
         echo $name;
 
@@ -69,6 +69,15 @@ class OwnerController
             $guardians = array_filter($guardians, function ($guardian) use ($preferred_size) {
 
                 return $guardian->GetPreferred_size() == $preferred_size;
+            });
+        }
+
+        
+        if ($preferred_size_cat != null && $preferred_size_cat != "*") {
+
+            $guardians = array_filter($guardians, function ($guardian) use ($preferred_size_cat) {
+
+                return $guardian->GetPreferred_size_cat() == $preferred_size_cat;
             });
         }
 

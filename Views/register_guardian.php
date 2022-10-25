@@ -47,13 +47,22 @@
             </div>
 
             <div>
-                <label for="prefered_size">Pet Size Preference: </label>
-                <select name="prefered_size" id="prefered_size" required>
+                <label for="prefered_size">Dog Size Preference: </label>
+                <select name="preferred_size" id="preferred_size" required>
                     <option value="small">Small</option>
                     <option value="medium">Medium</option>
                     <option value="big">Big</option>
                 </select></br>
 
+            </div>
+
+            <div>
+                <label for="prefered_size">Cat Size Preference: </label>
+                <select name="preferred_size_cat" id="preferred_size_cat" required>
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="big">Big</option>
+                </select></br>
             </div>
 
             <div class="txt_field">
