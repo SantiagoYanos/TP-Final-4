@@ -29,7 +29,7 @@ class PetController
         require_once VIEWS_PATH . "view_pets.php";
     }
 
-    public function Add($name, $breed, $observation, $pet_size, $vaccination_note, $photo_video)
+    public function Add($name, $breed, $observation, $pet_size, $vaccination_note, $photo_video, $type)
     {
         $pet = new Pet();
 
@@ -39,6 +39,7 @@ class PetController
         $pet->setSize($pet_size);
         $pet->setVaccination_plan($vaccination_note);
         $pet->setOwner_email($_SESSION["email"]);
+        $pet->setType($type);
         //$pet->setPhoto_video($photo_video);
 
         $petDAO = new PetDAO();
