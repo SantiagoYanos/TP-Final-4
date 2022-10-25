@@ -100,6 +100,7 @@ class GuardianDAO implements IGuardianDAO
                 $guardian->setAdress($content["adress"]);
                 $guardian->setPhone($content["phone"]);
                 $guardian->setPreferred_size($content["preferred_size"]);
+                $guardian->setPreferred_size_cat($content["preferred_size_cat"]);
                 $guardian->setPrice($content["price"]);
                 $guardian->setReputation($content["reputation"]);
                 $guardian->setEmail($content["email"]);
@@ -125,6 +126,7 @@ class GuardianDAO implements IGuardianDAO
             $valuesArray["adress"] = $guardian->getAdress();
             $valuesArray["phone"] = $guardian->getPhone();
             $valuesArray["preferred_size"] = $guardian->getPreferred_size();
+            $valuesArray["preferred_size_cat"] = $guardian->getPreferred_size_cat();
             $valuesArray["reputation"] = $guardian->getReputation();
             $valuesArray["price"] = $guardian->getPrice();
             $valuesArray["email"] = $guardian->getEmail();

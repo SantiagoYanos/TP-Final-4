@@ -28,7 +28,9 @@
         </div>
 
         <div>
-            <form action=<?php echo FRONT_ROOT . "Guardian/updateAvDates" ?> method="post">
+
+            <!-- <form action=<?php //echo FRONT_ROOT . "Guardian/updateAvDates" 
+                                ?> method="post">
 
                 <table class="table table-striped table-bordered">
 
@@ -40,55 +42,53 @@
 
                     <tr>
                         <td>Monday </td>
-                        <td name="monday"> <input id="preferencemonday " type="checkbox" name="monday" <?php if ($user->getAvailable_date()["monday"]) {
+                        <td name="monday"> <input id="preferencemonday " type="checkbox" name="monday" <?php /*if ($user->getAvailable_date()["monday"]) {
                                                                                                             echo "checked";
-                                                                                                        } ?>></td>
+                                                                                                    
+                                                                                                        } */ ?>></td>
                     </tr>
 
                     <tr>
                         <td>Tuesday </td>
-                        <td name="tuesday"> <input id="preferencetuesday " type="checkbox" name="tuesday" <?php if ($user->getAvailable_date()["tuesday"]) {
+                        <td name="tuesday"> <input id="preferencetuesday " type="checkbox" name="tuesday" <?php /*if ($user->getAvailable_date()["tuesday"]) {
                                                                                                                 echo "checked";
-                                                                                                            } ?>></td>
+                                                                                                            } */ ?>></td>
                     </tr>
 
                     <tr>
                         <td>Wednesday </td>
-                        <td name="wednesday"><input id="preferencewednesday " type="checkbox" name="wednesday" <?php if ($user->getAvailable_date()["wednesday"]) {
+                        <td name="wednesday"><input id="preferencewednesday " type="checkbox" name="wednesday" <?php /*if ($user->getAvailable_date()["wednesday"]) {
                                                                                                                     echo "checked";
-                                                                                                                } ?>></td>
+                                                                                                                } */ ?>></td>
                     </tr>
 
                     <tr>
                         <td>Thursday </td>
-                        <td name="thursday"> <input id="preferencethursday " type="checkbox" name="thursday" <?php if ($user->getAvailable_date()["thursday"]) {
+                        <td name="thursday"> <input id="preferencethursday " type="checkbox" name="thursday" <?php /* if ($user->getAvailable_date()["thursday"]) {
                                                                                                                     echo "checked";
-                                                                                                                } ?>></td>
+                                                                                                                } */ ?>></td>
                     </tr>
 
                     <tr>
                         <td>Friday </td>
-                        <td name="friday"> <input id="preferencefriday " type="checkbox" name="friday" <?php if ($user->getAvailable_date()["friday"]) {
+                        <td name="friday"> <input id="preferencefriday " type="checkbox" name="friday" <?php /* if ($user->getAvailable_date()["friday"]) {
                                                                                                             echo "checked";
-                                                                                                        } ?>></td>
+                                                                                                        } */ ?>></td>
                     </tr>
 
                     <tr>
                         <td>Saturday </td>
-                        <td name="saturday"><input id="preferencesaturday " type="checkbox" name="saturday" <?php if ($user->getAvailable_date()["saturday"]) {
+                        <td name="saturday"><input id="preferencesaturday " type="checkbox" name="saturday" <?php /* if ($user->getAvailable_date()["saturday"]) {
                                                                                                                 echo "checked";
-                                                                                                            } ?>></td>
+                                                                                                            } */ ?>></td>
                     </tr>
 
                     <tr>
                         <td>Sunday </td>
-                        <td name="sunday"> <input id="preferencesunday " type="checkbox" name="sunday" <?php if ($user->getAvailable_date()["sunday"]) {
+                        <td name="sunday"> <input id="preferencesunday " type="checkbox" name="sunday" <?php /* if ($user->getAvailable_date()["sunday"]) {
                                                                                                             echo "checked";
-                                                                                                        } ?>></td>
+                                                                                                        } */ ?>></td>
                     </tr>
-
-
-
 
                 </table>
 
@@ -96,7 +96,7 @@
 
                 <button class="submit">Save Changes</button>
 
-            </form>
+            </form> -->
 
         </div>
 
