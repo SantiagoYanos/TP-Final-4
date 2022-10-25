@@ -155,7 +155,13 @@
         </div>
 
         <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
-            <button type="submit">Log out</button>
+        <button type="submit" onclick="alertMessage()">Logout</button>
+
+            <script>
+                function alertMessage() {
+                    alert("Goodbye!");
+                }
+            </script>
 
         </form>
 
