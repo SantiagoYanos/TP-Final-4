@@ -7,6 +7,7 @@
         "adress": "asd",
         "phone": "123",
         "preferred_size": "medium",
+        "preferred_size_cat": null,
         "reputation": "3",
         "price": 100,
         "email": "asd@asd",
@@ -30,6 +31,7 @@
         "adress": "asd",
         "phone": "asd",
         "preferred_size": "medium",
+        "preferred_size_cat": null,
         "reputation": "5",
         "price": 100000,
         "email": "asdf@asdf",
@@ -53,6 +55,7 @@
         "adress": "puerto",
         "phone": "22388888",
         "preferred_size": "big",
+        "preferred_size_cat": null,
         "reputation": "3",
         "price": 250,
         "email": "marce@gmail.com",
@@ -76,6 +79,7 @@
         "adress": "luro 122",
         "phone": "2235918906",
         "preferred_size": "medium",
+        "preferred_size_cat": null,
         "reputation": "1",
         "price": 500,
         "email": "fran@gmail.com",
@@ -90,5 +94,53 @@
             "sunday": null
         },
         "birth_date": "2022-10-25"
+    },
+    {
+        "id": 5,
+        "cuil": "123",
+        "name": "123",
+        "last_name": "123",
+        "adress": "123",
+        "phone": "123",
+        "preferred_size": "big",
+        "preferred_size_cat": null,
+        "reputation": "3",
+        "price": null,
+        "email": "123@123",
+        "password": "123",
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-10-12"
+    },
+    {
+        "id": 6,
+        "cuil": "zxc",
+        "name": "zxc",
+        "last_name": "zxc",
+        "adress": "zxc",
+        "phone": "zxc",
+        "preferred_size": "big",
+        "preferred_size_cat": null,
+        "reputation": "3",
+        "price": null,
+        "email": "zxc@zxc",
+        "password": "zxc",
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-10-06"
     }
 ]
