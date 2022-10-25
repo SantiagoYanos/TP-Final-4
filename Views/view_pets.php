@@ -23,6 +23,7 @@
                 <th style="width: 150px;">photo</th>
                 <th style="width: 150px;">name</th>
                 <th style="width: 150px;">breed</th>
+                <th style="width: 150px;">type</th>
                 <th style="width: 50px;">size</th>
                 <th style="width: 150px;">vaccination note</th>
                 <th style="width: 250px;">observations</th>
@@ -40,6 +41,7 @@
                     <td><img src="../Views/images/rick-roll.gif" alt="rick" height="100" width="100"> </td>
                     <td><?php echo $pet->getName() ?> </td>
                     <td><?php echo $pet->getBreed() ?> </td>
+                    <td><?php echo $pet->getType() ?> </td>
                     <td><?php echo $pet->getSize() ?></td>
                     <td><img src=<?php echo $pet->getVaccination_plan() ?> alt="vac note" height="100" width="100"></td>
                     <td><?php echo $pet->getObservation() ?> </td>
