@@ -142,7 +142,6 @@
 
   </form>
 
-
   <table class="table table-striped table-bordered">
     <thead>
       <th>Name</th>

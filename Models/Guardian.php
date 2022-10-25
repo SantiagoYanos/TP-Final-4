@@ -11,6 +11,7 @@ class Guardian
     private $adress;
     private $phone;
     private $preferred_size;
+    private $preferred_size_cat;
     private $reputation;
     private $price;
     private $email;
@@ -128,39 +129,35 @@ class Guardian
         return $this;
     }
 
-    /**
-     * Get the value of prefered_size
-     */
     public function getPreferred_size()
     {
         return $this->preferred_size;
     }
 
-    /**
-     * Set the value of prefered_size
-     *
-     * 
-     */
-    public function setPreferred_size($prefered_size)
+    public function setPreferred_size($preferred_size)
     {
-        $this->preferred_size = $prefered_size;
+        $this->preferred_size = $preferred_size;
 
         return $this;
     }
 
-    /**
-     * Get the value of reputation
-     */
+    public function getPreferred_size_cat()
+    {
+        return $this->preferred_size_cat;
+    }
+
+    public function setPreferred_size_cat($preferred_size_cat)
+    {
+        $this->preferred_size_cat = $preferred_size_cat;
+
+        return $this;
+    }
+
     public function getReputation()
     {
         return $this->reputation;
     }
 
-    /**
-     * Set the value of reputation
-     *
-     * 
-     */
     public function setReputation($reputation)
     {
         $this->reputation = $reputation;
