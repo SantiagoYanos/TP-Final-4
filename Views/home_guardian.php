@@ -38,9 +38,10 @@
 
             <section class="container">
                 <h4 class="pt-4 pb-1">Available Dates</h4>
-                <form>
+                <form action=<?php echo FRONT_ROOT . "Guardian/updateAvDates"
+                                ?> method="post">
                     <div class="input-group date mb-3" id="datepicker">
-                        <input type="text" class="form-control" hidden>
+                        <input name="stringDates" type="text" class="form-control" hidden>
                         <span class="input-group-append">
                             <span class="input-group-text bg-white">
                                 <i class="fa fa-calendar pt-1 pb-1"></i>
@@ -58,80 +59,14 @@
                     $('#datepicker').datepicker({
 
                         multidate: true,
+                        format: 'yyyy-mm-dd'
 
                     });
 
+                    $('#datepicker').datepicker('setDate', new Date());
+
                 });
             </script>
-
-            <!-- <form action=<?php //echo FRONT_ROOT . "Guardian/updateAvDates" 
-                                ?> method="post">
-
-                <table class="table table-striped table-bordered">
-
-                    <tr>
-                        <th>Available Dates</th>
-                        <th>Select</th>
-
-                    </tr>
-
-                    <tr>
-                        <td>Monday </td>
-                        <td name="monday"> <input id="preferencemonday " type="checkbox" name="monday" <?php /*if ($user->getAvailable_date()["monday"]) {
-                                                                                                            echo "checked";
-                                                                                                    
-                                                                                                        } */ ?>></td>
-                    </tr>
-
-                    <tr>
-                        <td>Tuesday </td>
-                        <td name="tuesday"> <input id="preferencetuesday " type="checkbox" name="tuesday" <?php /*if ($user->getAvailable_date()["tuesday"]) {
-                                                                                                                echo "checked";
-                                                                                                            } */ ?>></td>
-                    </tr>
-
-                    <tr>
-                        <td>Wednesday </td>
-                        <td name="wednesday"><input id="preferencewednesday " type="checkbox" name="wednesday" <?php /*if ($user->getAvailable_date()["wednesday"]) {
-                                                                                                                    echo "checked";
-                                                                                                                } */ ?>></td>
-                    </tr>
-
-                    <tr>
-                        <td>Thursday </td>
-                        <td name="thursday"> <input id="preferencethursday " type="checkbox" name="thursday" <?php /* if ($user->getAvailable_date()["thursday"]) {
-                                                                                                                    echo "checked";
-                                                                                                                } */ ?>></td>
-                    </tr>
-
-                    <tr>
-                        <td>Friday </td>
-                        <td name="friday"> <input id="preferencefriday " type="checkbox" name="friday" <?php /* if ($user->getAvailable_date()["friday"]) {
-                                                                                                            echo "checked";
-                                                                                                        } */ ?>></td>
-                    </tr>
-
-                    <tr>
-                        <td>Saturday </td>
-                        <td name="saturday"><input id="preferencesaturday " type="checkbox" name="saturday" <?php /* if ($user->getAvailable_date()["saturday"]) {
-                                                                                                                echo "checked";
-                                                                                                            } */ ?>></td>
-                    </tr>
-
-                    <tr>
-                        <td>Sunday </td>
-                        <td name="sunday"> <input id="preferencesunday " type="checkbox" name="sunday" <?php /* if ($user->getAvailable_date()["sunday"]) {
-                                                                                                            echo "checked";
-                                                                                                        } */ ?>></td>
-                    </tr>
-
-                </table>
-
-                <button>Check Petitions</button>
-
-                <button class="submit">Save Changes</button>
-
-            </form> -->
 
         </div>
 
@@ -190,7 +125,7 @@
         </div>
 
         <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
-        <button type="submit" onclick="alertMessage()">Logout</button>
+            <button type="submit" onclick="alertMessage()">Logout</button>
 
             <script>
                 function alertMessage() {
