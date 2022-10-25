@@ -3,11 +3,12 @@
 namespace Models;
 
 class Reservation{
+
+    private $id;
     private $date;
     private $price;
     private $guardian_email;
     private $id_pet;
-    private $id;
 
     public function getDate()
     {
@@ -65,4 +66,3 @@ class Reservation{
         return $this;
     }
 }
-?>

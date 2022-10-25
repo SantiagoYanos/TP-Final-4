@@ -72,6 +72,7 @@ class PetDAO implements IPetDAO
         $pet->setObservation($content["observation"]);
         $pet->setBreed($content["breed"]);
         $pet->setOwner_email($content["Owner_email"]);
+        $pet->setType($content["type"]);
 
         return $pet;
     }
@@ -113,6 +114,7 @@ class PetDAO implements IPetDAO
         $valuesPet["observation"] = $pet->getObservation();
         $valuesPet["breed"] = $pet->getBreed();
         $valuesPet["Owner_email"] = $pet->getOwner_email();
+        $valuesPet["type"] = $pet->getType();
 
         return $valuesPet;
     }
