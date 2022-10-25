@@ -8,6 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
     <title>Guardian Home</title>
 </head>
 
@@ -28,6 +35,34 @@
         </div>
 
         <div>
+
+            <section class="container">
+                <h4 class="pt-4 pb-1">Available Dates</h4>
+                <form>
+                    <div class="input-group date mb-3" id="datepicker">
+                        <input type="text" class="form-control" hidden>
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white">
+                                <i class="fa fa-calendar pt-1 pb-1"></i>
+                            </span>
+                        </span>
+                    </div>
+
+                    <button type="submit">Save Dates Changes</button>
+
+                </form>
+            </section>
+
+            <script type="text/javascript">
+                $(function() {
+                    $('#datepicker').datepicker({
+
+                        multidate: true,
+
+                    });
+
+                });
+            </script>
 
             <!-- <form action=<?php //echo FRONT_ROOT . "Guardian/updateAvDates" 
                                 ?> method="post">
@@ -102,7 +137,7 @@
 
         <div class="container align-items-end">
 
-            <table class="table table-striped table-bordered mt-2">
+            <table class="table table-striped table-bordered mt-3">
 
                 <tbody>
 
