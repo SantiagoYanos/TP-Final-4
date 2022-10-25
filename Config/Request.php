@@ -56,7 +56,6 @@
                     $this->parameters[$key] = $file;
                 }
             }
-
         }
 
         private static function getMethodRequest()

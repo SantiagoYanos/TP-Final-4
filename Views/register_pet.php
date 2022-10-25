@@ -27,6 +27,12 @@
             <option value="big">Big</option>
         </select></br>
 
+        <label for="type">Type: </label>
+        <select name="type" id="type">
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+        </select></br>
+
         <label for="vaccination note"> vaccination note</label>
         <input type="file" name=" vaccination_note" placeholder="submit vac note photo"> <br>
 
