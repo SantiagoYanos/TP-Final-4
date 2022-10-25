@@ -28,5 +28,25 @@
         "breed": "Cat",
         "Owner_email": "shaknerxd@gmail.com",
         "type": "cat"
+    },
+    {
+        "id": 4,
+        "name": "123",
+        "size": "small",
+        "vaccination_plan": "",
+        "observation": "123",
+        "breed": "123",
+        "Owner_email": "probador@gmail.com",
+        "type": "dog"
+    },
+    {
+        "id": 5,
+        "name": "qwe",
+        "size": "small",
+        "vaccination_plan": "",
+        "observation": "qwe",
+        "breed": "qwe",
+        "Owner_email": "probador@gmail.com",
+        "type": "dog"
     }
 ]
