@@ -37,8 +37,12 @@ class GuardianController
     public function updateAvDates($stringDates)
     {
 
+        $guardian_DAO = new GuardianDAO();
+
         $arrayDates = explode(",", $stringDates);
 
-        var_dump($arrayDates);
+        $guardian_DAO->UpdateAvailableDates($_SESSION["email"], $arrayDates);
+
+        header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
     }
 }

@@ -141,10 +141,9 @@ class GuardianDAO implements IGuardianDAO
         file_put_contents($this->fileName, $fileContent);
     }
 
-    function UpdateAvailableDates($email, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $sunday)
+    /*function UpdateAvailableDates($email, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $sunday)
     {
         $this->RetrieveData();
-        $this->guardianList;
 
         $guardians = array_map(function ($guardian) use ($email, $monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $sunday) {
 
@@ -158,6 +157,25 @@ class GuardianDAO implements IGuardianDAO
                 $valuesArray["saturday"] = $saturday;
                 $valuesArray["sunday"] = $sunday;
                 $guardian->setAvailable_date($valuesArray);
+            }
+
+            return $guardian;
+        }, $this->guardianList);
+
+        $this->guardianList = $guardians;
+
+        $this->SaveData();
+    }*/
+
+    function UpdateAvailableDates($email, $availableDates)
+    {
+        $this->RetrieveData();
+
+        $guardians = array_map(function ($guardian) use ($email, $availableDates) {
+
+            if ($guardian->getEmail() == $email) {
+
+                $guardian->setAvailable_date($availableDates);
             }
 
             return $guardian;

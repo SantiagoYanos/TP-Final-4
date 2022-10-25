@@ -85,15 +85,8 @@ class AuthController
             $guardian->setEmail($email);
             $guardian->setPassword($password);
 
-            $valuesArray = array();
-            $valuesArray["monday"] = null;
-            $valuesArray["tuesday"] = null;
-            $valuesArray["wednesday"] = null;
-            $valuesArray["thursday"] = null;
-            $valuesArray["friday"] = null;
-            $valuesArray["saturday"] = null;
-            $valuesArray["sunday"] = null;
-            $guardian->setAvailable_date($valuesArray);
+
+            $guardian->setAvailable_date(array());
 
             $guardian->setBirth_date($birth_date);
 

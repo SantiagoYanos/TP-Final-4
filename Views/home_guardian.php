@@ -54,7 +54,9 @@
                 </form>
             </section>
 
-            <script type="text/javascript">
+            <?php echo
+
+            "<script type='text/javascript'>
                 $(function() {
                     $('#datepicker').datepicker({
 
@@ -63,10 +65,12 @@
 
                     });
 
-                    $('#datepicker').datepicker('setDate', new Date());
+                    $('#datepicker').datepicker('setDates',['" . join("','", $user->getAvailable_date()) . "']);
 
                 });
-            </script>
+            </script>"
+
+            ?>
 
         </div>
 
