@@ -60,7 +60,13 @@
     </table>
 
 
-    <button type="submit">Filter</button>
+    <button type="submit" onclick="alertMessage()">Add Filter</button>
+
+        <script>
+            function alertMessage() {
+                alert("Filter added successfully!");
+            }
+        </script>
 
     <table class="table table-bordered">
 

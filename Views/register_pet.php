@@ -38,7 +38,14 @@
 
         <label for="photo/video"> Add photo/video</label>
         <input type="file" name=" photo_video" placeholder="submit photo/video"> <br>
-        <button type="submit">Add Pet</button>
+        <button type="submit" onclick="alertMessage()">Add Pet</button>
+
+        <script>
+            function alertMessage() {
+                alert("Pet added successfully!");
+            }
+        </script>
+
     </form>
 </body>
 
