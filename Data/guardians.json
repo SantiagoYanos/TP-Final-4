@@ -94,5 +94,29 @@
             "sunday": null
         },
         "birth_date": "2022-10-25"
+    },
+    {
+        "id": 5,
+        "cuil": "123",
+        "name": "123",
+        "last_name": "123",
+        "adress": "123",
+        "phone": "123",
+        "preferred_size": "medium",
+        "preferred_size_cat": "big",
+        "reputation": "3",
+        "price": null,
+        "email": "123@123",
+        "password": "123",
+        "available_date": {
+            "monday": null,
+            "tuesday": null,
+            "wednesday": null,
+            "thursday": null,
+            "friday": null,
+            "saturday": null,
+            "sunday": null
+        },
+        "birth_date": "2022-10-11"
     }
 ]

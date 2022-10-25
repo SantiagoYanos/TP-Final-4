@@ -168,12 +168,12 @@
                     </tr>
 
                     <tr>
-                        <th>Dog size reference</th>
+                        <th>Dog Size Preference</th>
                         <td><?php echo $user->getPreferred_size() ?></td>
                     </tr>
 
                     <tr>
-                        <th>Cat size reference</th>
+                        <th>Cat Size Peference</th>
                         <td><?php echo $user->GetPreferred_size_cat() ?></td>
                     </tr>
 
@@ -190,7 +190,13 @@
         </div>
 
         <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
-            <button type="submit">Log out</button>
+        <button type="submit" onclick="alertMessage()">Logout</button>
+
+            <script>
+                function alertMessage() {
+                    alert("Goodbye!");
+                }
+            </script>
 
         </form>
 

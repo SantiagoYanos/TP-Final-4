@@ -85,11 +85,16 @@
 
     </br></br>
 
-    <div>
-        <form action="<?php echo FRONT_ROOT . "Auth/logOut" ?>" method="post">
-            <button type="logout">Logout</button></br>
+    <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
+        <button type="submit" onclick="alertMessage()">Logout</button>
+
+            <script>
+                function alertMessage() {
+                    alert("Goodbye!");
+                }
+            </script>
+
         </form>
-    </div>
 </body>
 
 </html>

@@ -79,7 +79,7 @@ class AuthController
             $guardian->setAdress($adress);
             $guardian->setPhone($phone);
             $guardian->setPreferred_size($preferred_size);
-            $guardian->setPreferred_size($preferred_size_cat);
+            $guardian->setPreferred_size_cat($preferred_size_cat);
             $guardian->setReputation("3");
             $guardian->setPrice(null);
             $guardian->setEmail($email);
