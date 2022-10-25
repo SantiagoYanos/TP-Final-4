@@ -29,17 +29,17 @@
         <tr>
           <th>Pet size</th>
           <td>
-            <select class="form-select" name="prefered_size" id="prefered_size" value="<?php echo $prefered_size ?>">
-              <option <?php if ($prefered_size == null) {
+            <select class="form-select" name="preferred_size" id="preferred_size" value="<?php echo $preferred_size ?>">
+              <option <?php if ($preferred_size == null) {
                         echo "selected='selected'";
                       } ?> value="*">*</option>
-              <option <?php if ($prefered_size == "small") {
+              <option <?php if ($preferred_size == "small") {
                         echo "selected='selected'";
                       } ?> value="small">Small</option>
-              <option <?php if ($prefered_size == "medium") {
+              <option <?php if ($preferred_size == "medium") {
                         echo "selected='selected'";
                       } ?> value="medium">Medium</option>
-              <option <?php if ($prefered_size == "big") {
+              <option <?php if ($preferred_size == "big") {
                         echo "selected='selected'";
                       } ?>value="big">Big</option>
             </select>
@@ -154,7 +154,7 @@
           <td><?php echo $guardian->GetName() ?></td>
           <td><?php echo $guardian->getAdress() ?></td>
           <td><?php echo $guardian->getReputation() ?></td>
-          <td><?php echo $guardian->getPrefered_size() ?></td>
+          <td><?php echo $guardian->getPreferred_size() ?></td>
           <td><?php echo $guardian->GetPrice() ?></td>
         </tr>
 

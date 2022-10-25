@@ -6,7 +6,8 @@
         "vaccination_plan": "",
         "observation": "muerde",
         "breed": "husky",
-        "Owner_email": "salamin@gmail.com"
+        "Owner_email": "salamin@gmail.com",
+        "type": "dog"
     },
     {
         "id": 2,
@@ -15,6 +16,17 @@
         "vaccination_plan": "",
         "observation": "rojo",
         "breed": "cocker",
-        "Owner_email": "che@gmail.com"
+        "Owner_email": "che@gmail.com",
+        "type": "cat"
+    },
+    {
+        "id": 3,
+        "name": "Tito",
+        "size": "medium",
+        "vaccination_plan": "",
+        "observation": "Yellow Cat",
+        "breed": "Cat",
+        "Owner_email": "shaknerxd@gmail.com",
+        "type": "cat"
     }
 ]
