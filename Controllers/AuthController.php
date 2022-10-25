@@ -66,7 +66,7 @@ class AuthController
         $ownerDAO = new OwnerDAO;
         $guardianDAO = new GuardianDAO;
 
-        if ($ownerDAO->getByEmail($email) || $guardianDAO->GetByEmail($email)) {
+        if ($ownerDAO->GetByEmail($email) || $guardianDAO->GetByEmail($email)) {
             ///redirigir al index;
             ///existe el owner o guardian con el email ingresado;
             return require_once(VIEWS_PATH . "register_guardian.php");
@@ -83,7 +83,7 @@ class AuthController
             $guardian->setPrice(null);
             $guardian->setEmail($email);
             $guardian->setPassword($password);
-
+            
             $valuesArray = array();
             $valuesArray["monday"] = null;
             $valuesArray["tuesday"] = null;
