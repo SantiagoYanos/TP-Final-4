@@ -26,8 +26,8 @@ create table owners(
 
     constraint pk_owners primary key (owner_id),
     constraint unq_dni unique (dni),
-    constraint unq_email unique (email),
-    constraint chk_birth_date check ( birth_date<=now() )
+    constraint unq_email unique (email)
+    /*constraint chk_birth_date check ( birth_date<=now() )*/
 );
 
 create table available_dates(
@@ -36,7 +36,7 @@ create table available_dates(
     guardian_id bigint not null,
 
     constraint pk_available_dates primary key (date_id),
-    constraint chk_future_date check (date>=now()),
+    /*constraint chk_future_date check (date>=now()),*/
     constraint fk_guardian_id foreign key (guardian_id) references guardians (guardian_id)
 );
 
@@ -60,7 +60,7 @@ create table guardians(
     constraint pk_owners primary key (guardian_id),
     constraint unq_ unique (cuil),
     constraint unq_email unique (email),
-    constraint chk_birth_date check ( birth_date<=now() ),
+    /*constraint chk_birth_date check ( birth_date<=now() ),*/
     constraint chk_price check (price>=0)
 );
 
@@ -98,13 +98,13 @@ create table reservations(
 
 
 create table reservations_x_pets(
-    reservartion_x_pets_id bigint not null auto_increment,
+    reservation_x_pets_id bigint not null auto_increment,
     reservation_id bigint not null,
     pet_id bigint not null,
 
-    constraint pk_reservations_x_pets primary key (reservartion_x_pets_id),
+    constraint pk_reservations_x_pets primary key (reservation_x_pets_id),
     constraint fk_reservation_id foreign key (reservation_id) references reservations(reservation_id),
-    constraint fk_pet_id foreign key (pet_id) references pets(pet_id)
+    constraint fk_pet foreign key (pet_id) references pets(pet_id)
 
 );
 
@@ -112,7 +112,7 @@ create table reservations_x_pets(
 
 
 create table payments(
-    payment_id bigint not null,
+    payment_id bigint auto_increment,
     amount float not null,
     date date not null,
     reservation_id bigint not null,
@@ -121,9 +121,9 @@ create table payments(
     active boolean not null  default 1,
     method varchar(150) not null,
     payment_number int not null,
-    constraint pk_payment primary key (payment_id),
-    constraint fk_guardian_id foreign key (guardian_id) references guardians(guardian_id),
-    constraint fk_owner_id foreign key (owner_id) references owners(owner_id),
-    constraint fk_reservation_id foreign key (reservation_id) references reservations (reservation_id),
+    constraint pk_payments primary key (payment_id),
+    constraint fk_payment_guardian foreign key (guardian_id) references guardians(guardian_id),
+    constraint fk_payment_owner foreign key (owner_id) references owners(owner_id),
+    constraint fk_payment_reservation foreign key (reservation_id) references reservations (reservation_id),
     constraint chk_negative_amount check ( amount>=0 )
 );
