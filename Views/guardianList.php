@@ -8,6 +8,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
   <link href="../Views/css/guardianList.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
   <title>Guardian List</title>
 </head>
 
@@ -27,7 +32,7 @@
         </tr>
 
         <tr>
-          <th>Pet size</th>
+          <th>Dog size</th>
           <td>
             <select class="form-select" name="preferred_size" id="preferred_size" value="<?php echo $preferred_size ?>">
               <option <?php if ($preferred_size == null) {
@@ -47,6 +52,26 @@
         </tr>
 
         <tr>
+          <th>Cat size</th>
+          <td>
+            <select class="form-select" name="preferred_size_cat" id="preferred_size_cat" value="<?php echo $preferred_size_cat ?>">
+              <option <?php if ($preferred_size_cat == null) {
+                        echo "selected='selected'";
+                      } ?> value="*">*</option>
+              <option <?php if ($preferred_size_cat == "small") {
+                        echo "selected='selected'";
+                      } ?> value="small">Small</option>
+              <option <?php if ($preferred_size_cat == "medium") {
+                        echo "selected='selected'";
+                      } ?> value="medium">Medium</option>
+              <option <?php if ($preferred_size_cat == "big") {
+                        echo "selected='selected'";
+                      } ?>value="big">Big</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
           <th>Location</th>
           <td><input type="text" name="location" id="location" value="<?php echo $location ?>"></td>
         </tr>
@@ -59,86 +84,44 @@
       </tbody>
     </table>
 
+    <div>
+
+      <h4 class="pt-4 pb-1">Select Dates</h4>
+      <div class="input-group date mb-3" id="datepicker">
+        <input name="stringDates" type="text" class="form-control" hidden>
+        <span class="input-group-append">
+          <span class="input-group-text bg-white">
+            <i class="fa fa-calendar pt-1 pb-1"></i>
+          </span>
+        </span>
+      </div>
+
+      <?php echo
+
+      "<script type='text/javascript'>
+                $(function() {
+                    $('#datepicker').datepicker({
+
+                        multidate: true,
+                        format: 'yyyy-mm-dd'
+
+                    });
+
+                    $('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "']);
+
+                });
+            </script>"
+      ?>
+
+    </div>
 
     <button type="submit" onclick="alertMessage()">Add Filter</button>
 
-        <script>
-            function alertMessage() {
-                alert("Filter added successfully!");
-            }
-        </script>
-
-    <table class="table table-bordered">
-
-      <script>
-        function select_Day(button_id) {
-
-          const dayButton = document.getElementById(button_id)
-          const buttonValue = document.getElementById(button_id + "_value")
-
-          if (buttonValue.value == "") {
-            buttonValue.value = "on";
-            dayButton.style.borderColor = "blue"
-
-          } else {
-            buttonValue.value = "";
-            dayButton.style.borderColor = "black"
-          }
-
-        }
-      </script>
-
-      <thead>
-        <th><button id="monday" onClick="select_Day(this.id)" type="button" <?php if ($monday == "on") {
-                                                                              echo "style='border-color:blue'";
-                                                                            } ?> class="day-option">Monday</input>
-            <input id="monday_value" name="monday" type="hidden" <?php if ($monday == "on") {
-                                                                    echo "value='on'";
-                                                                  } ?>>
-        </th>
-        <th><button id="tuesday" name="tuesday" onClick="select_Day(this.id)" type="button" <?php if ($tuesday == "on") {
-                                                                                              echo "style='border-color:blue'";
-                                                                                            } ?> class="day-option">Tuesday</input>
-            <input id="tuesday_value" name="tuesday" type="hidden" <?php if ($tuesday == "on") {
-                                                                      echo "value='on'";
-                                                                    } ?>>
-        </th>
-        <th><button id="wednesday" name="wednesday" onClick="select_Day(this.id)" type="button" <?php if ($wednesday == "on") {
-                                                                                                  echo "style='border-color:blue'";
-                                                                                                } ?> class="day-option">Wednesday</input>
-            <input id="wednesday_value" name="wednesday" type="hidden" <?php if ($wednesday == "on") {
-                                                                          echo "value='on'";
-                                                                        } ?>>
-        </th>
-        <th><button id="thursday" name="thursday" onClick="select_Day(this.id)" type="button" <?php if ($thursday == "on") {
-                                                                                                echo "style='border-color:blue'";
-                                                                                              } ?> class="day-option">Thursday</input>
-            <input id="thursday_value" name="thursday" type="hidden" <?php if ($thursday == "on") {
-                                                                        echo "value='on'";
-                                                                      } ?>>
-        </th>
-        <th><button id="friday" name="friday" onClick="select_Day(this.id)" type="button" <?php if ($friday == "on") {
-                                                                                            echo "style='border-color:blue'";
-                                                                                          } ?> class="day-option">Friday</input>
-            <input id="friday_value" name="friday" type="hidden" <?php if ($friday == "on") {
-                                                                    echo "value='on'";
-                                                                  } ?>>
-        </th>
-        <th><button id="saturday" name="saturday" onClick="select_Day(this.id)" type="button" <?php if ($saturday == "on") {
-                                                                                                echo "style='border-color:blue'";
-                                                                                              } ?> class="day-option">Saturday</input></th>
-        <input id="saturday_value" name="saturday" type="hidden" <?php if ($saturday == "on") {
-                                                                    echo "value='on'";
-                                                                  } ?>>
-        <th><button id="sunday" name="sunday" onClick="select_Day(this.id)" type="button" <?php if ($sunday == "on") {
-                                                                                            echo "style='border-color:blue'";
-                                                                                          } ?> class="day-option">Sunday</input>
-            <input id="sunday_value" name="sunday" type="hidden" <?php if ($sunday == "on") {
-                                                                    echo "value='on'";
-                                                                  } ?>>
-        </th>
-      </thead>
-    </table>
+    <script>
+      function alertMessage() {
+        alert("Filter added successfully!");
+      }
+    </script>
 
   </form>
 
@@ -168,6 +151,7 @@
 
   </table>
 
+  <?php echo $query ?>
 
 
 </body>

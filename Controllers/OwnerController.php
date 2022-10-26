@@ -25,9 +25,8 @@ class OwnerController
         require_once VIEWS_PATH . "home_owner.php";
     }
 
-    public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $preferred_size_cat = null, $location = null, $price = null, $monday = null, $tuesday = null, $wednesday = null, $thursday = null, $friday = null, $saturday = null, $sunday = null)
+    public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $preferred_size_cat = null, $location = null, $price = null, $stringDates = null)
     {
-        echo $name;
 
         $guardian_DAO = new GuardianDAO();
 
@@ -37,15 +36,6 @@ class OwnerController
 
             return $guardian->getPrice() != null;
         });
-
-        $valuesArray = array();
-        $valuesArray["monday"] = $monday;
-        $valuesArray["tuesday"] = $tuesday;
-        $valuesArray["wednesday"] = $wednesday;
-        $valuesArray["thursday"] = $thursday;
-        $valuesArray["friday"] = $friday;
-        $valuesArray["saturday"] = $saturday;
-        $valuesArray["sunday"] = $sunday;
 
         //---------------------------------------------- Filtros de guardianes
 
@@ -72,7 +62,7 @@ class OwnerController
             });
         }
 
-        
+
         if ($preferred_size_cat != null && $preferred_size_cat != "*") {
 
             $guardians = array_filter($guardians, function ($guardian) use ($preferred_size_cat) {
@@ -97,22 +87,18 @@ class OwnerController
             });
         }
 
-        $guardians = array_filter($guardians, function ($guardian) use ($valuesArray) {
+        if ($stringDates != null) {
+            $guardians = array_filter($guardians, function ($guardian) use ($price) {
 
-            $valid = true;
+                return $guardian->GetPrice() <= $price;
+            });
+        }
 
-            $available_dates = $guardian->getAvailable_date();
+        $stringDates = explode(",", $stringDates);
 
-            foreach (array_keys($available_dates) as $day) {
-                if ($valuesArray[$day] === "on" && $available_dates[$day] === null) {
-                    $valid = false;
-                }
-            }
+        $queryDates = join("' OR '", $stringDates);
 
-            return $valid;
-        });
-
-
+        $query = "SELECT * FROM available_dates WHERE '" . $queryDates . "';";
 
         require_once VIEWS_PATH . "guardianList.php";
     }
