@@ -1,9 +1,9 @@
 <?php
-    namespace DAO;
+    namespace SQLDAO;
 
     use \PDO as PDO;
     use \Exception as Exception;
-    use DAO\QueryType as QueryType;
+    use SQLDAO\QueryType as QueryType;
 
     class Connection
     {
