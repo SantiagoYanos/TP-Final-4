@@ -14,7 +14,7 @@ class Owner
     private $email;
     private $password;
     private $birth_date;
-
+    
     public function getName()
     {
         return $this->name;
