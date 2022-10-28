@@ -3,7 +3,9 @@
 namespace SQLDAO;
 
 use \Exception as Exception;
+use SQLDAO\UserDAO as UserDAO;
 use SQLDAO\IOwnerSQLDAO as IOwnerSQLDAO;
+use Models\User as User;
 use Models\Owner as Owner;
 use SQLDAO\Connection as Connection;
 
@@ -73,36 +75,37 @@ class OwnerSQLDAO implements IOwnerSQLDAO
         }
     }
 
-    public function Add(Owner $OwnerSQL)
+    public function Add(User $UserSQL, Owner $OwnerSQL)
     {
-        $this->RetrieveData();
-
         try {
-            $query = "INSERT INTO " . $this->tableName . " (name, last_name, adress, dni, phone, email, password, birth_date) VALUES (:name, :last_name, :adress, :dni, :phone, :email, :password, :birth_date);";
-
-            $parameters["name"] = $OwnerSQL->getName();
-            $parameters["last_name"] = $OwnerSQL->getLast_name();
-            $parameters["adress"] = $OwnerSQL->getAdress();
-            $parameters["dni"] = $OwnerSQL->getDni();
-            $parameters["phone"] = $OwnerSQL->getPhone();
-            $parameters["email"] = $OwnerSQL->getEmail();
-            $parameters["password"] = $OwnerSQL->getPassword();
-            $parameters["birth_date"] = $OwnerSQL->getBirth_date();
-            $parameters["active"] = true;
-
+            $queryUser = "INSERT INTO USERS" . " (name, last_name, adress, phone, email, password, birth_date) VALUES (:name, :last_name, :adress, :dni, :phone, :email, :password, :birth_date);";
+            $parametersUser["name"] = $UserSQL->getName();
+            $parametersUser["last_name"] = $UserSQL->getLast_name();
+            $parametersUser["adress"] = $UserSQL->getAdress();
+            $parametersUser["phone"] = $UserSQL->getPhone();
+            $parametersUser["email"] = $UserSQL->getEmail();
+            $parametersUser["password"] = $UserSQL->getPassword();
+            $parametersUser["birth_date"] = $UserSQL->getBirth_date();
 
             $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
 
-            $this->connection->ExecuteNonQuery($query, $parameters);
-        } catch (Exception $ex) {
-            throw $ex;
+            $UserDAO = new UserDAO();
+            $user = $UserDAO->GetByEmail($UserSQL->getEmail());
+            
+            if(!$user){
+                return null;
+            }
+
+            $queryOwner = "INSERT INTO ". $this->tableName . " (user_id, dni) VALUES (:user_id, :dni);";
+
+            $parametersOwner["dni"] = $OwnerSQL->getDni();
+            $parametersOwner["user_id"] = $user->getId();
+
+            $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner);
+        } catch (Exception $e) {
+            throw $e;
         }
-
-        array_push($this->OwnerSQLList, $OwnerSQL);
-
-        array_multisort($this->OwnerSQLList);
-
-        $this->SaveData();
     }
 
     public function GetAllBDD()
@@ -117,18 +120,13 @@ class OwnerSQLDAO implements IOwnerSQLDAO
             $resultSet = $this->connection->Execute($query);
 
             foreach ($resultSet as $row) {
-                $OwnerSQL = new Owner();
-                $OwnerSQL->setId($row["owner_id"]);
-                $OwnerSQL->setName($row["name"]);
-                $OwnerSQL->setLast_name($row["last_name"]);
-                $OwnerSQL->setAdress($row["adress"]);
-                $OwnerSQL->setDni($row["dni"]);
-                $OwnerSQL->setPhone($row["phone"]);
-                $OwnerSQL->setEmail($row["email"]);
-                $OwnerSQL->setPassword($row["password"]);
-                $OwnerSQL->setBirth_date($row["birth_date"]);
+                $UserDAO = new UserDAO();
+                $User = new User();
+                $User = $UserDAO->LoadData($row["user_id"]);
 
-                array_push($OwnerSQLList, $OwnerSQL);
+                $Owner = new Owner();
+                $User->setType_data($Owner);
+                array_push($OwnerSQLList, $Owner);
             }
 
             return $OwnerSQLList;
