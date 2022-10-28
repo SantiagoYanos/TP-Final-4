@@ -12,21 +12,28 @@ create table pet_multimedia(
 
 );
 
-create table owners(
-    owner_id bigint auto_increment,
-    name varchar(150) not null ,
-    last_name varchar(150) not null,
-    adress varchar(150) not null,
-    dni bigint not null,
-    phone varchar(50) not null,
-    email varchar(150) not null,
-    password varchar(150) not null,
-    birth_date date not null,
+CREATE TABLE users(
+    user_id bigint auto_increment,
+    name varChar(150) NOT NULL,
+    last_name varChar(150) NOT NULL,
+    adress varChar(150) NOT NULL,
+    phone varChar(50) NOT NULL,
+    email varChar(150) NOT NULL,
+    password varChar(150) NOT NULL,
+    birth_date date NOT NULL,
     active boolean not null default 1,
+    CONSTRAINT pk_user_id PRIMARY KEY (user_id),
+    CONSTRAINT unq_email UNIQUE
+);
 
-    constraint pk_owners primary key (owner_id),
-    constraint unq_dni unique (dni),
-    constraint unq_email unique (email)
+create table owners(
+    user_id bigint NOT NULL,
+    dni bigint not null,
+
+    constraint pk_user_id primary key (user_id),
+    constraint fk_user_id foreign key (user_id) references users(user_id) ON DELETE CASCADE,
+    CONSTRAINT unq_user_id UNIQUE (user_id),
+    constraint unq_dni unique (dni)
     /*constraint chk_birth_date check ( birth_date<=now() )*/
 );
 
@@ -37,29 +44,25 @@ create table available_dates(
 
     constraint pk_available_dates primary key (date_id),
     /*constraint chk_future_date check (date>=now()),*/
-    constraint fk_guardian_id foreign key (guardian_id) references guardians (guardian_id)
+    constraint fk_guardian_id foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE
 );
 
 
 
 create table guardians(
-    guardian_id bigint auto_increment,
-    name varchar(150) not null ,
-    last_name varchar(150) not null,
-    adress varchar(150) not null,
+    user_id bigint NOT NULL,
     cuil bigint not null,
-    phone varchar(50) not null,
-    email varchar(150) not null,
-    password varchar(250) not null,
-    birth_date date not null,
     reputation float not null,
-    preferred_size varchar(150),
-    active boolean not null default 1,
-    price float ,
+    preferred_size_dog int,
+    preferred_size_cat int,
+    price float,
 
-    constraint pk_owners primary key (guardian_id),
-    constraint unq_ unique (cuil),
-    constraint unq_email unique (email),
+    constraint pk_user_id primary key (user_id),
+    CONSTRAINT fk_user_id foreign KEY (user_id) references users(user_id) ON DELETE CASCADE,
+    CONSTRAINT unq_user_id UNIQUE,
+    CONSTRAINT fk_preferred_size_dog FOREIGN KEY REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
+    CONSTRAINT fk_preferred_size_cat FOREIGN KEY REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
+    constraint unq_cuil unique (cuil),
     /*constraint chk_birth_date check ( birth_date<=now() ),*/
     constraint chk_price check (price>=0)
 );
@@ -69,15 +72,15 @@ create table pets(
     pet_id bigint auto_increment,
     name varchar(150) not null,
     pet_type varchar(150) not null,
-    pet_size varchar(150) not null,
+    pet_size int,
     pet_breed varchar(150) not null default 'Unknown',
     observations text default ' ',
     owner_id bigint not null,
     active boolean not null default 1,
 
     constraint pk_pet primary key (pet_id),
-    constraint fk_owner_id foreign key (owner_id) references owners(owner_id) on delete cascade
-
+    CONSTRAINT fk_pet_size FOREIGN key (pet_size) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
+    constraint fk_owner_id foreign key (owner_id) references owners(user_id) on delete cascade
 );
 
 create table reservations(
@@ -91,7 +94,7 @@ create table reservations(
     state varchar(50) not null,
 
     constraint pk_reservations primary key (reservation_id),
-    constraint fk_guardian foreign key (guardian_id) references guardians (guardian_id)
+    constraint fk_guardian foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE
 
 );
 
@@ -108,9 +111,6 @@ create table reservations_x_pets(
 
 );
 
-
-
-
 create table payments(
     payment_id bigint auto_increment,
     amount float not null,
@@ -122,8 +122,14 @@ create table payments(
     method varchar(150) not null,
     payment_number int not null,
     constraint pk_payments primary key (payment_id),
-    constraint fk_payment_guardian foreign key (guardian_id) references guardians(guardian_id),
-    constraint fk_payment_owner foreign key (owner_id) references owners(owner_id),
+    constraint fk_payment_guardian foreign key (guardian_id) references users(user_id),
+    constraint fk_payment_owner foreign key (owner_id) references users(user_id),
     constraint fk_payment_reservation foreign key (reservation_id) references reservations (reservation_id),
     constraint chk_negative_amount check ( amount>=0 )
 );
+
+CREATE TABLE pet_sizes(
+    pet_size_id bigint auto_increment,
+    name varChar(50) not null
+    CONSTRAINT pk_pet_size_id PRIMARY KEY (pet_size_id)
+)
