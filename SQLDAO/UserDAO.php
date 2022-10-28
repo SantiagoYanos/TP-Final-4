@@ -24,16 +24,8 @@ class UserDAO implements IModels
             $resultSet = $this->connection->Execute($query);
 
             foreach ($resultSet as $row) {
-                $UserSQL = new User();
-                $UserSQL->setId($row["user_id"]);
-                $UserSQL->setName($row["name"]);
-                $UserSQL->setLast_name($row["last_name"]);
-                $UserSQL->setAdress($row["adress"]);
-                $UserSQL->setPhone($row["phone"]);
-                $UserSQL->setEmail($row["email"]);
-                $UserSQL->setPassword($row["password"]);
-                $UserSQL->setBirth_date($row["birth_date"]);
-                $UserSQL->setType_data(null);
+
+                $UserSQL = $this->LoadData($row);
 
                 array_push($UserList, $UserSQL);
             }
@@ -47,7 +39,6 @@ class UserDAO implements IModels
     public function GetById($id)
     {
         try {
-
             $this->UserList = array();
 
             $query = "SELECT * FROM " . $this->tableName;
@@ -55,16 +46,7 @@ class UserDAO implements IModels
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query);
 
-            $UserSQL = new User();
-            $UserSQL->setId($resultSet["user_id"]);
-            $UserSQL->setName($resultSet["name"]);
-            $UserSQL->setLast_name($resultSet["last_name"]);
-            $UserSQL->setAdress($resultSet["adress"]);
-            $UserSQL->setPhone($resultSet["phone"]);
-            $UserSQL->setEmail($resultSet["email"]);
-            $UserSQL->setPassword($resultSet["password"]);
-            $UserSQL->setBirth_date($resultSet["birth_date"]);
-            $UserSQL->setType_data(null);
+            $UserSQL = $this->LoadData($resultSet);
 
             array_push($UserList, $UserSQL);
 
@@ -72,5 +54,21 @@ class UserDAO implements IModels
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function LoadData($resultSet)
+    {
+        $UserSQL = new User();
+        $UserSQL->setId($resultSet["user_id"]);
+        $UserSQL->setName($resultSet["name"]);
+        $UserSQL->setLast_name($resultSet["last_name"]);
+        $UserSQL->setAdress($resultSet["adress"]);
+        $UserSQL->setPhone($resultSet["phone"]);
+        $UserSQL->setEmail($resultSet["email"]);
+        $UserSQL->setPassword($resultSet["password"]);
+        $UserSQL->setBirth_date($resultSet["birth_date"]);
+        $UserSQL->setType_data(null);
+
+        return $UserSQL;
     }
 }
