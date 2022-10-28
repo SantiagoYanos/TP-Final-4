@@ -149,15 +149,8 @@ class OwnerSQLDAO implements IOwnerSQLDAO
 
             foreach ($resultSet as $row) {
                 $OwnerSQL = new Owner();
-                $OwnerSQL->setId($row["owner_id"]);
-                $OwnerSQL->setName($row["name"]);
-                $OwnerSQL->setLast_name($row["last_name"]);
-                $OwnerSQL->setAdress($row["adress"]);
+
                 $OwnerSQL->setDni($row["dni"]);
-                $OwnerSQL->setPhone($row["phone"]);
-                $OwnerSQL->setEmail($row["email"]);
-                $OwnerSQL->setPassword($row["password"]);
-                $OwnerSQL->setBirth_date($row["birth_date"]);
 
                 return $OwnerSQL;
             }
