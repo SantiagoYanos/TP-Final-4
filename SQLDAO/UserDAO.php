@@ -18,7 +18,7 @@ class UserDAO implements IModels
 
             $UserList = array();
 
-            $query = "SELECT * FROM " . $this->tableName;
+            $query = "SELECT * FROM " . $this->tableName . " WHERE active=true";
 
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query);
@@ -41,7 +41,7 @@ class UserDAO implements IModels
         try {
             $this->UserList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "WHERE user_id=:id";
+            $query = "SELECT * FROM " . $this->tableName . "WHERE user_id=:id AND active=true";
 
             $parameters["id"] = $id;
 
@@ -65,31 +65,7 @@ class UserDAO implements IModels
         try {
             $this->UserList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "WHERE email=:email;";
-
-            $parameters["email"] = $email;
-
-            $this->connection = Connection::GetInstance();
-            $resultSet = $this->connection->Execute($query, $parameters);
-
-            if (!$resultSet[0]) {
-                return null;
-            }
-
-            $UserSQL = $this->LoadData($resultSet[0]);
-
-            return $UserSQL;
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-    
-    public function GetByEmail($email)
-    {
-        try {
-            $this->UserList = array();
-
-            $query = "SELECT * FROM " . $this->tableName . "WHERE email=:email;";
+            $query = "SELECT * FROM " . $this->tableName . "WHERE email=:email AND active=true;";
 
             $parameters["email"] = $email;
 
@@ -103,6 +79,21 @@ class UserDAO implements IModels
             $UserSQL = $this->LoadData($resultSet);
 
             return $UserSQL;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function Remove($id)
+    {
+        try {
+
+            $query = "UPDATE " . $this->tableName . " SET active=false WHERE user_id=:id";
+
+            $parameters["id"] = $id;
+
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
         } catch (Exception $e) {
             throw $e;
         }

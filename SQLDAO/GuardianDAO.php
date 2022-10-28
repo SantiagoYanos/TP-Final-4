@@ -61,7 +61,7 @@ class OwnerDAO implements IModels
         try {
             $GuardianSQLList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "g INNER JOIN users u ON g.user_id=u.user_id";
+            $query = "SELECT * FROM " . $this->tableName . "g INNER JOIN users u ON g.user_id=u.user_id WHERE u.active=true";
 
             $this->connection = Connection::GetInstance();
 
@@ -90,7 +90,7 @@ class OwnerDAO implements IModels
     {
 
         try {
-            $query = "SELECT * FROM " . $this->tableName . "t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = " . $id . "AND active = true";
+            $query = "SELECT * FROM " . $this->tableName . "t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = " . $id . "AND u.active = true";
 
             $this->connection = Connection::GetInstance();
 
