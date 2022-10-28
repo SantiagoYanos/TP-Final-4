@@ -41,16 +41,44 @@ class UserDAO implements IModels
         try {
             $this->UserList = array();
 
-            $query = "SELECT * FROM " . $this->tableName;
+            $query = "SELECT * FROM " . $this->tableName . "WHERE user_id=:id";
+
+            $parameters["id"] = $id;
 
             $this->connection = Connection::GetInstance();
-            $resultSet = $this->connection->Execute($query);
+            $resultSet = $this->connection->Execute($query, $parameters);
 
-            $UserSQL = $this->LoadData($resultSet);
+            if (!$resultSet[0]) {
+                return null;
+            }
 
-            array_push($UserList, $UserSQL);
+            $UserSQL = $this->LoadData($resultSet[0]);
 
-            return $UserList;
+            return $UserSQL;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function GetByEmail($email)
+    {
+        try {
+            $this->UserList = array();
+
+            $query = "SELECT * FROM " . $this->tableName . "WHERE email=:email;";
+
+            $parameters["email"] = $email;
+
+            $this->connection = Connection::GetInstance();
+            $resultSet = $this->connection->Execute($query, $parameters);
+
+            if (!$resultSet[0]) {
+                return null;
+            }
+
+            $UserSQL = $this->LoadData($resultSet[0]);
+
+            return $UserSQL;
         } catch (Exception $e) {
             throw $e;
         }

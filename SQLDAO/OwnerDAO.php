@@ -7,7 +7,7 @@ use SQLDAO\IOwnerSQLDAO as IOwnerSQLDAO;
 use Models\Owner as Owner;
 use SQLDAO\Connection as Connection;
 
-class OwnerSQLDAO implements IOwnerSQLDAO
+class OwnerDAO implements IOwnerSQLDAO
 {
     private $OwnerSQLList = array();
     private $connection;
