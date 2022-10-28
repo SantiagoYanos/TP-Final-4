@@ -56,107 +56,125 @@ class OwnerDAO implements IModels
         }
     }
 
-    public function activateFromBDD($OwnerSQL)
+    public function GetAll()
     {
         try {
-            $query  = "UPDATE " . $this->tableName . " SET active ='" . 1 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
+            $GuardianSQLList = array();
 
-            $this->connection  = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query);
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function deleteFromBDD($OwnerSQL)
-    {
-        try {
-            $query  = "UPDATE " . $this->tableName . " SET active ='" . 0 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
-
-            $this->connection  = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query);
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function editBDD(Owner $OwnerSQL)
-    {
-        try {
-            $query1  = "UPDATE " . $this->tableName . " SET name='" . $OwnerSQL->getName() . "' where owner_id = " . $OwnerSQL->getId();
-            $query2  = "UPDATE " . $this->tableName . " SET email ='" . $OwnerSQL->getEmail() . "' where owner_id =" . $OwnerSQL->getId();
-            $query3  = "UPDATE " . $this->tableName . " SET phone ='" . $OwnerSQL->getPhone() . "' where owner_id =" . $OwnerSQL->getId();
-            $query4  = "UPDATE " . $this->tableName . " SET password ='" . $OwnerSQL->getPassword() . "' where owner_id =" . $OwnerSQL->getId();
-            $query5  = "UPDATE " . $this->tableName . " SET last_name ='" . $OwnerSQL->getLast_name() . "' where owner_id =" . $OwnerSQL->getId();
-            $query6  = "UPDATE " . $this->tableName . " SET adress ='" . $OwnerSQL->getAdress() . "' where owner_id =" . $OwnerSQL->getId();
-            $query7  = "UPDATE " . $this->tableName . " SET dni ='" . $OwnerSQL->getDni() . "' where owner_id =" . $OwnerSQL->getId();
-            $query8  = "UPDATE " . $this->tableName . " SET birht_date ='" . $OwnerSQL->getBirth_date() . "' where owner_id =" . $OwnerSQL->getId();
-
-            $this->connection  = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query1);
-            $this->connection->ExecuteNonQuery($query2);
-            $this->connection->ExecuteNonQuery($query3);
-            $this->connection->ExecuteNonQuery($query4);
-            $this->connection->ExecuteNonQuery($query5);
-            $this->connection->ExecuteNonQuery($query6);
-            $this->connection->ExecuteNonQuery($query7);
-            $this->connection->ExecuteNonQuery($query8);
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function GetAllBDD()
-    {
-        try {
-            $OwnerSQLList = array();
-
-            $query = "SELECT * FROM " . $this->tableName;
+            $query = "SELECT * FROM " . $this->tableName . "g INNER JOIN users u ON g.user_id=u.user_id";
 
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->Execute($query);
 
-            foreach ($resultSet as $row) {
-                $OwnerSQL = new Owner();
-                $OwnerSQL->setId($row["owner_id"]);
-                $OwnerSQL->setName($row["name"]);
-                $OwnerSQL->setLast_name($row["last_name"]);
-                $OwnerSQL->setAdress($row["adress"]);
-                $OwnerSQL->setDni($row["dni"]);
-                $OwnerSQL->setPhone($row["phone"]);
-                $OwnerSQL->setEmail($row["email"]);
-                $OwnerSQL->setPassword($row["password"]);
-                $OwnerSQL->setBirth_date($row["birth_date"]);
+            $UserDAO = new UserDAO();
 
-                array_push($OwnerSQLList, $OwnerSQL);
+            foreach ($resultSet as $row) {
+
+                $UserSQL = $UserDAO->LoadData($row);
+
+                $GuardianSQL = $this->LoadData($row);
+
+                $UserSQL->setType_data($GuardianSQL);
+
+                array_push($GuardianSQLList, $UserSQL);
             }
 
-            return $OwnerSQLList;
+            return $GuardianSQLList;
         } catch (Exception $ex) {
             throw $ex;
         }
     }
 
-    public function GetByIdBDD($id)
+    public function GetById($id)
     {
 
         try {
-            $query = "SELECT * FROM " . $this->tableName . " WHERE owner_id = " . $id . "and active = true";
+            $query = "SELECT * FROM " . $this->tableName . "t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = " . $id . "AND active = true";
 
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->Execute($query);
 
-            foreach ($resultSet as $row) {
-                $OwnerSQL = new Owner();
-
-                $OwnerSQL->setDni($row["dni"]);
-
-                return $OwnerSQL;
+            if (!$resultSet[0]) {
+                return null;
             }
+
+            $userDAO = new UserDAO();
+
+            $UserSQL = $userDAO->LoadData($resultSet[0]);
+
+            $GuardianSQL = $this->LoadData($resultSet[0]);
+
+            $UserSQL->setType_data($GuardianSQL);
+
+            return $UserSQL;
         } catch (Exception $ex) {
             throw $ex;
         }
     }
+
+    public function LoadData($resultSet)
+    {
+        $GuardianSQL = new Guardian();
+        $GuardianSQL->setCuil($resultSet["cuil"]);
+        $GuardianSQL->setPreferred_size($resultSet["preferred_size_dog"]);
+        $GuardianSQL->setPreferred_size_cat($resultSet["preferred_size_cat"]);
+        $GuardianSQL->setReputation($resultSet["reputation"]);
+        $GuardianSQL->setAvailable_date($resultSet["available_date"]);
+        $GuardianSQL->setPrice($resultSet["price"]);
+
+        return $GuardianSQL;
+    }
+
+    // public function Activate($UserSQL)
+    // {
+    //     try {
+    //         $query  = "UPDATE " . $this->tableName . " SET active ='" . 1 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
+
+    //         $this->connection  = Connection::GetInstance();
+    //         $this->connection->ExecuteNonQuery($query);
+    //     } catch (Exception $e) {
+    //         throw $e;
+    //     }
+    // }
+
+    // public function deleteFromBDD($OwnerSQL)
+    // {
+    //     try {
+    //         $query  = "UPDATE " . $this->tableName . " SET active ='" . 0 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
+
+    //         $this->connection  = Connection::GetInstance();
+    //         $this->connection->ExecuteNonQuery($query);
+    //     } catch (Exception $e) {
+    //         throw $e;
+    //     }
+    // }
+
+    // public function editBDD(Owner $OwnerSQL)
+    // {
+    //     try {
+    //         $query1  = "UPDATE " . $this->tableName . " SET name='" . $OwnerSQL->getName() . "' where owner_id = " . $OwnerSQL->getId();
+    //         $query2  = "UPDATE " . $this->tableName . " SET email ='" . $OwnerSQL->getEmail() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query3  = "UPDATE " . $this->tableName . " SET phone ='" . $OwnerSQL->getPhone() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query4  = "UPDATE " . $this->tableName . " SET password ='" . $OwnerSQL->getPassword() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query5  = "UPDATE " . $this->tableName . " SET last_name ='" . $OwnerSQL->getLast_name() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query6  = "UPDATE " . $this->tableName . " SET adress ='" . $OwnerSQL->getAdress() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query7  = "UPDATE " . $this->tableName . " SET dni ='" . $OwnerSQL->getDni() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query8  = "UPDATE " . $this->tableName . " SET birht_date ='" . $OwnerSQL->getBirth_date() . "' where owner_id =" . $OwnerSQL->getId();
+
+    //         $this->connection  = Connection::GetInstance();
+    //         $this->connection->ExecuteNonQuery($query1);
+    //         $this->connection->ExecuteNonQuery($query2);
+    //         $this->connection->ExecuteNonQuery($query3);
+    //         $this->connection->ExecuteNonQuery($query4);
+    //         $this->connection->ExecuteNonQuery($query5);
+    //         $this->connection->ExecuteNonQuery($query6);
+    //         $this->connection->ExecuteNonQuery($query7);
+    //         $this->connection->ExecuteNonQuery($query8);
+    //     } catch (Exception $e) {
+    //         throw $e;
+    //     }
+    // }
+
 }
