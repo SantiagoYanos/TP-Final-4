@@ -83,6 +83,30 @@ class UserDAO implements IModels
             throw $e;
         }
     }
+    
+    public function GetByEmail($email)
+    {
+        try {
+            $this->UserList = array();
+
+            $query = "SELECT * FROM " . $this->tableName . "WHERE email=:email;";
+
+            $parameters["email"] = $email;
+
+            $this->connection = Connection::GetInstance();
+            $resultSet = $this->connection->Execute($query, $parameters);
+
+            if (!$resultSet[0]) {
+                return null;
+            }
+
+            $UserSQL = $this->LoadData($resultSet);
+
+            return $UserSQL;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
     public function LoadData($resultSet)
     {
