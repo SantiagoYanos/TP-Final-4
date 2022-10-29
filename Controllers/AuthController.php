@@ -2,10 +2,12 @@
 
 namespace Controllers;
 
-use DAO\GuardianDAO as GuardianDAO;
-use DAO\OwnerDAO as OwnerDAO;
+use SQLDAO\GuardianDAO as GuardianDAO;
+use SQLDAO\OwnerDAO as OwnerDAO;
 use Models\Guardian as Guardian;
 use Models\Owner as Owner;
+
+use SQLDAO\UserDAO as UserDAO;
 
 class AuthController
 {
@@ -30,123 +32,207 @@ class AuthController
         return require_once(VIEWS_PATH . "login.php");
     }
 
-
-
-    public function RegisterOwner($name, $last_name, $adress, $dni, $phone, $email, $password, $birth_date)
+    public function RegisterOwner($name, $last_name, $adress, $phone, $email, $password, $birth_date, $dni)
     {
-        $ownerDAO = new OwnerDAO;
-        $guardianDAO = new GuardianDAO;
+        $ownerDAO = new OwnerDAO();
 
-        if ($ownerDAO->GetByEmail($email) || $guardianDAO->GetByEmail($email) || $ownerDAO->GetByDNI($dni)) {
-            ///redirigir al index;
-            ///existe el owner o guardian con el email ingresado;
-            return require_once(VIEWS_PATH . "register_owner.php");
-        } else {
-            $owner = new Owner();
+        $userDAO = new UserDAO();
 
-            $owner->setName($name);
-            $owner->setLast_name($last_name);
-            $owner->setAdress($adress);
-            $owner->setBirth_date($birth_date);
-            $owner->setDni($dni);
-            $owner->setPhone($phone);
-            $owner->setPets(array());
-            $owner->setEmail($email);
-            $owner->setPassword($password);
-            $ownerDAO->add($owner);
+        $userArray = [];
 
-            ///creamos la cuenta de owner.
+        $userArray["name"] = $name;
+        $userArray["last_name"] = $last_name;
+        $userArray["adress"] = $adress;
+        $userArray["phone"] = $phone;
+        $userArray["email"] = $email;
+        $userArray["password"] = $password;
+        $userArray["birth_date"] = $birth_date;
 
-            return require_once(VIEWS_PATH . "login.php");
-        }
+        $newUser = $userDAO->LoadData($userArray);
+
+        //Continuar
     }
 
-    public function RegisterGuardian($cuil, $name, $last_name, $adress, $phone, $preferred_size, $preferred_size_cat, $email, $password, $birth_date)
+    public function RegisterGuardian($name, $last_name, $adress, $phone, $email, $password, $birth_date, $cuil, $preferred_size, $preferred_size_cat, $reputation, $available_date, $price)
     {
-        $ownerDAO = new OwnerDAO;
-        $guardianDAO = new GuardianDAO;
+        $userDAO = new UserDAO();
 
-        if ($ownerDAO->GetByEmail($email) || $guardianDAO->GetByEmail($email) || $guardianDAO->GetByCuil($cuil)) {
-            ///redirigir al index;
-            ///existe el owner o guardian con el email ingresado;
-            return require_once(VIEWS_PATH . "register_guardian.php");
-        } else {
-            $guardian = new Guardian();
+        $userArray = array();
+        $userArray["name"] = $name;
+        $userArray["last_name"] = $last_name;
+        $userArray["adress"] = $adress;
+        $userArray["phone"] = $phone;
+        $userArray["email"] = $email;
+        $userArray["password"] = $password;
+        $userArray["birth_date"] = $birth_date;
 
-            $guardian->setCuil($cuil);
-            $guardian->setName($name);
-            $guardian->setLast_name($last_name);
-            $guardian->setAdress($adress);
-            $guardian->setPhone($phone);
-            $guardian->setPreferred_size($preferred_size);
-            $guardian->setPreferred_size_cat($preferred_size_cat);
-            $guardian->setReputation("3");
-            $guardian->setPrice(null);
-            $guardian->setEmail($email);
-            $guardian->setPassword($password);
+        $newUser = $userDAO->LoadData($userArray);
 
+        $guardianDAO = new GuardianDAO();
 
-            $guardian->setAvailable_date(array());
+        $guardianArray = array();
 
-            $guardian->setBirth_date($birth_date);
+        $guardianArray["cuil"] = $cuil;
+        $guardianArray["preferred_size_dog"] = $preferred_size;
+        $guardianArray["preferred_size_cat"] = $preferred_size_cat;
+        $guardianArray["reputation"] = $reputation;
+        $guardianArray["available_date"] = $available_date;
+        $guardianArray["price"] = $price;
 
-            $guardianDAO->Add($guardian);
+        $newGuardian = $guardianDAO->LoadData($guardianArray);
 
-            ///creamos la cuenta de guardian.
+        $guardianDAO->Add($newUser, $newGuardian);
 
-
-
-            return require_once(VIEWS_PATH . "login.php");
-        }
+        return require_once(VIEWS_PATH . "login.php");
     }
+
+
+
+    // public function RegisterOwner($name, $last_name, $adress, $dni, $phone, $email, $password, $birth_date)
+    // {
+    //     $ownerDAO = new OwnerDAO;
+    //     $guardianDAO = new GuardianDAO;
+
+    //     if ($ownerDAO->GetByEmail($email) || $guardianDAO->GetByEmail($email) || $ownerDAO->GetByDNI($dni)) {
+    //         ///redirigir al index;
+    //         ///existe el owner o guardian con el email ingresado;
+    //         return require_once(VIEWS_PATH . "register_owner.php");
+    //     } else {
+    //         $owner = new Owner();
+
+    //         $owner->setName($name);
+    //         $owner->setLast_name($last_name);
+    //         $owner->setAdress($adress);
+    //         $owner->setBirth_date($birth_date);
+    //         $owner->setDni($dni);
+    //         $owner->setPhone($phone);
+    //         $owner->setPets(array());
+    //         $owner->setEmail($email);
+    //         $owner->setPassword($password);
+    //         $ownerDAO->add($owner);
+
+    //         ///creamos la cuenta de owner.
+
+    //         return require_once(VIEWS_PATH . "login.php");
+    //     }
+    // }
+
+    // ----------------------------------------------------------------------------
+
+    // public function RegisterGuardian($cuil, $name, $last_name, $adress, $phone, $preferred_size, $preferred_size_cat, $email, $password, $birth_date)
+    // {
+    //     $ownerDAO = new OwnerDAO;
+    //     $guardianDAO = new GuardianDAO;
+
+    //     if ($ownerDAO->GetByEmail($email) || $guardianDAO->GetByEmail($email) || $guardianDAO->GetByCuil($cuil)) {
+    //         ///redirigir al index;
+    //         ///existe el owner o guardian con el email ingresado;
+    //         return require_once(VIEWS_PATH . "register_guardian.php");
+    //     } else {
+    //         $guardian = new Guardian();
+
+    //         $guardian->setCuil($cuil);
+    //         $guardian->setName($name);
+    //         $guardian->setLast_name($last_name);
+    //         $guardian->setAdress($adress);
+    //         $guardian->setPhone($phone);
+    //         $guardian->setPreferred_size($preferred_size);
+    //         $guardian->setPreferred_size_cat($preferred_size_cat);
+    //         $guardian->setReputation("3");
+    //         $guardian->setPrice(null);
+    //         $guardian->setEmail($email);
+    //         $guardian->setPassword($password);
+
+
+    //         $guardian->setAvailable_date(array());
+
+    //         $guardian->setBirth_date($birth_date);
+
+    //         $guardianDAO->Add($guardian);
+
+    //         ///creamos la cuenta de guardian.
+
+
+
+    //         return require_once(VIEWS_PATH . "login.php");
+    //     }
+    // }
+
+    // public function Login($email, $password)
+    // {
+    //     $guardian_DAO = new GuardianDAO();
+    //     $owner_DAO = new OwnerDAO();
+
+    //     $user = $guardian_DAO->GetByEmail($email);
+
+    //     // echo "<script>console.log('Debug Objects: " . $user . "' );</script>";
+
+    //     if ($user != null) {
+    //         if ($user->getPassword() == $password) {
+
+    //             //Crear sesión
+    //             session_start();
+
+    //             $_SESSION["email"] = $user->getEmail();
+
+    //             $_SESSION["type"] = "guardian";
+
+    //             echo "<script>console.log('Debug Objects: " . var_dump(session_id()) . "' );</script>";
+
+    //             //Redirigir a perfil Guardian (return)
+    //             return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+    //         }
+    //     }
+
+    //     $user = $owner_DAO->getByEmail($email);
+
+    //     if ($user != null) {
+    //         if ($user->getPassword() == $password) {
+
+    //             //Crear sesión
+    //             session_start();
+
+    //             $_SESSION["email"] = $user->getEmail();
+
+    //             $_SESSION["type"] = "owner";
+
+    //             //Redirigir a perfil Owner (return)
+    //             return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+    //         }
+    //     }
+
+    //     //Redirigir a Login otra vez (return)
+    //     return require_once(VIEWS_PATH . "login.php");
+    // }
+
+    //----------------------------------------------------------------------------------
 
     public function Login($email, $password)
     {
-        $guardian_DAO = new GuardianDAO();
-        $owner_DAO = new OwnerDAO();
+        $userDAO = new UserDAO();
 
-        $user = $guardian_DAO->GetByEmail($email);
+        $detectedUser = $userDAO->GetByEmail($email);
 
-        // echo "<script>console.log('Debug Objects: " . $user . "' );</script>";
-
-        if ($user != null) {
-            if ($user->getPassword() == $password) {
-
-                //Crear sesión
-                session_start();
-
-                $_SESSION["email"] = $user->getEmail();
-
-                $_SESSION["type"] = "guardian";
-
-                echo "<script>console.log('Debug Objects: " . var_dump(session_id()) . "' );</script>";
-
-                //Redirigir a perfil Guardian (return)
-                return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-            }
+        if (!$detectedUser) {
+            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
 
-        $user = $owner_DAO->getByEmail($email);
+        if ($detectedUser["password"] == $password) {
+            /*¿Cómo podemos diferenciar los usuarios? 
+        
+            1. Hacer una llamada a cada tabla
+        
+            2. Hacer un SELECT al users y con los joins diferenciar los tipos (una query con dos subquerys adentro seguramente)*/
 
-        if ($user != null) {
-            if ($user->getPassword() == $password) {
-
-                //Crear sesión
-                session_start();
-
-                $_SESSION["email"] = $user->getEmail();
-
-                $_SESSION["type"] = "owner";
-
-                //Redirigir a perfil Owner (return)
+            if ($detectedUser["type"] == "guardian") {
+                return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+            } else {
                 return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
             }
         }
 
-        //Redirigir a Login otra vez (return)
-        return require_once(VIEWS_PATH . "login.php");
+        return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
     }
-
 
     public function logOut()
     {
@@ -156,4 +242,6 @@ class AuthController
             return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
     }
+
+    //-----------------------------------------------------------------------------------
 }

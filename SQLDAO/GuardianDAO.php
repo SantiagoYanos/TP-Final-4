@@ -9,7 +9,7 @@ use SQLDAO\Connection as Connection;
 use SQLDAO\IModels as IModels;
 use SQLDAO\UserDAO as UserDAO;
 
-class OwnerDAO implements IModels
+class GuardianDAO implements IModels
 {
     private $connection;
     private $tableName = "guardians";
