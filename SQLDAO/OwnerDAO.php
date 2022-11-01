@@ -79,7 +79,8 @@ class OwnerDAO implements IModels
     public function Add(User $UserSQL, Owner $OwnerSQL)
     {
         try {
-            $queryUser = "INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES (:name, :last_name, :adress, :dni, :phone, :email, :password, :birth_date);";
+            $queryUser = "INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES (:name, :last_name, :adress, :phone, :email, :password, :birth_date);";
+
             $parametersUser["name"] = $UserSQL->getName();
             $parametersUser["last_name"] = $UserSQL->getLast_name();
             $parametersUser["adress"] = $UserSQL->getAdress();
@@ -89,10 +90,12 @@ class OwnerDAO implements IModels
             $parametersUser["birth_date"] = $UserSQL->getBirth_date();
 
             $this->connection = Connection::GetInstance();
+
             $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
 
-            $UserDAO = new UserDAO();
-            $user = $UserDAO->GetByEmail($UserSQL->getEmail());
+            $userDAO = new UserDAO();
+
+            $user = $userDAO->GetByEmail($UserSQL->getEmail());
 
             if (!$user) {
                 return null;
