@@ -231,6 +231,7 @@ class AuthController
                session_start();
 
                $_SESSION["email"] = $detectedUser->getEmail();
+               $_SESSION["id"] = $detectedUser->getId();
 
                
 

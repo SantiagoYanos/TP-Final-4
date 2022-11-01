@@ -69,7 +69,7 @@ create table pets(
     pet_type varchar(150) not null,
     pet_size int,
     pet_breed varchar(150) not null default 'Unknown',
-    observations text default ' ',
+    observations varchar 255 default' ',
     owner_id bigint not null,
     active boolean not null default 1,
 

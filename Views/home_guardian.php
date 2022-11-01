@@ -21,6 +21,7 @@
 <body>
 
     <h1>Guardian's home</h1> <i class="fa fa-house"></i>
+    
 
     <h2>Reputation</h2>
 
@@ -31,9 +32,10 @@
         <b class="float-end">5 Stars</b>
 
         <div class="progress mb-3">
-            <div class="progress-bar" style="width:<?php echo (($user->getReputation() * 100) / 5) ?>%"></div>
+            <div class="progress-bar" style="width:<?php echo (($user->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
         </div>
 
+        
         <div>
 
             <section class="container">
@@ -53,8 +55,8 @@
 
                 </form>
             </section>
-
-            <?php echo
+            
+           <!-- <?/*php echo
 
             "<script type='text/javascript'>
                 $(function() {
@@ -70,12 +72,12 @@
                 });
             </script>"
 
-            ?>
+            */?> -->
 
         </div>
-
+        
         <div class="container align-items-end">
-
+       
             <table class="table table-striped table-bordered mt-3">
 
                 <tbody>
@@ -108,12 +110,12 @@
 
                     <tr>
                         <th>Dog Size Preference</th>
-                        <td><?php echo $user->getPreferred_size() ?></td>
+                        <td><?php echo $user->getType_Data()->getPreferred_size() ?></td>
                     </tr>
 
                     <tr>
                         <th>Cat Size Peference</th>
-                        <td><?php echo $user->GetPreferred_size_cat() ?></td>
+                        <td><?php echo $user->getType_Data()->GetPreferred_size_cat() ?></td>
                     </tr>
 
                     <tr>
