@@ -21,9 +21,9 @@ class GuardianController
     {
         //var_dump($_SESSION);
 
-        $userDAO = new userDAO();
+        $user = new GuardianDAO();
 
-        $user = $userDAO->GetByEmail($_SESSION["email"]);
+        $user = $user->GetByid($_SESSION["id"]);
 
         require_once VIEWS_PATH . "home_guardian.php";
     }

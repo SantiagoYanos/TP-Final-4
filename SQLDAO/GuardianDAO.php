@@ -90,7 +90,7 @@ class GuardianDAO implements IModels
     {
 
         try {
-            $query = "SELECT * FROM " . $this->tableName . "t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = " . $id . "AND u.active = true";
+            $query = "SELECT * FROM " . $this->tableName . " t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = " . $id . " AND u.active = true";
 
             $this->connection = Connection::GetInstance();
 
@@ -121,7 +121,7 @@ class GuardianDAO implements IModels
         $GuardianSQL->setPreferred_size($resultSet["preferred_size_dog"]);
         $GuardianSQL->setPreferred_size_cat($resultSet["preferred_size_cat"]);
         $GuardianSQL->setReputation($resultSet["reputation"]);
-        $GuardianSQL->setAvailable_date($resultSet["available_date"]);
+        //$GuardianSQL->setAvailable_date($resultSet["available_date"]);
         $GuardianSQL->setPrice($resultSet["price"]);
 
         return $GuardianSQL;
