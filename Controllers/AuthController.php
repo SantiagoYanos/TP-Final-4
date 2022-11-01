@@ -39,7 +39,7 @@ class AuthController
         $userDAO = new UserDAO();
 
         $userArray = [];
-
+        $userArray["user_id"]=0;
         $userArray["name"] = $name;
         $userArray["last_name"] = $last_name;
         $userArray["adress"] = $adress;
