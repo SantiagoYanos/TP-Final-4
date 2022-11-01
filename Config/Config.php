@@ -11,7 +11,7 @@ define("JS_PATH", FRONT_ROOT . VIEWS_PATH . "js/");
 define("IMG_PATH", VIEWS_PATH . "images/");
 
 //Datos, FALTAN CAMBIARLOS
-define("DB_HOST", "dbhost");
-define("DB_NAME", "dbname");
-define("DB_USER", "dbuser");
-define("DB_PASS", "db_pass");
+define("DB_HOST", "localhost");
+define("DB_NAME", "pet_hero");
+define("DB_USER", "root");
+define("DB_PASS", "");

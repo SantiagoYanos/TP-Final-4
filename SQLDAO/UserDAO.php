@@ -65,7 +65,7 @@ class UserDAO implements IModels
         try {
             $this->UserList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "WHERE email=:email AND active=true;";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE email=:email AND active=true;";
 
             $parameters["email"] = $email;
 
@@ -76,7 +76,7 @@ class UserDAO implements IModels
                 return null;
             }
 
-            $UserSQL = $this->LoadData($resultSet);
+            $UserSQL = $this->LoadData($resultSet[0]);
 
             return $UserSQL;
         } catch (Exception $e) {
@@ -113,6 +113,34 @@ class UserDAO implements IModels
         $UserSQL->setType_data(null);
 
         return $UserSQL;
+    }
+
+
+    public function getTypeById($id)
+    {
+        try {
+            $this->UserList = array();
+
+            $query = "SELECT user_id, 'guardian' as type FROM guardians where user_id=:id UNION all SELECT user_id, 'owner' as type FROM owners where user_id=:id;";
+
+            $parameters["id"] = $id;
+
+            $this->connection = Connection::GetInstance();
+            $resultSet = $this->connection->Execute($query, $parameters);
+
+            if (!$resultSet[0]) {
+                return null;
+            }
+
+            
+
+            return $resultSet[0];
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+
+        
     }
 
     

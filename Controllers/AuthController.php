@@ -217,18 +217,34 @@ class AuthController
             return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
 
-        if ($detectedUser["password"] == $password) {
+        if ($detectedUser->getPassword()== $password) {
             /*¿Cómo podemos diferenciar los usuarios? 
         
             1. Hacer una llamada a cada tabla
         
             2. Hacer un SELECT al users y con los joins diferenciar los tipos (una query con dos subquerys adentro seguramente)*/
 
-            if ($detectedUser["type"] == "guardian") {
-                return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-            } else {
+
+            $typeDetected=$userDAO->getTypeById($detectedUser->getId());
+
+               //Crear sesión
+               session_start();
+
+               $_SESSION["email"] = $detectedUser->getEmail();
+
+               
+
+            var_dump($typeDetected);
+
+            if ($typeDetected["type"] == "owner") {
+                $_SESSION["type"] = "owner";
                 return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+            } else {
+                $_SESSION["type"] = "guardian";
+                return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
             }
+
+
         }
 
         return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
