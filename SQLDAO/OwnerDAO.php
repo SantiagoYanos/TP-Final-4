@@ -7,73 +7,74 @@ use SQLDAO\UserDAO as UserDAO;
 use SQLDAO\IOwnerSQLDAO as IOwnerSQLDAO;
 use Models\User as User;
 use Models\Owner as Owner;
+use SQLDAO\IModels as IModels;
 use SQLDAO\Connection as Connection;
 
-class OwnerDAO implements IOwnerSQLDAO
+class OwnerDAO implements IModels
 {
     private $OwnerSQLList = array();
     private $connection;
     private $tableName = "owners";
 
-    function removeElementWithValue($array, $key, $value)
-    {
-        foreach ($array as $subKey => $subArray) {
-            if ($subArray[$key] == $value) {
-                unset($array[$subKey]);
-            }
-        }
-        return $array;
-    }
+    // function removeElementWithValue($array, $key, $value)
+    // {
+    //     foreach ($array as $subKey => $subArray) {
+    //         if ($subArray[$key] == $value) {
+    //             unset($array[$subKey]);
+    //         }
+    //     }
+    //     return $array;
+    // }
 
-    public function activateFromBDD($OwnerSQL)
-    {
-        try {
-            $query  = "UPDATE " . $this->tableName . " SET active ='" . 1 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
+    // public function activateFromBDD($OwnerSQL)
+    // {
+    //     try {
+    //         $query  = "UPDATE " . $this->tableName . " SET active ='" . 1 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
 
-            $this->connection  = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query);
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
+    //         $this->connection  = Connection::GetInstance();
+    //         $this->connection->ExecuteNonQuery($query);
+    //     } catch (Exception $e) {
+    //         throw $e;
+    //     }
+    // }
 
-    public function deleteFromBDD($OwnerSQL)
-    {
-        try {
-            $query  = "UPDATE " . $this->tableName . " SET active ='" . 0 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
+    // public function deleteFromBDD($OwnerSQL)
+    // {
+    //     try {
+    //         $query  = "UPDATE " . $this->tableName . " SET active ='" . 0 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
 
-            $this->connection  = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query);
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
+    //         $this->connection  = Connection::GetInstance();
+    //         $this->connection->ExecuteNonQuery($query);
+    //     } catch (Exception $e) {
+    //         throw $e;
+    //     }
+    // }
 
-    public function editBDD(Owner $OwnerSQL)
-    {
-        try {
-            $query1  = "UPDATE " . $this->tableName . " SET name='" . $OwnerSQL->getName() . "' where owner_id = " . $OwnerSQL->getId();
-            $query2  = "UPDATE " . $this->tableName . " SET email ='" . $OwnerSQL->getEmail() . "' where owner_id =" . $OwnerSQL->getId();
-            $query3  = "UPDATE " . $this->tableName . " SET phone ='" . $OwnerSQL->getPhone() . "' where owner_id =" . $OwnerSQL->getId();
-            $query4  = "UPDATE " . $this->tableName . " SET password ='" . $OwnerSQL->getPassword() . "' where owner_id =" . $OwnerSQL->getId();
-            $query5  = "UPDATE " . $this->tableName . " SET last_name ='" . $OwnerSQL->getLast_name() . "' where owner_id =" . $OwnerSQL->getId();
-            $query6  = "UPDATE " . $this->tableName . " SET adress ='" . $OwnerSQL->getAdress() . "' where owner_id =" . $OwnerSQL->getId();
-            $query7  = "UPDATE " . $this->tableName . " SET dni ='" . $OwnerSQL->getDni() . "' where owner_id =" . $OwnerSQL->getId();
-            $query8  = "UPDATE " . $this->tableName . " SET birht_date ='" . $OwnerSQL->getBirth_date() . "' where owner_id =" . $OwnerSQL->getId();
+    // public function editBDD(Owner $OwnerSQL)
+    // {
+    //     try {
+    //         $query1  = "UPDATE " . $this->tableName . " SET name='" . $OwnerSQL->getName() . "' where owner_id = " . $OwnerSQL->getId();
+    //         $query2  = "UPDATE " . $this->tableName . " SET email ='" . $OwnerSQL->getEmail() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query3  = "UPDATE " . $this->tableName . " SET phone ='" . $OwnerSQL->getPhone() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query4  = "UPDATE " . $this->tableName . " SET password ='" . $OwnerSQL->getPassword() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query5  = "UPDATE " . $this->tableName . " SET last_name ='" . $OwnerSQL->getLast_name() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query6  = "UPDATE " . $this->tableName . " SET adress ='" . $OwnerSQL->getAdress() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query7  = "UPDATE " . $this->tableName . " SET dni ='" . $OwnerSQL->getDni() . "' where owner_id =" . $OwnerSQL->getId();
+    //         $query8  = "UPDATE " . $this->tableName . " SET birht_date ='" . $OwnerSQL->getBirth_date() . "' where owner_id =" . $OwnerSQL->getId();
 
-            $this->connection  = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query1);
-            $this->connection->ExecuteNonQuery($query2);
-            $this->connection->ExecuteNonQuery($query3);
-            $this->connection->ExecuteNonQuery($query4);
-            $this->connection->ExecuteNonQuery($query5);
-            $this->connection->ExecuteNonQuery($query6);
-            $this->connection->ExecuteNonQuery($query7);
-            $this->connection->ExecuteNonQuery($query8);
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
+    //         $this->connection  = Connection::GetInstance();
+    //         $this->connection->ExecuteNonQuery($query1);
+    //         $this->connection->ExecuteNonQuery($query2);
+    //         $this->connection->ExecuteNonQuery($query3);
+    //         $this->connection->ExecuteNonQuery($query4);
+    //         $this->connection->ExecuteNonQuery($query5);
+    //         $this->connection->ExecuteNonQuery($query6);
+    //         $this->connection->ExecuteNonQuery($query7);
+    //         $this->connection->ExecuteNonQuery($query8);
+    //     } catch (Exception $e) {
+    //         throw $e;
+    //     }
+    // }
 
     public function Add(User $UserSQL, Owner $OwnerSQL)
     {
@@ -92,12 +93,12 @@ class OwnerDAO implements IOwnerSQLDAO
 
             $UserDAO = new UserDAO();
             $user = $UserDAO->GetByEmail($UserSQL->getEmail());
-            
-            if(!$user){
+
+            if (!$user) {
                 return null;
             }
 
-            $queryOwner = "INSERT INTO ". $this->tableName . " (user_id, dni) VALUES (:user_id, :dni);";
+            $queryOwner = "INSERT INTO " . $this->tableName . " (user_id, dni) VALUES (:user_id, :dni);";
 
             $parametersOwner["dni"] = $OwnerSQL->getDni();
             $parametersOwner["user_id"] = $user->getId();
@@ -108,25 +109,28 @@ class OwnerDAO implements IOwnerSQLDAO
         }
     }
 
-    public function GetAllBDD()
+    public function GetAll()
     {
         try {
-            $OwnerSQLList = array();
+            $OwnersSQLList = array();
 
-            $query = "SELECT * FROM " . $this->tableName;
+            $query = "SELECT * FROM " . $this->tableName . " g INNER JOIN users u ON g.user_id=u.user_id WHERE u.active=true";
 
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->Execute($query);
 
-            foreach ($resultSet as $row) {
-                $UserDAO = new UserDAO();
-                $User = new User();
-                $User = $UserDAO->LoadData($row["user_id"]);
+            $UserDAO = new UserDAO();
 
-                $Owner = new Owner();
-                $User->setType_data($Owner);
-                array_push($OwnerSQLList, $Owner);
+            foreach ($resultSet as $row) {
+
+                $UserSQL = $UserDAO->LoadData($row);
+
+                $OwnerSQL = $this->LoadData($row);
+
+                $UserSQL->setType_data($OwnerSQL);
+
+                array_push($OwnerSQLList, $UserSQL);
             }
 
             return $OwnerSQLList;
@@ -135,25 +139,39 @@ class OwnerDAO implements IOwnerSQLDAO
         }
     }
 
-    public function GetByIdBDD($id)
+    public function GetById($id)
     {
 
         try {
-            $query = "SELECT * FROM " . $this->tableName . " WHERE owner_id = " . $id . "and active = true";
+            $query = "SELECT * FROM " . $this->tableName . " t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = " . $id . " AND u.active = true";
 
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->Execute($query);
 
-            foreach ($resultSet as $row) {
-                $OwnerSQL = new Owner();
-
-                $OwnerSQL->setDni($row["dni"]);
-
-                return $OwnerSQL;
+            if (!$resultSet[0]) {
+                return null;
             }
+
+            $userDAO = new UserDAO();
+
+            $UserSQL = $userDAO->LoadData($resultSet[0]);
+
+            $OwnerSQL = $this->LoadData($resultSet[0]);
+
+            $UserSQL->setType_data($OwnerSQL);
+
+            return $UserSQL;
         } catch (Exception $ex) {
             throw $ex;
         }
+    }
+
+    public function LoadData($resultSet)
+    {
+        $OwnerSQL = new Owner();
+        $OwnerSQL->setDni($resultSet["dni"]);
+
+        return $OwnerSQL;
     }
 }
