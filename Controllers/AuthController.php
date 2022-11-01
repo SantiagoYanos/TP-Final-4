@@ -6,7 +6,6 @@ use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 use Models\Guardian as Guardian;
 use Models\Owner as Owner;
-
 use SQLDAO\UserDAO as UserDAO;
 
 class AuthController
@@ -34,11 +33,10 @@ class AuthController
 
     public function RegisterOwner($name, $last_name, $adress, $phone, $email, $password, $birth_date, $dni)
     {
-        $ownerDAO = new OwnerDAO();
-
+        
         $userDAO = new UserDAO();
-
-        $userArray = [];
+        
+        $userArray = array();
         $userArray["user_id"]=0;
         $userArray["name"] = $name;
         $userArray["last_name"] = $last_name;
@@ -47,10 +45,22 @@ class AuthController
         $userArray["email"] = $email;
         $userArray["password"] = $password;
         $userArray["birth_date"] = $birth_date;
-
+        
         $newUser = $userDAO->LoadData($userArray);
+        
+        /////
+        
+        $ownerDAO = new OwnerDAO();
+        
+        $ownerArray = array();
 
-        //Continuar
+        $ownerArray["dni"] = $dni;
+
+        $newOwner = $ownerDAO->LoadData($ownerArray);
+
+        $ownerDAO->Add($newUser, $newOwner);
+        
+        return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
     }
 
     public function RegisterGuardian($name, $last_name, $adress, $phone, $email, $password, $birth_date, $cuil, $preferred_size, $preferred_size_cat)
@@ -68,6 +78,8 @@ class AuthController
         $userArray["birth_date"] = $birth_date;
 
         $newUser = $userDAO->LoadData($userArray);
+
+        ///////
 
         $guardianDAO = new GuardianDAO();
 
