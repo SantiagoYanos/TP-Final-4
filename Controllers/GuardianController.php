@@ -3,7 +3,8 @@
 namespace Controllers;
 
 //use DAO\GuardianDAO as GuardianDAO;
-use  SQLDAO\GuardianDAO as 
+use  SQLDAO\GuardianDAO as GuardianDAO;
+use SQLDAO\UserDAO as userDAO;
 
 class GuardianController
 {
@@ -20,9 +21,9 @@ class GuardianController
     {
         //var_dump($_SESSION);
 
-        $guardian_DAO = new GuardianDAO();
+        $userDAO = new userDAO();
 
-        $user = $guardian_DAO->GetByEmail($_SESSION["email"]);
+        $user = $userDAO->GetByEmail($_SESSION["email"]);
 
         require_once VIEWS_PATH . "home_guardian.php";
     }
@@ -35,7 +36,7 @@ class GuardianController
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
     }*/
 
-    public function updateAvDates($stringDates)
+    /*public function updateAvDates($stringDates)
     {
 
         $guardian_DAO = new GuardianDAO();
@@ -45,5 +46,7 @@ class GuardianController
         $guardian_DAO->UpdateAvailableDates($_SESSION["email"], $arrayDates);
 
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-    }
+    }*/
+
+    
 }
