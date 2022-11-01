@@ -53,11 +53,12 @@ class AuthController
         //Continuar
     }
 
-    public function RegisterGuardian($name, $last_name, $adress, $phone, $email, $password, $birth_date, $cuil, $preferred_size, $preferred_size_cat, $reputation, $available_date, $price)
+    public function RegisterGuardian($name, $last_name, $adress, $phone, $email, $password, $birth_date, $cuil, $preferred_size, $preferred_size_cat)
     {
         $userDAO = new UserDAO();
 
         $userArray = array();
+        $userArray["user_id"]=0;
         $userArray["name"] = $name;
         $userArray["last_name"] = $last_name;
         $userArray["adress"] = $adress;
@@ -75,9 +76,9 @@ class AuthController
         $guardianArray["cuil"] = $cuil;
         $guardianArray["preferred_size_dog"] = $preferred_size;
         $guardianArray["preferred_size_cat"] = $preferred_size_cat;
-        $guardianArray["reputation"] = $reputation;
-        $guardianArray["available_date"] = $available_date;
-        $guardianArray["price"] = $price;
+        $guardianArray["reputation"] = 0;
+        $guardianArray["available_date"] = null;
+        $guardianArray["price"] = 500;
 
         $newGuardian = $guardianDAO->LoadData($guardianArray);
 

@@ -49,18 +49,18 @@
             <div>
                 <label for="preferred_size">Dog Size Preference: </label>
                 <select name="preferred_size" id="preferred_size" required>
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="big">Big</option>
+                    <option value=3>Small</option>
+                    <option value=2>Medium</option>
+                    <option value=1>Big</option>
                 </select></br>
             </div>
 
             <div>
                 <label for="preferred_size_cat">Cat Size Preference: </label>
                 <select name="preferred_size_cat" id="preferred_size_cat" required>
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="big">Big</option>
+                    <option value=3>Small</option>
+                    <option value=2>Medium</option>
+                    <option value=1>Big</option>
                 </select></br>
             </div>
 

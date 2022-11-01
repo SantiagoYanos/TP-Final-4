@@ -40,15 +40,15 @@ class GuardianDAO implements IModels
                 return null;
             }
 
-            $queryGuardian = "INSERT INTO" . $this->tableName . "(user_id, cuil, preferred_size_dog,preferred_size_cat, reputation, available_date, price) VALUES (:user_id, :cuil, :preferred_size_dog, :preferred_size_cat, :reputation, :available_date, :price);";
+            $queryGuardian = "INSERT INTO " . $this->tableName . " (user_id, cuil, preferred_size_dog,preferred_size_cat ) VALUES (:user_id, :cuil, :preferred_size_dog, :preferred_size_cat);";
 
             $parametersGuardian["user_id"] = $user->getId();
             $parametersGuardian["cuil"] = $GuardianSQL->getCuil();
             $parametersGuardian["preferred_size_dog"] = $GuardianSQL->getPreferred_size();
             $parametersGuardian["preferred_size_cat"] = $GuardianSQL->getPreferred_size_cat();
-            $parametersGuardian["reputation"] = $GuardianSQL->getReputation();
-            $parametersGuardian["available_date"] = $GuardianSQL->getAvailable_date();
-            $parametersGuardian["price"] = $GuardianSQL->getPrice();
+            //$parametersGuardian["reputation"] = $GuardianSQL->getReputation();
+            //$parametersGuardian["available_date"] = $GuardianSQL->getAvailable_date();
+            //$parametersGuardian["price"] = $GuardianSQL->getPrice();
 
             $this->connection->ExecuteNonQuery($queryGuardian, $parametersGuardian);
         } catch (Exception $e) {
@@ -61,7 +61,7 @@ class GuardianDAO implements IModels
         try {
             $GuardianSQLList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "g INNER JOIN users u ON g.user_id=u.user_id WHERE u.active=true";
+            $query = "SELECT * FROM " . $this->tableName . " g INNER JOIN users u ON g.user_id=u.user_id WHERE u.active=true";
 
             $this->connection = Connection::GetInstance();
 
@@ -120,9 +120,9 @@ class GuardianDAO implements IModels
         $GuardianSQL->setCuil($resultSet["cuil"]);
         $GuardianSQL->setPreferred_size($resultSet["preferred_size_dog"]);
         $GuardianSQL->setPreferred_size_cat($resultSet["preferred_size_cat"]);
-        $GuardianSQL->setReputation($resultSet["reputation"]);
+        //$GuardianSQL->setReputation($resultSet["reputation"]);
         //$GuardianSQL->setAvailable_date($resultSet["available_date"]);
-        $GuardianSQL->setPrice($resultSet["price"]);
+        //$GuardianSQL->setPrice($resultSet["price"]);
 
         return $GuardianSQL;
     }
