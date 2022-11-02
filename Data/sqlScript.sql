@@ -7,9 +7,6 @@ CREATE TABLE pet_sizes(
     CONSTRAINT pk_pet_size_id PRIMARY KEY (pet_size_id)
 );
 
-
-
-
 CREATE TABLE users(
     user_id bigint auto_increment,
     name varChar(150) NOT NULL,
@@ -21,12 +18,12 @@ CREATE TABLE users(
     birth_date date NOT NULL,
     active boolean not null default 1,
     CONSTRAINT pk_user_id PRIMARY KEY (user_id),
-    CONSTRAINT unq_email UNIQUE (user_id)
+    CONSTRAINT unq_email UNIQUE (email)
 );
 
 create table owners(
     user_id bigint NOT NULL,
-    dni bigint not null,
+    dni varChar(150) not null,
 
     constraint pk_owner_user_id primary key (user_id),
     constraint fk_owner_user_id foreign key (user_id) references users(user_id) ON DELETE CASCADE,
@@ -35,9 +32,12 @@ create table owners(
     /*constraint chk_birth_date check ( birth_date<=now() )*/
 );
 
+
+
+
 create table guardians(
     user_id bigint NOT NULL,
-    cuil bigint not null,
+    cuil varChar(150) not null,
     reputation float not null,
     preferred_size_dog int,
     preferred_size_cat int,
@@ -69,7 +69,7 @@ create table pets(
     pet_type varchar(150) not null,
     pet_size int,
     pet_breed varchar(150) not null default 'Unknown',
-    observations varchar 255 default' ',
+    observations varchar(250) default '',
     owner_id bigint not null,
     active boolean not null default 1,
 
@@ -104,8 +104,6 @@ create table reservations(
 
 );
 
-
-
 create table reservations_x_pets(
     reservation_x_pets_id bigint not null auto_increment,
     reservation_id bigint not null,
@@ -133,3 +131,16 @@ create table payments(
     constraint fk_payment_reservation foreign key (reservation_id) references reservations (reservation_id),
     constraint chk_negative_amount check ( amount>=0 )
 );
+
+
+INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Santiago", "Yanosky", "costa 12222", "02235887965", "santi@gmail.com", "elmascapito", '2002-11-13');
+INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Agus", "Kumar", "basural 5555", "02235 1256987", "agus@gmail.com", "elmascapoto", '1999-11-12');
+
+
+
+INSERT INTO pet_sizes(name) VALUES ("big");
+INSERT INTO pet_sizes(name) VALUES ("medium");
+INSERT INTO pet_sizes(name) VALUES ("small");
+
+INSERT INTO guardians (user_id, cuil, reputation, preferred_size_dog, preferred_size_cat, price) VALUES (1, "5555555", 3.2, 1, 2, 5000);
+INSERT INTO owners (user_id, dni) VALUES (2, 52555633);
