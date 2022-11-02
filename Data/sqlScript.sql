@@ -32,9 +32,6 @@ create table owners(
     /*constraint chk_birth_date check ( birth_date<=now() )*/
 );
 
-
-
-
 create table guardians(
     user_id bigint NOT NULL,
     cuil varChar(150) not null,

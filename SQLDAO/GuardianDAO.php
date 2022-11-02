@@ -78,7 +78,7 @@ class GuardianDAO implements IModels
 
                 $UserSQL = $UserDAO->LoadData($row);
 
-                $GuardianSQL = $this->LoadData($row);
+                $GuardianSQL = $this->LoadData($row, $this->GetAvailableDates($UserSQL->getId()));
 
                 $UserSQL->setType_data($GuardianSQL);
 
@@ -115,7 +115,7 @@ class GuardianDAO implements IModels
 
             $UserSQL = $userDAO->LoadData($resultSet[0]);
 
-            $GuardianSQL = $this->LoadData($resultSet[0]);
+            $GuardianSQL = $this->LoadData($resultSet[0], $this->GetAvailableDates($UserSQL->getId()));
 
             $UserSQL->setType_data($GuardianSQL);
 
@@ -125,7 +125,47 @@ class GuardianDAO implements IModels
         }
     }
 
-    public function LoadData($resultSet)
+    public function AddAvailableDates($id, $available_dates)
+    {
+        try {
+            $queryDelete = "DELETE FROM available_dates WHERE guardian_id= " . $id;
+
+            $datesString = join("') , (" . $id . ",'", $available_dates);
+
+            $queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (" . $id . ", '" . $datesString . "')";
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($queryDelete);
+
+            $this->connection->ExecuteNonQuery($queryInsert);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function GetAvailableDates($id)
+    {
+        try {
+
+            $query = "SELECT date FROM available_dates WHERE guardian_id= " . $id;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            $available_dates = array_map(function ($dateArray) {
+
+                return $dateArray["date"];
+            }, $resultSet);
+
+            return $available_dates;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function LoadData($resultSet, $available_dates)
     {
         $GuardianSQL = new Guardian();
         $GuardianSQL->setCuil($resultSet["cuil"]);
@@ -134,9 +174,9 @@ class GuardianDAO implements IModels
         if ($resultSet["reputation"]) {
             $GuardianSQL->setReputation($resultSet["reputation"]);
         }
-        // if ($resultSet["available_date"]) {
-        //     $GuardianSQL->setAvailable_date($resultSet["available_date"]);
-        // }
+        if ($available_dates) {
+            $GuardianSQL->setAvailable_date($available_dates);
+        }
         if ($resultSet["price"]) {
             $GuardianSQL->setPrice($resultSet["price"]);
         }

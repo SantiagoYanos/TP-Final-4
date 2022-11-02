@@ -21,7 +21,7 @@
 <body>
 
     <h1>Guardian's home</h1> <i class="fa fa-house"></i>
-    
+
 
     <h2>Reputation</h2>
 
@@ -35,7 +35,7 @@
             <div class="progress-bar" style="width:<?php echo (($user->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
         </div>
 
-        
+
         <div>
 
             <section class="container">
@@ -55,8 +55,8 @@
 
                 </form>
             </section>
-            
-           <!-- <?/*php echo
+
+            <?php echo
 
             "<script type='text/javascript'>
                 $(function() {
@@ -67,17 +67,17 @@
 
                     });
 
-                    $('#datepicker').datepicker('setDates',['" . join("','", $user->getAvailable_date()) . "']);
+                    $('#datepicker').datepicker('setDates',['" . join("','", $user->getType_data()->getAvailable_date()) . "']);
 
                 });
             </script>"
 
-            */?> -->
+            ?>
 
         </div>
-        
+
         <div class="container align-items-end">
-       
+
             <table class="table table-striped table-bordered mt-3">
 
                 <tbody>

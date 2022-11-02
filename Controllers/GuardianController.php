@@ -36,17 +36,15 @@ class GuardianController
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
     }*/
 
-    /*public function updateAvDates($stringDates)
+    public function updateAvDates($stringDates)
     {
 
         $guardian_DAO = new GuardianDAO();
 
         $arrayDates = explode(",", $stringDates);
 
-        $guardian_DAO->UpdateAvailableDates($_SESSION["email"], $arrayDates);
+        $guardian_DAO->AddAvailableDates($_SESSION["id"], $arrayDates);
 
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-    }*/
-
-    
+    }
 }
