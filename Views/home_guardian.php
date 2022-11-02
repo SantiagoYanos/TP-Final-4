@@ -56,21 +56,28 @@
                 </form>
             </section>
 
-            <?php echo
+            <?php
 
-            "<script type='text/javascript'>
-                $(function() {
-                    $('#datepicker').datepicker({
+            $calendario = "<script type='text/javascript'>
+            $(function() {
+                $('#datepicker').datepicker({
 
-                        multidate: true,
-                        format: 'yyyy-mm-dd'
-
-                    });
-
-                    $('#datepicker').datepicker('setDates',['" . join("','", $user->getType_data()->getAvailable_date()) . "']);
+                    multidate: true,
+                    format: 'yyyy-mm-dd'
 
                 });
-            </script>"
+                
+                ";
+
+            if ($user->getType_data()->getAvailable_date()) {
+                $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $user->getType_data()->getAvailable_date()) . "'])";
+            }
+
+            $calendario = $calendario . "
+                });
+            </script>";
+
+            echo $calendario;
 
             ?>
 

@@ -41,9 +41,12 @@ class GuardianController
 
         $guardian_DAO = new GuardianDAO();
 
-        $arrayDates = explode(",", $stringDates);
-
-        $guardian_DAO->AddAvailableDates($_SESSION["id"], $arrayDates);
+        if ($stringDates != "") {
+            $arrayDates = explode(",", $stringDates);
+            $guardian_DAO->AddAvailableDates($_SESSION["id"], $arrayDates);
+        } else {
+            $guardian_DAO->AddAvailableDates($_SESSION["id"], []);
+        }
 
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
     }

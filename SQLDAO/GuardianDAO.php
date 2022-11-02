@@ -130,13 +130,17 @@ class GuardianDAO implements IModels
         try {
             $queryDelete = "DELETE FROM available_dates WHERE guardian_id= " . $id;
 
-            $datesString = join("') , (" . $id . ",'", $available_dates);
-
-            $queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (" . $id . ", '" . $datesString . "')";
-
             $this->connection = Connection::GetInstance();
 
             $this->connection->ExecuteNonQuery($queryDelete);
+
+            if ($available_dates == []) {
+                return NULL;
+            }
+
+            $datesString = join("') , (" . $id . ",'", $available_dates);
+
+            $queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (" . $id . ", '" . $datesString . "')";
 
             $this->connection->ExecuteNonQuery($queryInsert);
         } catch (Exception $ex) {
@@ -153,6 +157,10 @@ class GuardianDAO implements IModels
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->Execute($query);
+
+            if ($resultSet == []) {
+                return NULL;
+            }
 
             $available_dates = array_map(function ($dateArray) {
 
@@ -176,6 +184,8 @@ class GuardianDAO implements IModels
         }
         if ($available_dates) {
             $GuardianSQL->setAvailable_date($available_dates);
+        } else {
+            $GuardianSQL->setAvailable_date(NULL);
         }
         if ($resultSet["price"]) {
             $GuardianSQL->setPrice($resultSet["price"]);
