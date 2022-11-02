@@ -40,13 +40,13 @@
                       } ?> value="*">*</option>
               <option <?php if ($preferred_size == "small") {
                         echo "selected='selected'";
-                      } ?> value="small">Small</option>
+                      } ?> value="3">Small</option>
               <option <?php if ($preferred_size == "medium") {
                         echo "selected='selected'";
-                      } ?> value="medium">Medium</option>
+                      } ?> value="2">Medium</option>
               <option <?php if ($preferred_size == "big") {
                         echo "selected='selected'";
-                      } ?>value="big">Big</option>
+                      } ?>value="1">Big</option>
             </select>
           </td>
         </tr>
@@ -60,13 +60,13 @@
                       } ?> value="*">*</option>
               <option <?php if ($preferred_size_cat == "small") {
                         echo "selected='selected'";
-                      } ?> value="small">Small</option>
+                      } ?> value="3">Small</option>
               <option <?php if ($preferred_size_cat == "medium") {
                         echo "selected='selected'";
-                      } ?> value="medium">Medium</option>
+                      } ?> value="2">Medium</option>
               <option <?php if ($preferred_size_cat == "big") {
                         echo "selected='selected'";
-                      } ?>value="big">Big</option>
+                      } ?>value="1">Big</option>
             </select>
           </td>
         </tr>
@@ -96,21 +96,29 @@
         </span>
       </div>
 
-      <?php echo
+      <?php
 
-      "<script type='text/javascript'>
-                $(function() {
-                    $('#datepicker').datepicker({
+      $calendario = "<script type='text/javascript'>
+            $(function() {
+                $('#datepicker').datepicker({
 
-                        multidate: true,
-                        format: 'yyyy-mm-dd'
-
-                    });
-
-                    $('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "']);
+                    multidate: true,
+                    format: 'yyyy-mm-dd'
 
                 });
-            </script>"
+                
+                ";
+
+      if ($stringDates) {
+        $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "'])";
+      }
+
+      $calendario = $calendario . "
+                });
+            </script>";
+
+      echo $calendario;
+
       ?>
 
     </div>
@@ -152,8 +160,6 @@
     </tbody>
 
   </table>
-
-  <?php echo $query ?>
 
 
 </body>

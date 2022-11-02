@@ -66,7 +66,7 @@ class GuardianDAO implements IModels
             INNER JOIN users u ON t.user_id=u.user_id
             INNER JOIN pet_sizes psd ON psd.pet_size_id=t.preferred_size_dog
             INNER JOIN pet_sizes psc ON psc.pet_size_id=t.preferred_size_cat
-            WHERE u.active = true";
+            WHERE u.active = true AND t.price IS NOT NULL";
 
             $this->connection = Connection::GetInstance();
 
@@ -168,6 +168,87 @@ class GuardianDAO implements IModels
             }, $resultSet);
 
             return $available_dates;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function SearchGuardiansByFilters($filters)
+    {
+
+        $available_dates = array_pop($filters);
+
+        $filtersQuery = array_map(function ($filter) {
+
+            switch ($filter[0]) {
+
+                case "name":
+                    return "u.name LIKE '%" . $filter[1] . "%'";
+                    break;
+                case "reputation":
+                    return "t.reputation >= " . $filter[1];
+                    break;
+                case "preferred_size_dog":
+                    return "t.preferred_size_dog = " . $filter[1];
+                    break;
+                case "preferred_size_cat":
+                    return "t.preferred_size_cat = " . $filter[1];
+                    break;
+                case "adress":
+                    return "u.adress LIKE '%" . $filter[1] . "%'";
+                    break;
+                case "price":
+                    return "t.price <= " . $filter[1];
+                    break;
+                default:
+                    return "";
+                    break;
+            };
+        }, $filters);
+
+        try {
+
+            $query = "SELECT u.*, t.cuil, t.reputation, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
+            
+        FROM " .  $this->tableName  . " t 
+        INNER JOIN users u ON t.user_id=u.user_id
+        INNER JOIN pet_sizes psd ON psd.pet_size_id=t.preferred_size_dog    
+        INNER JOIN pet_sizes psc ON psc.pet_size_id=t.preferred_size_cat
+         WHERE u.active = true AND t.price IS NOT NULL";
+
+
+            if ($filtersQuery != []) {
+
+                $filtersQuery = join(" AND ", $filtersQuery);
+
+                $query = $query . " AND " . $filtersQuery;
+            }
+
+            if ($available_dates[0] == "available_dates") {
+
+                $query = $query . " AND " . count($available_dates[1]) . " IN (SELECT count(date) as dates FROM available_dates WHERE date IN ('" . join("','", $available_dates[1]) . "') AND guardian_id=t.user_id GROUP BY guardian_id)";
+            }
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            $UserDAO = new UserDAO();
+
+            $GuardianSQLList = array();
+
+            foreach ($resultSet as $row) {
+
+                $UserSQL = $UserDAO->LoadData($row);
+
+                $GuardianSQL = $this->LoadData($row, $this->GetAvailableDates($UserSQL->getId()));
+
+                $UserSQL->setType_data($GuardianSQL);
+
+                array_push($GuardianSQLList, $UserSQL);
+            };
+
+            return $GuardianSQLList;
         } catch (Exception $ex) {
             throw $ex;
         }
