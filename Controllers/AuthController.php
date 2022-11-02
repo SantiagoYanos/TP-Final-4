@@ -33,11 +33,11 @@ class AuthController
 
     public function RegisterOwner($name, $last_name, $adress, $phone, $email, $password, $birth_date, $dni)
     {
-        
+
         $userDAO = new UserDAO();
-        
+
         $userArray = array();
-        $userArray["user_id"]=0;
+        $userArray["user_id"] = 0;
         $userArray["name"] = $name;
         $userArray["last_name"] = $last_name;
         $userArray["adress"] = $adress;
@@ -45,13 +45,13 @@ class AuthController
         $userArray["email"] = $email;
         $userArray["password"] = $password;
         $userArray["birth_date"] = $birth_date;
-        
+
         $newUser = $userDAO->LoadData($userArray);
-        
+
         /////
-        
+
         $ownerDAO = new OwnerDAO();
-        
+
         $ownerArray = array();
 
         $ownerArray["dni"] = $dni;
@@ -59,7 +59,7 @@ class AuthController
         $newOwner = $ownerDAO->LoadData($ownerArray);
 
         $ownerDAO->Add($newUser, $newOwner);
-        
+
         return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
     }
 
@@ -68,7 +68,7 @@ class AuthController
         $userDAO = new UserDAO();
 
         $userArray = array();
-        $userArray["user_id"]=0;
+        $userArray["user_id"] = 0;
         $userArray["name"] = $name;
         $userArray["last_name"] = $last_name;
         $userArray["adress"] = $adress;
@@ -88,9 +88,9 @@ class AuthController
         $guardianArray["cuil"] = $cuil;
         $guardianArray["preferred_size_dog"] = $preferred_size;
         $guardianArray["preferred_size_cat"] = $preferred_size_cat;
-        $guardianArray["reputation"] = 0;
+        $guardianArray["reputation"] = null;
         $guardianArray["available_date"] = null;
-        $guardianArray["price"] = 500;
+        $guardianArray["price"] = null;
 
         $newGuardian = $guardianDAO->LoadData($guardianArray);
 
@@ -230,7 +230,7 @@ class AuthController
             return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
 
-        if ($detectedUser->getPassword()== $password) {
+        if ($detectedUser->getPassword() == $password) {
             /*¿Cómo podemos diferenciar los usuarios? 
         
             1. Hacer una llamada a cada tabla
@@ -238,15 +238,15 @@ class AuthController
             2. Hacer un SELECT al users y con los joins diferenciar los tipos (una query con dos subquerys adentro seguramente)*/
 
 
-            $typeDetected=$userDAO->getTypeById($detectedUser->getId());
+            $typeDetected = $userDAO->getTypeById($detectedUser->getId());
 
-               //Crear sesión
-               session_start();
+            //Crear sesión
+            session_start();
 
-               $_SESSION["email"] = $detectedUser->getEmail();
-               $_SESSION["id"] = $detectedUser->getId();
+            $_SESSION["email"] = $detectedUser->getEmail();
+            $_SESSION["id"] = $detectedUser->getId();
 
-               
+
 
             var_dump($typeDetected);
 
@@ -257,8 +257,6 @@ class AuthController
                 $_SESSION["type"] = "guardian";
                 return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
             }
-
-
         }
 
         return header("location: " . FRONT_ROOT . "Auth/ShowLogin");

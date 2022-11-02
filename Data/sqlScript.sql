@@ -38,7 +38,7 @@ create table owners(
 create table guardians(
     user_id bigint NOT NULL,
     cuil varChar(150) not null,
-    reputation float not null,
+    reputation float not null default 3,
     preferred_size_dog int,
     preferred_size_cat int,
     price float,

@@ -61,7 +61,12 @@ class GuardianDAO implements IModels
         try {
             $GuardianSQLList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . " g INNER JOIN users u ON g.user_id=u.user_id WHERE u.active=true";
+            $query = "SELECT u.*, t.cuil, t.reputation, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
+            FROM " . $this->tableName  . " t 
+            INNER JOIN users u ON t.user_id=u.user_id
+            INNER JOIN pet_sizes psd ON psd.pet_size_id=t.preferred_size_dog
+            INNER JOIN pet_sizes psc ON psc.pet_size_id=t.preferred_size_cat
+            WHERE u.active = true";
 
             $this->connection = Connection::GetInstance();
 
@@ -90,7 +95,13 @@ class GuardianDAO implements IModels
     {
 
         try {
-            $query = "SELECT * FROM " . $this->tableName . " t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = " . $id . " AND u.active = true";
+            $query =
+                "SELECT u.*, t.cuil, t.reputation, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
+            FROM " . $this->tableName  . " t 
+            INNER JOIN users u ON t.user_id=u.user_id
+            INNER JOIN pet_sizes psd ON psd.pet_size_id=t.preferred_size_dog
+            INNER JOIN pet_sizes psc ON psc.pet_size_id=t.preferred_size_cat
+            WHERE u.user_id = " . $id . " AND u.active = true";
 
             $this->connection = Connection::GetInstance();
 
@@ -120,9 +131,15 @@ class GuardianDAO implements IModels
         $GuardianSQL->setCuil($resultSet["cuil"]);
         $GuardianSQL->setPreferred_size($resultSet["preferred_size_dog"]);
         $GuardianSQL->setPreferred_size_cat($resultSet["preferred_size_cat"]);
-        //$GuardianSQL->setReputation($resultSet["reputation"]);
-        //$GuardianSQL->setAvailable_date($resultSet["available_date"]);
-        //$GuardianSQL->setPrice($resultSet["price"]);
+        if ($resultSet["reputation"]) {
+            $GuardianSQL->setReputation($resultSet["reputation"]);
+        }
+        // if ($resultSet["available_date"]) {
+        //     $GuardianSQL->setAvailable_date($resultSet["available_date"]);
+        // }
+        if ($resultSet["price"]) {
+            $GuardianSQL->setPrice($resultSet["price"]);
+        }
 
         return $GuardianSQL;
     }
