@@ -99,7 +99,7 @@ class OwnerDAO implements IModels
 
             if (!$user) {
                 return null;
-            }
+            }   
 
             $queryOwner = "INSERT INTO " . $this->tableName . " (user_id, dni) VALUES (:user_id, :dni);";
 

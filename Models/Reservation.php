@@ -7,7 +7,7 @@ class Reservation{
     private $id;
     private $date;
     private $price;
-    private $guardian_email;
+    private $guardian_id;
     private $id_pet;
 
     public function getDate()

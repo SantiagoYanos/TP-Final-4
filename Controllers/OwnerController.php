@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-use DAO\OwnerDAO as OwnerDAO;
-use DAO\GuardianDAO as GuardianDAO;
+use SQLDAO\OwnerDAO as OwnerDAO;
+use SQLDAO\GuardianDAO as GuardianDAO;
 
 class OwnerController
 {
@@ -20,7 +20,7 @@ class OwnerController
     {
         $owner_DAO = new OwnerDAO();
 
-        $user = $owner_DAO->GetByEmail($_SESSION["email"]);
+        $user = $owner_DAO->GetById($_SESSION["id"]);
 
         require_once VIEWS_PATH . "home_owner.php";
     }
@@ -34,7 +34,7 @@ class OwnerController
 
         $guardians = array_filter($guardians, function ($guardian) {
 
-            return $guardian->getPrice() != null;
+            return $guardian->getType_data()->getPrice() != null;
         });
 
         //---------------------------------------------- Filtros de guardianes
@@ -50,7 +50,7 @@ class OwnerController
 
             $guardians = array_filter($guardians, function ($guardian) use ($rating) {
 
-                return $guardian->GetReputation() >= $rating;
+                return $guardian->getType_data()->GetReputation() >= $rating;
             });
         }
 
@@ -58,7 +58,7 @@ class OwnerController
 
             $guardians = array_filter($guardians, function ($guardian) use ($preferred_size) {
 
-                return $guardian->GetPreferred_size() == $preferred_size;
+                return $guardian->getType_data()->GetPreferred_size() == $preferred_size;
             });
         }
 
@@ -67,7 +67,7 @@ class OwnerController
 
             $guardians = array_filter($guardians, function ($guardian) use ($preferred_size_cat) {
 
-                return $guardian->GetPreferred_size_cat() == $preferred_size_cat;
+                return $guardian->getType_data()->GetPreferred_size_cat() == $preferred_size_cat;
             });
         }
 
@@ -83,14 +83,14 @@ class OwnerController
 
             $guardians = array_filter($guardians, function ($guardian) use ($price) {
 
-                return $guardian->GetPrice() <= $price;
+                return $guardian->getType_data()->GetPrice() <= $price;
             });
         }
 
         if ($stringDates != null) {
             $guardians = array_filter($guardians, function ($guardian) use ($price) {
 
-                return $guardian->GetPrice() <= $price;
+                return $guardian->getType_data()->GetPrice() <= $price;
             });
         }
 

@@ -130,7 +130,8 @@
       <th>Name</th>
       <th>Addres</th>
       <th>Rating</th>
-      <th>Pet size preference</th>
+      <th>Dog Size Preference</th>
+      <th>Cat Size Preference</th>
       <th>Price</th>
     </thead>
 
@@ -141,9 +142,10 @@
         <tr>
           <td><?php echo $guardian->GetName() ?></td>
           <td><?php echo $guardian->getAdress() ?></td>
-          <td><?php echo $guardian->getReputation() ?></td>
-          <td><?php echo $guardian->getPreferred_size() ?></td>
-          <td><?php echo $guardian->GetPrice() ?></td>
+          <td><?php echo $guardian->getType_data()->getReputation() ?></td>
+          <td><?php echo $guardian->getType_data()->getPreferred_size() ?></td>
+          <td><?php echo $guardian->getType_data()->getPreferred_size_cat() ?></td>
+          <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
         </tr>
 
       <?php } ?>
