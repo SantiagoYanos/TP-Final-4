@@ -14,4 +14,4 @@ define("IMG_PATH", VIEWS_PATH . "images/");
 define("DB_HOST", "localhost");
 define("DB_NAME", "pet_hero");
 define("DB_USER", "root");
-define("DB_PASS", "1234");
+define("DB_PASS", "");
