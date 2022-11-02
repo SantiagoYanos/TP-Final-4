@@ -92,7 +92,7 @@ class AuthController
         $guardianArray["available_date"] = null;
         $guardianArray["price"] = null;
 
-        $newGuardian = $guardianDAO->LoadData($guardianArray);
+        $newGuardian = $guardianDAO->LoadData($guardianArray,null);
 
         $guardianDAO->Add($newUser, $newGuardian);
 
