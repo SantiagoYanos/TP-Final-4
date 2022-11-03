@@ -134,7 +134,7 @@
   </form>
 
     
-  <form action=<?php echo "/Owner/MakeReservation"?> type=POST>
+  <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method=POST>
   <input type="hidden" id="guardian_id"></input>
     <table class="table table-striped table-bordered">
       <thead>
