@@ -57,12 +57,13 @@ class OwnerController
             array_push($filters, ["price", $price]);
         }
 
-        if ($stringDates != null) {
-
+        if ($stringDates != null && $stringDates != "") {
             $stringDates = explode(",", $stringDates);
-
-            array_push($filters, ["available_dates", $stringDates]);
+        } else {
+            $stringDates = [];
         }
+
+        array_push($filters, ["available_dates", $stringDates]);
 
         if ($filters != []) {
             $guardians = $guardian_DAO->SearchGuardiansByFilters($filters);

@@ -224,7 +224,7 @@ class GuardianDAO implements IModels
                 $query = $query . " AND " . $filtersQuery;
             }
 
-            if ($available_dates[0] == "available_dates") {
+            if ($available_dates[0] == "available_dates" && $available_dates[1] != []) {
 
                 $query = $query . " AND " . count($available_dates[1]) . " IN (SELECT count(date) as dates FROM available_dates WHERE date IN ('" . join("','", $available_dates[1]) . "') AND guardian_id=t.user_id GROUP BY guardian_id)";
             }
