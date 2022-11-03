@@ -38,13 +38,13 @@
               <option <?php if ($preferred_size == null) {
                         echo "selected='selected'";
                       } ?> value="*">*</option>
-              <option <?php if ($preferred_size == "small") {
+              <option <?php if ($preferred_size == 3) {
                         echo "selected='selected'";
                       } ?> value="3">Small</option>
-              <option <?php if ($preferred_size == "medium") {
+              <option <?php if ($preferred_size == 2) {
                         echo "selected='selected'";
                       } ?> value="2">Medium</option>
-              <option <?php if ($preferred_size == "big") {
+              <option <?php if ($preferred_size == 1) {
                         echo "selected='selected'";
                       } ?>value="1">Big</option>
             </select>
@@ -58,13 +58,13 @@
               <option <?php if ($preferred_size_cat == null) {
                         echo "selected='selected'";
                       } ?> value="*">*</option>
-              <option <?php if ($preferred_size_cat == "small") {
+              <option <?php if ($preferred_size_cat == 3) {
                         echo "selected='selected'";
                       } ?> value="3">Small</option>
-              <option <?php if ($preferred_size_cat == "medium") {
+              <option <?php if ($preferred_size_cat == 2) {
                         echo "selected='selected'";
                       } ?> value="2">Medium</option>
-              <option <?php if ($preferred_size_cat == "big") {
+              <option <?php if ($preferred_size_cat == 1) {
                         echo "selected='selected'";
                       } ?>value="1">Big</option>
             </select>

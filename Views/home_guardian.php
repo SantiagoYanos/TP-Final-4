@@ -85,7 +85,7 @@
 
         <div class="container align-items-end">
 
-            <table class="table table-striped table-bordered mt-3">
+            <table class="table table-striped table-bordered mt-3 mb-1">
 
                 <tbody>
 
@@ -106,6 +106,11 @@
                     </tr>
 
                     <tr>
+                        <th>Cuil</th>
+                        <td><?php echo $user->getType_Data()->getCuil() ?></td>
+                    </tr>
+
+                    <tr>
                         <th>Phone</th>
                         <td><?php echo $user->getPhone() ?></td>
                     </tr>
@@ -117,12 +122,12 @@
 
                     <tr>
                         <th>Dog Size Preference</th>
-                        <td><?php echo $user->getType_Data()->getPreferred_size() ?></td>
+                        <td><?php echo ucwords($user->getType_Data()->getPreferred_size()) ?></td>
                     </tr>
 
                     <tr>
                         <th>Cat Size Peference</th>
-                        <td><?php echo $user->getType_Data()->GetPreferred_size_cat() ?></td>
+                        <td><?php echo ucwords($user->getType_Data()->GetPreferred_size_cat()) ?></td>
                     </tr>
 
                     <tr>
@@ -130,15 +135,31 @@
                         <td><?php echo $user->getBirth_date() ?></td>
                     </tr>
 
+                    <tr>
+                        <th>Price</th>
+                        <td><?php if ($user->getType_Data()->getPrice() == NULL) {
+                                echo "UNASSIGNED";
+                            } else {
+                                echo "$" . $user->getType_Data()->getPrice();
+                            }
+                            ?></td>
+                    </tr>
+
                 </tbody>
+
             </table>
 
-            <button class="float-end">Edit</button>
+            <?php if ($user->getType_Data()->getPrice() == NULL) {
+                echo "<b>(WARNING: If price is not setted, you will not be able to get Reservations!)</b>";
+            }
+            ?>
+
+            <a href=<?php echo FRONT_ROOT . "Guardian/ShowEdit" ?>><button class="float-end mt-2">Edit</button></a>
 
         </div>
 
         <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
-            <button type="submit" onclick="alertMessage()">Logout</button>
+            <button type="submit" class="mt-2" onclick="alertMessage()">Logout</button>
 
             <script>
                 function alertMessage() {

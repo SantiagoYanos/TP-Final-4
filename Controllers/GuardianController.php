@@ -4,7 +4,8 @@ namespace Controllers;
 
 //use DAO\GuardianDAO as GuardianDAO;
 use  SQLDAO\GuardianDAO as GuardianDAO;
-use SQLDAO\UserDAO as userDAO;
+use Models\User as User;
+use Models\Guardian as Guardian;
 
 class GuardianController
 {
@@ -47,6 +48,50 @@ class GuardianController
         } else {
             $guardian_DAO->AddAvailableDates($_SESSION["id"], []);
         }
+
+        header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+    }
+
+    public function ShowEdit()
+    {
+        $user = new GuardianDAO();
+
+        $user = $user->GetByid($_SESSION["id"]);
+
+        require_once VIEWS_PATH . "edit_guardian.php";
+    }
+
+    public function Edit($preferred_size, $preferred_size_cat, $price = null, $birth_date = null, $cuil = null,  $name = null, $last_name = null, $adress = null, $phone = null)
+    {
+
+        $guardianDAO = new GuardianDAO();
+
+        $user = new User();
+
+        $user->setId($_SESSION["id"]);
+
+        $user->setName($name);
+
+        $user->setLast_name($last_name);
+
+        $user->setAdress($adress);
+
+        $user->setPhone($phone);
+
+        $user->setBirth_date($birth_date);
+
+
+        $guardian = new Guardian();
+
+        $guardian->setPreferred_size($preferred_size);
+
+        $guardian->setPreferred_size_cat($preferred_size_cat);
+
+        $guardian->setCuil($cuil);
+
+        $guardian->setPrice($price);
+
+        $guardianDAO->Edit($user, $guardian);
 
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
     }
