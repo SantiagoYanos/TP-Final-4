@@ -87,6 +87,7 @@ class PetDAO implements IModels
         $petsQL->setObservation($resultSet["observations"]);
         $petsQL->setType($resultSet["pet_type"]);
         $petsQL->setOwner_id($resultSet["owner_id"]);
+        //$petsQL->setVaccination_plan($resultSet["vaccination_plan"]); //falta la logica del multimedia
         
         return $petsQL;
     }
