@@ -116,8 +116,6 @@ class PetDAO implements IModels
 
     public function GetPetsByOwner($owner_id)
     {
-       
-    
         try {
 
             $PetList = array();
