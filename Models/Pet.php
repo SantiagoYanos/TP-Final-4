@@ -10,7 +10,7 @@ class Pet
     private $vaccination_plan;
     private $observation;
     private $id;
-    private $owner_email;
+    private $owner_id;
     private $type;
 
 
@@ -88,18 +88,7 @@ class Pet
         return $this;
     }
 
-    public function getOwner_email()
-    {
-        return $this->owner_email;
-    }
-
-    public function setOwner_email($owner_email)
-    {
-        $this->owner_email = $owner_email;
-
-        return $this;
-    }
-
+    
     public function getType()
     {
         return $this->type;
@@ -108,6 +97,26 @@ class Pet
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of owner_id
+     */ 
+    public function getOwner_id()
+    {
+        return $this->owner_id;
+    }
+
+    /**
+     * Set the value of owner_id
+     *
+     * @return  self
+     */ 
+    public function setOwner_id($owner_id)
+    {
+        $this->owner_id = $owner_id;
 
         return $this;
     }
