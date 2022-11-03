@@ -22,9 +22,9 @@
         <input type="text" name="observation" placeholder="observations"></br>
         <label for="pet_size">Pet Size: </label>
         <select name="pet_size" id="pet_size">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="big">Big</option>
+            <option value=3>Small</option>
+            <option value=2>Medium</option>
+            <option value=1>Big</option>
         </select></br>
 
         <label for="type">Type: </label>
