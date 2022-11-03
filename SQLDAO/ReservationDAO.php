@@ -16,40 +16,22 @@ class ReservationDAO implements IModels
     private $connection;
     private $tableName = "reservations";
 
-    public function Add(Reservation $reservation, User $UserSQL, Guardian $GuardianSQL)
+    public function Add(Reservation $reservation, Guardian $guardian)
     {
         try {
 
-            $queryUser = "INSERT INTO reservations (id, date, price, guardian_id, id_pet) VALUES (:id, :date, :price, :guardian_id, :id_pet);";
+            $queryUser = "INSERT INTO reservations (date, price, guardian_id, id_pet) VALUES (:id, :date, :price, :guardian_id, :id_pet);";
 
-            $parametersUser["name"] = $UserSQL->getName();
-            $parametersUser["last_name"] = $UserSQL->getLast_name();
-            $parametersUser["adress"] = $UserSQL->getAdress();
-            $parametersUser["phone"] = $UserSQL->getPhone();
-            $parametersUser["email"] = $UserSQL->getEmail();
-            $parametersUser["password"] = $UserSQL->getPassword();
-            $parametersUser["birth_date"] = $UserSQL->getBirth_date();
+            $parametersUser["date"] = $reservation->getDate();
+            $parametersUser["price"] = $reservation->getPrice();
+            $parametersUser["guardian_id"] = $reservation->getGuardian_id();
+            $parametersUser["id_pet"] = $reservation->getId_pet();
 
             $this->connection = Connection::GetInstance();
 
             $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
 
-            $userDAO = new UserDAO();
-
-            $user = $userDAO->GetByEmail($UserSQL->getEmail());
-
-            if (!$user) {
-                return null;
-            }
-
-            $queryGuardian = "INSERT INTO " . $this->tableName . " (user_id, cuil, preferred_size_dog,preferred_size_cat ) VALUES (:user_id, :cuil, :preferred_size_dog, :preferred_size_cat);";
-
-            $parametersGuardian["user_id"] = $user->getId();
-            $parametersGuardian["cuil"] = $GuardianSQL->getCuil();
-            $parametersGuardian["preferred_size_dog"] = $GuardianSQL->getPreferred_size();
-            $parametersGuardian["preferred_size_cat"] = $GuardianSQL->getPreferred_size_cat();
-
-            $this->connection->ExecuteNonQuery($queryGuardian, $parametersGuardian);
+            
         } catch (Exception $e) {
             throw $e;
         }

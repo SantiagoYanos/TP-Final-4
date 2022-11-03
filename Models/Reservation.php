@@ -32,12 +32,12 @@ class Reservation{
         return $this;
     }
 
-    public function getGuardian_email()
+    public function getGuardian_id()
     {
         return $this->guardian_email;
     }
 
-    public function setGuardian_email($guardian_email)
+    public function setGuardian_id($guardian_email)
     {
         $this->guardian_email = $guardian_email;
         return $this;
