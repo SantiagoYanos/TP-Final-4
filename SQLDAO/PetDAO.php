@@ -97,7 +97,15 @@ class PetDAO implements IModels
             $queryPet = "INSERT INTO pets (name, pet_size, pet_breed, observations, pet_type, owner_id) VALUES (:name, :pet_size, :pet_breed, :observations, :pet_type, :owner_id);";
 
             $parametersPet["name"] = $PetSQL->getName();
+            if($PetSQL->getSize()=="big")
+            {
+                $parametersPet["pet_size"] =1;
+            }else if($PetSQL->getSize()=="medium,")
+            {
+                $parametersPet["pet_size"] = 2 ;
+            }else $parametersPet["pet_size"] =3;
             $parametersPet["pet_size"] = $PetSQL->getSize();
+
             $parametersPet["pet_breed"] = $PetSQL->getBreed();
             $parametersPet["observations"] = $PetSQL->getObservation();
             $parametersPet["pet_type"] = $PetSQL->getType();
