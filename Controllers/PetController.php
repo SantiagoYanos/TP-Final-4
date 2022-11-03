@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use DAO\PetDAO as PetDAO;
+use SQLDAO\PetDAO as PetDAO;
 use Models\Pet as Pet;
 
 
@@ -24,8 +24,8 @@ class PetController
 
         $pet_DAO = new PetDAO();
 
-        $petList = $pet_DAO->GetPetsByOwner($_SESSION["email"]);
-
+        $petList = $pet_DAO->GetPetsByOwner($_SESSION["id"]);
+        //acordarse de en la vista usar un if para mostrar el tamaño como texto en lugar de numero
         require_once VIEWS_PATH . "view_pets.php";
     }
 
@@ -38,7 +38,7 @@ class PetController
         $pet->setObservation($observation);
         $pet->setSize($pet_size);
         $pet->setVaccination_plan($vaccination_note);
-        $pet->setOwner_email($_SESSION["email"]);
+        $pet->setOwner_id($_SESSION["id"]);
         $pet->setType($type);
         //$pet->setPhoto_video($photo_video);
 

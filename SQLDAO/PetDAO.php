@@ -87,6 +87,7 @@ class PetDAO implements IModels
         $petsQL->setObservation($resultSet["observations"]);
         $petsQL->setType($resultSet["pet_type"]);
         $petsQL->setOwner_id($resultSet["owner_id"]);
+        //$petsQL->setVaccination_plan($resultSet["vaccination_plan"]); //falta la logica del multimedia
         
         return $petsQL;
     }
@@ -116,6 +117,34 @@ class PetDAO implements IModels
 
             $this->connection->ExecuteNonQuery($queryPet, $parametersPet);
 
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function GetPetsByOwner($owner_id)
+    {
+       
+    
+        try {
+
+            $PetList = array();
+
+            $query = "SELECT * FROM " . $this->tableName . "WHERE owner_id=:owner_id AND active=true";
+
+            $parameters["owner_id"] = $owner_id;
+
+            $this->connection = Connection::GetInstance();
+            $resultSet = $this->connection->Execute($query);
+
+            foreach ($resultSet as $row) {
+
+                $petsQL = $this->LoadData($row);
+
+                array_push($PetList, $petsQL);
+            }
+
+            return $PetList;
         } catch (Exception $e) {
             throw $e;
         }
