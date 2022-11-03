@@ -90,6 +90,28 @@ class PetDAO implements IModels
         
         return $petsQL;
     }
+    
+    public function Add(Pet $PetSQL)
+    {
+        try {
+            $queryPet = "INSERT INTO pets (name, pet_size, pet_breed, observations, pet_type, owner_id) VALUES (:name, :pet_size, :pet_breed, :observations, :pet_type, :owner_id);";
+
+            $parametersPet["name"] = $PetSQL->getName();
+            $parametersPet["pet_size"] = $PetSQL->getSize();
+            $parametersPet["pet_breed"] = $PetSQL->getBreed();
+            $parametersPet["observations"] = $PetSQL->getObservation();
+            $parametersPet["pet_type"] = $PetSQL->getType();
+            $parametersPet["owrner_id"] = $PetSQL->getOwner_id();
+            
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($queryPet, $parametersPet);
+
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
 
 }
