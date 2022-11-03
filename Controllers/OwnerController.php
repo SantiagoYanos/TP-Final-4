@@ -26,6 +26,11 @@ class OwnerController
         require_once VIEWS_PATH . "home_owner.php";
     }
 
+    public function MakeReservation(){
+        
+    }
+
+
     public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $preferred_size_cat = null, $location = null, $price = null, $stringDates = null)
     {
 

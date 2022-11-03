@@ -9,6 +9,15 @@ class Reservation{
     private $price;
     private $guardian_id;
     private $id_pet;
+    private $available_dates;
+
+    public function setAvailable_Dates($date){
+        $this->available_dates = $date;
+    }
+
+    public function getAvailable_Dates(){
+        return $this->available_dates;
+    }
 
     public function getDate()
     {
@@ -32,14 +41,14 @@ class Reservation{
         return $this;
     }
 
-    public function getGuardian_email()
+    public function getGuardian_id()
     {
-        return $this->guardian_email;
+        return $this->guardian_id;
     }
 
-    public function setGuardian_email($guardian_email)
+    public function setGuardian_id($guardian_id)
     {
-        $this->guardian_email = $guardian_email;
+        $this->guardian_id = $guardian_id;
         return $this;
     }
 

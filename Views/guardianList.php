@@ -133,31 +133,38 @@
 
   </form>
 
-  <table class="table table-striped table-bordered">
-    <thead>
-      <th>Name</th>
-      <th>Addres</th>
-      <th>Rating</th>
-      <th>Dog Size Preference</th>
-      <th>Cat Size Preference</th>
-      <th>Price</th>
-    </thead>
+    
+  <form action=<?php echo "/Owner/MakeReservation"?> type=POST>
+  <input type="hidden" id="guardian_id"></input>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <th>Name</th>
+        <th>Addres</th>
+        <th>Rating</th>
+        <th>Dog Size Preference</th>
+        <th>Cat Size Preference</th>
+        <th>Price</th>
+        <th>Make Reservation</th>
+      </thead>
+    
+      <!--GUARDIAN ES USER!!!!!-->
 
-    <tbody>
-      <?php
-      foreach ($guardians as $guardian) {
-      ?>
-        <tr>
-          <td><?php echo $guardian->GetName() ?></td>
-          <td><?php echo $guardian->getAdress() ?></td>
-          <td><?php echo $guardian->getType_data()->getReputation() ?></td>
-          <td><?php echo $guardian->getType_data()->getPreferred_size() ?></td>
-          <td><?php echo $guardian->getType_data()->getPreferred_size_cat() ?></td>
-          <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
-        </tr>
-
-      <?php } ?>
-    </tbody>
+      <tbody>
+        <?php
+        foreach ($guardians as $guardian) {
+        ?>
+          <tr>
+            <td><?php echo $guardian->GetName() ?></td>
+            <td><?php echo $guardian->getAdress() ?></td>
+            <td><?php echo $guardian->getType_data()->getReputation() ?></td>
+            <td><?php echo $guardian->getType_data()->getPreferred_size() ?></td>
+            <td><?php echo $guardian->getType_data()->getPreferred_size_cat() ?></td>
+            <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
+            <td><button name="<?php echo $guardian->getid() ?>" type="submit">Make it !</button></td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </form>
 
   </table>
 

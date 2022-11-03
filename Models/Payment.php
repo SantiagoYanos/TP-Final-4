@@ -7,8 +7,8 @@ class Payment {
     private $amount;
     private $date;
     private $payment_method;
-    private $guardian_email;
-    private $owner_email;
+    private $guardian_id;
+    private $owner_id;
 
     public function getId()
     {
@@ -58,24 +58,24 @@ class Payment {
         return $this;
     }
 
-    public function getGuardian_email()
+    public function getGuardian_id()
     {
         return $this->guardian_email;
     }
 
-    public function setGuardian_email($guardian_email)
+    public function setGuardian_id($guardian_email)
     {
         $this->guardian_email = $guardian_email;
 
         return $this;
     }
 
-    public function getOwner_email()
+    public function getOwner_id()
     {
         return $this->owner_email;
     }
 
-    public function setOwner_email($owner_email)
+    public function setOwner_id($owner_email)
     {
         $this->owner_email = $owner_email;
 

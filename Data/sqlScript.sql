@@ -49,6 +49,7 @@ create table guardians(
     /*constraint chk_birth_date check ( birth_date<=now() ),*/
     constraint chk_price check (price>=0)
 );
+
 create table available_dates(
     date_id bigint not null,
     date date not null,
@@ -83,7 +84,6 @@ create table pet_multimedia(
 
     constraint pk_pet_multimedia primary key (file_id),
     constraint fk_pet_id foreign key (pet_id) references pets (pet_id) on delete cascade
-
 );
 
 create table reservations(
@@ -98,7 +98,15 @@ create table reservations(
 
     constraint pk_reservations primary key (reservation_id),
     constraint fk_guardian foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE
+);
 
+create table reservation_x_dates(
+    reservation_id bigint not null,
+    date_id bigint not null,
+
+    constraint pk_reservation_x_dates primary key (reservation_id, date_id),
+    constraint fk_reservation_id foreign key (reservation_id) references reservations (reservation_id) ON DELETE CASCADE,
+    constraint fk_date_id foreign key (date_id) references available_dates (date_id) ON DELETE CASCADE
 );
 
 create table reservations_x_pets(
@@ -109,7 +117,6 @@ create table reservations_x_pets(
     constraint pk_reservations_x_pets primary key (reservation_x_pets_id),
     constraint fk_reservation_id foreign key (reservation_id) references reservations(reservation_id),
     constraint fk_pet foreign key (pet_id) references pets(pet_id)
-
 );
 
 create table payments(

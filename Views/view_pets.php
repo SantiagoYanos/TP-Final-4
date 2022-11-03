@@ -43,7 +43,7 @@
                     <td><?php echo $pet->getBreed() ?> </td>
                     <td><?php echo $pet->getType() ?> </td>
                     <td><?php echo $pet->getSize() ?></td>
-                    <td><img src=<?php echo $pet->getVaccination_plan() ?> alt="vac note" height="100" width="100"></td>
+                    <!--<td><img src=<?php echo $pet->getVaccination_plan() ?> alt="vac note" height="100" width="100"></td> -->
                     <td><?php echo $pet->getObservation() ?> </td>
                     <td><img src="../Views/images/rick-roll.gif" alt="pet video" height="100" width="100"> </td>
                     <td><button type="submit">select</button></td>

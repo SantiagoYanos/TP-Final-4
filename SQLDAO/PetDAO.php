@@ -41,7 +41,7 @@ class PetDAO implements IModels
         try {
             $this->PetList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "WHERE pet_id=:id AND active=true";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE pet_id=:id AND active=true";
 
             $parameters["id"] = $id;
 
@@ -98,19 +98,11 @@ class PetDAO implements IModels
             $queryPet = "INSERT INTO pets (name, pet_size, pet_breed, observations, pet_type, owner_id) VALUES (:name, :pet_size, :pet_breed, :observations, :pet_type, :owner_id);";
 
             $parametersPet["name"] = $PetSQL->getName();
-            if($PetSQL->getSize()=="big")
-            {
-                $parametersPet["pet_size"] =1;
-            }else if($PetSQL->getSize()=="medium,")
-            {
-                $parametersPet["pet_size"] = 2 ;
-            }else $parametersPet["pet_size"] =3;
             $parametersPet["pet_size"] = $PetSQL->getSize();
-
             $parametersPet["pet_breed"] = $PetSQL->getBreed();
             $parametersPet["observations"] = $PetSQL->getObservation();
             $parametersPet["pet_type"] = $PetSQL->getType();
-            $parametersPet["owrner_id"] = $PetSQL->getOwner_id();
+            $parametersPet["owner_id"] = $PetSQL->getOwner_id();
             
 
             $this->connection = Connection::GetInstance();
@@ -124,18 +116,16 @@ class PetDAO implements IModels
 
     public function GetPetsByOwner($owner_id)
     {
-       
-    
         try {
 
             $PetList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "WHERE owner_id=:owner_id AND active=true";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE owner_id=:owner_id AND active=true";
 
             $parameters["owner_id"] = $owner_id;
 
             $this->connection = Connection::GetInstance();
-            $resultSet = $this->connection->Execute($query);
+            $resultSet = $this->connection->Execute($query, $parameters);
 
             foreach ($resultSet as $row) {
 
