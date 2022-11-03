@@ -24,6 +24,7 @@ class ReservationDAO implements IModels
 
             $parametersReservation["price"] = $reservation->getPrice();
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
+            //$parametersReservation["active"] = 1;
             $parametersReservation["state"] = "Pending";
 
             $this->connection = Connection::GetInstance();
