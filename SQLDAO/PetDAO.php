@@ -41,7 +41,7 @@ class PetDAO implements IModels
         try {
             $this->PetList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "WHERE pet_id=:id AND active=true";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE pet_id=:id AND active=true";
 
             $parameters["id"] = $id;
 
@@ -102,7 +102,7 @@ class PetDAO implements IModels
             $parametersPet["pet_breed"] = $PetSQL->getBreed();
             $parametersPet["observations"] = $PetSQL->getObservation();
             $parametersPet["pet_type"] = $PetSQL->getType();
-            $parametersPet["owrner_id"] = $PetSQL->getOwner_id();
+            $parametersPet["owner_id"] = $PetSQL->getOwner_id();
             
 
             $this->connection = Connection::GetInstance();
@@ -122,12 +122,12 @@ class PetDAO implements IModels
 
             $PetList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "WHERE owner_id=:owner_id AND active=true";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE owner_id=:owner_id AND active=true";
 
             $parameters["owner_id"] = $owner_id;
 
             $this->connection = Connection::GetInstance();
-            $resultSet = $this->connection->Execute($query);
+            $resultSet = $this->connection->Execute($query, $parameters);
 
             foreach ($resultSet as $row) {
 
