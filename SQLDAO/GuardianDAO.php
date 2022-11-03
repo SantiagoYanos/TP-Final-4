@@ -56,6 +56,35 @@ class GuardianDAO implements IModels
         }
     }
 
+    public function Edit(User $UserSQL, Guardian $GuardianSQL)
+    {
+        try {
+            $queryUser = "UPDATE users SET name=:name, last_name=:last_name, adress=:adress, phone=:phone, birth_date=:birth_date WHERE user_id=:user_id";
+
+            $parametersUser["user_id"] = $UserSQL->getId();
+            $parametersUser["name"] = $UserSQL->getName();
+            $parametersUser["last_name"] = $UserSQL->getLast_name();
+            $parametersUser["adress"] = $UserSQL->getAdress();
+            $parametersUser["phone"] = $UserSQL->getPhone();
+            $parametersUser["birth_date"] = $UserSQL->getBirth_date();
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
+
+            $queryGuardian = "UPDATE " . $this->tableName . " SET cuil=:cuil, preferred_size_dog=:preferred_size_dog , preferred_size_cat=:preferred_size_cat WHERE user_id=:user_id";
+
+            $parametersUser["user_id"] = $UserSQL->getId();
+            $parametersGuardian["cuil"] = $GuardianSQL->getCuil();
+            $parametersGuardian["preferred_size_dog"] = $GuardianSQL->getPreferred_size();
+            $parametersGuardian["preferred_size_cat"] = $GuardianSQL->getPreferred_size_cat();
+
+            $this->connection->ExecuteNonQuery($queryGuardian, $parametersGuardian);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function GetAll()
     {
         try {

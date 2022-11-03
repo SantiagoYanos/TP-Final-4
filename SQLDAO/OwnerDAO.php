@@ -99,12 +99,39 @@ class OwnerDAO implements IModels
 
             if (!$user) {
                 return null;
-            }   
+            }
 
             $queryOwner = "INSERT INTO " . $this->tableName . " (user_id, dni) VALUES (:user_id, :dni);";
 
             $parametersOwner["dni"] = $OwnerSQL->getDni();
             $parametersOwner["user_id"] = $user->getId();
+
+            $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function Edit(User $UserSQL, Owner $OwnerSQL)
+    {
+        try {
+            $queryUser = "UPDATE users SET name=:name, last_name=:last_name, adress=:adress, phone=:phone, birth_date=:birth_date WHERE user_id=:user_id";
+
+            $parametersUser["user_id"] = $UserSQL->getId();
+            $parametersUser["name"] = $UserSQL->getName();
+            $parametersUser["last_name"] = $UserSQL->getLast_name();
+            $parametersUser["adress"] = $UserSQL->getAdress();
+            $parametersUser["phone"] = $UserSQL->getPhone();
+            $parametersUser["birth_date"] = $UserSQL->getBirth_date();
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
+
+            $queryOwner = "UPDATE " . $this->tableName . " SET dni=:dni WHERE user_id=:user_id";
+
+            $parametersOwner["user_id"] = $UserSQL->getId();
+            $parametersOwner["dni"] = $OwnerSQL->getDni();
 
             $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner);
         } catch (Exception $e) {
