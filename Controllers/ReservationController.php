@@ -20,10 +20,10 @@ class ReservationController{
         $guardian_DAO = new GuardianDAO();
         $owner_DAO = new OwnerDAO();
 
-        $user_guardian = $guardian_DAO->GetById($guardian_id);
+        $user_guardian = $guardian_DAO->GetById(1);
 
         $reservation = new Reservation();
-        $reservation->setGuardian_id($guardian_id);
+        $reservation->setGuardian_id(1);
         $reservation->setPrice(500);
         
         $reservation_DAO = new ReservationDAO();

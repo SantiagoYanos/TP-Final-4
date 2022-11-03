@@ -20,12 +20,11 @@ class ReservationDAO implements IModels
     {
         try {
 
-            $queryReservation = "INSERT INTO reservations (price, guardian_id, active, state) VALUES (:price, :guardian_id, :active, :state);";
-            
-            $parametersReservation["id"] = 0;
+            $queryReservation = "INSERT INTO reservations (price, guardian_id, state) VALUES (:price, :guardian_id, :state);";
+        
             $parametersReservation["price"] = $reservation->getPrice();
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
-            $parametersReservation["active"] = 1;
+            //$parametersReservation["active"] = 1;
             $parametersReservation["state"] = "Pending";
 
             $this->connection = Connection::GetInstance();
