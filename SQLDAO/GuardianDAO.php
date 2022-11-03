@@ -72,12 +72,13 @@ class GuardianDAO implements IModels
 
             $this->connection->ExecuteNonQuery($queryUser, $parametersUser);
 
-            $queryGuardian = "UPDATE " . $this->tableName . " SET cuil=:cuil, preferred_size_dog=:preferred_size_dog , preferred_size_cat=:preferred_size_cat WHERE user_id=:user_id";
+            $queryGuardian = "UPDATE " . $this->tableName . " SET cuil=:cuil, price=:price, preferred_size_dog=:preferred_size_dog, preferred_size_cat=:preferred_size_cat WHERE user_id=:user_id";
 
-            $parametersUser["user_id"] = $UserSQL->getId();
+            $parametersGuardian["user_id"] = $UserSQL->getId();
             $parametersGuardian["cuil"] = $GuardianSQL->getCuil();
             $parametersGuardian["preferred_size_dog"] = $GuardianSQL->getPreferred_size();
             $parametersGuardian["preferred_size_cat"] = $GuardianSQL->getPreferred_size_cat();
+            $parametersGuardian["price"] = $GuardianSQL->getPrice();
 
             $this->connection->ExecuteNonQuery($queryGuardian, $parametersGuardian);
         } catch (Exception $e) {
