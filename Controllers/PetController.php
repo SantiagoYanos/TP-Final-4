@@ -4,6 +4,7 @@ namespace Controllers;
 
 use SQLDAO\PetDAO as PetDAO;
 use Models\Pet as Pet;
+use \Exception as Exception;
 
 
 class PetController
@@ -29,28 +30,87 @@ class PetController
         require_once VIEWS_PATH . "view_pets.php";
     }
 
-    public function Add($name, $breed, $observation, $pet_size, $vaccination_note, $photo_video, $type)
+    public function Add($name, $breed, $observation, $pet_size, $type, $file, $file1, $pet_video)
     {
-        $pet = new Pet();
+        try
+        {
+            
+            echo "--------------";
+            $fileName = $file["name"];
+            $tempFileName = $file["tmp_name"];
+            $type = $file["type"];
+            
+            $filePath = VIEWS_PATH.basename($fileName);            
+            echo "*********";
+            $fileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
 
-        $pet->setName($name);
-        $pet->setBreed($breed);
-        $pet->setObservation($observation);
-        $pet->setSize($pet_size);
-        $pet->setVaccination_plan($vaccination_note);
-        $pet->setOwner_id($_SESSION["id"]);
-        $pet->setType($type);
-        //$pet->setPhoto_video($photo_video);
+            $imageSize = getimagesize($tempFileName);
 
-        $petDAO = new PetDAO();
 
-        $petDAO->Add($pet);
+            echo "--------------";
+            $fileName1 = $file1["name"];
+            $tempFileName1 = $file1["tmp_name"];
+            $type1 = $file1["type"];
+            
+            $filePath1 = VIEWS_PATH.basename($fileName1);            
+            echo "*********";
+            $fileType1 = strtolower(pathinfo($filePath1, PATHINFO_EXTENSION));
 
-        return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+            $imageSize1 = getimagesize($tempFileName1);
+
+            
+            if($imageSize !== false && $imageSize1 !==false)
+            {
+                if (move_uploaded_file($tempFileName, $filePath))
+                {
+        
+                    $pet = new Pet();
+                    $pet->setName($name);
+                    $pet->setBreed($breed);
+                    $pet->setObservation($observation);
+                    $pet->setSize($pet_size);
+                   
+                    $pet->setOwner_id($_SESSION["id"]);
+                    $pet->setType($type);
+                    $pet->setVaccination_plan($fileName);
+                    $pet->setPet_img($fileName1);
+                    $pet->setPet_video($pet_video);
+        
+                    $message = "Imagen subida correctamente";
+                    $petDAO = new PetDAO();
+
+                    $petDAO->Add($pet);
+                }
+                else
+                    $message = "Ocurrió un error al intentar subir la imagen";
+            }
+            else   
+                $message = "El archivo no corresponde a una imágen";
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+      
+    
+        echo $message;
+        var_dump($message);
+        var_dump($pet);
+
+        //return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
 
     public function ShowRegisterPet()
     {
         require_once VIEWS_PATH . "register_pet.php";
     }
+
+
+
+
 }
+
+
+    
+
+

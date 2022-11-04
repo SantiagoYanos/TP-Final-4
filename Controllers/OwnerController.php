@@ -4,7 +4,8 @@ namespace Controllers;
 
 use SQLDAO\OwnerDAO as OwnerDAO;
 use SQLDAO\GuardianDAO as GuardianDAO;
-use StringBackedEnum;
+use Models\User as User;
+use Models\Owner as Owner;
 
 class OwnerController
 {
@@ -24,6 +25,45 @@ class OwnerController
         $user = $owner_DAO->GetById($_SESSION["id"]);
 
         require_once VIEWS_PATH . "home_owner.php";
+    }
+
+    public function ShowEdit()
+    {
+        $user = new OwnerDAO();
+
+        $user = $user->GetByid($_SESSION["id"]);
+
+        require_once VIEWS_PATH . "edit_owner.php";
+    }
+
+    public function Edit($dni, $birth_date = null,  $name = null, $last_name = null, $adress = null, $phone = null)
+    {
+
+        $ownerDAO = new OwnerDAO();
+
+        $user = new User();
+
+        $user->setId($_SESSION["id"]);
+
+        $user->setName($name);
+
+        $user->setLast_name($last_name);
+
+        $user->setAdress($adress);
+
+        $user->setPhone($phone);
+
+        $user->setBirth_date($birth_date);
+
+
+        $owner = new Owner();
+
+        $owner->setDni($dni);
+
+
+        $ownerDAO->Edit($user, $owner);
+
+        header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
 
     public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $preferred_size_cat = null, $location = null, $price = null, $stringDates = null)

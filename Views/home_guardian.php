@@ -89,7 +89,6 @@
 
                 <tbody>
 
-
                     <tr>
                         <th>Name</th>
                         <td><?php echo $user->getName() ?></td>

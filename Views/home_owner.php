@@ -60,6 +60,11 @@
                 </tr>
 
                 <tr>
+                    <th>DNI</th>
+                    <td><?php echo $user->getType_Data()->getDni() ?></td>
+                </tr>
+
+                <tr>
                     <th>Phone</th>
                     <td><?php echo $user->getPhone() ?></td>
                 </tr>
@@ -80,21 +85,19 @@
     </div>
 
     <div>
-        <button type="">Edit</button>
+        <a href=<?php echo FRONT_ROOT . "Owner/ShowEdit" ?>><button class="float-end mt-2">Edit</button></a>
     </div>
-
-    </br></br>
 
     <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
         <button type="submit" onclick="alertMessage()">Logout</button>
 
-            <script>
-                function alertMessage() {
-                    alert("Goodbye!");
-                }
-            </script>
+        <script>
+            function alertMessage() {
+                alert("Goodbye!");
+            }
+        </script>
 
-        </form>
+    </form>
 </body>
 
 </html>

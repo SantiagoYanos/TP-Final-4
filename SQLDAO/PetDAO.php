@@ -87,15 +87,19 @@ class PetDAO implements IModels
         $petsQL->setObservation($resultSet["observations"]);
         $petsQL->setType($resultSet["pet_type"]);
         $petsQL->setOwner_id($resultSet["owner_id"]);
-        //$petsQL->setVaccination_plan($resultSet["vaccination_plan"]); //falta la logica del multimedia
+        $petsQL->setVaccination_plan($resultSet["vaccination_plan"]);
+        $petsQL->setPet_img($resultSet["pet_img"]);
+        $petsQL->setPet_video($resultSet["pet_video"]);
         
+        
+
         return $petsQL;
     }
     
     public function Add(Pet $PetSQL)
     {
         try {
-            $queryPet = "INSERT INTO pets (name, pet_size, pet_breed, observations, pet_type, owner_id) VALUES (:name, :pet_size, :pet_breed, :observations, :pet_type, :owner_id);";
+            $queryPet = "INSERT INTO pets (name, pet_size, pet_breed, observations, pet_type, owner_id,vaccination_note, pet_img, pet_video) VALUES (:name, :pet_size, :pet_breed, :observations, :pet_type, :owner_id, :vaccination_note, :pet_img, :pet_video);";
 
             $parametersPet["name"] = $PetSQL->getName();
             $parametersPet["pet_size"] = $PetSQL->getSize();
@@ -103,12 +107,32 @@ class PetDAO implements IModels
             $parametersPet["observations"] = $PetSQL->getObservation();
             $parametersPet["pet_type"] = $PetSQL->getType();
             $parametersPet["owner_id"] = $PetSQL->getOwner_id();
+            $parametersPet["vaccination_note"] = $PetSQL->getOwner_id();
+            $parametersPet["pet_img"] = $PetSQL->getOwner_id();
+            $parametersPet["pet_video"] = $PetSQL->getOwner_id();
             
 
             $this->connection = Connection::GetInstance();
 
             $this->connection->ExecuteNonQuery($queryPet, $parametersPet);
+            /*
+            $PetDAO = new PetDAO();
 
+            $pet = $PetDAO->GetById($PetSQL->getId());
+            
+            if (!$pet) {
+                return null;
+            }
+            
+            $queryPetMultimedia = "INSERT INTO " . "pet_multimedia" . " (file_path, pet_id, description ) VALUES (:file_path, :pet_id, :description);";
+
+            $parametersMultimedia["file_path"] = $PetSQL->getVaccination_plan();
+            $parametersMultimedia["pet_id"] = $pet->getId();
+            $parametersMultimedia["description"] = "vaccination_note";
+            
+
+            $this->connection->ExecuteNonQuery($queryPetMultimedia, $parametersMultimedia);
+            */
         } catch (Exception $e) {
             throw $e;
         }
