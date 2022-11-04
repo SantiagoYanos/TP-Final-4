@@ -133,8 +133,9 @@ class PetDAO implements IModels
 
                 array_push($PetList, $petsQL);
             }
-
+            
             return $PetList;
+
         } catch (Exception $e) {
             throw $e;
         }

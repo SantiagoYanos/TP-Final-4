@@ -19,17 +19,14 @@ class ReservationDAO implements IModels
     public function Add(Reservation $reservation, Guardian $guardian)
     {
         try {
-
             $queryReservation = "INSERT INTO reservations (price, guardian_id, state) VALUES (:price, :guardian_id, :state);";
         
             $parametersReservation["price"] = $reservation->getPrice();
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
-            //$parametersReservation["active"] = 1;
             $parametersReservation["state"] = "Pending";
 
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($queryReservation, $parametersReservation);
-
             
         } catch (Exception $e) {
             throw $e;

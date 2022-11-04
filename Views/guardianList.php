@@ -160,7 +160,10 @@
             <td><?php echo $guardian->getType_data()->getPreferred_size() ?></td>
             <td><?php echo $guardian->getType_data()->getPreferred_size_cat() ?></td>
             <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
-            <td><button name="<?php echo $guardian->getid() ?>" type="submit">Make it !</button></td>
+            <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method=POST>
+              <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
+                <td><button type="submit">Check Profile</button></td>
+            </form>
           </tr>
         <?php } ?>
       </tbody>
