@@ -16,19 +16,38 @@ class ReservationDAO implements IModels
     private $connection;
     private $tableName = "reservations";
 
-    public function Add(Reservation $reservation, Guardian $guardian)
+    public function Add(Reservation $reservation, $reservation_dates, $pets_ids)
     {
         try {
 
-            $queryReservation = "INSERT INTO reservations (price, guardian_id, state) VALUES (:price, :guardian_id, :state);";
+            $queryReservation = "CALL create_Reservation(:price, :guardian_id);";
 
             $parametersReservation["price"] = $reservation->getPrice();
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
-            //$parametersReservation["active"] = 1;
-            $parametersReservation["state"] = "Pending";
 
             $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($queryReservation, $parametersReservation);
+            $resultSet = $this->connection->Execute($queryReservation, $parametersReservation);
+
+            if ($resultSet) {
+
+                $id_reservation = $resultSet["id_reservation"];
+
+                $id_guardian = $reservation->getGuardian_id();
+
+                $datesString = join("') , (" . $id_reservation . ",'", $reservation_dates);
+
+                $queryDates = "INSERT INTO reservations_x_dates (reservation_id, date ) VALUES (" . $id_reservation . ", '" . $datesString . "')";
+
+                $petsString = join(") , (" . $id_reservation . ",", $pets_ids);
+
+                $queryPetsReservations = "INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (" . $id_reservation . "," . $petsString . ")";
+
+                $this->connection->ExecuteNonQuery($queryDates);
+
+                $this->connection->ExecuteNonQuery($queryPetsReservations);
+            } else {
+                return null;
+            }
         } catch (Exception $e) {
             throw $e;
         }

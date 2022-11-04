@@ -1,11 +1,14 @@
-<?php 
+<?php
+
 namespace Controllers;
+
 use SQLDAO\ReservationDAO as ReservationDAO;
 use SQLDAO\GuardianDAO as GuardianDAO;
-USE SQLDAO\OwnerDAO as OwnerDAO;
+use SQLDAO\OwnerDAO as OwnerDAO;
 use Models\Reservation as Reservation;
 
-class ReservationController{
+class ReservationController
+{
 
     function __construct()
     {
@@ -16,21 +19,19 @@ class ReservationController{
         }
     }
 
-    public function MakeReservation($guardian_id){
-        $guardian_DAO = new GuardianDAO();
+    public function MakeReservation($guardian_id, $price, $reservation_dates, $pets_ids)
+    {
         $owner_DAO = new OwnerDAO();
-
-        $user_guardian = $guardian_DAO->GetById(1);
 
         $reservation = new Reservation();
         $reservation->setGuardian_id(1);
         $reservation->setPrice(500);
-        
+
+        $reservation_dates = join(",", $reservation_dates);
+
         $reservation_DAO = new ReservationDAO();
-        $reservation_DAO->Add($reservation, $user_guardian->getType_data());
+        $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids);
 
         require_once VIEWS_PATH . "make_reservation.php";
     }
-
 }
-?>

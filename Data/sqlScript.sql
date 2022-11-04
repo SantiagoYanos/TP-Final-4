@@ -89,8 +89,6 @@ create table pet_multimedia(
 create table reservations(
     reservation_id bigint not null auto_increment,
     price bigint not null,
-    start_date date not null,
-    finish_date date not null,
 
     guardian_id bigint not null,
     active boolean not null default 1,
@@ -98,6 +96,7 @@ create table reservations(
 
     constraint pk_reservations primary key (reservation_id),
     constraint fk_guardian foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE
+
 );
 
 create table reservation_x_dates(
@@ -148,3 +147,6 @@ INSERT INTO pet_sizes(name) VALUES ("small");
 
 INSERT INTO guardians (user_id, cuil, reputation, preferred_size_dog, preferred_size_cat, price) VALUES (1, "5555555", 3.2, 1, 2, 5000);
 INSERT INTO owners (user_id, dni) VALUES (2, 52555633);
+
+
+
