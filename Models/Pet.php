@@ -12,6 +12,9 @@ class Pet
     private $id;
     private $owner_id;
     private $type;
+    private $pet_img;
+    private $pet_video;
+    
 
 
     /*public function __constructor($name, $breed, $size, $vaccination_plan, $observation){
@@ -117,6 +120,48 @@ class Pet
     public function setOwner_id($owner_id)
     {
         $this->owner_id = $owner_id;
+
+        return $this;
+    }
+
+  
+
+    /**
+     * Get the value of pet_video
+     */ 
+    public function getPet_video()
+    {
+        return $this->pet_video;
+    }
+
+    /**
+     * Set the value of pet_video
+     *
+     * @return  self
+     */ 
+    public function setPet_video($pet_video)
+    {
+        $this->pet_video = $pet_video;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pet_img
+     */ 
+    public function getPet_img()
+    {
+        return $this->pet_img;
+    }
+
+    /**
+     * Set the value of pet_img
+     *
+     * @return  self
+     */ 
+    public function setPet_img($pet_img)
+    {
+        $this->pet_img = $pet_img;
 
         return $this;
     }
