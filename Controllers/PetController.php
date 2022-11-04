@@ -89,13 +89,15 @@ class PetController
         }
         catch(Exception $ex)
         {
-            $message = $ex->getMessage();
+            throw $ex;
         }
       
     
+        echo $message;
+        var_dump($message);
+        var_dump($pet);
 
-
-        return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+        //return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
 
     public function ShowRegisterPet()
