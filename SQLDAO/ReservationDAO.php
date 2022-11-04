@@ -29,17 +29,19 @@ class ReservationDAO implements IModels
 
             if ($resultSet) {
 
-                $id_reservation = $resultSet["id_reservation"];
-
-                $id_guardian = $reservation->getGuardian_id();
+                $id_reservation = $resultSet[0]["id_reservation"];
 
                 $datesString = join("') , (" . $id_reservation . ",'", $reservation_dates);
 
                 $queryDates = "INSERT INTO reservations_x_dates (reservation_id, date ) VALUES (" . $id_reservation . ", '" . $datesString . "')";
 
+                echo $queryDates;
+
                 $petsString = join(") , (" . $id_reservation . ",", $pets_ids);
 
                 $queryPetsReservations = "INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (" . $id_reservation . "," . $petsString . ")";
+
+                echo $queryPetsReservations;
 
                 $this->connection->ExecuteNonQuery($queryDates);
 

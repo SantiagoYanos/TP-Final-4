@@ -26,16 +26,19 @@ class ReservationController
     public function MakeReservation($guardian_id, $price, $reservation_dates, $pets_ids)
     {
         $owner_DAO = new OwnerDAO();
-        $pet_DAO = new PetDAO;
 
         $reservation = new Reservation();
         $reservation->setGuardian_id(1);
         $reservation->setPrice(500);
 
-        $reservation_dates = join(",", $reservation_dates);
+        /* $reservation_dates = String de fechas (Lo que nos da el calendario) */
+
+        /* $pets_ids = Array de Id's de las mascotas a agregar en la reserva (Hay que ver como hacerlo)*/
+
+        $reservation_dates = explode(",", $reservation_dates);
 
         $reservation_DAO = new ReservationDAO();
-        $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids);
+        $reservation_DAO->Add($reservation, ["2022-10-02", "2021-05-01"], [1]); //Cambiar los valores de prueba;
 
         require_once VIEWS_PATH . "make_reservation.php";
     }
