@@ -19,7 +19,6 @@ class ReservationDAO implements IModels
     public function Add(Reservation $reservation, $reservation_dates, $pets_ids)
     {
         try {
-
             $queryReservation = "CALL create_Reservation(:price, :guardian_id);";
 
             $parametersReservation["price"] = $reservation->getPrice();

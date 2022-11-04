@@ -12,7 +12,7 @@
     <h1>Add Pet</h1>
     <h2>Add your pet info: </h2><br>
 
-    <form action="<?php echo FRONT_ROOT . "Pet/Add" ?>" method="post">
+    <form action="<?php echo FRONT_ROOT . "Pet/Add" ?>" method="post" enctype="multipart/form-data" class="bg-dark-alpha p-5">
         <label for="name">Name: </label>
         <input type="text" name="name" placeholder="Name"></br>
         <label for="">Breed: </label>
@@ -34,10 +34,15 @@
         </select></br>
 
         <label for="vaccination note"> vaccination note</label>
-        <input type="file" name=" vaccination_note" placeholder="submit vac note photo"> <br>
+        <input type="file" name=" file" placeholder="submit vac note photo"> <br>
 
-        <label for="photo/video"> Add photo/video</label>
-        <input type="file" name=" photo_video" placeholder="submit photo/video"> <br>
+        <label for="photo"> Add photo</label>
+        <input type="file" name=" file1" placeholder="submit photo"> <br>
+
+        <label for="video"> Add video url</label>
+        <input type="text" name=" pet_video" placeholder="submit video"> <br>
+
+
         <button type="submit" onclick="alertMessage()">Add Pet</button>
 
         <script>

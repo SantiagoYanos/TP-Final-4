@@ -2,10 +2,14 @@
 
 namespace Controllers;
 
+
+
+use Models\Reservation as Reservation;
+use Models\Pet as Pet;
+use SQLDAO\PetDAO;
 use SQLDAO\ReservationDAO as ReservationDAO;
 use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
-use Models\Reservation as Reservation;
 
 class ReservationController
 {
@@ -22,6 +26,7 @@ class ReservationController
     public function MakeReservation($guardian_id, $price, $reservation_dates, $pets_ids)
     {
         $owner_DAO = new OwnerDAO();
+        $pet_DAO = new PetDAO;
 
         $reservation = new Reservation();
         $reservation->setGuardian_id(1);

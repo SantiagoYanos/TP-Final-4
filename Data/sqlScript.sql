@@ -69,6 +69,9 @@ create table pets(
     pet_breed varchar(150) not null default 'Unknown',
     observations varchar(250) default '',
     owner_id bigint not null,
+    vaccionation_plan varchar(250),
+    pet_img varchar(250),
+    pet_video varchar(250),
     active boolean not null default 1,
 
     constraint pk_pet primary key (pet_id),
