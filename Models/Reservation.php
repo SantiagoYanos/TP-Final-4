@@ -2,31 +2,26 @@
 
 namespace Models;
 
-class Reservation{
+class Reservation
+{
 
     private $id;
-    private $date;
     private $price;
     private $guardian_id;
-    private $id_pet;
-    private $available_dates;
+    private $owner_id;
+    private $pets;
+    private $dates;
+    private $state;
 
-    public function setAvailable_Dates($date){
-        $this->available_dates = $date;
-    }
-
-    public function getAvailable_Dates(){
-        return $this->available_dates;
-    }
-
-    public function getDate()
+    public function getId()
     {
-        return $this->date;
+        return $this->id;
     }
 
-    public function setDate($date)
+    public function setId($id)
     {
-        $this->date = $date;
+        $this->id = $id;
+
         return $this;
     }
 
@@ -52,26 +47,47 @@ class Reservation{
         return $this;
     }
 
-    public function getId_pet()
+    public function getOwner_id()
     {
-        return $this->id_pet;
+        return $this->owner_id;
     }
 
-    public function setId_pet($id_pet)
+    public function setOwner_id($owner_id)
     {
-        $this->id_pet = $id_pet;
+        $this->owner_id = $owner_id;
         return $this;
     }
- 
-    public function getId()
+
+    public function getPets()
     {
-        return $this->id;
+        return $this->pets;
     }
 
-    public function setId($id)
+    public function setPets($pets)
     {
-        $this->id = $id;
+        $this->pets = $pets;
+        return $this;
+    }
+
+    public function setDates($dates)
+    {
+        $this->dates = $dates;
+    }
+
+    public function getDates()
+    {
+        return $this->dates;
+    }
+
+    public function setState($state)
+    {
+        $this->state = $state;
 
         return $this;
+    }
+
+    public function getState()
+    {
+        return $this->state;
     }
 }

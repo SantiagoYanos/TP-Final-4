@@ -29,6 +29,7 @@ class ReservationController
 
         $reservation = new Reservation();
         $reservation->setGuardian_id(1);
+        $reservation->setOwner_id($_SESSION["id"]);
         $reservation->setPrice(500);
 
         /* $reservation_dates = String de fechas (Lo que nos da el calendario) */

@@ -10,6 +10,9 @@ use Models\Reservation as Reservation;
 use SQLDAO\Connection as Connection;
 use SQLDAO\IModels as IModels;
 use SQLDAO\UserDAO as UserDAO;
+use SQLDAO\PetDAO as PetDAO;
+
+use function PHPSTORM_META\map;
 
 class ReservationDAO implements IModels
 {
@@ -19,10 +22,11 @@ class ReservationDAO implements IModels
     public function Add(Reservation $reservation, $reservation_dates, $pets_ids)
     {
         try {
-            $queryReservation = "CALL create_Reservation(:price, :guardian_id);";
+            $queryReservation = "CALL create_Reservation(:price, :guardian_id, :owner_id);";
 
             $parametersReservation["price"] = $reservation->getPrice();
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
+            $parametersReservation["owner_id"] = $reservation->getOwner_id();
 
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($queryReservation, $parametersReservation);
@@ -57,33 +61,35 @@ class ReservationDAO implements IModels
     public function GetAll()
     {
         try {
-            $GuardianSQLList = array();
 
-            $query = "SELECT u.*, t.cuil, t.reputation, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
-            FROM " . $this->tableName  . " t 
-            INNER JOIN users u ON t.user_id=u.user_id
-            INNER JOIN pet_sizes psd ON psd.pet_size_id=t.preferred_size_dog
-            INNER JOIN pet_sizes psc ON psc.pet_size_id=t.preferred_size_cat
-            WHERE u.active = true";
+            $query = "SELECT * FROM " . $this->tableName . ";";
 
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->Execute($query);
 
-            $UserDAO = new UserDAO();
-
-            foreach ($resultSet as $row) {
-
-                $UserSQL = $UserDAO->LoadData($row);
-
-                $GuardianSQL = $this->LoadData($row);
-
-                $UserSQL->setType_data($GuardianSQL);
-
-                array_push($GuardianSQLList, $UserSQL);
+            if (!$resultSet[0]) {
+                return [];
             }
 
-            return $GuardianSQLList;
+            $reservationList = array();
+
+            foreach ($resultSet as $reservation) {
+
+                $getReservation = $this->LoadData($reservation);
+
+                $getDates = $this->GetDates($getReservation->getId());
+
+                $getReservation->setDates($getDates);
+
+                $getPets = $this->GetPets($getReservation->getId());
+
+                $getReservation->setPets($getPets);
+
+                array_push($reservationList);
+            }
+
+            return $reservationList;
         } catch (Exception $ex) {
             throw $ex;
         }
@@ -93,50 +99,139 @@ class ReservationDAO implements IModels
     {
 
         try {
-            $query =
-                "SELECT u.*, t.cuil, t.reputation, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
-            FROM " . $this->tableName  . " t 
-            INNER JOIN users u ON t.user_id=u.user_id
-            INNER JOIN pet_sizes psd ON psd.pet_size_id=t.preferred_size_dog
-            INNER JOIN pet_sizes psc ON psc.pet_size_id=t.preferred_size_cat
-            WHERE u.user_id = " . $id . " AND u.active = true";
+            $queryReservation = "SELECT * FROM " . $this->tableName . " WHERE active=true AND reservation_id = " . $id . ";";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($queryReservation);
+
+            if (!$resultSet[0]) {
+                return null;
+            }
+
+            $getReservation = $this->LoadData($resultSet[0]);
+
+            $getDates = $this->GetDates($getReservation->getId());
+
+            $getReservation->setDates($getDates);
+
+            $getPets = $this->GetPets($getReservation->getId());
+
+            $getReservation->setPets($getPets);
+
+            return $getReservation;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function GetByGuardianOrOwner($id, $type)
+    {
+
+        /* 
+        $type = "guardian" OR "owner"
+        
+        */
+
+        try {
+
+            if ($type = "guardian") {
+                $queryType = "guardian_id = " . $id . ";";
+            } else {
+                $queryType = "owner_id = " . $id . ";";
+            }
+
+            $queryReservation = "SELECT * FROM " . $this->tableName . " WHERE active=true AND " . $queryType;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($queryReservation);
+
+            if (!$resultSet[0]) {
+                return [];
+            }
+
+            $reservationList = array();
+
+            foreach ($resultSet as $reservation) {
+
+                $getReservation = $this->LoadData($reservation);
+
+                $getDates = $this->GetDates($getReservation->getId());
+
+                $getReservation->setDates($getDates);
+
+                $getPets = $this->GetPets($getReservation->getId());
+
+                $getReservation->setPets($getPets);
+
+                array_push($reservationList);
+            }
+
+            return $reservationList;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+
+    public function GetDates($id)
+    {
+        try {
+
+            $query = "SELECT * FROM " . $this->tablename . " WHERE guardian_id = " . $id . ";";
 
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->Execute($query);
 
             if (!$resultSet[0]) {
-                return null;
+                return [];
             }
 
-            $userDAO = new UserDAO();
+            $datesArray = array_map(function ($dateArray) {
+                return $dateArray["date"];
+            }, $resultSet);
 
-            $UserSQL = $userDAO->LoadData($resultSet[0]);
-
-            $GuardianSQL = $this->LoadData($resultSet[0]);
-
-            $UserSQL->setType_data($GuardianSQL);
-
-            return $UserSQL;
+            return $datesArray;
         } catch (Exception $ex) {
             throw $ex;
         }
     }
 
+    public function GetPets($id)
+    {
+        $query = "SELECT * FROM reservations_x_pets WHERE reservation_id = " . $id;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query);
+
+        if (!$resultSet[0]) {
+            return [];
+        }
+
+        $petDAO = new PetDAO();
+
+        $petsArray = array_map(function ($pet) use ($petDAO) {
+
+            $newPet = $petDAO->LoadData($pet);
+
+            return $newPet;
+        }, $resultSet);
+
+        return $petsArray;
+    }
+
     public function LoadData($resultSet)
     {
-        $GuardianSQL = new Guardian();
-        $GuardianSQL->setCuil($resultSet["cuil"]);
-        $GuardianSQL->setPreferred_size($resultSet["preferred_size_dog"]);
-        $GuardianSQL->setPreferred_size_cat($resultSet["preferred_size_cat"]);
-        if ($resultSet["reputation"]) {
-            $GuardianSQL->setReputation($resultSet["reputation"]);
-        }
+        $ReservationSQL = new Reservation();
+        $ReservationSQL->setId($resultSet["reservation_id"]);
+        $ReservationSQL->setPrice($resultSet["price"]);
+        $ReservationSQL->setGuardian_id($resultSet["guardian_id"]);
+        $ReservationSQL->setOwner_id($resultSet["owner_id"]);
+        $ReservationSQL->setState($resultSet["state"]);
 
-        if ($resultSet["price"]) {
-            $GuardianSQL->setPrice($resultSet["price"]);
-        }
-
-        return $GuardianSQL;
+        return $ReservationSQL;
     }
 }
