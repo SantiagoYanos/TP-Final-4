@@ -38,14 +38,15 @@
             <?php foreach ($petList as $pet) {
             ?>
                 <tr>
-                    <td><img src="../Views/images/rick-roll.gif" alt="rick" height="100" width="100"> </td>
+                    <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
                     <td><?php echo $pet->getName() ?> </td>
                     <td><?php echo $pet->getBreed() ?> </td>
                     <td><?php echo $pet->getType() ?> </td>
                     <td><?php echo $pet->getSize() ?></td>
                     <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td> 
                     <td><?php echo $pet->getObservation() ?> </td>
-                    <!--<td><iframe src=" <?php echo $pet->getPet_video();   ?>" alt="pet video" height="100" width="100"> </td>-->
+                    <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
+                    <td><iframe src=" <?php echo $pet->getPet_video();   ?>" alt="pet video" height="100" width="100">  </iframe> </td>
                     <td><button type="submit">select</button></td>
                 <?php
             }
