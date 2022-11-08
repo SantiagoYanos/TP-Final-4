@@ -132,9 +132,7 @@
     </script>
 
   </form>
-
-    
-  <form action=<?php echo FRONT_ROOT . "Reservation/SeeProfile" ?> method=POST>
+  
   <input type="hidden" id="guardian_id"></input>
     <table class="table table-striped table-bordered">
       <thead>
@@ -167,7 +165,6 @@
           </tr>
         <?php } ?>
       </tbody>
-    </form>
 
   </table>
 

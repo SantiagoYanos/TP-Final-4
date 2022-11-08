@@ -31,14 +31,26 @@ class ReservationController
         require_once(VIEWS_PATH . "owner_GuardianProfile.php");
     }
 
-    public function MakeReservation($guardian_id, $price, $reservation_dates, $pets_ids)
+    public function MakeReservation($guardian_id, $reservation_dates, $pets_ids)
     {
         $owner_DAO = new OwnerDAO();
+        $guardianDAO = new GuardianDAO();
+        $guardian_user = $guardianDAO->GetById($guardian_id);
+
+        $cant_pets=0;
+
+        foreach($_SESSION["pet_name"] as $pet){
+            $cant_pets++;
+        }
+
+        $price = $cant_pets * $guardian_user->getType_data()->getPrice();
 
         $reservation = new Reservation();
-        $reservation->setGuardian_id(1);
+        $reservation->setGuardian_id($guardian_id);
         $reservation->setOwner_id($_SESSION["id"]);
-        $reservation->setPrice(500);
+        $reservation->setPrice($price);
+
+        var_dump($reservation);
 
         /* $reservation_dates = String de fechas (Lo que nos da el calendario) */
 
