@@ -90,12 +90,12 @@ class PetDAO implements IModels
         $petsQL->setVaccination_plan($resultSet["vaccination_plan"]);
         $petsQL->setPet_img($resultSet["pet_img"]);
         $petsQL->setPet_video($resultSet["pet_video"]);
-        
-        
+
+
 
         return $petsQL;
     }
-    
+
     public function Add(Pet $PetSQL)
     {
         try {
@@ -106,11 +106,18 @@ class PetDAO implements IModels
             $parametersPet["pet_breed"] = $PetSQL->getBreed();
             $parametersPet["observations"] = $PetSQL->getObservation();
             $parametersPet["pet_type"] = $PetSQL->getType();
-            $parametersPet["owner_id"] = $PetSQL->getOwner_id();
-            $parametersPet["vaccination_note"] = $PetSQL->getOwner_id();
-            $parametersPet["pet_img"] = $PetSQL->getOwner_id();
-            $parametersPet["pet_video"] = $PetSQL->getOwner_id();
-            
+            if ($parametersPet["owner_id"]) {
+                $parametersPet["owner_id"] = $PetSQL->getOwner_id();
+            }
+            if ($parametersPet["vaccination_note"]) {
+                $parametersPet["vaccination_note"] = $PetSQL->getOwner_id();
+            }
+            if ($parametersPet["pet_img"]) {
+                $parametersPet["pet_img"] = $PetSQL->getPet_img();
+            }
+            if ($parametersPet["pet_video"]) {
+                $parametersPet["pet_video"] = $PetSQL->getPet_video();
+            }
 
             $this->connection = Connection::GetInstance();
 
@@ -157,13 +164,10 @@ class PetDAO implements IModels
 
                 array_push($PetList, $petsQL);
             }
-            
-            return $PetList;
 
+            return $PetList;
         } catch (Exception $e) {
             throw $e;
         }
     }
-
-
 }
