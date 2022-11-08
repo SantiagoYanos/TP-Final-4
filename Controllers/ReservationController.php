@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-
-
 use Models\Reservation as Reservation;
 use Models\Pet as Pet;
 use SQLDAO\PetDAO as PetDAO;
@@ -26,8 +24,8 @@ class ReservationController
     public function SeeProfile($guardian_id){
         $guardianDAO = new GuardianDAO();
         $petDAO = new PetDAO();
-        
-        $petList = $petDAO()->GetPetsByOwner($_SESSION["id"]);
+
+        $petList = $petDAO->GetPetsByOwner($_SESSION["id"]);
 
         $user_guardian = $guardianDAO->GetById($_POST["guardian_id"]);
         require_once(VIEWS_PATH . "profile_reservation.php");
