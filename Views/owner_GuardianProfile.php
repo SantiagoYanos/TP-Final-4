@@ -147,6 +147,25 @@
 
         <h3>Make Reservation</h3>
 
+        <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">
+            <div class="container align-items-end">
+                <div>
+                    <label for="pet_name">Select Your Pet: </label>
+                    <select name="pet_name" id="pet_name" required>
+                        <?php foreach ($petList as $pet)?>
+                        <option name="<?php $pet->getName()?>" value=<?php $pet->getId()?>><?php echo $pet->getName() ?></option>
+                    </select></br>
+                </div>
+            </div>
+        
+            <div class="container align-items-end">
+                <div>
+                    <label for="dates">Select Dates: </label>
+                  
+                </div>
+            </div>
+        </form>
+
 </body>
 
 </html>

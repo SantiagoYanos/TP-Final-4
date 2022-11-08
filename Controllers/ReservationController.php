@@ -27,8 +27,8 @@ class ReservationController
 
         $petList = $petDAO->GetPetsByOwner($_SESSION["id"]);
 
-        $user_guardian = $guardianDAO->GetById($_POST["guardian_id"]);
-        require_once(VIEWS_PATH . "profile_reservation.php");
+        $guardian = $guardianDAO->GetById($_POST["guardian_id"]);
+        require_once(VIEWS_PATH . "owner_GuardianProfile.php");
     }
 
     public function MakeReservation($guardian_id, $price, $reservation_dates, $pets_ids)
