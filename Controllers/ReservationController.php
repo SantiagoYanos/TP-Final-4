@@ -6,7 +6,7 @@ namespace Controllers;
 
 use Models\Reservation as Reservation;
 use Models\Pet as Pet;
-use SQLDAO\PetDAO;
+use SQLDAO\PetDAO as PetDAO;
 use SQLDAO\ReservationDAO as ReservationDAO;
 use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
@@ -21,6 +21,16 @@ class ReservationController
         if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
         }
+    }
+
+    public function SeeProfile($guardian_id){
+        $guardianDAO = new GuardianDAO();
+        $petDAO = new PetDAO();
+        
+        $petList = $petDAO()->GetPetsByOwner($_SESSION["id"]);
+
+        $user_guardian = $guardianDAO->GetById($_POST["guardian_id"]);
+        require_once(VIEWS_PATH . "profile_reservation.php");
     }
 
     public function MakeReservation($guardian_id, $price, $reservation_dates, $pets_ids)

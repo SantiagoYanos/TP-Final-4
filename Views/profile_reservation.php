@@ -142,7 +142,7 @@
 
         </div>
 
-        <form action=<?php echo FRONT_ROOT . "Reservation" ?> method="post">
+        <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">
             <div class="container align-items-end">
                 <div>
                     <label for="pet_name">Select Your Pet: </label>

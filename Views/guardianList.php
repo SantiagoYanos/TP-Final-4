@@ -134,7 +134,7 @@
   </form>
 
     
-  <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method=POST>
+  <form action=<?php echo FRONT_ROOT . "Reservation/SeeProfile" ?> method=POST>
   <input type="hidden" id="guardian_id"></input>
     <table class="table table-striped table-bordered">
       <thead>
@@ -160,7 +160,7 @@
             <td><?php echo $guardian->getType_data()->getPreferred_size() ?></td>
             <td><?php echo $guardian->getType_data()->getPreferred_size_cat() ?></td>
             <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
-            <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method=POST>
+            <form action=<?php echo FRONT_ROOT . "Reservation/SeeProfile" ?> method=POST>
               <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
                 <td><button type="submit">Check Profile</button></td>
             </form>
