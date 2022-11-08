@@ -8,8 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
-
-
+    <script type="text/javascript" src="../utils/multiselect_dropdown.js"></script>
+    <style type="text/css">
+        select{
+            width: 30em;
+            height: 30em;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -20,7 +25,7 @@
 
 <body>
 
-    <h1>Guardian's profile</h1> <i class="fa fa-house"></i>
+    <h1><?php echo $guardian->getName() ?>'s profile</h1> <i class="fa fa-house"></i>
 
 
     <h2>Reputation</h2>
@@ -32,51 +37,6 @@
 
         <div class="progress mb-3">
             <div class="progress-bar" style="width:<?php echo (($guardian->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
-        </div>
-
-
-        <div>
-
-            <section class="container">
-                <h4 class="pt-4 pb-1">Available Dates</h4>
-
-                <div class="input-group date mb-3" id="datepicker">
-                    <input name="stringDates" type="text" class="form-control" hidden>
-                    <span class="input-group-append">
-                        <span class="input-group-text bg-white">
-                            <i class="fa fa-calendar pt-1 pb-1"></i>
-                        </span>
-                    </span>
-                </div>
-
-            </section>
-
-            <?php
-
-            $calendario = "<script type='text/javascript'>
-            $(function() {
-                $('#datepicker').datepicker({
-
-                    multidate: true,
-                    format: 'yyyy-mm-dd',
-                    enableOnReadonly: true
-
-                });
-                
-                ";
-
-            if ($guardian->getType_data()->getAvailable_date()) {
-                $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $guardian->getType_data()->getAvailable_date()) . "'])";
-            }
-
-            $calendario = $calendario . "
-                });
-            </script>";
-
-            echo $calendario;
-
-            ?>
-
         </div>
 
         <div class="container align-items-end">
@@ -147,23 +107,74 @@
 
         <h3>Make Reservation</h3>
 
+        <!-----------SELECCION DE PETS------------------------------------------------------------------------------------->         
+
         <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">
             <div class="container align-items-end">
                 <div>
-                    <label for="pet_name">Select Your Pet: </label>
-                    <select name="pet_name" id="pet_name" required>
+                    <label for="pets_ids">Select Your Pets: </label>
+                    <select name="pets_ids" id="pets_ids" multiple required>
                         <?php foreach ($petList as $pet)?>
                         <option name="<?php $pet->getName()?>" value=<?php $pet->getId()?>><?php echo $pet->getName() ?></option>
                     </select></br>
+
                 </div>
             </div>
         
+        <!-----------SELECCION DE FECHAS-----------------------------------------------------------------------------------> 
+
             <div class="container align-items-end">
                 <div>
+
                     <label for="dates">Select Dates: </label>
-                  
+
+                    <div>
+                        <section class="container">
+
+                            <div class="input-group date mb-3" id="datepicker">
+                                <input name="reservation_dates" type="text" class="form-control" hidden>
+                                <span class="input-group-append">
+                                    <span class="input-group-text bg-white">
+                                        <i class="fa fa-calendar pt-1 pb-1"></i>
+                                    </span>
+                                </span>
+                            </div>
+
+                        </section>
+
+                        <?php
+
+                        $calendario = "<script type='text/javascript'>
+                        $(function() {
+                            $('#datepicker').datepicker({
+
+                                multidate: true,
+                                format: 'yyyy-mm-dd',
+                                enableOnReadonly: true
+
+                            });
+                            
+                            ";
+
+                        if ($guardian->getType_data()->getAvailable_date()) {
+                            $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $guardian->getType_data()->getAvailable_date()) . "'])";
+                        }
+
+                        $calendario = $calendario . "
+                            });
+                        </script>";
+
+                        echo $calendario;
+
+                        ?>
+
+                    </div>
                 </div>
-            </div>
+            </div> 
+
+            <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
+            
+            <button type="submit">Make Reservation</button></br>
         </form>
 
 </body>

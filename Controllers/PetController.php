@@ -38,7 +38,7 @@ class PetController
             echo "--------------";
             $fileName = $file["name"];
             $tempFileName = $file["tmp_name"];
-            $type = $file["type"];
+            $type1 = $file["type"];
             
             $filePath = VIEWS_PATH.basename($fileName);            
             echo "*********";
@@ -61,7 +61,7 @@ class PetController
             
             if($imageSize !== false && $imageSize1 !==false)
             {
-                if (move_uploaded_file($tempFileName, $filePath))
+                if ($imageSize !== false && $imageSize1 !==false)
                 {
         
                     $pet = new Pet();
@@ -79,7 +79,15 @@ class PetController
                     $message = "Imagen subida correctamente";
                     $petDAO = new PetDAO();
 
-                    $petDAO->Add($pet);
+                    $pet_id=$petDAO->Add($pet);
+
+                    if($pet_id){
+                        mkdir(IMG_PATH . $pet_id);
+                        move_uploaded_file($tempFileName, IMG_PATH . $pet_id . "/" .basename($filePath) );
+                        move_uploaded_file($tempFileName1, IMG_PATH . $pet_id . "/" .basename($filePath1) );                   
+                    }
+
+
                 }
                 else
                     $message = "Ocurrió un error al intentar subir la imagen";
@@ -97,8 +105,18 @@ class PetController
         var_dump($message);
         var_dump($pet);
 
-        //return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+        return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
+
+
+    public function deletePet($petId)
+    {
+        $petDAO = new PetDAO();
+        $petDAO->disablePet($petId);
+        return header("location: " . FRONT_ROOT . "Pet/PetList");
+
+    }
+
 
     public function ShowRegisterPet()
     {
