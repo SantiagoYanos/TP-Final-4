@@ -112,8 +112,8 @@
         <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">
             <div class="container align-items-end">
                 <div>
-                    <label for="pet_name">Select Your Pets: </label>
-                    <select name="pet_name" id="pet_name" multiple required>
+                    <label for="pets_ids">Select Your Pets: </label>
+                    <select name="pets_ids" id="pets_ids" multiple required>
                         <?php foreach ($petList as $pet)?>
                         <option name="<?php $pet->getName()?>" value=<?php $pet->getId()?>><?php echo $pet->getName() ?></option>
                     </select></br>
@@ -132,7 +132,7 @@
                         <section class="container">
 
                             <div class="input-group date mb-3" id="datepicker">
-                                <input name="stringDates" type="text" class="form-control" hidden>
+                                <input name="reservation_dates" type="text" class="form-control" hidden>
                                 <span class="input-group-append">
                                     <span class="input-group-text bg-white">
                                         <i class="fa fa-calendar pt-1 pb-1"></i>

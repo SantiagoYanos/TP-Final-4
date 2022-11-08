@@ -2,8 +2,10 @@
 
 namespace Controllers;
 
+use SQLDAO\PetDAO as PetDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 use SQLDAO\GuardianDAO as GuardianDAO;
+use Models\Pet as Pet;
 use Models\User as User;
 use Models\Owner as Owner;
 
@@ -117,8 +119,10 @@ class OwnerController
     function ViewGuardianProfile($guardian_id)
     {
         $guardianDAO = new GuardianDAO();
+        $PetDAO = new PetDAO();
 
         $guardian = $guardianDAO->GetById($guardian_id);
+        $petList = $PetDAO->GetPetsByOwner($_SESSION["id"]);
 
         if ($guardian) {
             require_once VIEWS_PATH . "owner_GuardianProfile.php";
