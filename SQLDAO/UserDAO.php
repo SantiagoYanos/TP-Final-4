@@ -115,7 +115,6 @@ class UserDAO implements IModels
         return $UserSQL;
     }
 
-
     public function getTypeById($id)
     {
         try {
@@ -132,16 +131,11 @@ class UserDAO implements IModels
                 return null;
             }
 
-            
+
 
             return $resultSet[0];
         } catch (Exception $e) {
             throw $e;
         }
-
-
-        
     }
-
-    
 }
