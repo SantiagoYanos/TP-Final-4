@@ -8,10 +8,10 @@ define("FRONT_ROOT", "/TP4/TP-Final-4/");
 define("VIEWS_PATH", "Views/");
 define("CSS_PATH", FRONT_ROOT . VIEWS_PATH . "css/");
 define("JS_PATH", FRONT_ROOT . VIEWS_PATH . "js/");
-define("IMG_PATH", VIEWS_PATH . "images/");
+define("IMG_PATH", VIEWS_PATH . "images/pets/");
 
 //Datos, FALTAN CAMBIARLOS
 define("DB_HOST", "localhost");
 define("DB_NAME", "pet_hero");
 define("DB_USER", "root");
-define("DB_PASS", "1234");
+define("DB_PASS", "");

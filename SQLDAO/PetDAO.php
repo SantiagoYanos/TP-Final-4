@@ -99,22 +99,31 @@ class PetDAO implements IModels
     public function Add(Pet $PetSQL)
     {
         try {
-            $queryPet = "INSERT INTO pets (name, pet_size, pet_breed, observations, pet_type, owner_id,vaccination_note, pet_img, pet_video) VALUES (:name, :pet_size, :pet_breed, :observations, :pet_type, :owner_id, :vaccination_note, :pet_img, :pet_video);";
+            $queryPet = "CALL insertPet(:name, :pet_type, :pet_size, :pet_breed, :observations, :owner_id, :vaccination_plan, :pet_img, :pet_video)"; /*"INSERT INTO pets (name, pet_type, pet_size, pet_breed, observations, owner_id, vaccination_plan, pet_img, pet_video) VALUES (:name, :pet_type, :pet_size, :pet_breed, :observations, :owner_id, :vaccination_plan, :pet_img, :pet_video);"*/
 
             $parametersPet["name"] = $PetSQL->getName();
+            
+            $parametersPet["pet_type"] = $PetSQL->getType();
             $parametersPet["pet_size"] = $PetSQL->getSize();
             $parametersPet["pet_breed"] = $PetSQL->getBreed();
             $parametersPet["observations"] = $PetSQL->getObservation();
-            $parametersPet["pet_type"] = $PetSQL->getType();
+            
             $parametersPet["owner_id"] = $PetSQL->getOwner_id();
-            $parametersPet["vaccination_note"] = $PetSQL->getOwner_id();
-            $parametersPet["pet_img"] = $PetSQL->getOwner_id();
-            $parametersPet["pet_video"] = $PetSQL->getOwner_id();
+            $parametersPet["vaccination_plan"] = $PetSQL->getVaccination_plan();
+            $parametersPet["pet_img"] = $PetSQL->getPet_img();
+            $parametersPet["pet_video"] = $PetSQL->getPet_video();
             
 
             $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($queryPet, $parametersPet);
+            $resultSet=$this->connection->Execute($queryPet, $parametersPet);
+
+            if(!$resultSet[0]){
+                return null;
+            }
+            return $resultSet[0]["id_pet"];
+
+
             /*
             $PetDAO = new PetDAO();
 
@@ -136,6 +145,8 @@ class PetDAO implements IModels
         } catch (Exception $e) {
             throw $e;
         }
+
+        
     }
 
     public function GetPetsByOwner($owner_id)
@@ -163,6 +174,11 @@ class PetDAO implements IModels
         } catch (Exception $e) {
             throw $e;
         }
+    }
+
+    public function getInsertedPetId()
+    {
+        $query = "SELECT * FROM " . $this->tableName . " WHERE owner_id=:owner_id AND active=true";
     }
 
 
