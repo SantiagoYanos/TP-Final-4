@@ -142,7 +142,7 @@
 
         </div>
 
-        <form action=<?php echo FRONT_ROOT . "Reservation" ?> method="post">
+        <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">
             <div class="container align-items-end">
                 <div>
                     <label for="pet_name">Select Your Pet: </label>
@@ -162,8 +162,6 @@
         </form>
 
         <!--<a href-<?php require_once VIEWS_PATH . "guardianList.php" ?>><button class="float-end mt-2">Back</button></a>>-->
-                
-
         
 </body>
 </html>
