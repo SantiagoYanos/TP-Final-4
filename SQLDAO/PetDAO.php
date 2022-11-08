@@ -108,18 +108,11 @@ class PetDAO implements IModels
             $parametersPet["pet_breed"] = $PetSQL->getBreed();
             $parametersPet["observations"] = $PetSQL->getObservation();
             $parametersPet["pet_type"] = $PetSQL->getType();
-            if ($parametersPet["owner_id"]) {
-                $parametersPet["owner_id"] = $PetSQL->getOwner_id();
-            }
-            if ($parametersPet["vaccination_note"]) {
-                $parametersPet["vaccination_note"] = $PetSQL->getOwner_id();
-            }
-            if ($parametersPet["pet_img"]) {
-                $parametersPet["pet_img"] = $PetSQL->getPet_img();
-            }
-            if ($parametersPet["pet_video"]) {
-                $parametersPet["pet_video"] = $PetSQL->getPet_video();
-            }
+            $parametersPet["owner_id"] = $PetSQL->getOwner_id();
+            $parametersPet["vaccination_note"] = $PetSQL->getOwner_id();
+            $parametersPet["pet_img"] = $PetSQL->getOwner_id();
+            $parametersPet["pet_video"] = $PetSQL->getOwner_id();
+
 
             $this->connection = Connection::GetInstance();
 
