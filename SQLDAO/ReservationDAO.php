@@ -12,8 +12,6 @@ use SQLDAO\IModels as IModels;
 use SQLDAO\UserDAO as UserDAO;
 use SQLDAO\PetDAO as PetDAO;
 
-use function PHPSTORM_META\map;
-
 class ReservationDAO implements IModels
 {
     private $connection;
