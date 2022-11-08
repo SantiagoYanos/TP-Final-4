@@ -176,9 +176,15 @@ class PetDAO implements IModels
         }
     }
 
-    public function getInsertedPetId()
+    public function disablePet($petId)
     {
-        $query = "SELECT * FROM " . $this->tableName . " WHERE owner_id=:owner_id AND active=true";
+        $queryUser = "UPDATE pets SET active= 0 WHERE pet_id= " . $petId ;
+
+            
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($queryUser);
     }
 
 

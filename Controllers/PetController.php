@@ -108,6 +108,16 @@ class PetController
         return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
 
+
+    public function deletePet($petId)
+    {
+        $petDAO = new PetDAO();
+        $petDAO->disablePet($petId);
+        return header("location: " . FRONT_ROOT . "Pet/PetList");
+
+    }
+
+
     public function ShowRegisterPet()
     {
         require_once VIEWS_PATH . "register_pet.php";

@@ -46,8 +46,29 @@
                     <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td> 
                     <td><?php echo $pet->getObservation() ?> </td>
                     <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
-                    <td><iframe src=" <?php echo $pet->getPet_video();   ?>" alt="pet video" height="100" width="100">  </iframe> </td>
-                    <td><button type="submit">select</button></td>
+                    <td> <a href=" <?php echo $pet->getPet_video();   ?>" alt="pet video"> Video </a>   </td>
+
+                    <td>
+                        <form id= <?php echo $pet->getId(); ?> action="<?php echo FRONT_ROOT . "Pet/deletePet" ?>" method="post">
+                        <input type="hidden" name="petId" value="<?php echo $pet->getId() ?>"></input>
+                    </form>
+                    <button type="submit" class="mt-2" onclick="confirming(<?php echo $pet->getId(); ?>)">delete</button>
+
+                    <script>
+                    function confirming(id) {
+                    var txt;
+                    if (confirm("are you sure you want to delete this pet?")) {
+                        txt = "You pressed OK!";
+                        document.getElementById(id).submit();
+                    } else {
+                        txt = "You pressed Cancel!";
+                    }
+
+                    }
+                    </script>
+
+
+                    </td>
                 <?php
             }
                 ?>
@@ -65,7 +86,7 @@
         <form action="<?php echo FRONT_ROOT . "Pet/ShowRegisterPet" ?>" method="post">
             <button type="submit">Add new pet</button>
         </form>
-    </div> <button type="submit">edit</button> <button type="submit">remove</button>
+   
 
 </body>
 
