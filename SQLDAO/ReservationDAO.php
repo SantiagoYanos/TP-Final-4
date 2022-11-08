@@ -163,7 +163,7 @@ class ReservationDAO implements IModels
 
                 $getReservation->setPets($getPets);
 
-                array_push($reservationList);
+                array_push($reservationList, $getReservation);
             }
 
             return $reservationList;
@@ -199,7 +199,7 @@ class ReservationDAO implements IModels
 
     public function GetPets($id)
     {
-        $query = "SELECT rp.reservation_id, p.name, p.pet_breed, p.pet_type, p.pet_size, p.observations FROM reservations_x_pets rp INNER JOIN pets p ON rp.pet_id = p.pet_id WHERE reservation_id =" . $id . ";";
+        $query = "SELECT rp.reservation_id, p.pet_id, p.name, p.pet_breed, p.pet_type, p.pet_size, p.observations FROM reservations_x_pets rp INNER JOIN pets p ON rp.pet_id = p.pet_id WHERE reservation_id =" . $id . ";";
 
         $this->connection = Connection::GetInstance();
 

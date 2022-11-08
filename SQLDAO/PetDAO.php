@@ -79,21 +79,27 @@ class PetDAO implements IModels
 
     public function LoadData($resultSet)
     {
-        $petsQL = new Pet();
-        $petsQL->setId($resultSet["pet_id"]);
-        $petsQL->setName($resultSet["name"]);
-        $petsQL->setSize($resultSet["pet_size"]);
-        $petsQL->setBreed($resultSet["pet_breed"]);
-        $petsQL->setObservation($resultSet["observations"]);
-        $petsQL->setType($resultSet["pet_type"]);
-        $petsQL->setOwner_id($resultSet["owner_id"]);
-        $petsQL->setVaccination_plan($resultSet["vaccination_plan"]);
-        $petsQL->setPet_img($resultSet["pet_img"]);
-        $petsQL->setPet_video($resultSet["pet_video"]);
+        $petSQL = new Pet();
+        $petSQL->setId($resultSet["pet_id"]);
+        $petSQL->setName($resultSet["name"]);
+        $petSQL->setSize($resultSet["pet_size"]);
+        $petSQL->setBreed($resultSet["pet_breed"]);
+        $petSQL->setObservation($resultSet["observations"]);
+        $petSQL->setType($resultSet["pet_type"]);
+        if (isset($resultSet["owner_id"])) {
+            $petSQL->setOwner_id($resultSet["owner_id"]);
+        }
+        if (isset($resultSet["vaccination_plan"])) {
+            $petSQL->setVaccination_plan($resultSet["vaccination_plan"]);
+        }
+        if (isset($resultSet["pet_img"])) {
+            $petSQL->setPet_img($resultSet["pet_img"]);
+        }
+        if (isset($resultSet["pet_video"])) {
+            $petSQL->setPet_video($resultSet["pet_video"]);
+        }
 
-
-
-        return $petsQL;
+        return $petSQL;
     }
 
     public function Add(Pet $PetSQL)

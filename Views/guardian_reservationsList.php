@@ -27,7 +27,7 @@
             <th>Price</th>
             <th>Pets</th>
             <th>Dates</th>
-            <th>Status</th>
+            <th>State</th>
             <th>Accept/Decline</th>
         </thead>
 
@@ -45,7 +45,7 @@
                 echo "<td>$" . $reservation->getPrice() . "</td>";
                 echo "<td>Show Pets</td>";
                 echo "<td>Dates Calendar</td>";
-                echo "<td>" . $reservation->getStatus() . "</td>";
+                echo "<td>" . $reservation->getState() . "</td>";
                 echo "<td>Accept Decline</td>";
             }
 
