@@ -132,39 +132,38 @@
     </script>
 
   </form>
-  
-  <input type="hidden" id="guardian_id"></input>
-    <table class="table table-striped table-bordered">
-      <thead>
-        <th>Name</th>
-        <th>Addres</th>
-        <th>Rating</th>
-        <th>Dog Size Preference</th>
-        <th>Cat Size Preference</th>
-        <th>Price</th>
-        <th>Make Reservation</th>
-      </thead>
-    
-      <!--GUARDIAN ES USER!!!!!-->
 
-      <tbody>
-        <?php
-        foreach ($guardians as $guardian) {
-        ?>
-          <tr>
-            <td><?php echo $guardian->GetName() ?></td>
-            <td><?php echo $guardian->getAdress() ?></td>
-            <td><?php echo $guardian->getType_data()->getReputation() ?></td>
-            <td><?php echo $guardian->getType_data()->getPreferred_size() ?></td>
-            <td><?php echo $guardian->getType_data()->getPreferred_size_cat() ?></td>
-            <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
-            <form action=<?php echo FRONT_ROOT . "Reservation/SeeProfile" ?> method=POST>
-              <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
-                <td><button type="submit">Check Profile</button></td>
-            </form>
-          </tr>
-        <?php } ?>
-      </tbody>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <th>Name</th>
+      <th>Addres</th>
+      <th>Rating</th>
+      <th>Dog Size Preference</th>
+      <th>Cat Size Preference</th>
+      <th>Price</th>
+      <th>Make Reservation</th>
+    </thead>
+
+    <!--GUARDIAN ES USER!!!!!-->
+
+    <tbody>
+      <?php
+      foreach ($guardians as $guardian) {
+      ?>
+        <tr>
+          <td><?php echo $guardian->GetName() ?></td>
+          <td><?php echo $guardian->getAdress() ?></td>
+          <td><?php echo $guardian->getType_data()->getReputation() ?></td>
+          <td><?php echo $guardian->getType_data()->getPreferred_size() ?></td>
+          <td><?php echo $guardian->getType_data()->getPreferred_size_cat() ?></td>
+          <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
+          <form action=<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?> method=GET>
+            <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
+            <td><button type="submit">Check Profile</button></td>
+          </form>
+        </tr>
+      <?php } ?>
+    </tbody>
 
   </table>
 
