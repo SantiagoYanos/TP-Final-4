@@ -13,7 +13,7 @@
 
 <body>
     <div>
-        <h1>Owner's Home</h1>
+        <h1><?php echo $user->getName()?>'s Home</h1>
     </div>
 
     <div>

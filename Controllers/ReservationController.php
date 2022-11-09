@@ -59,7 +59,7 @@ class ReservationController
         $reservation_DAO = new ReservationDAO();
         $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids); //Cambiar los valores de prueba;
 
-        var_dump($reservation);
+        /*var_dump($reservation);*/
 
         header("location: " . FRONT_ROOT . "Owner/SearchGuardian");
     }

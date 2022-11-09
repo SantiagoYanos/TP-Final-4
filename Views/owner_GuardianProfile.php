@@ -141,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            
+
         <!----------------------------------------------------------------------------------------------------------------->
         
         
@@ -198,7 +198,13 @@
 
             <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
             
-            <button type="submit">Make Reservation</button></br>
+            <button type="submit" onclick="alertMessage()">Make Reservation </button></br>
+
+            <script>
+                function alertMessage() {
+                    alert("Reservation request sent to Guardian!");
+                }
+            </script>
         </form>
 
 </body>
