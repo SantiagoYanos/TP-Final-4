@@ -124,6 +124,8 @@ class OwnerController
         $guardian = $guardianDAO->GetById($guardian_id);
         $PetList = $PetDAO->GetPetsByOwner($_SESSION["id"]);
 
+        $availableDatesJson = json_encode($guardian->getType_data()->getAvailable_date());
+
         if ($guardian) {
             require_once VIEWS_PATH . "owner_GuardianProfile.php";
         } else {

@@ -31,17 +31,15 @@ class ReservationController
         require_once(VIEWS_PATH . "owner_GuardianProfile.php");
     }*/
 
-    public function MakeReservation($guardian_id, $reservation_dates, $pets_ids)
+    public function MakeReservation($guardian_id, $reservation_dates, $pets_ids = [])
     {
+
         $owner_DAO = new OwnerDAO();
         $guardianDAO = new GuardianDAO();
         $guardian_user = $guardianDAO->GetById($guardian_id);
-        $cant_pets=0;
+        $cant_pets = 0;
 
-        foreach($pets_ids as $pet){
-            $pet_DAO = new PetDAO();
-            $pet = $pet_DAO->GetById($pet);
-            $petList[] = $pet;
+        foreach ($pets_ids as $pet) {
             $cant_pets++;
         }
 

@@ -39,7 +39,7 @@
             $i = 1;
 
             foreach ($reservations as $reservation) {
-
+                echo "<tr>";
                 echo "<td>" . $i . "</td>";
                 echo "<td>See Owner Profile</td>";
                 echo "<td>$" . $reservation->getPrice() . "</td>";
@@ -47,6 +47,9 @@
                 echo "<td>Dates Calendar</td>";
                 echo "<td>" . $reservation->getState() . "</td>";
                 echo "<td>Accept Decline</td>";
+                echo "</tr>";
+
+                $i++;
             }
 
             ?>

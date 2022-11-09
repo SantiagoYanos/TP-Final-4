@@ -19,7 +19,7 @@
     <script src="../Utils/petlist_function.js"></script>
     <script type="text/javascript" src="../utils/multiselect_dropdown.js"></script>
     <style type="text/css">
-        select{
+        select {
             width: 30em;
             height: 30em;
         }
@@ -120,32 +120,32 @@
 
 
 
-        <!-----------SELECCION DE PETS------------------------------------------------------------------------------------->         
+        <!-----------SELECCION DE PETS------------------------------------------------------------------------------------->
         <script>
-                require(['bootstrap-multiselect'], function(purchase){
-                    $('#pets_ids').multiselect();
-                });
+            require(['bootstrap-multiselect'], function(purchase) {
+                $('#pets_ids').multiselect();
+            });
         </script>
 
-        <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">  
+        <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">
             <div class="container align-items-end">
                 <div>
                     <label for="pets_ids">Select Your Pets: </label>
-                    <div class="checkboxlist"  id="skills">
+                    <div class="checkboxlist" id="skills">
                         <?php
-                            $cont=0;
-                            foreach($PetList as $pet){
-                                echo "<input type='checkbox' name='pets_ids[]' value=".$pet->getId().">".$pet->getName()."</option>";
-                            }
+                        $cont = 0;
+                        foreach ($PetList as $pet) {
+                            echo "<input type='checkbox' name='pets_ids[]' value=" . $pet->getId() . ">" . $pet->getName() . "</option>";
+                        }
                         ?>
                     </div>
                 </div>
             </div>
 
-        <!----------------------------------------------------------------------------------------------------------------->
-        
-        
-        <!-----------SELECCION DE FECHAS-----------------------------------------------------------------------------------> 
+            <!----------------------------------------------------------------------------------------------------------------->
+
+
+            <!-----------SELECCION DE FECHAS----------------------------------------------------------------------------------->
 
             <div class="container align-items-end">
                 <div>
@@ -174,7 +174,7 @@
 
                                 multidate: true,
                                 format: 'yyyy-mm-dd',
-                                enableOnReadonly: true
+                                enableOnReadonly: true,
 
                             });
                             
@@ -194,10 +194,10 @@
 
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
-            
+
             <button type="submit" onclick="alertMessage()">Make Reservation </button></br>
 
             <script>
@@ -205,7 +205,18 @@
                     alert("Reservation request sent to Guardian!");
                 }
             </script>
+
         </form>
+
+        <button id="prueba"> Boton de prueba</button>
+
+        <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
+
+        <script>
+            const availableDatesJson = '<?php echo $availableDatesJson ?>'
+
+            InitializeAvailableDates(availableDatesJson);
+        </script>
 
 </body>
 
