@@ -6,6 +6,7 @@ namespace Controllers;
 use  SQLDAO\GuardianDAO as GuardianDAO;
 use Models\User as User;
 use Models\Guardian as Guardian;
+use SQLDAO\ReservationDAO;
 
 class GuardianController
 {
@@ -94,5 +95,15 @@ class GuardianController
         $guardianDAO->Edit($user, $guardian);
 
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+    }
+
+    public function ViewReservations()
+    {
+
+        $reservationDAO = new ReservationDAO();
+
+        $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian");
+
+        require_once VIEWS_PATH . "guardian_reservationsList.php";
     }
 }

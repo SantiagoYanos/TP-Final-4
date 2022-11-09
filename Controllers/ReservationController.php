@@ -21,7 +21,7 @@ class ReservationController
         }
     }
 
-    public function SeeProfile($guardian_id){
+    /*public function SeeProfile($guardian_id){
         $guardianDAO = new GuardianDAO();
         $petDAO = new PetDAO();
 
@@ -29,17 +29,19 @@ class ReservationController
 
         $guardian = $guardianDAO->GetById($_POST["guardian_id"]);
         require_once(VIEWS_PATH . "owner_GuardianProfile.php");
-    }
+    }*/
 
     public function MakeReservation($guardian_id, $reservation_dates, $pets_ids)
     {
         $owner_DAO = new OwnerDAO();
         $guardianDAO = new GuardianDAO();
         $guardian_user = $guardianDAO->GetById($guardian_id);
-
         $cant_pets=0;
 
-        foreach($_SESSION["pet_name"] as $pet){
+        foreach($pets_ids as $pet){
+            $pet_DAO = new PetDAO();
+            $pet = $pet_DAO->GetById($pet);
+            $petList[] = $pet;
             $cant_pets++;
         }
 
@@ -50,17 +52,15 @@ class ReservationController
         $reservation->setOwner_id($_SESSION["id"]);
         $reservation->setPrice($price);
 
-        var_dump($reservation);
-
-        /* $reservation_dates = String de fechas (Lo que nos da el calendario) */
-
-        /* $pets_ids = Array de Id's de las mascotas a agregar en la reserva (Hay que ver como hacerlo)*/
+        /*var_dump($_POST);*/
 
         $reservation_dates = explode(",", $reservation_dates);
 
         $reservation_DAO = new ReservationDAO();
-        $reservation_DAO->Add($reservation, ["2022-10-02", "2021-05-01"], [1]); //Cambiar los valores de prueba;
+        $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids); //Cambiar los valores de prueba;
 
-        require_once VIEWS_PATH . "make_reservation.php";
+        /*var_dump($reservation);*/
+
+        header("location: " . FRONT_ROOT . "Owner/SearchGuardian");
     }
 }

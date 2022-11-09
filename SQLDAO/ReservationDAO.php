@@ -26,6 +26,8 @@ class ReservationDAO implements IModels
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
             $parametersReservation["owner_id"] = $reservation->getOwner_id();
 
+            var_dump($parametersReservation);
+
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($queryReservation, $parametersReservation);
 
@@ -41,7 +43,7 @@ class ReservationDAO implements IModels
 
                 $petsString = join(") , (" . $id_reservation . ",", $pets_ids);
 
-                $queryPetsReservations = "INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (" . $id_reservation . "," . $petsString . ")";
+                $queryPetsReservations = " INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (" . $id_reservation . "," . $petsString . ")";
 
                 echo $queryPetsReservations;
 
@@ -163,7 +165,7 @@ class ReservationDAO implements IModels
 
                 $getReservation->setPets($getPets);
 
-                array_push($reservationList);
+                array_push($reservationList, $getReservation);
             }
 
             return $reservationList;
@@ -177,7 +179,7 @@ class ReservationDAO implements IModels
     {
         try {
 
-            $query = "SELECT * FROM " . $this->tablename . " WHERE guardian_id = " . $id . ";";
+            $query = "SELECT * FROM reservations_x_dates WHERE reservation_id = " . $id . ";";
 
             $this->connection = Connection::GetInstance();
 
@@ -199,7 +201,7 @@ class ReservationDAO implements IModels
 
     public function GetPets($id)
     {
-        $query = "SELECT * FROM reservations_x_pets WHERE reservation_id = " . $id;
+        $query = "SELECT rp.reservation_id, p.pet_id, p.name, p.pet_breed, p.pet_type, p.pet_size, p.observations FROM reservations_x_pets rp INNER JOIN pets p ON rp.pet_id = p.pet_id WHERE reservation_id =" . $id . ";";
 
         $this->connection = Connection::GetInstance();
 
