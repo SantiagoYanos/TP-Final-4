@@ -8,6 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css">
+    <script data-main="dist/js/" src="js/require.min.js"></script>
+
+    <script src="../Utils/petlist_function.js"></script>
     <script type="text/javascript" src="../utils/multiselect_dropdown.js"></script>
     <style type="text/css">
         select{
@@ -107,19 +116,34 @@
 
         <h3>Make Reservation</h3>
 
-        <!-----------SELECCION DE PETS------------------------------------------------------------------------------------->         
+        <!----------------------------------------------------------------------------------------------------------------->
 
-        <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">
+
+
+        <!-----------SELECCION DE PETS------------------------------------------------------------------------------------->         
+        <script>
+                require(['bootstrap-multiselect'], function(purchase){
+                    $('#pets_ids').multiselect();
+                });
+        </script>
+
+        <form action=<?php echo FRONT_ROOT . "Reservation/MakeReservation" ?> method="post">  
             <div class="container align-items-end">
                 <div>
                     <label for="pets_ids">Select Your Pets: </label>
-                    <select name="pets_ids" id="pets_ids" multiple required>
-                        <?php foreach ($petList as $pet)?>
-                        <option name="<?php $pet->getName()?>" value=<?php $pet->getId()?>><?php echo $pet->getName() ?></option>
-                    </select></br>
-
+                    <div class="checkboxlist"  id="skills">
+                        <?php
+                            $cont=0;
+                            foreach($PetList as $pet){
+                                echo "<input type='checkbox' name='pets_ids[]' value=".$pet->getId().">".$pet->getName()."</option>";
+                            }
+                        ?>
+                    </div>
                 </div>
             </div>
+            
+        <!----------------------------------------------------------------------------------------------------------------->
+        
         
         <!-----------SELECCION DE FECHAS-----------------------------------------------------------------------------------> 
 

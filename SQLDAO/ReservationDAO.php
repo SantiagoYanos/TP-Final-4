@@ -26,6 +26,8 @@ class ReservationDAO implements IModels
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
             $parametersReservation["owner_id"] = $reservation->getOwner_id();
 
+            var_dump($parametersReservation);
+
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($queryReservation, $parametersReservation);
 
@@ -41,7 +43,7 @@ class ReservationDAO implements IModels
 
                 $petsString = join(") , (" . $id_reservation . ",", $pets_ids);
 
-                $queryPetsReservations = "INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (" . $id_reservation . "," . $petsString . ")";
+                $queryPetsReservations = " INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (" . $id_reservation . "," . $petsString . ")";
 
                 echo $queryPetsReservations;
 

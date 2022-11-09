@@ -122,7 +122,7 @@ class OwnerController
         $PetDAO = new PetDAO();
 
         $guardian = $guardianDAO->GetById($guardian_id);
-        $petList = $PetDAO->GetPetsByOwner($_SESSION["id"]);
+        $PetList = $PetDAO->GetPetsByOwner($_SESSION["id"]);
 
         if ($guardian) {
             require_once VIEWS_PATH . "owner_GuardianProfile.php";
