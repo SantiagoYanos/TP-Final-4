@@ -68,7 +68,7 @@ class OwnerController
         header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
 
-    public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $preferred_size_cat = null, $location = null, $price = null, $stringDates = null)
+    public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $preferred_size_cat = null, $location = null, $price = null, $stringDates = null, $alert = null)
     {
 
         $guardian_DAO = new GuardianDAO();
@@ -116,7 +116,7 @@ class OwnerController
         require_once VIEWS_PATH . "guardianList.php";
     }
 
-    function ViewGuardianProfile($guardian_id)
+    function ViewGuardianProfile($guardian_id, $alert = null)
     {
         $guardianDAO = new GuardianDAO();
         $PetDAO = new PetDAO();

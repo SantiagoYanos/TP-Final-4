@@ -120,15 +120,20 @@
 
                         <tr>
                             <th>Price</th>
-                            <td>$ <input type="text" id="price" name="price" value="<?php echo $user->getType_Data()->getPrice() ?> required"></td>
+                            <td>$ <input type="text" id="price" name="price" value="<?php echo $user->getType_Data()->getPrice() ?>" required></td>
                         </tr>
 
                     </tbody>
                 </table>
 
-                <button type="submit">Edit</button>
+                <button type=" submit">Edit</button>
 
             </form>
+
+            <br>
+
+            <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
+
 
         </div>
 

@@ -118,8 +118,6 @@
 
         <!----------------------------------------------------------------------------------------------------------------->
 
-
-
         <!-----------SELECCION DE PETS------------------------------------------------------------------------------------->
         <script>
             require(['bootstrap-multiselect'], function(purchase) {
@@ -191,15 +189,23 @@
 
             <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
 
-            <button type="submit" onclick="alertMessage()">Make Reservation </button></br>
+            <button type="submit">Make Reservation </button></br>
 
-            <script>
+            <!--<script>
                 function alertMessage() {
                     alert("Reservation request sent to Guardian!");
                 }
-            </script>
+            </script>!-->
 
         </form>
+
+        <?php
+
+        if ($alert) {
+            echo " <script> alert('" . $alert . "'); </script>";
+        };
+        ?>
+
 
         <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
 

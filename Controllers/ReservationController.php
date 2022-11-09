@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Models\Guardian;
 use Models\Reservation as Reservation;
 use Models\Pet as Pet;
 use SQLDAO\PetDAO as PetDAO;
@@ -31,8 +32,16 @@ class ReservationController
         require_once(VIEWS_PATH . "owner_GuardianProfile.php");
     }*/
 
-    public function MakeReservation($guardian_id, $reservation_dates, $pets_ids = [])
+    public function MakeReservation($guardian_id, $reservation_dates = null, $pets_ids = [])
     {
+
+        if ($pets_ids == []) {
+            header("location: "  . FRONT_ROOT . "Owner/ViewGuardianProfile?guardian_id=" . $guardian_id . '&alert="You need to select one or more pets!"');
+        }
+
+        if (!$reservation_dates) {
+            header("location: "  . FRONT_ROOT . "Owner/ViewGuardianProfile?guardian_id=" . $guardian_id . '&alert="You need to select one or more dates!"');
+        }
 
         $owner_DAO = new OwnerDAO();
         $guardianDAO = new GuardianDAO();
@@ -59,6 +68,6 @@ class ReservationController
 
         /*var_dump($reservation);*/
 
-        header("location: " . FRONT_ROOT . "Owner/SearchGuardian");
+        header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="Reservation request sent to Guardian!"');
     }
 }
