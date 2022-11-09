@@ -69,7 +69,7 @@ create table pets(
     pet_breed varchar(150) not null default 'Unknown',
     observations varchar(250) default '',
     owner_id bigint not null,
-    vaccionation_plan varchar(250),
+    vaccination_plan varchar(250),
     pet_img varchar(250),
     pet_video varchar(250),
     active boolean not null default 1,
@@ -77,16 +77,6 @@ create table pets(
     constraint pk_pet primary key (pet_id),
     CONSTRAINT fk_pet_size FOREIGN key (pet_size) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
     constraint fk_owner_id foreign key (owner_id) references owners(user_id) on delete cascade
-);
-
-create table pet_multimedia(
-    file_id bigint auto_increment,
-    file_path text not null,
-    pet_id bigint not null,
-    description varchar(150) not null,
-
-    constraint pk_pet_multimedia primary key (file_id),
-    constraint fk_pet_id foreign key (pet_id) references pets (pet_id) on delete cascade
 );
 
 create table reservations(
@@ -152,4 +142,14 @@ INSERT INTO guardians (user_id, cuil, reputation, preferred_size_dog, preferred_
 INSERT INTO owners (user_id, dni) VALUES (2, 52555633);
 
 
+
+CREATE PROCEDURE insertPet(IN p_name varchar(150), IN p_pet_type varchar(150), IN p_pet_size int, IN p_pet_breed varchar(150), IN p_observations varchar(250), IN p_owner_id bigint, IN p_vaccination_plan varchar(250), IN p_pet_img varchar(250), IN p_pet_video varchar(250))
+BEGIN
+
+    INSERT INTO pets (name, pet_type, pet_size, pet_breed, observations, owner_id, vaccination_plan, pet_img, pet_video) VALUES (p_name, p_pet_type, p_pet_size, p_pet_breed, p_observations, p_owner_id, p_vaccination_plan, p_pet_img, p_pet_video);
+
+    SELECT last_insert_id() as id_pet;
+
+
+END;
 
