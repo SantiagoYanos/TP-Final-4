@@ -69,7 +69,7 @@ create table pets(
     pet_breed varchar(150) not null default 'Unknown',
     observations varchar(250) default '',
     owner_id bigint not null,
-    vaccionation_plan varchar(250),
+    vaccination_plan varchar(250),
     pet_img varchar(250),
     pet_video varchar(250),
     active boolean not null default 1,
@@ -77,16 +77,6 @@ create table pets(
     constraint pk_pet primary key (pet_id),
     CONSTRAINT fk_pet_size FOREIGN key (pet_size) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
     constraint fk_owner_id foreign key (owner_id) references owners(user_id) on delete cascade
-);
-
-create table pet_multimedia(
-    file_id bigint auto_increment,
-    file_path text not null,
-    pet_id bigint not null,
-    description varchar(150) not null,
-
-    constraint pk_pet_multimedia primary key (file_id),
-    constraint fk_pet_id foreign key (pet_id) references pets (pet_id) on delete cascade
 );
 
 create table reservations(
@@ -163,19 +153,3 @@ BEGIN
 
 END;
 
-create table pets(
-    pet_id bigint auto_increment,
-    name varchar(150) not null,
-    pet_type varchar(150) not null,
-    pet_size int,
-    pet_breed varchar(150) not null default 'Unknown',
-    observations varchar(250) default '',
-    owner_id bigint not null,
-    vaccination_plan varchar(250),
-    pet_img varchar(250),
-    pet_video varchar(250),
-    active boolean not null default 1,
-
-    constraint pk_pet primary key (pet_id),
-    CONSTRAINT fk_pet_size FOREIGN key (pet_size) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
-    constraint fk_owner_id foreign key (owner_id) references owners(user_id) on delete cascade
