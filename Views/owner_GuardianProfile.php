@@ -135,8 +135,9 @@
                         <?php
                         $cont = 0;
                         foreach ($PetList as $pet) {
-                            echo "<input type='checkbox' name='pets_ids[]' value=" . $pet->getId() . ">" . $pet->getName() . "</option>";
+                            echo "<input type='checkbox' name='pets_ids[]' value=" . $pet->getId() . "> " . $pet->getName() . "</option> <br>";
                         }
+                        echo "<br>"
                         ?>
                     </div>
                 </div>
@@ -199,8 +200,6 @@
             </script>
 
         </form>
-
-        <button id="prueba"> Boton de prueba</button>
 
         <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
 
