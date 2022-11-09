@@ -177,14 +177,6 @@
                                 enableOnReadonly: true,
 
                             });
-                            
-                            ";
-
-                        if ($guardian->getType_data()->getAvailable_date()) {
-                            $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $guardian->getType_data()->getAvailable_date()) . "'])";
-                        }
-
-                        $calendario = $calendario . "
                             });
                         </script>";
 
