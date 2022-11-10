@@ -7,6 +7,7 @@ use  SQLDAO\GuardianDAO as GuardianDAO;
 use Models\User as User;
 use Models\Guardian as Guardian;
 use SQLDAO\ReservationDAO;
+use SQLDAO\OwnerDAO as OwnerDAO;
 
 class GuardianController
 {
@@ -105,5 +106,18 @@ class GuardianController
         $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian");
 
         require_once VIEWS_PATH . "guardian_reservationsList.php";
+    }
+
+    function ViewOwnerProfile($owner_id)
+    {
+        $ownerDAO = new OwnerDAO();
+
+        $owner = $ownerDAO->GetById($owner_id);
+
+        if ($owner) {
+            require_once VIEWS_PATH . "guardian_OwnerProfile.php";
+        } else {
+            header("location: " . FRONT_ROOT . "Guardian/ViewReservations");
+        }
     }
 }
