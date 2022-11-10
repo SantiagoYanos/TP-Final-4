@@ -174,6 +174,7 @@
                                 multidate: true,
                                 format: 'yyyy-mm-dd',
                                 enableOnReadonly: true,
+                                startDate: '" . date("Y-m-d") . "'
 
                             });
                             });

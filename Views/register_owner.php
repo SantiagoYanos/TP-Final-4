@@ -44,7 +44,7 @@
                 <label for="">Phone: </label>
             </div>
             <div class="txt_field">
-                <input type="date" name="birth_date"></br>
+                <input type="date" name="birth_date" max="<?php echo date("Y-m-d") ?>"></br>
                 <label for="birthdate">Birthdate: </label>
             </div>
 
