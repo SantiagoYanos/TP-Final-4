@@ -113,11 +113,10 @@ class PetDAO implements IModels
             $parametersPet["pet_size"] = $PetSQL->getSize();
             $parametersPet["pet_breed"] = $PetSQL->getBreed();
             $parametersPet["observations"] = $PetSQL->getObservation();
-            $parametersPet["pet_type"] = $PetSQL->getType();
             $parametersPet["owner_id"] = $PetSQL->getOwner_id();
-            $parametersPet["vaccination_note"] = $PetSQL->getOwner_id();
-            $parametersPet["pet_img"] = $PetSQL->getOwner_id();
-            $parametersPet["pet_video"] = $PetSQL->getOwner_id();
+            $parametersPet["vaccination_plan"] = $PetSQL->getVaccination_plan();
+            $parametersPet["pet_img"] = $PetSQL->getPet_img();
+            $parametersPet["pet_video"] = $PetSQL->getPet_img();
 
 
             $this->connection = Connection::GetInstance();
@@ -178,4 +177,8 @@ class PetDAO implements IModels
             throw $e;
         }
     }
+
+
+
+    
 }
