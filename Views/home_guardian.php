@@ -84,6 +84,10 @@
 
         </div>
 
+        <br>
+
+        <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="pl-1">Visualize Reservations</button></a>
+
         <div class="container align-items-end">
 
             <table class="table table-striped table-bordered mt-3 mb-1">
