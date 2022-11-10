@@ -79,9 +79,9 @@
 
             </form>
 
-            <form action=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>>
-                <button type="submit">Back</button>
-            </form>
+            <br>
+
+            <a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="mt-2">Back</button></a>
 
         </div>
 
