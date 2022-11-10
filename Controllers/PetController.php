@@ -38,6 +38,7 @@ class PetController
             }else{
                 $pet->setSize("small");
             }
+            //s
         }
         //acordarse de en la vista usar un if para mostrar el tamaño como texto en lugar de numero
         require_once VIEWS_PATH . "view_pets.php";
