@@ -20,13 +20,10 @@ class PetController
 
     public function PetList()
     {
-
-        // echo "<script>console.log('Debug Objects: " . var_dump($_SESSION) . "' );</script>";
-
         $pet_DAO = new PetDAO();
 
         $petList = $pet_DAO->GetPetsByOwner($_SESSION["id"]);
-        //acordarse de en la vista usar un if para mostrar el tamaño como texto en lugar de numero
+
         require_once VIEWS_PATH . "view_pets.php";
     }
 

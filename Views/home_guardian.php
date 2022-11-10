@@ -63,7 +63,8 @@
                 $('#datepicker').datepicker({
 
                     multidate: true,
-                    format: 'yyyy-mm-dd'
+                    format: 'yyyy-mm-dd',
+                    startDate: '" . date("Y-m-d") . "'
 
                 });
                 
