@@ -67,7 +67,7 @@
                             <td>
                                 <div>
                                     <label for="birth_date">Birthdate: </label>
-                                    <input type="date" name="birth_date" required></br>
+                                    <input type="date" name="birth_date" max="<?php echo date("Y-m-d") ?>" required></br>
                                 </div>
                             </td>
                         </tr>
@@ -78,6 +78,10 @@
                 <button type="submit">Edit</button>
 
             </form>
+
+            <br>
+
+            <a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="mt-2">Back</button></a>
 
         </div>
 

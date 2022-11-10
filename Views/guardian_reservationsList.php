@@ -41,7 +41,7 @@
             foreach ($reservations as $reservation) {
                 echo "<tr>";
                 echo "<td>" . $i . "</td>";
-                echo "<td>See Owner Profile</td>";
+                echo "<td> <a href=" . FRONT_ROOT . 'Guardian/ViewOwnerProfile?owner_id=' . $reservation->GetOwner_id() . '><button class="mt-2">Back</button></a> </td>';
                 echo "<td>$" . $reservation->getPrice() . "</td>";
                 echo "<td>Show Pets</td>";
                 echo "<td>Dates Calendar</td>";
@@ -57,6 +57,10 @@
         </tbody>
 
     </table>
+
+    <br>
+
+    <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
 
 </body>
 

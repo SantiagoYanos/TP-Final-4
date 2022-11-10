@@ -20,9 +20,6 @@ class PetController
 
     public function PetList()
     {
-
-        // echo "<script>console.log('Debug Objects: " . var_dump($_SESSION) . "' );</script>";
-
         $pet_DAO = new PetDAO();
 
         $petList = $pet_DAO->GetPetsByOwner($_SESSION["id"]);

@@ -63,7 +63,8 @@
                 $('#datepicker').datepicker({
 
                     multidate: true,
-                    format: 'yyyy-mm-dd'
+                    format: 'yyyy-mm-dd',
+                    startDate: '" . date("Y-m-d") . "'
 
                 });
                 
@@ -82,6 +83,10 @@
             ?>
 
         </div>
+
+        <br>
+
+        <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="pl-1">Visualize Reservations</button></a>
 
         <div class="container align-items-end">
 

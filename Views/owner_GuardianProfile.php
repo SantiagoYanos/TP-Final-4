@@ -48,6 +48,8 @@
             <div class="progress-bar" style="width:<?php echo (($guardian->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
         </div>
 
+        <br>
+
         <div class="container align-items-end">
 
             <table class="table table-striped table-bordered mt-3 mb-1">
@@ -174,6 +176,7 @@
                                 multidate: true,
                                 format: 'yyyy-mm-dd',
                                 enableOnReadonly: true,
+                                startDate: '" . date("Y-m-d") . "'
 
                             });
                             });
