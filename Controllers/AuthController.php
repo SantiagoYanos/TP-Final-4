@@ -92,7 +92,7 @@ class AuthController
         $guardianArray["available_date"] = null;
         $guardianArray["price"] = null;
 
-        $newGuardian = $guardianDAO->LoadData($guardianArray,null);
+        $newGuardian = $guardianDAO->LoadData($guardianArray, null);
 
         $guardianDAO->Add($newUser, $newGuardian);
 
@@ -231,12 +231,6 @@ class AuthController
         }
 
         if ($detectedUser->getPassword() == $password) {
-            /*¿Cómo podemos diferenciar los usuarios? 
-        
-            1. Hacer una llamada a cada tabla
-        
-            2. Hacer un SELECT al users y con los joins diferenciar los tipos (una query con dos subquerys adentro seguramente)*/
-
 
             $typeDetected = $userDAO->getTypeById($detectedUser->getId());
 
@@ -245,8 +239,6 @@ class AuthController
 
             $_SESSION["email"] = $detectedUser->getEmail();
             $_SESSION["id"] = $detectedUser->getId();
-
-
 
             var_dump($typeDetected);
 

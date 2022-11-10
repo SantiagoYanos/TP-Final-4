@@ -5,7 +5,6 @@ function InitializeAvailableDates(availableDatesJson) {
   available_dates = available_dates.map((date) => {
     return new Date(date).getTime();
   });
-
   console.log(available_dates);
 }
 
