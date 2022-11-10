@@ -51,15 +51,13 @@ create table guardians(
 );
 
 create table available_dates(
-    date_id bigint not null,
+	guardian_id bigint not null,
     date date not null,
-    guardian_id bigint not null,
-
-    constraint pk_available_dates primary key (date_id),
+    
+    constraint pk_available_dates primary key (guardian_id, date),
     /*constraint chk_future_date check (date>=now()),*/
     constraint fk_guardian_id foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE
 );
-
 
 create table pets(
     pet_id bigint auto_increment,
@@ -79,27 +77,33 @@ create table pets(
     constraint fk_owner_id foreign key (owner_id) references owners(user_id) on delete cascade
 );
 
+create table pet_multimedia(
+    file_id bigint auto_increment,
+    file_path text not null,
+    pet_id bigint not null,
+    description varchar(150) not null,
+
+    constraint pk_pet_multimedia primary key (file_id),
+    constraint fk_pet_id foreign key (pet_id) references pets (pet_id) on delete cascade
+
+);
+
 create table reservations(
     reservation_id bigint not null auto_increment,
     price bigint not null,
 
     guardian_id bigint not null,
+    owner_id bigint not null,
     active boolean not null default 1,
     state varchar(50) not null,
 
     constraint pk_reservations primary key (reservation_id),
-    constraint fk_guardian foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE
+    constraint fk_guardian foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE,
+    constraint fk_owner foreign key (owner_id) references owners (user_id) ON DELETE CASCADE
 
 );
 
-create table reservation_x_dates(
-    reservation_id bigint not null,
-    date_id bigint not null,
 
-    constraint pk_reservation_x_dates primary key (reservation_id, date_id),
-    constraint fk_reservation_id foreign key (reservation_id) references reservations (reservation_id) ON DELETE CASCADE,
-    constraint fk_date_id foreign key (date_id) references available_dates (date_id) ON DELETE CASCADE
-);
 
 create table reservations_x_pets(
     reservation_x_pets_id bigint not null auto_increment,
@@ -109,6 +113,15 @@ create table reservations_x_pets(
     constraint pk_reservations_x_pets primary key (reservation_x_pets_id),
     constraint fk_reservation_id foreign key (reservation_id) references reservations(reservation_id),
     constraint fk_pet foreign key (pet_id) references pets(pet_id)
+
+);
+
+create table reservations_x_dates(
+    date date not null,
+    reservation_id bigint not null,
+
+    constraint pk_available_dates_reservation primary key (date, reservation_id),
+    constraint fk_id_reservation foreign key (reservation_id) references reservations (reservation_id) ON DELETE CASCADE
 );
 
 create table payments(
@@ -132,16 +145,12 @@ create table payments(
 INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Santiago", "Yanosky", "costa 12222", "02235887965", "santi@gmail.com", "elmascapito", '2002-11-13');
 INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Agus", "Kumar", "basural 5555", "02235 1256987", "agus@gmail.com", "elmascapoto", '1999-11-12');
 
-
-
 INSERT INTO pet_sizes(name) VALUES ("big");
 INSERT INTO pet_sizes(name) VALUES ("medium");
 INSERT INTO pet_sizes(name) VALUES ("small");
 
 INSERT INTO guardians (user_id, cuil, reputation, preferred_size_dog, preferred_size_cat, price) VALUES (1, "5555555", 3.2, 1, 2, 5000);
 INSERT INTO owners (user_id, dni) VALUES (2, 52555633);
-
-
 
 CREATE PROCEDURE insertPet(IN p_name varchar(150), IN p_pet_type varchar(150), IN p_pet_size int, IN p_pet_breed varchar(150), IN p_observations varchar(250), IN p_owner_id bigint, IN p_vaccination_plan varchar(250), IN p_pet_img varchar(250), IN p_pet_video varchar(250))
 BEGIN
@@ -150,6 +159,14 @@ BEGIN
 
     SELECT last_insert_id() as id_pet;
 
+END;
+
+CREATE PROCEDURE create_Reservation(IN p_price bigint, IN p_guardian_id bigint, OUT id_reservation bigint)
+BEGIN
+    
+    INSERT INTO reservations (price, guardian_id, state) VALUES (p_price, p_guardian_id, 'Pending');
+    
+    SET id_reservation = last_insert_id();
 
 END;
 
