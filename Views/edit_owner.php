@@ -79,6 +79,10 @@
 
             </form>
 
+            <br>
+
+            <a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="mt-2">Back</button></a>
+
         </div>
 
 </body>
