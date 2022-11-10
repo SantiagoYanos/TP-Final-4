@@ -161,12 +161,12 @@ BEGIN
 
 END;
 
-CREATE PROCEDURE create_Reservation(IN p_price bigint, IN p_guardian_id bigint, OUT id_reservation bigint)
+CREATE PROCEDURE create_Reservation(IN p_price bigint, IN p_guardian_id bigint, IN p_owner_id bigint)
 BEGIN
     
-    INSERT INTO reservations (price, guardian_id, state) VALUES (p_price, p_guardian_id, 'Pending');
-    
-    SET id_reservation = last_insert_id();
+    INSERT INTO reservations (price, guardian_id, owner_id, state) VALUES (p_price, p_guardian_id, p_owner_id, 'Pending');
+
+    SELECT last_insert_id() as id_reservation;
 
 END;
 
