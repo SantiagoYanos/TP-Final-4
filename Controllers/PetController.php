@@ -103,7 +103,7 @@ class PetController
     public function deletePet($petId)
     {
         $petDAO = new PetDAO();
-        //$petDAO->disablePet($petId);
+        $petDAO->Remove($petId);
         return header("location: " . FRONT_ROOT . "Pet/PetList");
     }
 
