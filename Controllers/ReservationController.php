@@ -34,6 +34,7 @@ class ReservationController
 
     public function MakeReservation($guardian_id, $reservation_dates = null, $pets_ids = [])
     {
+        $flag=0;
 
         if ($pets_ids == []) {
             header("location: "  . FRONT_ROOT . "Owner/ViewGuardianProfile?guardian_id=" . $guardian_id . '&alert="You need to select one or more pets!"');
@@ -43,31 +44,51 @@ class ReservationController
             header("location: "  . FRONT_ROOT . "Owner/ViewGuardianProfile?guardian_id=" . $guardian_id . '&alert="You need to select one or more dates!"');
         }
 
-        $owner_DAO = new OwnerDAO();
+        /////Chequear size
         $guardianDAO = new GuardianDAO();
+        $owner_DAO = new OwnerDAO();
         $guardian_user = $guardianDAO->GetById($guardian_id);
-        $cant_pets = 0;
-
-        foreach ($pets_ids as $pet) {
-            $cant_pets++;
+        
+        foreach($pets_ids as $pet){
+            if($pet->gettype=="dog"){
+                if($guardian_user->getType_data()->getPreferred_size() > $pet->getSize()){
+                    $flag=1;
+                }
+            }
+            if($pet->gettype="cat"){
+                if($guardian_user->getType_data()->getPreferred_size_cat() < $pet->getSize()){
+                    $flag=1;
+                }
+            }  
+        }                            
+        
+        if($flag==0){
+                $cant_pets = 0;
+        
+                foreach ($pets_ids as $pet) {
+                    $cant_pets++;
+                }
+        
+                $price = $cant_pets * $guardian_user->getType_data()->getPrice();
+        
+                $reservation = new Reservation();
+                $reservation->setGuardian_id($guardian_id);
+                $reservation->setOwner_id($_SESSION["id"]);
+                $reservation->setPrice($price);
+        
+                /*var_dump($_POST);*/
+        
+                $reservation_dates = explode(",", $reservation_dates);
+        
+                $reservation_DAO = new ReservationDAO();
+                $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids); //Cambiar los valores de prueba;
+        
+                /*var_dump($reservation);*/
+        
+                header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="Reservation request sent to Guardian!"');
         }
-
-        $price = $cant_pets * $guardian_user->getType_data()->getPrice();
-
-        $reservation = new Reservation();
-        $reservation->setGuardian_id($guardian_id);
-        $reservation->setOwner_id($_SESSION["id"]);
-        $reservation->setPrice($price);
-
-        /*var_dump($_POST);*/
-
-        $reservation_dates = explode(",", $reservation_dates);
-
-        $reservation_DAO = new ReservationDAO();
-        $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids); //Cambiar los valores de prueba;
-
-        /*var_dump($reservation);*/
-
-        header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="Reservation request sent to Guardian!"');
+        else{
+            header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="The Guardian does not support that pet size!"');
+        }
     }
 }
