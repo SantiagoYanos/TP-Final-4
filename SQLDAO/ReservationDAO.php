@@ -26,7 +26,7 @@ class ReservationDAO implements IModels
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
             $parametersReservation["owner_id"] = $reservation->getOwner_id();
 
-            var_dump($parametersReservation);
+            /*var_dump($parametersReservation);*/
 
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($queryReservation, $parametersReservation);
