@@ -92,9 +92,9 @@ class PetController
         }
 
 
-        echo $message;
-        var_dump($message);
-        var_dump($pet);
+        //echo $message;
+        //var_dump($message);
+        //var_dump($pet);
 
         return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
