@@ -177,8 +177,4 @@ class PetDAO implements IModels
             throw $e;
         }
     }
-
-
-
-    
 }
