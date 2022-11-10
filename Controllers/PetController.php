@@ -24,6 +24,19 @@ class PetController
 
         $petList = $pet_DAO->GetPetsByOwner($_SESSION["id"]);
 
+        foreach ($petList as $pet)
+        {
+            if($pet->getSize() == 1)
+            {
+                $pet->setSize("big");
+            }elseif($pet->getSize() ==2)
+            {
+                $pet->setSize("medium");
+            }else{
+                $pet->setSize("small");
+            }
+        }
+
         require_once VIEWS_PATH . "view_pets.php";
     }
 
