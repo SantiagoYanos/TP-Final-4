@@ -167,9 +167,15 @@
 
   </table>
 
-    <form action=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>>
-        <button type="submit">Back</button>
-    </form>
+  <form action=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>>
+    <button type="submit">Back</button>
+  </form>
+
+  <?php
+  if ($alert) {
+    echo " <script> alert('" . $alert . "'); </script>";
+  };
+  ?>
 
 </body>
 

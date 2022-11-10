@@ -32,15 +32,14 @@ class PetController
 
     public function Add($name, $breed, $observation, $pet_size, $type, $file, $file1, $pet_video)
     {
-        try
-        {
-            
+        try {
+
             echo "--------------";
             $fileName = $file["name"];
             $tempFileName = $file["tmp_name"];
             $type1 = $file["type"];
-            
-            $filePath = VIEWS_PATH.basename($fileName);            
+
+            $filePath = VIEWS_PATH . basename($fileName);
             echo "*********";
             $fileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
 
@@ -51,56 +50,48 @@ class PetController
             $fileName1 = $file1["name"];
             $tempFileName1 = $file1["tmp_name"];
             $type1 = $file1["type"];
-            
-            $filePath1 = VIEWS_PATH.basename($fileName1);            
+
+            $filePath1 = VIEWS_PATH . basename($fileName1);
             echo "*********";
             $fileType1 = strtolower(pathinfo($filePath1, PATHINFO_EXTENSION));
 
             $imageSize1 = getimagesize($tempFileName1);
 
-            
-            if($imageSize !== false && $imageSize1 !==false)
-            {
-                if ($imageSize !== false && $imageSize1 !==false)
-                {
-        
+
+            if ($imageSize !== false && $imageSize1 !== false) {
+                if ($imageSize !== false && $imageSize1 !== false) {
+
                     $pet = new Pet();
                     $pet->setName($name);
                     $pet->setBreed($breed);
                     $pet->setObservation($observation);
                     $pet->setSize($pet_size);
-                   
+
                     $pet->setOwner_id($_SESSION["id"]);
                     $pet->setType($type);
                     $pet->setVaccination_plan($fileName);
                     $pet->setPet_img($fileName1);
                     $pet->setPet_video($pet_video);
-        
+
                     $message = "Imagen subida correctamente";
                     $petDAO = new PetDAO();
 
-                    $pet_id=$petDAO->Add($pet);
+                    $pet_id = $petDAO->Add($pet);
 
-                    if($pet_id){
+                    if ($pet_id) {
                         mkdir(IMG_PATH . $pet_id);
-                        move_uploaded_file($tempFileName, IMG_PATH . $pet_id . "/" .basename($filePath) );
-                        move_uploaded_file($tempFileName1, IMG_PATH . $pet_id . "/" .basename($filePath1) );                   
+                        move_uploaded_file($tempFileName, IMG_PATH . $pet_id . "/" . basename($filePath));
+                        move_uploaded_file($tempFileName1, IMG_PATH . $pet_id . "/" . basename($filePath1));
                     }
-
-
-                }
-                else
+                } else
                     $message = "Ocurrió un error al intentar subir la imagen";
-            }
-            else   
+            } else
                 $message = "El archivo no corresponde a una imágen";
-        }
-        catch(Exception $ex)
-        {
+        } catch (Exception $ex) {
             throw $ex;
         }
-      
-    
+
+
         echo $message;
         var_dump($message);
         var_dump($pet);
@@ -114,7 +105,6 @@ class PetController
         $petDAO = new PetDAO();
         $petDAO->Remove($petId);
         return header("location: " . FRONT_ROOT . "Pet/PetList");
-
     }
 
 
@@ -122,13 +112,4 @@ class PetController
     {
         require_once VIEWS_PATH . "register_pet.php";
     }
-
-
-
-
 }
-
-
-    
-
-
