@@ -49,18 +49,17 @@ class ReservationController
         $guardianDAO = new GuardianDAO();
         $owner_DAO = new OwnerDAO();
         $guardian_user = $guardianDAO->GetById($guardian_id);
-        $petList = array();
 
         foreach($pets_ids as $pet_id){
-
+    
             $pet = $PetDAO->GetById($pet_id);
             if($pet->getType() == "dog"){
-                if($guardian_user->getType_data()->getPreferred_size() > $pet->getSize()){
+                if($guardian_user->getType_data()->getPreferred_size() >= $pet->getSize()){
                     $flag=1;
                 }
             }
             if($pet->getType()=="cat"){
-                if($guardian_user->getType_data()->getPreferred_size_cat() < $pet->getSize()){
+                if($guardian_user->getType_data()->getPreferred_size_cat() >= $pet->getSize()){
                     $flag=1;
                 }
             }  
