@@ -58,8 +58,9 @@ class ReservationDAO implements IModels
         }
     }
 
-    public function updateState($reservation_id, $state){
-        try{
+    public function updateState($reservation_id, $state)
+    {
+        try {
             $query = "UPDATE reservations SET state = :state WHERE id_reservation = :id_reservation";
 
             $parameters["state"] = $state;
@@ -67,14 +68,9 @@ class ReservationDAO implements IModels
 
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters);
-        }
-        catch (Exception $ex) {
+        } catch (Exception $ex) {
             throw $ex;
         }
-    }
-
-    public function getExistingReservations($pet){
-        
     }
 
     public function GetAll()
@@ -240,6 +236,45 @@ class ReservationDAO implements IModels
         }, $resultSet);
 
         return $petsArray;
+    }
+
+    public function getExistingReservations($arrayDates)
+    {
+        $query = 'SELECT r.reservation_id,
+        count(date) as include_dates,
+        p.pet_id,
+        p.name,
+        p.pet_type,
+        p.pet_size,
+        p.pet_breed,
+        p.observations
+       FROM reservations_x_dates rd 
+       INNER JOIN reservations r ON rd.reservation_id = r.reservation_id
+       INNER JOIN reservations_x_pets rp ON r.reservation_id = rp.reservation_id
+       INNER JOIN pets p ON rp.pet_id = p.pet_id
+       WHERE date IN ("2022-11-10") AND r.state = "Accepted" AND r.active=true
+       GROUP BY r.reservation_id
+       HAVING include_dates>=:cant_dates LIMIT 1';
+
+        $parameters["cant_dates"] = sizeof($arrayDates);
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query, $parameters);
+
+        if (!$resultSet) {
+            return null;
+        }
+
+        if ($resultSet[0]) {
+            $petDAO = new PetDAO();
+
+            $pet = $petDAO->LoadData($resultSet[0]);
+
+            return $pet;
+        } else {
+            return null;
+        }
     }
 
     public function LoadData($resultSet)

@@ -173,6 +173,12 @@
 
         </form>
 
+        <?php
+        if ($alert) {
+            echo " <script> alert('" . $alert . "'); </script>";
+        };
+        ?>
+
 
 
 </body>
