@@ -20,7 +20,7 @@ class GuardianController
         }
     }
 
-    public function HomeGuardian()
+    public function HomeGuardian($alert = null)
     {
         //var_dump($_SESSION);
 
@@ -51,7 +51,7 @@ class GuardianController
             $guardian_DAO->AddAvailableDates($_SESSION["id"], []);
         }
 
-        header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+        header("location: " . FRONT_ROOT . 'Guardian/HomeGuardian?alert=' . "Available dates updated succesfully!");
     }
 
     public function ShowEdit()
