@@ -69,6 +69,12 @@
     <br>
 
     <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
+    
+    <?php
+  if ($alert) {
+    echo " <script> alert('" . $alert . "'); </script>";
+  };
+  ?>
 
 </body>
 
