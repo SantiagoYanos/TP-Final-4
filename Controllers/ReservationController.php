@@ -132,7 +132,7 @@ class ReservationController
     }
 
 
-    public function accept_reservation($reservation) {
+    public function acceptReservation($reservation_id) {
         if ($_SESSION["type"] == "owner") {
             header("location: " . FRONT_ROOT . "Owner/HomeOwner");
         }
@@ -143,6 +143,7 @@ class ReservationController
         $flag=0;
 
         $reservationDAO= new ReservationDAO;
+        $reservation=$reservationDAO->getById($reservation_id);
         
         
         if( $reservationDAO->getExistingReservations($pet=$reservation->getDates()))
@@ -192,6 +193,18 @@ class ReservationController
 
         }
         return true;
+
+    }
+
+    public function rejectReservation($reservation_id)
+    {
+
+        $reservationDAO= new ReservationDAO;
+        $reservation=$reservationDAO->getById($reservation_id);
+
+        $reservationDAO->updateState($reservation->getId(),"Rejected");
+
+            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation rejected"');
 
     }
 
