@@ -58,6 +58,25 @@ class ReservationDAO implements IModels
         }
     }
 
+    public function updateState($reservation_id, $state){
+        try{
+            $query = "UPDATE reservations SET state = :state WHERE id_reservation = :id_reservation";
+
+            $parameters["state"] = $state;
+            $parameters["id_reservation"] = $reservation_id;
+
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        }
+        catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function getExistingReservations($pet){
+        
+    }
+
     public function GetAll()
     {
         try {
