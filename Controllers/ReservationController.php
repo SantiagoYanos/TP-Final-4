@@ -146,15 +146,27 @@ class ReservationController
         $reservation=$reservationDAO->getById($reservation_id);
         
         
-        if( $reservationDAO->getExistingReservations($pet=$reservation->getDates()))
+        $pet=$reservationDAO->getExistingReservations($reservation->getDates());
+        if($pet)
         {
-
+            
+            $petList=array();
             array_push($petList,$pet);
+            array_push($petList,$reservation->getPets()[0]);
+            
+
+            //var_dump($pet);
+            
 
             if($this->checkBreed($petList)!=true){
 
-                $flag=1;
+                header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
+
+            }else{
+                $reservationDAO->updateState($reservation->getId(),"Accepted");
+                header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
             }
+           
 
 
         }else{
@@ -165,11 +177,7 @@ class ReservationController
 
         }
 
-        if($flag==1)
-        {
-            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
-        }
-
+       
         
 
 
@@ -185,8 +193,10 @@ class ReservationController
         
 
         foreach ($petList as $pet) {
-
-            if($pet->getBreed()!= $breed || $pet->getType()!= $type)
+            /*var_dump($pet->getBreed());
+            var_dump($petList[1]);
+            var_dump($petList[1]->getBreed());*/
+            if($pet->getBreed() != $breed || $pet->getType()!= $type)
             {
                 return false;
             }

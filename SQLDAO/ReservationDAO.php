@@ -61,10 +61,10 @@ class ReservationDAO implements IModels
     public function updateState($reservation_id, $state)
     {
         try {
-            $query = "UPDATE reservations SET state = :state WHERE id_reservation = :id_reservation";
+            $query = "UPDATE reservations SET state = :state WHERE reservation_id = :reservation_id";
 
             $parameters["state"] = $state;
-            $parameters["id_reservation"] = $reservation_id;
+            $parameters["reservation_id"] = $reservation_id;
 
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters);
@@ -252,7 +252,7 @@ class ReservationDAO implements IModels
        INNER JOIN reservations r ON rd.reservation_id = r.reservation_id
        INNER JOIN reservations_x_pets rp ON r.reservation_id = rp.reservation_id
        INNER JOIN pets p ON rp.pet_id = p.pet_id
-       WHERE date IN ("2022-11-10") AND r.state = "Accepted" AND r.active=true
+       WHERE date IN ("2022-11-23") AND r.state = "Accepted" AND r.active=true
        GROUP BY r.reservation_id
        HAVING include_dates>=:cant_dates LIMIT 1';
 

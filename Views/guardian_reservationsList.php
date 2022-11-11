@@ -48,13 +48,13 @@
 
             <td> 
                 <form  action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post"  >
-                <button type= "submit"> Accept </button>  <input type="hidden" name="reservation" value="<?php echo $reservation->getId() ?>"></input> 
+                <button type= "submit"> Accept </button>  <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input> 
                 </form>
                 
                 
                 <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> "method="post"  > 
                 <button type= "submit"> Reject </button>  
-                <input type="hidden" name="reservation" value="<?php echo $reservation->getId() ?>"></input> 
+                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input> 
              
                 </form> 
             </td>
