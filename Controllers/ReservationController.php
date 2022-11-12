@@ -132,7 +132,7 @@ class ReservationController
     }
 
 
-    public function accept_reservation($reservation) {
+    public function acceptReservation($reservation_id) {
         if ($_SESSION["type"] == "owner") {
             header("location: " . FRONT_ROOT . "Owner/HomeOwner");
         }
@@ -143,17 +143,30 @@ class ReservationController
         $flag=0;
 
         $reservationDAO= new ReservationDAO;
+        $reservation=$reservationDAO->getById($reservation_id);
         
         
-        if( $reservationDAO->getExistingReservations($pet=$reservation->getDates()))
+        $pet=$reservationDAO->getExistingReservations($reservation->getDates());
+        if($pet)
         {
-
+            
+            $petList=array();
             array_push($petList,$pet);
+            array_push($petList,$reservation->getPets()[0]);
+            
+
+            //var_dump($pet);
+            
 
             if($this->checkBreed($petList)!=true){
 
-                $flag=1;
+                header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
+
+            }else{
+                $reservationDAO->updateState($reservation->getId(),"Accepted");
+                header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
             }
+           
 
 
         }else{
@@ -164,11 +177,7 @@ class ReservationController
 
         }
 
-        if($flag==1)
-        {
-            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
-        }
-
+       
         
 
 
@@ -184,14 +193,28 @@ class ReservationController
         
 
         foreach ($petList as $pet) {
-
-            if($pet->getBreed()!= $breed || $pet->getType()!= $type)
+            /*var_dump($pet->getBreed());
+            var_dump($petList[1]);
+            var_dump($petList[1]->getBreed());*/
+            if($pet->getBreed() != $breed || $pet->getType()!= $type)
             {
                 return false;
             }
 
         }
         return true;
+
+    }
+
+    public function rejectReservation($reservation_id)
+    {
+
+        $reservationDAO= new ReservationDAO;
+        $reservation=$reservationDAO->getById($reservation_id);
+
+        $reservationDAO->updateState($reservation->getId(),"Rejected");
+
+            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation rejected"');
 
     }
 

@@ -61,10 +61,10 @@ class ReservationDAO implements IModels
     public function updateState($reservation_id, $state)
     {
         try {
-            $query = "UPDATE reservations SET state = :state WHERE id_reservation = :id_reservation";
+            $query = "UPDATE reservations SET state = :state WHERE reservation_id = :reservation_id";
 
             $parameters["state"] = $state;
-            $parameters["id_reservation"] = $reservation_id;
+            $parameters["reservation_id"] = $reservation_id;
 
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query, $parameters);

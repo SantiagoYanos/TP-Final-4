@@ -98,7 +98,7 @@ class GuardianController
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
     }
 
-    public function ViewReservations()
+    public function ViewReservations($alert=null)
     {
 
         $reservationDAO = new ReservationDAO();

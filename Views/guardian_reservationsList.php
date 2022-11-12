@@ -28,39 +28,53 @@
             <th>Pets</th>
             <th>Dates</th>
             <th>State</th>
-            <th>Accept/Decline</th>
+            <th>Action</th>
+            
         </thead>
 
+        
+
         <tbody>
+        <?php
+        foreach ($reservations as $reservation) {
+        ?>
+          <tr>
+            <td><?php echo $reservation->GetId() ?></td>
+            <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id= " . $reservation->GetOwner_id() ?> ><button class="mt-2">Owner Profile</button></a>  </td>
+            <td><?php echo $reservation->getPrice() ?></td>
+            <td>Show Pets</td>
+            <td>Dates Calendar</td>
+            <td><?php echo $reservation->getState() ?> </td>
+
+            <td> 
+                <form  action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post"  >
+                <button type= "submit"> Accept </button>  <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input> 
+                </form>
+                
+                
+                <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> "method="post"  > 
+                <button type= "submit"> Reject </button>  
+                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input> 
+             
+                </form> 
+            </td>
 
 
-            <?php
-
-            $i = 1;
-
-            foreach ($reservations as $reservation) {
-                echo "<tr>";
-                echo "<td>" . $i . "</td>";
-                echo "<td> <a href=" . FRONT_ROOT . 'Guardian/ViewOwnerProfile?owner_id=' . $reservation->GetOwner_id() . '><button class="mt-2">Owner Profile</button></a> </td>';
-                echo "<td>$" . $reservation->getPrice() . "</td>";
-                echo "<td>Show Pets</td>";
-                echo "<td>Dates Calendar</td>";
-                echo "<td>" . $reservation->getState() . "</td>";
-                echo "<td>Accept Decline</td>";
-                echo "</tr>";
-
-                $i++;
-            }
-
-            ?>
-
-        </tbody>
+          </tr>
+        <?php } ?>
+      </tbody>
 
     </table>
 
     <br>
 
     <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
+    
+    <?php
+  if ($alert) {
+    echo " <script> alert('" . $alert . "'); </script>";
+  };
+  ?>
 
 </body>
 
