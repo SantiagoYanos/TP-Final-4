@@ -29,52 +29,92 @@
             <th>Dates</th>
             <th>State</th>
             <th>Action</th>
-            
+
         </thead>
 
-        
+
 
         <tbody>
-        <?php
-        foreach ($reservations as $reservation) {
-        ?>
-          <tr>
-            <td><?php echo $reservation->GetId() ?></td>
-            <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id= " . $reservation->GetOwner_id() ?> ><button class="mt-2">Owner Profile</button></a>  </td>
-            <td><?php echo $reservation->getPrice() ?></td>
-            <td>Show Pets</td>
-            <td>Dates Calendar</td>
-            <td><?php echo $reservation->getState() ?> </td>
+            <?php
+            foreach ($reservations as $reservation) {
+            ?>
+                <tr>
+                    <td><?php echo $reservation->GetId() ?></td>
+                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id= " . $reservation->GetOwner_id() ?>><button class="mt-2">Owner Profile</button></a> </td>
+                    <td><?php echo $reservation->getPrice() ?></td>
+                    <td>
+                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Show Pets
+                        </a>
+                    </td>
 
-            <td> 
-                <form  action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post"  >
-                <button type= "submit"> Accept </button>  <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input> 
-                </form>
-                
-                
-                <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> "method="post"  > 
-                <button type= "submit"> Reject </button>  
-                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input> 
-             
-                </form> 
-            </td>
+                    <td>Dates Calendar</td>
+                    <td><?php echo $reservation->getState() ?> </td>
+
+                    <td>
+                        <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
+                            <button type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                        </form>
 
 
-          </tr>
-        <?php } ?>
-      </tbody>
+                        <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> " method="post">
+                            <button type="submit"> Reject </button>
+                            <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+
+                        </form>
+                    </td>
+                </tr>
+
+                <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
+                    <td colspan="7">
+                        <table class="table table-bordered">
+
+                            <thead>
+                                <th>Reservation Pets</th>
+                            </thead>
+
+                            <tbody>
+
+                                <?php foreach ($reservation->getPets() as $pet) {
+                                ?>
+                                    <tr>
+                                        <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
+                                        <td style="width: 150px;"><?php echo $pet->getName() ?> </td>
+                                        <td style="width: 150px;"><?php echo $pet->getBreed() ?> </td>
+                                        <td style="width: 150px;"><?php echo $pet->getType() ?> </td>
+                                        <td style="width: 150px;"><?php echo $pet->getSize() ?></td>
+                                        <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
+                                        <td style="width: 150px;"><?php echo $pet->getObservation() ?> </td>
+                                        <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
+                                        <td style="width: 150px;"> <a href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
+                    </td>
+                <?php
+                                }
+                ?>
+
+                </tr>
+
+        </tbody>
+
 
     </table>
+    </td>
+    </tr>
 
-    <br>
+<?php } ?>
+</tbody>
 
-    <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
-    
-    <?php
-  if ($alert) {
+</table>
+
+<br>
+
+<a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
+
+<?php
+if ($alert) {
     echo " <script> alert('" . $alert . "'); </script>";
-  };
-  ?>
+};
+?>
 
 </body>
 
