@@ -240,6 +240,13 @@ class ReservationDAO implements IModels
 
     public function getExistingReservations($arrayDates)
     {
+
+        $datesJson = json_encode($arrayDates);
+
+        $datesJson = ltrim($datesJson, '[');
+
+        $datesJson = rtrim($datesJson, ']');
+
         $query = 'SELECT r.reservation_id,
         count(date) as include_dates,
         p.pet_id,
@@ -252,7 +259,7 @@ class ReservationDAO implements IModels
        INNER JOIN reservations r ON rd.reservation_id = r.reservation_id
        INNER JOIN reservations_x_pets rp ON r.reservation_id = rp.reservation_id
        INNER JOIN pets p ON rp.pet_id = p.pet_id
-       WHERE date IN ("2022-11-10") AND r.state = "Accepted" AND r.active=true
+       WHERE date IN (' . $datesJson . ') AND r.state = "Accepted" AND r.active=true
        GROUP BY r.reservation_id
        HAVING include_dates>=:cant_dates LIMIT 1';
 
