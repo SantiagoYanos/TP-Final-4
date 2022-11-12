@@ -82,7 +82,25 @@
                                         <td style="width: 150px;"><?php echo $pet->getName() ?> </td>
                                         <td style="width: 150px;"><?php echo $pet->getBreed() ?> </td>
                                         <td style="width: 150px;"><?php echo $pet->getType() ?> </td>
-                                        <td style="width: 150px;"><?php echo $pet->getSize() ?></td>
+                                        <td style="width: 150px;">
+
+                                            <?php switch ($pet->getSize()) {
+                                                case 1:
+                                                    echo "Big";
+                                                    break;
+                                                case 2:
+                                                    echo "Medium";
+                                                    break;
+                                                case 3:
+                                                    echo "Small";
+                                                    break;
+                                                default:
+                                                    echo "Undefined";
+                                                    break;
+                                            }
+                                            ?>
+
+                                        </td>
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
                                         <td style="width: 150px;"><?php echo $pet->getObservation() ?> </td>
                                         <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
