@@ -27,6 +27,7 @@
 
         <thead>
             <th>Reservation Number</th>
+            <th>Guardian ID</th>
             <th>Price</th>
             <th>Pets</th>
             <th>Dates</th>
@@ -41,6 +42,7 @@
             ?>  
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
+                    <td><?php echo $reservation->getGuardian_id() ?></td>
                     <td><?php echo $reservation->getPrice() ?></td>
                     <td>
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
