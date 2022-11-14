@@ -5,9 +5,11 @@ namespace Controllers;
 use SQLDAO\PetDAO as PetDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 use SQLDAO\GuardianDAO as GuardianDAO;
+use SQLDAO\ReservationDAO as ReservationDAO;
 use Models\Pet as Pet;
 use Models\User as User;
 use Models\Owner as Owner;
+use Models\Reservation;
 
 class OwnerController
 {
@@ -131,5 +133,14 @@ class OwnerController
         } else {
             header("location: " . FRONT_ROOT . "Owner/SearchGuardian");
         }
+    }
+
+    function ViewReservationsOwner($alert=null)
+    {
+        $reservationDAO = new ReservationDAO();
+
+        $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "owner");
+        
+        require_once VIEWS_PATH . "owner_reservationsList.php";
     }
 }

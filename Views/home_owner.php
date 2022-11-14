@@ -29,7 +29,7 @@
     </div>
 
     <div>
-        <form action="..." method="post">
+        <form action="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>"  method="post">
             <button type="submit">See Reservations</button>
         </form>
     </div>

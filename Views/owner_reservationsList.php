@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <title>My Reservations</title>
 </head>
 
@@ -23,16 +27,12 @@
 
         <thead>
             <th>Reservation Number</th>
-            <th>Owner</th>
             <th>Price</th>
             <th>Pets</th>
             <th>Dates</th>
             <th>State</th>
-            <th>Action</th>
 
         </thead>
-
-
 
         <tbody>
             <?php
@@ -40,7 +40,6 @@
             ?>
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
-                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id= " . $reservation->GetOwner_id() ?>><button class="mt-2">Owner Profile</button></a> </td>
                     <td><?php echo $reservation->getPrice() ?></td>
                     <td>
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -48,21 +47,52 @@
                         </a>
                     </td>
 
-                    <td>Dates Calendar</td>
-                    <td><?php echo $reservation->getState() ?> </td>
-
+                    <!----------------CALENDARIO--------------------->
                     <td>
-                        <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
-                            <button type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
-                        </form>
 
+                    <div class="container align-items-end">
+                        <div>
+                            <div>
+                                <section class="container">
 
-                        <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> " method="post">
-                            <button type="submit"> Reject </button>
-                            <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                    <div class="input-group date mb-3" id="datepicker">
+                                        <input name="reservation_dates" type="text" class="form-control" hidden>
+                                        <span class="input-group-append">
+                                            <span class="input-group-text bg-white">
+                                                <i class="fa fa-calendar pt-1 pb-1"></i>
+                                            </span>
+                                        </span>
+                                    </div>
 
-                        </form>
+                                </section>
+
+                                <?php
+
+                                $calendario = "<script type='text/javascript'>
+                                $(function() {
+                                    $('#datepicker').datepicker({
+
+                                        multidate: true,
+                                        format: 'yyyy-mm-dd',
+                                        enableOnReadonly: true,
+                                        startDate: '" . date("Y-m-d") . "'
+
+                                    });
+                                    });
+                                </script>";
+
+                                echo $calendario;
+
+                                ?>
+
+                            </div>
+                        </div>
+                    </div>
+
                     </td>
+                    <!----------------CALENDARIO--------------------->
+
+                    <td><?php echo $reservation->getState() ?> </td>
                 </tr>
 
                 <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
@@ -126,13 +156,21 @@
 
 <br>
 
-<a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
+<a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="mt-2">Back</button></a>
 
 <?php
-if ($alert) {
-    echo " <script> alert('" . $alert . "'); </script>";
-};
+    if ($alert) {
+        echo " <script> alert('" . $alert . "'); </script>";
+    };
 ?>
+
+<script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
+
+        <script>
+            const availableDatesJson = '<?php echo $availableDatesJson ?>'
+
+            InitializeAvailableDates(availableDatesJson);
+        </script>
 
 </body>
 

@@ -142,7 +142,7 @@ class ReservationDAO implements IModels
 
     public function GetByGuardianOrOwner($id, $type)
     {
-
+        $reservationList=array();
         /* 
         $type = "guardian" OR "owner"
         
@@ -150,7 +150,7 @@ class ReservationDAO implements IModels
 
         try {
 
-            if ($type = "guardian") {
+            if ($type == "guardian") {
                 $queryType = "guardian_id = " . $id . ";";
             } else {
                 $queryType = "owner_id = " . $id . ";";
@@ -165,9 +165,7 @@ class ReservationDAO implements IModels
             if (!$resultSet || $resultSet == []) {
                 return [];
             }
-
-            $reservationList = array();
-
+            
             foreach ($resultSet as $reservation) {
 
                 $getReservation = $this->LoadData($reservation);
@@ -182,7 +180,7 @@ class ReservationDAO implements IModels
 
                 array_push($reservationList, $getReservation);
             }
-
+            
             return $reservationList;
         } catch (Exception $ex) {
             throw $ex;
