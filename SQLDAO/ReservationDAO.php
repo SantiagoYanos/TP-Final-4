@@ -101,12 +101,53 @@ class ReservationDAO implements IModels
 
                 $getReservation->setPets($getPets);
 
-                array_push($reservationList);
+                array_push($reservationList, $getReservation);
             }
 
             return $reservationList;
         } catch (Exception $ex) {
             throw $ex;
+        }
+    }
+
+    public function GetAllByDates($guardian_id, $dates = [])
+    {
+        if($dates){
+            try {
+                foreach($dates as $date){
+                    //$query = "SELECT * FROM " . $this->tableName . ";";
+
+                    $query = "select * from " . $this->tableName. " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date = " . "'$date'" ." and guardian_id= " . $guardian_id .";";
+
+                    $this->connection = Connection::GetInstance();
+        
+                    $resultSet = $this->connection->Execute($query);
+        
+                    if (!$resultSet[0]) {
+                        return [];
+                    }
+        
+                    $reservationList = array();
+        
+                    foreach ($resultSet as $reservation) {
+        
+                        $getReservation = $this->LoadData($reservation);
+        
+                        $getDates = $this->GetDates($getReservation->getId());
+        
+                        $getReservation->setDates($getDates);
+        
+                        $getPets = $this->GetPets($getReservation->getId());
+        
+                        $getReservation->setPets($getPets);
+        
+                        array_push($reservationList, $getReservation);
+                    }
+                }
+                return $reservationList;
+            } catch (Exception $ex) {
+                throw $ex;
+            }
         }
     }
 
