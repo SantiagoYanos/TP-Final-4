@@ -240,8 +240,6 @@ class AuthController
             $_SESSION["email"] = $detectedUser->getEmail();
             $_SESSION["id"] = $detectedUser->getId();
 
-            var_dump($typeDetected);
-
             if ($typeDetected["type"] == "owner") {
                 $_SESSION["type"] = "owner";
                 return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
