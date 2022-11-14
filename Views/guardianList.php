@@ -83,8 +83,9 @@
 
       </tbody>
     </table>
-
+    
     <div>
+      <button type="submit" onclick="alertMessage()">Add Filter</button>
 
       <h4 class="pt-4 pb-1">Select Dates</h4>
       <div class="input-group date mb-3" id="datepicker">
@@ -124,7 +125,6 @@
 
     </div>
 
-    <button type="submit" onclick="alertMessage()">Add Filter</button>
 
     <script>
       function alertMessage() {

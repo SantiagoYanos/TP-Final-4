@@ -36,8 +36,9 @@
 
         <tbody>
             <?php
+            $idCont=0;
             foreach ($reservations as $reservation) {
-            ?>
+            ?>  
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
                     <td><?php echo $reservation->getPrice() ?></td>
@@ -55,7 +56,7 @@
                             <div>
                                 <section class="container">
 
-                                    <div class="input-group date mb-3" id="datepicker">
+                                    <div class="input-group date mb-3" id="<?php echo $idCont ?>">
                                         <input name="reservation_dates" type="text" class="form-control" hidden>
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
@@ -68,20 +69,26 @@
 
                                 <?php
 
-                                $calendario = "<script type='text/javascript'>
-                                $(function() {
-                                    $('#datepicker').datepicker({
+                                    $calendario = "<script type='text/javascript'>
+                                    $(function() {
+                                        $('#".$idCont."').datepicker({
 
-                                        multidate: true,
-                                        format: 'yyyy-mm-dd',
-                                        enableOnReadonly: true,
-                                        startDate: '" . date("Y-m-d") . "'
+                                            multidate: true,
+                                            format: 'yyyy-mm-dd',
+                                            startDate: '" . date("Y-m-d") . "'
 
-                                    });
-                                    });
-                                </script>";
+                                        });
+                                        
+                                        ";
 
-                                echo $calendario;
+                                    if ($reservation->getDates()) {
+                                        $calendario = $calendario . "$('#".$idCont."').datepicker('setDates',['" . join("','", $reservation->getDates()) . "'])";
+                                    }
+
+                                    $calendario = $calendario . "
+                                        });
+                                    </script>";
+                                    echo $calendario;
 
                                 ?>
 
@@ -137,8 +144,9 @@
                                         <td style="width: 150px;"> <a href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
                 <?php
-                                }
-                ?>
+                $idCont++;
+            }
+            ?>
 
                 </tr>
 
