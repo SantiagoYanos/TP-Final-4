@@ -108,10 +108,10 @@ class ReservationController
 
         if($this->checkBreed($petList)!=true){
 
-            $flag=1;
+            $flag=3;
         }    
         
-        if($flag!=1 && $flag!=2){
+        if($flag==0){
                 $cant_pets = 0;
         
                 foreach ($pets_ids as $pet) {
@@ -141,7 +141,12 @@ class ReservationController
                 header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="The Guardian does not support that pet size!"');
             }
             else{
-                header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="This pet has already been requested to this Guardian at that date!"');
+                if($flag==2){
+                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="This pet has already been requested to this Guardian at that date!"');
+                }
+                else{
+                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="You cant add two different breeds into one reservation!"');
+                }
             }
         }
     }
