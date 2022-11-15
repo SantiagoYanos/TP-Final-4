@@ -52,6 +52,8 @@
                     <td><?php echo $reservation->getState() ?> </td>
 
                     <td>
+                      <?php if($reservation->getState()=="Pending")
+                      {?>
                         <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
                             <button type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                         </form>
@@ -62,7 +64,9 @@
                             <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
 
                         </form>
+                      <?php }?>
                     </td>
+
                 </tr>
 
                 <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
