@@ -40,7 +40,7 @@
             ?>
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
-                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id= " . $reservation->GetOwner_id() ?>><button class="mt-2">Owner Profile</button></a> </td>
+                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id=" . $reservation->GetOwner_id() ?>><button class="mt-2">Owner Profile</button></a> </td>
                     <td><?php echo $reservation->getPrice() ?></td>
                     <td>
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -52,19 +52,18 @@
                     <td><?php echo $reservation->getState() ?> </td>
 
                     <td>
-                      <?php if($reservation->getState()=="Pending")
-                      {?>
-                        <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
-                            <button type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
-                        </form>
+                        <?php if ($reservation->getState() == "Pending") { ?>
+                            <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
+                                <button type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                            </form>
 
 
-                        <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> " method="post">
-                            <button type="submit"> Reject </button>
-                            <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                            <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> " method="post">
+                                <button type="submit"> Reject </button>
+                                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
 
-                        </form>
-                      <?php }?>
+                            </form>
+                        <?php } ?>
                     </td>
 
                 </tr>

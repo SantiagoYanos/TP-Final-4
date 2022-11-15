@@ -173,11 +173,16 @@ class OwnerDAO implements IModels
     {
 
         try {
-            $query = "SELECT * FROM " . $this->tableName . " t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = " . $id . " AND u.active = true";
+
+            $id = intval($id);
+
+            $query = "SELECT * FROM " . $this->tableName . " t INNER JOIN users u ON t.user_id=u.user_id WHERE u.user_id = :id AND u.active = true";
+
+            $parameters["id"] = $id;
 
             $this->connection = Connection::GetInstance();
 
-            $resultSet = $this->connection->Execute($query);
+            $resultSet = $this->connection->Execute($query, $parameters);
 
             if (!$resultSet[0]) {
                 return null;
