@@ -9,8 +9,10 @@
     <title>Login</title>
 </head>
 
+<a href=<?php echo FRONT_ROOT . "Auth/ShowChooseSide" ?>></a>
+
+<!--<body  style="background-image: url(<?php // echo ROOT . 'Views/images/ducky.jpg' ?>)" style=background-repeat:no-repeat;>-->
 <body  style="background-image: url(../Views/images/ducky.jpg)" style=background-repeat:no-repeat;>
-   
     <div class="center">
     <h1>PET HERO</h1>
         <h2>WELCOME</h2>

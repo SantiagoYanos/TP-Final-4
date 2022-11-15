@@ -29,7 +29,17 @@ class AuthController
     public function ShowLogin()
     {
         return require_once(VIEWS_PATH . "login.php");
+      
+        
     }
+
+    public function Index($message = "")
+    {
+        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+    }
+
+    
+  
 
     public function RegisterOwner($name, $last_name, $adress, $phone, $email, $password, $birth_date, $dni)
     {

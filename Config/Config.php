@@ -2,7 +2,9 @@
 
 namespace Config;
 
-define("ROOT", dirname(__DIR__) . "/");
+//str_replace("\ ." , ". / .", dirname(__DIR__));
+
+define("ROOT",str_replace("\.","./.",dirname(__DIR__))."/");
 //Path to your project's root folder
 define("FRONT_ROOT", "/TP4/TP-Final-4/");
 define("VIEWS_PATH", "Views/");
@@ -14,4 +16,4 @@ define("IMG_PATH", VIEWS_PATH . "images/pets/");
 define("DB_HOST", "localhost");
 define("DB_NAME", "pet_hero");
 define("DB_USER", "root");
-define("DB_PASS", "1234");
+define("DB_PASS", "");
