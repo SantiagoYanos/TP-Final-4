@@ -37,9 +37,9 @@
 
         <tbody>
             <?php
-            $idCont=0;
+            $idCont = 0;
             foreach ($reservations as $reservation) {
-            ?>  
+            ?>
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
                     <td><?php echo $reservation->getGuardian_id() ?></td>
@@ -53,38 +53,37 @@
                     <!----------------CALENDARIO--------------------->
                     <td>
 
-                    <div class="container align-items-end">
-                        <div>
+                        <div class="container align-items-end">
                             <div>
-                                <section class="container">
+                                <div>
+                                    <section class="container">
 
-                                    <div class="input-group date mb-3" id="<?php echo $idCont ?>">
-                                        <input name="reservation_dates" type="text" class="form-control" hidden>
-                                        <span class="input-group-append">
-                                            <span class="input-group-text bg-white">
-                                                <i class="fa fa-calendar pt-1 pb-1"></i>
+                                        <div class="input-group date mb-3" id="<?php echo $idCont ?>">
+                                            <input name="reservation_dates" type="text" class="form-control" hidden>
+                                            <span class="input-group-append">
+                                                <span class="input-group-text bg-white">
+                                                    <i class="fa fa-calendar pt-1 pb-1"></i>
+                                                </span>
                                             </span>
-                                        </span>
-                                    </div>
+                                        </div>
 
-                                </section>
+                                    </section>
 
-                                <?php
+                                    <?php
 
                                     $calendario = "<script type='text/javascript'>
                                     $(function() {
-                                        $('#".$idCont."').datepicker({
+                                        $('#" . $idCont . "').datepicker({
 
                                             multidate: true,
-                                            format: 'yyyy-mm-dd',
-                                            startDate: '" . date("Y-m-d") . "'
+                                            format: 'yyyy-mm-dd'
 
                                         });
                                         
                                         ";
 
                                     if ($reservation->getDates()) {
-                                        $calendario = $calendario . "$('#".$idCont."').datepicker('setDates',['" . join("','", $reservation->getDates()) . "'])";
+                                        $calendario = $calendario . "$('#" . $idCont . "').datepicker('setDates',['" . join("','", $reservation->getDates()) . "'])";
                                     }
 
                                     $calendario = $calendario . "
@@ -92,11 +91,11 @@
                                     </script>";
                                     echo $calendario;
 
-                                ?>
+                                    ?>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
 
                     </td>
                     <!----------------CALENDARIO--------------------->
@@ -146,9 +145,9 @@
                                         <td style="width: 150px;"> <a href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
                 <?php
-                $idCont++;
-            }
-            ?>
+                                    $idCont++;
+                                }
+                ?>
 
                 </tr>
 
@@ -169,18 +168,18 @@
 <a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="mt-2">Back</button></a>
 
 <?php
-    if ($alert) {
-        echo " <script> alert('" . $alert . "'); </script>";
-    };
+if ($alert) {
+    echo " <script> alert('" . $alert . "'); </script>";
+};
 ?>
 
 <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
 
-        <script>
-            const availableDatesJson = '<?php echo $availableDatesJson ?>'
+<script>
+    const availableDatesJson = '<?php echo $availableDatesJson ?>'
 
-            InitializeAvailableDates(availableDatesJson);
-        </script>
+    InitializeAvailableDates(availableDatesJson);
+</script>
 
 </body>
 
