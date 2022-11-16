@@ -151,35 +151,39 @@ class ReservationController
 
     public function acceptReservation($reservation_id)
     {
-        if ($_SESSION["type"] == "owner") {
-            header("location: " . FRONT_ROOT . "Owner/HomeOwner");
-        }
+        try {
+            if ($_SESSION["type"] == "owner") {
+                header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+            }
 
-        $flag = 0;
+            $flag = 0;
 
-        $reservationDAO = new ReservationDAO;
-        $reservation = $reservationDAO->getById($reservation_id);
+            $reservationDAO = new ReservationDAO;
+            $reservation = $reservationDAO->getById($reservation_id);
 
 
-        $pet = $reservationDAO->getExistingReservations($reservation->getDates());
-        if ($pet) {
+            $pet = $reservationDAO->getExistingReservations($reservation->getDates());
+            if ($pet) {
 
-            $petList = array();
-            array_push($petList, $pet);
-            array_push($petList, $reservation->getPets()[0]);
+                $petList = array();
+                array_push($petList, $pet);
+                array_push($petList, $reservation->getPets()[0]);
 
-            if ($this->checkBreed($petList) != true) {
+                if ($this->checkBreed($petList) != true) {
 
-                header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
+                    header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
+                } else {
+                    $reservationDAO->updateState($reservation->getId(), "Accepted");
+                    header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
+                }
             } else {
+
                 $reservationDAO->updateState($reservation->getId(), "Accepted");
+
                 header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
             }
-        } else {
-
-            $reservationDAO->updateState($reservation->getId(), "Accepted");
-
-            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
+        } catch (Exception $ex) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
     }
 
