@@ -17,7 +17,7 @@ class ReservationDAO implements IModels
     private $connection;
     private $tableName = "reservations";
 
-    public function Add(Reservation $reservation, $reservation_dates, $pets_ids)
+    /*public function Add(Reservation $reservation, $reservation_dates, $pets_ids)
     {
         try {
             $queryReservation = "CALL create_Reservation(:price, :guardian_id, :owner_id);";
@@ -25,8 +25,6 @@ class ReservationDAO implements IModels
             $parametersReservation["price"] = $reservation->getPrice();
             $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
             $parametersReservation["owner_id"] = $reservation->getOwner_id();
-
-            /*var_dump($parametersReservation);*/
 
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($queryReservation, $parametersReservation);
@@ -39,17 +37,48 @@ class ReservationDAO implements IModels
 
                 $queryDates = "INSERT INTO reservations_x_dates (reservation_id, date ) VALUES (" . $id_reservation . ", '" . $datesString . "')";
 
-                echo $queryDates;
-
                 $petsString = join(") , (" . $id_reservation . ",", $pets_ids);
 
                 $queryPetsReservations = " INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (" . $id_reservation . "," . $petsString . ")";
 
-                echo $queryPetsReservations;
-
                 $this->connection->ExecuteNonQuery($queryDates);
 
                 $this->connection->ExecuteNonQuery($queryPetsReservations);
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }*/
+
+    public function Add(Reservation $reservation, $reservation_dates, $pets_ids)
+    {
+        try {
+            $queryReservation = "CALL create_Reservation(:price, :guardian_id, :owner_id);";
+
+            $parametersReservation["price"] = $reservation->getPrice();
+            $parametersReservation["guardian_id"] = $reservation->getGuardian_id();
+            $parametersReservation["owner_id"] = $reservation->getOwner_id();
+
+            $this->connection = Connection::GetInstance();
+            $resultSet = $this->connection->Execute($queryReservation, $parametersReservation);
+
+            if ($resultSet) {
+
+                $id_reservation = $resultSet[0]["id_reservation"];
+
+                $datesString = join("') , (" . $id_reservation . ",'", $reservation_dates);
+                $queryDates = "INSERT INTO reservations_x_dates (reservation_id, date ) VALUES (:reservation_id, '" . $datesString . "')";
+                $parametersDates["reservation_id"] = $id_reservation;
+
+                $petsString = join(") , (" . $id_reservation . ",", $pets_ids);
+                $queryPetsReservations = " INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (:reservation_id," . $petsString . ")";
+                $parametersPetsReservations["reservation_id"] = $id_reservation;
+
+                $this->connection->ExecuteNonQuery($queryDates, $parametersDates);
+
+                $this->connection->ExecuteNonQuery($queryPetsReservations, $parametersPetsReservations);
             } else {
                 return null;
             }
@@ -117,11 +146,15 @@ class ReservationDAO implements IModels
                 foreach($dates as $date){
                     //$query = "SELECT * FROM " . $this->tableName . ";";
 
-                    $query = "select * from " . $this->tableName. " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date = " . "'$date'" ." and guardian_id= " . $guardian_id .";";
+                    //$query = "select * from " . $this->tableName. " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date = " . "'$date'" ." and guardian_id= " . $guardian_id .";";
+                    $query = "select * from " . $this->tableName. " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date =:date and guardian_id=:guardian_id;";
+
+                    $parameters["date"] = $date;
+                    $parameters["guardian_id"] = $guardian_id;
 
                     $this->connection = Connection::GetInstance();
         
-                    $resultSet = $this->connection->Execute($query);
+                    $resultSet = $this->connection->Execute($query, $parameters);
         
                     if (!$resultSet[0]) {
                         return [];
@@ -155,11 +188,15 @@ class ReservationDAO implements IModels
     {
 
         try {
-            $queryReservation = "SELECT * FROM " . $this->tableName . " WHERE active=true AND reservation_id = " . $id . ";";
+            ///$queryReservation = "SELECT * FROM " . $this->tableName . " WHERE active=true AND reservation_id = " . $id . ";";
+
+            $queryReservation = "SELECT * FROM " . $this->tableName . " WHERE active=true AND reservation_id = :id ;";
+
+            $parameters["id"] =$id;
 
             $this->connection = Connection::GetInstance();
 
-            $resultSet = $this->connection->Execute($queryReservation);
+            $resultSet = $this->connection->Execute($queryReservation, $parameters);
 
             if (!$resultSet[0]) {
                 return null;
