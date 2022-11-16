@@ -8,6 +8,7 @@ use Models\User as User;
 use Models\Guardian as Guardian;
 use SQLDAO\ReservationDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
+use \Exception as Exception;
 
 class GuardianController
 {
@@ -22,6 +23,7 @@ class GuardianController
 
     public function HomeGuardian($alert = null)
     {
+        try{
         //var_dump($_SESSION);
 
         $user = new GuardianDAO();
@@ -29,6 +31,11 @@ class GuardianController
         $user = $user->GetByid($_SESSION["id"]);
 
         require_once VIEWS_PATH . "home_guardian.php";
+
+    }catch(Exception $e)
+            {
+                header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            }
     }
 
     /*public function updateAvDates($monday = null, $tuesday = null, $wednesday = null, $thursday = null, $friday = null, $saturday = null, $sunday = null)
@@ -41,7 +48,7 @@ class GuardianController
 
     public function updateAvDates($stringDates)
     {
-
+        try{
         $guardian_DAO = new GuardianDAO();
 
         if ($stringDates != "") {
@@ -52,20 +59,31 @@ class GuardianController
         }
 
         header("location: " . FRONT_ROOT . 'Guardian/HomeGuardian?alert=' . "Available dates updated succesfully!");
+
+    }catch(Exception $e)
+        {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
     }
 
     public function ShowEdit()
     {
+        try{
         $user = new GuardianDAO();
 
         $user = $user->GetByid($_SESSION["id"]);
 
         require_once VIEWS_PATH . "edit_guardian.php";
+
+    }catch(Exception $e)
+    {
+        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+    }
     }
 
     public function Edit($preferred_size, $preferred_size_cat, $price = null, $birth_date = null, $cuil = null,  $name = null, $last_name = null, $adress = null, $phone = null)
     {
-
+        try{
         $guardianDAO = new GuardianDAO();
 
         $user = new User();
@@ -96,20 +114,30 @@ class GuardianController
         $guardianDAO->Edit($user, $guardian);
 
         header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+    }catch(Exception $e)
+    {
+        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+    }
     }
 
     public function ViewReservations($alert = null)
     {
+        try{
 
         $reservationDAO = new ReservationDAO();
 
         $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian");
 
         require_once VIEWS_PATH . "guardian_reservationsList.php";
+    }catch(Exception $e)
+    {
+        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+    }
     }
 
     function ViewOwnerProfile($owner_id)
     {
+        try{
         $ownerDAO = new OwnerDAO();
 
         $owner = $ownerDAO->GetById($owner_id);
@@ -119,5 +147,9 @@ class GuardianController
         } else {
             header("location: " . FRONT_ROOT . "Guardian/ViewReservations");
         }
+    }catch(Exception $e)
+    {
+        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+    }
     }
 }

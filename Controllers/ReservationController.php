@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Exception;
 use Models\Guardian;
 use Models\Reservation as Reservation;
 use Models\Pet as Pet;
@@ -30,7 +31,7 @@ class ReservationController
 
     public function MakeReservation($guardian_id, $reservation_dates = null, $pets_ids = [])
     {
-
+        
         if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
         }
@@ -60,95 +61,97 @@ class ReservationController
             }
         }
         
-        /////Chequear size
-        $PetDAO = new PetDAO();
-        $guardianDAO = new GuardianDAO();
-        $owner_DAO = new OwnerDAO();
-        $guardian_user = $guardianDAO->GetById($guardian_id);
+        try{
+            /////Chequear size
+            $PetDAO = new PetDAO();
+            $guardianDAO = new GuardianDAO();
+            $owner_DAO = new OwnerDAO();
+            $guardian_user = $guardianDAO->GetById($guardian_id);
 
-        $guardianPetSize=$guardian_user->getType_Data()->getPreferred_size();
-        $guardianPetSizeCat=$guardian_user->getType_Data()->getPreferred_size_Cat();
+            $guardianPetSize=$guardian_user->getType_Data()->getPreferred_size();
+            $guardianPetSizeCat=$guardian_user->getType_Data()->getPreferred_size_Cat();
 
-        if($guardianPetSizeCat=="big"){
-            $guardianPetSizeCat=1;
-        }
-        if($guardianPetSizeCat=="medium"){
-            $guardianPetSizeCat=2;
-        }
-        if($guardianPetSizeCat=="small"){
-            $guardianPetSizeCat=3;
-        }
-        if($guardianPetSize=="big"){
-            $guardianPetSize=1;
-        }
-        if($guardianPetSize=="medium"){
-            $guardianPetSize=2;
-        }
-        if($guardianPetSize=="small"){
-            $guardianPetSize=3;
-        }
-
-        $petList=array();
-
-        foreach($pets_ids as $pet_id){
-            
-            $pet = $PetDAO->GetById($pet_id);
-            array_push($petList,$pet);
-            if($pet->getType() == "dog"){
-                if($guardianPetSize > $pet->getSize()){
-                    $flag=1;
-                }
+            if($guardianPetSizeCat=="big"){
+                $guardianPetSizeCat=1;
             }
-            if($pet->getType()=="cat"){
-                if($guardianPetSizeCat > $pet->getSize()){
-                    $flag=1;
-                }
-            }  
-        }
+            if($guardianPetSizeCat=="medium"){
+                $guardianPetSizeCat=2;
+            }
+            if($guardianPetSizeCat=="small"){
+                $guardianPetSizeCat=3;
+            }
+            if($guardianPetSize=="big"){
+                $guardianPetSize=1;
+            }
+            if($guardianPetSize=="medium"){
+                $guardianPetSize=2;
+            }
+            if($guardianPetSize=="small"){
+                $guardianPetSize=3;
+            }
 
-        if($this->checkBreed($petList)!=true){
+            $petList=array();
 
-            $flag=3;
-        }    
-        
-        if($flag==0){
-                $cant_pets = 0;
-        
-                foreach ($pets_ids as $pet) {
-                    $cant_pets++;
+            foreach($pets_ids as $pet_id){
+                
+                $pet = $PetDAO->GetById($pet_id);
+                array_push($petList,$pet);
+                if($pet->getType() == "dog"){
+                    if($guardianPetSize > $pet->getSize()){
+                        $flag=1;
+                    }
                 }
-        
-                $price = $cant_pets * $guardian_user->getType_data()->getPrice();
-        
-                $reservation = new Reservation();
-                $reservation->setGuardian_id($guardian_id);
-                $reservation->setOwner_id($_SESSION["id"]);
-                $reservation->setPrice($price);
-        
-                /*var_dump($_POST);*/
-        
-                $reservation_dates = explode(",", $reservation_dates);
-        
-                $reservation_DAO = new ReservationDAO();
-                $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids); //Cambiar los valores de prueba;
-        
-                /*var_dump($reservation);*/
-        
-                header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="Reservation request sent to Guardian!"');
-        }
-        else{
-            if($flag==1){
-                header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="The Guardian does not support that pet size!"');
+                if($pet->getType()=="cat"){
+                    if($guardianPetSizeCat > $pet->getSize()){
+                        $flag=1;
+                    }
+                }  
+            }
+
+            if($this->checkBreed($petList)!=true){
+
+                $flag=3;
+            }    
+            
+            if($flag==0){
+                    $cant_pets = 0;
+            
+                    foreach ($pets_ids as $pet) {
+                        $cant_pets++;
+                    }
+            
+                    $price = $cant_pets * $guardian_user->getType_data()->getPrice();
+            
+                    $reservation = new Reservation();
+                    $reservation->setGuardian_id($guardian_id);
+                    $reservation->setOwner_id($_SESSION["id"]);
+                    $reservation->setPrice($price);
+            
+                    $reservation_dates = explode(",", $reservation_dates);
+            
+                    $reservation_DAO = new ReservationDAO();
+                    $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids); //Cambiar los valores de prueba;
+            
+                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="Reservation request sent to Guardian!"');
             }
             else{
-                if($flag==2){
-                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="This pet has already been requested to this Guardian at that date!"');
+                if($flag==1){
+                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="The Guardian does not support that pet size!"');
                 }
                 else{
-                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="You cant add two different breeds into one reservation!"');
+                    if($flag==2){
+                        header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="This pet has already been requested to this Guardian at that date!"');
+                    }
+                    else{
+                        header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="You cant add two different breeds into one reservation!"');
+                    }
                 }
             }
         }
+        catch(Exception $ex){
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
+        
     }
 
     public function acceptReservation($reservation_id) {
@@ -170,10 +173,6 @@ class ReservationController
             array_push($petList,$pet);
             array_push($petList,$reservation->getPets()[0]);
             
-
-            //var_dump($pet);
-            
-
             if($this->checkBreed($petList)!=true){
 
                 header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
@@ -213,13 +212,15 @@ class ReservationController
 
     public function rejectReservation($reservation_id)
     {
-
-        $reservationDAO= new ReservationDAO;
-        $reservation=$reservationDAO->getById($reservation_id);
-
-        $reservationDAO->updateState($reservation->getId(),"Rejected");
-
+        try{
+            $reservationDAO= new ReservationDAO;
+            $reservation=$reservationDAO->getById($reservation_id);
+            $reservationDAO->updateState($reservation->getId(),"Rejected");
             header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation rejected"');
+        }
+        catch(Exception $ex){
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
 
     }
 }

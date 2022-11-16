@@ -10,6 +10,7 @@ use Models\Pet as Pet;
 use Models\User as User;
 use Models\Owner as Owner;
 use Models\Reservation;
+use \Exception as Exception;
 
 class OwnerController
 {
@@ -24,25 +25,37 @@ class OwnerController
 
     public function HomeOwner()
     {
+        try{
         $owner_DAO = new OwnerDAO();
-
+        
         $user = $owner_DAO->GetById($_SESSION["id"]);
+        
 
         require_once VIEWS_PATH . "home_owner.php";
+        }catch(Exception $e)
+            {
+                header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            }
     }
 
     public function ShowEdit()
     {
+        try{
         $user = new OwnerDAO();
 
         $user = $user->GetByid($_SESSION["id"]);
 
         require_once VIEWS_PATH . "edit_owner.php";
+
+    }catch(Exception $e)
+    {
+        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+    }
     }
 
     public function Edit($dni, $birth_date = null,  $name = null, $last_name = null, $adress = null, $phone = null)
     {
-
+        try{
         $ownerDAO = new OwnerDAO();
 
         $user = new User();
@@ -64,14 +77,19 @@ class OwnerController
 
         $owner->setDni($dni);
 
-
+        
         $ownerDAO->Edit($user, $owner);
-
+       
         header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+        }catch(Exception $e)
+            {
+                header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            }
     }
 
     public function SearchGuardian($name = null, $rating = null, $preferred_size = null, $preferred_size_cat = null, $location = null, $price = null, $stringDates = null, $alert = null)
     {
+        try{
 
         $guardian_DAO = new GuardianDAO();
 
@@ -116,10 +134,16 @@ class OwnerController
         }
 
         require_once VIEWS_PATH . "guardianList.php";
+
+        }catch(Exception $e)
+            {
+                header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            }
     }
 
     function ViewGuardianProfile($guardian_id, $alert = null)
     {
+        try{
         $guardianDAO = new GuardianDAO();
         $PetDAO = new PetDAO();
 
@@ -133,14 +157,26 @@ class OwnerController
         } else {
             header("location: " . FRONT_ROOT . "Owner/SearchGuardian");
         }
+
+        }catch(Exception $e)
+            {
+                header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            }
     }
 
     function ViewReservationsOwner($alert=null)
     {
+        try{
+
+        
         $reservationDAO = new ReservationDAO();
 
         $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "owner");
         
         require_once VIEWS_PATH . "owner_reservationsList.php";
+        }catch(Exception $e)
+            {
+                header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            }
     }
 }
