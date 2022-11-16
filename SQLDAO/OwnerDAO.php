@@ -16,66 +16,6 @@ class OwnerDAO implements IModels
     private $connection;
     private $tableName = "owners";
 
-    // function removeElementWithValue($array, $key, $value)
-    // {
-    //     foreach ($array as $subKey => $subArray) {
-    //         if ($subArray[$key] == $value) {
-    //             unset($array[$subKey]);
-    //         }
-    //     }
-    //     return $array;
-    // }
-
-    // public function activateFromBDD($OwnerSQL)
-    // {
-    //     try {
-    //         $query  = "UPDATE " . $this->tableName . " SET active ='" . 1 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
-
-    //         $this->connection  = Connection::GetInstance();
-    //         $this->connection->ExecuteNonQuery($query);
-    //     } catch (Exception $e) {
-    //         throw $e;
-    //     }
-    // }
-
-    // public function deleteFromBDD($OwnerSQL)
-    // {
-    //     try {
-    //         $query  = "UPDATE " . $this->tableName . " SET active ='" . 0 . "' where owner_id =" . $OwnerSQL->getOwnerSQLId();
-
-    //         $this->connection  = Connection::GetInstance();
-    //         $this->connection->ExecuteNonQuery($query);
-    //     } catch (Exception $e) {
-    //         throw $e;
-    //     }
-    // }
-
-    // public function editBDD(Owner $OwnerSQL)
-    // {
-    //     try {
-    //         $query1  = "UPDATE " . $this->tableName . " SET name='" . $OwnerSQL->getName() . "' where owner_id = " . $OwnerSQL->getId();
-    //         $query2  = "UPDATE " . $this->tableName . " SET email ='" . $OwnerSQL->getEmail() . "' where owner_id =" . $OwnerSQL->getId();
-    //         $query3  = "UPDATE " . $this->tableName . " SET phone ='" . $OwnerSQL->getPhone() . "' where owner_id =" . $OwnerSQL->getId();
-    //         $query4  = "UPDATE " . $this->tableName . " SET password ='" . $OwnerSQL->getPassword() . "' where owner_id =" . $OwnerSQL->getId();
-    //         $query5  = "UPDATE " . $this->tableName . " SET last_name ='" . $OwnerSQL->getLast_name() . "' where owner_id =" . $OwnerSQL->getId();
-    //         $query6  = "UPDATE " . $this->tableName . " SET adress ='" . $OwnerSQL->getAdress() . "' where owner_id =" . $OwnerSQL->getId();
-    //         $query7  = "UPDATE " . $this->tableName . " SET dni ='" . $OwnerSQL->getDni() . "' where owner_id =" . $OwnerSQL->getId();
-    //         $query8  = "UPDATE " . $this->tableName . " SET birht_date ='" . $OwnerSQL->getBirth_date() . "' where owner_id =" . $OwnerSQL->getId();
-
-    //         $this->connection  = Connection::GetInstance();
-    //         $this->connection->ExecuteNonQuery($query1);
-    //         $this->connection->ExecuteNonQuery($query2);
-    //         $this->connection->ExecuteNonQuery($query3);
-    //         $this->connection->ExecuteNonQuery($query4);
-    //         $this->connection->ExecuteNonQuery($query5);
-    //         $this->connection->ExecuteNonQuery($query6);
-    //         $this->connection->ExecuteNonQuery($query7);
-    //         $this->connection->ExecuteNonQuery($query8);
-    //     } catch (Exception $e) {
-    //         throw $e;
-    //     }
-    // }
-
     public function Add(User $UserSQL, Owner $OwnerSQL)
     {
         try {

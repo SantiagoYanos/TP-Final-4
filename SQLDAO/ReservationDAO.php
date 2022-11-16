@@ -141,39 +141,39 @@ class ReservationDAO implements IModels
 
     public function GetAllByDates($guardian_id, $dates = [])
     {
-        if($dates){
+        if ($dates) {
             try {
-                foreach($dates as $date){
+                foreach ($dates as $date) {
                     //$query = "SELECT * FROM " . $this->tableName . ";";
 
                     //$query = "select * from " . $this->tableName. " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date = " . "'$date'" ." and guardian_id= " . $guardian_id .";";
-                    $query = "select * from " . $this->tableName. " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date =:date and guardian_id=:guardian_id;";
+                    $query = "select * from " . $this->tableName . " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date =:date and guardian_id=:guardian_id;";
 
                     $parameters["date"] = $date;
                     $parameters["guardian_id"] = $guardian_id;
 
                     $this->connection = Connection::GetInstance();
-        
+
                     $resultSet = $this->connection->Execute($query, $parameters);
-        
+
                     if (!$resultSet[0]) {
                         return [];
                     }
-        
+
                     $reservationList = array();
-        
+
                     foreach ($resultSet as $reservation) {
-        
+
                         $getReservation = $this->LoadData($reservation);
-        
+
                         $getDates = $this->GetDates($getReservation->getId());
-        
+
                         $getReservation->setDates($getDates);
-        
+
                         $getPets = $this->GetPets($getReservation->getId());
-        
+
                         $getReservation->setPets($getPets);
-        
+
                         array_push($reservationList, $getReservation);
                     }
                 }
@@ -192,7 +192,7 @@ class ReservationDAO implements IModels
 
             $queryReservation = "SELECT * FROM " . $this->tableName . " WHERE active=true AND reservation_id = :id ;";
 
-            $parameters["id"] =$id;
+            $parameters["id"] = $id;
 
             $this->connection = Connection::GetInstance();
 
@@ -220,7 +220,7 @@ class ReservationDAO implements IModels
 
     public function GetByGuardianOrOwner($id, $type)
     {
-        $reservationList=array();
+        $reservationList = array();
         /* 
         $type = "guardian" OR "owner"
         
@@ -229,21 +229,23 @@ class ReservationDAO implements IModels
         try {
 
             if ($type == "guardian") {
-                $queryType = "guardian_id = " . $id . ";";
+                $queryType = "guardian_id = :id ;";
             } else {
-                $queryType = "owner_id = " . $id . ";";
+                $queryType = "owner_id = :id ;";
             }
 
             $queryReservation = "SELECT * FROM " . $this->tableName . " WHERE active=true AND " . $queryType;
 
+            $parameters["id"] = $id;
+
             $this->connection = Connection::GetInstance();
 
-            $resultSet = $this->connection->Execute($queryReservation);
+            $resultSet = $this->connection->Execute($queryReservation, $parameters);
 
             if (!$resultSet || $resultSet == []) {
                 return [];
             }
-            
+
             foreach ($resultSet as $reservation) {
 
                 $getReservation = $this->LoadData($reservation);
@@ -258,7 +260,7 @@ class ReservationDAO implements IModels
 
                 array_push($reservationList, $getReservation);
             }
-            
+
             return $reservationList;
         } catch (Exception $ex) {
             throw $ex;
@@ -270,11 +272,13 @@ class ReservationDAO implements IModels
     {
         try {
 
-            $query = "SELECT * FROM reservations_x_dates WHERE reservation_id = " . $id . ";";
+            $query = "SELECT * FROM reservations_x_dates WHERE reservation_id = :id;";
+
+            $parameters["id"] = $id;
 
             $this->connection = Connection::GetInstance();
 
-            $resultSet = $this->connection->Execute($query);
+            $resultSet = $this->connection->Execute($query, $parameters);
 
             if (!$resultSet[0]) {
                 return [];
@@ -292,11 +296,13 @@ class ReservationDAO implements IModels
 
     public function GetPets($id)
     {
-        $query = "SELECT rp.reservation_id, p.* FROM reservations_x_pets rp INNER JOIN pets p ON rp.pet_id = p.pet_id WHERE reservation_id =" . $id . ";";
+        $query = "SELECT rp.reservation_id, p.* FROM reservations_x_pets rp INNER JOIN pets p ON rp.pet_id = p.pet_id WHERE reservation_id = :id ;";
+
+        $parameters["id"] = $id;
 
         $this->connection = Connection::GetInstance();
 
-        $resultSet = $this->connection->Execute($query);
+        $resultSet = $this->connection->Execute($query, $parameters);
 
         if (!$resultSet[0]) {
             return [];
@@ -338,8 +344,6 @@ class ReservationDAO implements IModels
        WHERE date IN (' . $datesJson . ') AND r.state = "Accepted" AND r.active=true
        GROUP BY r.reservation_id
        HAVING include_dates >=1 LIMIT 1';
-
-        
 
         $this->connection = Connection::GetInstance();
 

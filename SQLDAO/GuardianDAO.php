@@ -158,14 +158,14 @@ class GuardianDAO implements IModels
     public function AddAvailableDates($id, $available_dates)
     {
         try {
-            $queryDelete = "DELETE FROM available_dates WHERE guardian_id= :id"  ;
+            $queryDelete = "DELETE FROM available_dates WHERE guardian_id= :id";
 
             $this->connection = Connection::GetInstance();
 
             $parameters1["id"] = $id;
-            
 
-            $this->connection->ExecuteNonQuery($queryDelete,$parameters1);
+
+            $this->connection->ExecuteNonQuery($queryDelete, $parameters1);
 
             if ($available_dates == []) {
                 return NULL;
@@ -173,15 +173,15 @@ class GuardianDAO implements IModels
 
             //$datesString = join("') , (" . $id . ",'", $available_dates);
             $datesString = join("') , (:id ,'", $available_dates);
-            
-            
+
+
             $parameters2["id"] = $id;
-           // $parameters2["datesString"] = $datesString;
+            // $parameters2["datesString"] = $datesString;
             // 2022-11-24') , (:id ,'2022-11-25
             $queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (:id, '" . $datesString . "')";
             //$queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (:id,   :datesString )";
             var_dump($datesString);
-            $this->connection->ExecuteNonQuery($queryInsert,$parameters2);
+            $this->connection->ExecuteNonQuery($queryInsert, $parameters2);
         } catch (Exception $ex) {
             throw $ex;
         }
@@ -195,7 +195,7 @@ class GuardianDAO implements IModels
             $parameters1["id"] = $id;
             $this->connection = Connection::GetInstance();
 
-            $resultSet = $this->connection->Execute($query,$parameters1);
+            $resultSet = $this->connection->Execute($query, $parameters1);
 
             if ($resultSet == []) {
                 return NULL;

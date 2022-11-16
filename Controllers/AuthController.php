@@ -32,7 +32,7 @@ class AuthController
         return require_once(VIEWS_PATH . "login.php");
     }
 
-    public function Index($message = "")
+    public function Index()
     {
         header("location: " . FRONT_ROOT . "Auth/ShowLogin");
     }

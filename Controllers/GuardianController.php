@@ -23,19 +23,17 @@ class GuardianController
 
     public function HomeGuardian($alert = null)
     {
-        try{
-        //var_dump($_SESSION);
+        try {
+            //var_dump($_SESSION);
 
-        $user = new GuardianDAO();
+            $user = new GuardianDAO();
 
-        $user = $user->GetByid($_SESSION["id"]);
+            $user = $user->GetByid($_SESSION["id"]);
 
-        require_once VIEWS_PATH . "home_guardian.php";
-
-    }catch(Exception $e)
-            {
-                header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-            }
+            require_once VIEWS_PATH . "home_guardian.php";
+        } catch (Exception $e) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
     }
 
     /*public function updateAvDates($monday = null, $tuesday = null, $wednesday = null, $thursday = null, $friday = null, $saturday = null, $sunday = null)
@@ -48,108 +46,101 @@ class GuardianController
 
     public function updateAvDates($stringDates)
     {
-        try{
-        $guardian_DAO = new GuardianDAO();
+        try {
+            $guardian_DAO = new GuardianDAO();
 
-        if ($stringDates != "") {
-            $arrayDates = explode(",", $stringDates);
-            $guardian_DAO->AddAvailableDates($_SESSION["id"], $arrayDates);
-        } else {
-            $guardian_DAO->AddAvailableDates($_SESSION["id"], []);
-        }
+            if ($stringDates != "") {
+                $arrayDates = explode(",", $stringDates);
+                $guardian_DAO->AddAvailableDates($_SESSION["id"], $arrayDates);
+            } else {
+                $guardian_DAO->AddAvailableDates($_SESSION["id"], []);
+            }
 
-        header("location: " . FRONT_ROOT . 'Guardian/HomeGuardian?alert=' . "Available dates updated succesfully!");
-
-    }catch(Exception $e)
-        {
+            header("location: " . FRONT_ROOT . 'Guardian/HomeGuardian?alert=' . "Available dates updated succesfully!");
+        } catch (Exception $e) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
     }
 
     public function ShowEdit()
     {
-        try{
-        $user = new GuardianDAO();
+        try {
+            $user = new GuardianDAO();
 
-        $user = $user->GetByid($_SESSION["id"]);
+            $user = $user->GetByid($_SESSION["id"]);
 
-        require_once VIEWS_PATH . "edit_guardian.php";
-
-    }catch(Exception $e)
-    {
-        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-    }
+            require_once VIEWS_PATH . "edit_guardian.php";
+        } catch (Exception $e) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
     }
 
     public function Edit($preferred_size, $preferred_size_cat, $price = null, $birth_date = null, $cuil = null,  $name = null, $last_name = null, $adress = null, $phone = null)
     {
-        try{
-        $guardianDAO = new GuardianDAO();
+        try {
+            $guardianDAO = new GuardianDAO();
 
-        $user = new User();
+            $user = new User();
 
-        $user->setId($_SESSION["id"]);
+            $user->setId($_SESSION["id"]);
 
-        $user->setName($name);
+            $user->setName($name);
 
-        $user->setLast_name($last_name);
+            $user->setLast_name($last_name);
 
-        $user->setAdress($adress);
+            $user->setAdress($adress);
 
-        $user->setPhone($phone);
+            $user->setPhone($phone);
 
-        $user->setBirth_date($birth_date);
+            $user->setBirth_date($birth_date);
 
 
-        $guardian = new Guardian();
+            $guardian = new Guardian();
 
-        $guardian->setPreferred_size($preferred_size);
+            $guardian->setPreferred_size($preferred_size);
 
-        $guardian->setPreferred_size_cat($preferred_size_cat);
+            $guardian->setPreferred_size_cat($preferred_size_cat);
 
-        $guardian->setCuil($cuil);
+            $guardian->setCuil($cuil);
 
-        $guardian->setPrice($price);
+            $guardian->setPrice($price);
 
-        $guardianDAO->Edit($user, $guardian);
+            $guardianDAO->Edit($user, $guardian);
 
-        header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-    }catch(Exception $e)
-    {
-        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-    }
+            header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+        } catch (Exception $e) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
     }
 
     public function ViewReservations($alert = null)
     {
-        try{
+        try {
 
-        $reservationDAO = new ReservationDAO();
+            $reservationDAO = new ReservationDAO();
 
-        $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian");
+            $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian");
 
-        require_once VIEWS_PATH . "guardian_reservationsList.php";
-    }catch(Exception $e)
-    {
-        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-    }
+            require_once VIEWS_PATH . "guardian_reservationsList.php";
+        } catch (Exception $e) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
     }
 
     function ViewOwnerProfile($owner_id)
     {
-        try{
-        $ownerDAO = new OwnerDAO();
+        try {
+            $ownerDAO = new OwnerDAO();
 
-        $owner = $ownerDAO->GetById($owner_id);
+            $owner = $ownerDAO->GetById($owner_id);
 
-        if ($owner) {
-            require_once VIEWS_PATH . "guardian_OwnerProfile.php";
-        } else {
-            header("location: " . FRONT_ROOT . "Guardian/ViewReservations");
+            if ($owner) {
+                require_once VIEWS_PATH . "guardian_OwnerProfile.php";
+            } else {
+                header("location: " . FRONT_ROOT . "Guardian/ViewReservations");
+            }
+        } catch (Exception $e) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
-    }catch(Exception $e)
-    {
-        header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-    }
     }
 }
