@@ -20,46 +20,46 @@ class PetController
 
     public function PetList()
     {
-        $pet_DAO = new PetDAO();
+        try {
 
-        $petList = $pet_DAO->GetPetsByOwner($_SESSION["id"]);
+            $pet_DAO = new PetDAO();
 
-        foreach ($petList as $pet) {
-            if ($pet->getSize() == 1) {
-                $pet->setSize("big");
-            } elseif ($pet->getSize() == 2) {
-                $pet->setSize("medium");
-            } else {
-                $pet->setSize("small");
+            $petList = $pet_DAO->GetPetsByOwner($_SESSION["id"]);
+
+            foreach ($petList as $pet) {
+                if ($pet->getSize() == 1) {
+                    $pet->setSize("big");
+                } elseif ($pet->getSize() == 2) {
+                    $pet->setSize("medium");
+                } else {
+                    $pet->setSize("small");
+                }
             }
-        }
 
-        require_once VIEWS_PATH . "view_pets.php";
+            require_once VIEWS_PATH . "view_pets.php";
+        } catch (Exception $ex) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
     }
 
     public function Add($name, $breed, $observation, $pet_size, $type, $file, $file1, $pet_video)
     {
         try {
 
-            echo "--------------";
             $fileName = $file["name"];
             $tempFileName = $file["tmp_name"];
             $type1 = $file["type"];
 
             $filePath = VIEWS_PATH . basename($fileName);
-            echo "*********";
             $fileType = strtolower(pathinfo($filePath, PATHINFO_EXTENSION));
 
             $imageSize = getimagesize($tempFileName);
 
-
-            echo "--------------";
             $fileName1 = $file1["name"];
             $tempFileName1 = $file1["tmp_name"];
             $type1 = $file1["type"];
 
             $filePath1 = VIEWS_PATH . basename($fileName1);
-            echo "*********";
             $fileType1 = strtolower(pathinfo($filePath1, PATHINFO_EXTENSION));
 
             $imageSize1 = getimagesize($tempFileName1);
@@ -93,25 +93,25 @@ class PetController
                 } else
                     $message = "Ocurrió un error al intentar subir la imagen";
             } else
+
                 $message = "El archivo no corresponde a una imágen";
+
+            return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
         } catch (Exception $ex) {
-            throw $ex;
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
-
-
-        //echo $message;
-        //var_dump($message);
-        //var_dump($pet);
-
-        return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
     }
 
 
     public function deletePet($petId)
     {
-        $petDAO = new PetDAO();
-        $petDAO->Remove($petId);
-        return header("location: " . FRONT_ROOT . "Pet/PetList");
+        try {
+            $petDAO = new PetDAO();
+            $petDAO->Remove($petId);
+            return header("location: " . FRONT_ROOT . "Pet/PetList");
+        } catch (Exception $ex) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
     }
 
 
