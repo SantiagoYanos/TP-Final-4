@@ -300,13 +300,13 @@ class ReservationDAO implements IModels
        INNER JOIN pets p ON rp.pet_id = p.pet_id
        WHERE date IN (' . $datesJson . ') AND r.state = "Accepted" AND r.active=true
        GROUP BY r.reservation_id
-       HAVING include_dates>=:cant_dates LIMIT 1';
+       HAVING include_dates >=1 LIMIT 1';
 
-        $parameters["cant_dates"] = sizeof($arrayDates);
+        
 
         $this->connection = Connection::GetInstance();
 
-        $resultSet = $this->connection->Execute($query, $parameters);
+        $resultSet = $this->connection->Execute($query);
 
         if (!$resultSet) {
             return null;
