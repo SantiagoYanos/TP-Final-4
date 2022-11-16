@@ -125,14 +125,10 @@ class ReservationController
                 $reservation->setOwner_id($_SESSION["id"]);
                 $reservation->setPrice($price);
         
-                /*var_dump($_POST);*/
-        
                 $reservation_dates = explode(",", $reservation_dates);
         
                 $reservation_DAO = new ReservationDAO();
                 $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids); //Cambiar los valores de prueba;
-        
-                /*var_dump($reservation);*/
         
                 header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="Reservation request sent to Guardian!"');
         }
