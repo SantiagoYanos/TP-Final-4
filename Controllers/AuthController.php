@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use \Exception as Exception;
 use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 use Models\Guardian as Guardian;
@@ -41,73 +42,130 @@ class AuthController
 
     public function RegisterOwner($name, $last_name, $adress, $phone, $email, $password, $birth_date, $dni)
     {
+        try {
 
-        $userDAO = new UserDAO();
+            $userDAO = new UserDAO();
 
-        $userArray = array();
-        $userArray["user_id"] = 0;
-        $userArray["name"] = $name;
-        $userArray["last_name"] = $last_name;
-        $userArray["adress"] = $adress;
-        $userArray["phone"] = $phone;
-        $userArray["email"] = $email;
-        $userArray["password"] = $password;
-        $userArray["birth_date"] = $birth_date;
+            $userArray = array();
+            $userArray["user_id"] = 0;
+            $userArray["name"] = $name;
+            $userArray["last_name"] = $last_name;
+            $userArray["adress"] = $adress;
+            $userArray["phone"] = $phone;
+            $userArray["email"] = $email;
+            $userArray["password"] = $password;
+            $userArray["birth_date"] = $birth_date;
 
-        $newUser = $userDAO->LoadData($userArray);
+            $newUser = $userDAO->LoadData($userArray);
 
-        /////
+            /////
 
-        $ownerDAO = new OwnerDAO();
+            $ownerDAO = new OwnerDAO();
 
-        $ownerArray = array();
+            $ownerArray = array();
 
-        $ownerArray["dni"] = $dni;
+            $ownerArray["dni"] = $dni;
 
-        $newOwner = $ownerDAO->LoadData($ownerArray);
+            $newOwner = $ownerDAO->LoadData($ownerArray);
 
-        $ownerDAO->Add($newUser, $newOwner);
+            $ownerDAO->Add($newUser, $newOwner);
 
-        return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        } catch (Exception $ex) {
+
+            header("location: " . FRONT_ROOT . "Auth/ShowRegister");
+        }
     }
 
     public function RegisterGuardian($name, $last_name, $adress, $phone, $email, $password, $birth_date, $cuil, $preferred_size, $preferred_size_cat)
     {
-        $userDAO = new UserDAO();
 
-        $userArray = array();
-        $userArray["user_id"] = 0;
-        $userArray["name"] = $name;
-        $userArray["last_name"] = $last_name;
-        $userArray["adress"] = $adress;
-        $userArray["phone"] = $phone;
-        $userArray["email"] = $email;
-        $userArray["password"] = $password;
-        $userArray["birth_date"] = $birth_date;
+        try {
+            $userDAO = new UserDAO();
 
-        $newUser = $userDAO->LoadData($userArray);
+            $userArray = array();
+            $userArray["user_id"] = 0;
+            $userArray["name"] = $name;
+            $userArray["last_name"] = $last_name;
+            $userArray["adress"] = $adress;
+            $userArray["phone"] = $phone;
+            $userArray["email"] = $email;
+            $userArray["password"] = $password;
+            $userArray["birth_date"] = $birth_date;
 
-        ///////
+            $newUser = $userDAO->LoadData($userArray);
 
-        $guardianDAO = new GuardianDAO();
+            ///////
 
-        $guardianArray = array();
+            $guardianDAO = new GuardianDAO();
 
-        $guardianArray["cuil"] = $cuil;
-        $guardianArray["preferred_size_dog"] = $preferred_size;
-        $guardianArray["preferred_size_cat"] = $preferred_size_cat;
-        $guardianArray["reputation"] = null;
-        $guardianArray["available_date"] = null;
-        $guardianArray["price"] = null;
+            $guardianArray = array();
 
-        $newGuardian = $guardianDAO->LoadData($guardianArray, null);
+            $guardianArray["cuil"] = $cuil;
+            $guardianArray["preferred_size_dog"] = $preferred_size;
+            $guardianArray["preferred_size_cat"] = $preferred_size_cat;
+            $guardianArray["reputation"] = null;
+            $guardianArray["available_date"] = null;
+            $guardianArray["price"] = null;
 
-        $guardianDAO->Add($newUser, $newGuardian);
+            $newGuardian = $guardianDAO->LoadData($guardianArray, null);
 
-        return require_once(VIEWS_PATH . "login.php");
+            $guardianDAO->Add($newUser, $newGuardian);
+
+            return require_once(VIEWS_PATH . "login.php");
+        } catch (Exception $ex) {
+            header("location: " . FRONT_ROOT . "Auth/ShowRegister");
+        }
     }
 
+    public function Login($email, $password)
+    {
+        try {
 
+
+            $userDAO = new UserDAO();
+
+            $detectedUser = $userDAO->GetByEmail($email);
+
+            if (!$detectedUser) {
+                return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            }
+
+            if ($detectedUser->getPassword() == $password) {
+
+                $typeDetected = $userDAO->getTypeById($detectedUser->getId());
+
+                //Crear sesión
+                session_start();
+
+                $_SESSION["email"] = $detectedUser->getEmail();
+                $_SESSION["id"] = $detectedUser->getId();
+
+                if ($typeDetected["type"] == "owner") {
+                    $_SESSION["type"] = "owner";
+                    return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+                } else {
+                    $_SESSION["type"] = "guardian";
+                    return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+                }
+            }
+
+            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        } catch (Exception $ex) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
+    }
+
+    public function logOut()
+    {
+        session_start();
+        if ($_SESSION["email"]) {
+            session_destroy();
+            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
+    }
+
+    //-----------------------------------------------------------------------------------
 
     // public function RegisterOwner($name, $last_name, $adress, $dni, $phone, $email, $password, $birth_date)
     // {
@@ -186,7 +244,7 @@ class AuthController
 
     //     $user = $guardian_DAO->GetByEmail($email);
 
-    //     // echo "<script>console.log('Debug Objects: " . $user . "' );</script>";
+    //    
 
     //     if ($user != null) {
     //         if ($user->getPassword() == $password) {
@@ -198,7 +256,7 @@ class AuthController
 
     //             $_SESSION["type"] = "guardian";
 
-    //             echo "<script>console.log('Debug Objects: " . var_dump(session_id()) . "' );</script>";
+    //  
 
     //             //Redirigir a perfil Guardian (return)
     //             return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
@@ -227,47 +285,4 @@ class AuthController
     // }
 
     //----------------------------------------------------------------------------------
-
-    public function Login($email, $password)
-    {
-        $userDAO = new UserDAO();
-
-        $detectedUser = $userDAO->GetByEmail($email);
-
-        if (!$detectedUser) {
-            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-        }
-
-        if ($detectedUser->getPassword() == $password) {
-
-            $typeDetected = $userDAO->getTypeById($detectedUser->getId());
-
-            //Crear sesión
-            session_start();
-
-            $_SESSION["email"] = $detectedUser->getEmail();
-            $_SESSION["id"] = $detectedUser->getId();
-
-            if ($typeDetected["type"] == "owner") {
-                $_SESSION["type"] = "owner";
-                return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
-            } else {
-                $_SESSION["type"] = "guardian";
-                return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-            }
-        }
-
-        return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-    }
-
-    public function logOut()
-    {
-        session_start();
-        if ($_SESSION["email"]) {
-            session_destroy();
-            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-        }
-    }
-
-    //-----------------------------------------------------------------------------------
 }
