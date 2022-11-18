@@ -6,9 +6,11 @@ class Payment {
     private $id;
     private $amount;
     private $date;
-    private $payment_method;
-    private $guardian_id;
+    private $reservation_id;
     private $owner_id;
+    private $guardian_id;
+    private $method;
+    private $payment_number;
 
     public function getId()
     {
@@ -19,9 +21,9 @@ class Payment {
     {
         $this->id = $id;
 
-        return $this->id;
+        return $this;
     }
- 
+
     public function getAmount()
     {
         return $this->amount;
@@ -33,7 +35,7 @@ class Payment {
 
         return $this;
     }
- 
+
     public function getDate()
     {
         return $this->date;
@@ -45,40 +47,64 @@ class Payment {
 
         return $this;
     }
-
-    public function getPayment_method()
+ 
+    public function getReservation_id()
     {
-        return $this->payment_method;
+        return $this->reservation_id;
     }
 
-    public function setPayment_method($payment_method)
+    public function setReservation_id($reservation_id)
     {
-        $this->payment_method = $payment_method;
-
-        return $this;
-    }
-
-    public function getGuardian_id()
-    {
-        return $this->guardian_email;
-    }
-
-    public function setGuardian_id($guardian_email)
-    {
-        $this->guardian_email = $guardian_email;
+        $this->reservation_id = $reservation_id;
 
         return $this;
     }
 
     public function getOwner_id()
     {
-        return $this->owner_email;
+        return $this->owner_id;
     }
 
-    public function setOwner_id($owner_email)
+    public function setOwner_id($owner_id)
     {
-        $this->owner_email = $owner_email;
+        $this->owner_id = $owner_id;
 
         return $this;
     }
-}
+
+    public function getGuardian_id()
+    {
+        return $this->guardian_id;
+    }
+
+    public function setGuardian_id($guardian_id)
+    {
+        $this->guardian_id = $guardian_id;
+
+        return $this;
+    }
+
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    public function getPayment_number()
+    {
+        return $this->payment_number;
+    }
+
+    public function setPayment_number($payment_number)
+    {
+        $this->payment_number = $payment_number;
+
+        return $this;
+    }
+    }
