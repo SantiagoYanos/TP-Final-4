@@ -1,52 +1,14 @@
 [
     {
         "id": 1,
-        "name": "manito",
-        "size": "medium",
-        "vaccination_plan": "",
-        "observation": "muerde",
-        "breed": "husky",
-        "Owner_email": "salamin@gmail.com",
-        "type": "dog"
-    },
-    {
-        "id": 2,
-        "name": "salame",
-        "size": "medium",
-        "vaccination_plan": "",
-        "observation": "rojo",
-        "breed": "cocker",
-        "Owner_email": "che@gmail.com",
-        "type": "cat"
-    },
-    {
-        "id": 3,
-        "name": "Tito",
-        "size": "medium",
-        "vaccination_plan": "",
-        "observation": "Yellow Cat",
-        "breed": "Cat",
-        "Owner_email": "shaknerxd@gmail.com",
-        "type": "cat"
-    },
-    {
-        "id": 4,
-        "name": "123",
-        "size": "small",
-        "vaccination_plan": "",
-        "observation": "123",
-        "breed": "123",
-        "Owner_email": "probador@gmail.com",
-        "type": "dog"
-    },
-    {
-        "id": 5,
-        "name": "qwe",
-        "size": "small",
-        "vaccination_plan": "",
-        "observation": "qwe",
-        "breed": "qwe",
-        "Owner_email": "probador@gmail.com",
-        "type": "dog"
+        "name": "manolo",
+        "size": "3",
+        "vaccination_plan": "48753.jpg",
+        "observation": "fluffy",
+        "breed": "salchica",
+        "owner_id": 2,
+        "type": "dog",
+        "pet_img": "127169.jpg",
+        "pet_video": "https:\/\/www.youtube.com\/watch?v=DSG53BsUYd0"
     }
 ]

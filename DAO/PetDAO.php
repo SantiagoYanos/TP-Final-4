@@ -2,10 +2,10 @@
 
 namespace DAO;
 
-use DAO\IPetDAO as IPetDAO;
+use DAO\IModels as IModels;
 use Models\Pet as Pet;
 
-class PetDAO implements IPetDAO
+class PetDAO implements IModels
 {
     private $pet_list = array();
     private $fileName = ROOT . "Data/pet.json";
@@ -16,6 +16,7 @@ class PetDAO implements IPetDAO
         $pet->setId($this->getNextId());
         array_push($this->pet_list, $pet);
         $this->SaveData();
+        return $pet->getId();
     }
 
     function GetAll()
@@ -42,6 +43,9 @@ class PetDAO implements IPetDAO
         $this->pet_list = array_filter($this->pet_list, function ($pet) use ($id) {
             return $pet->getId() != $id;
         });
+
+        $this->SaveData();
+
     }
 
     private function RetrieveData()
@@ -71,18 +75,20 @@ class PetDAO implements IPetDAO
         $pet->setVaccination_plan($content["vaccination_plan"]);
         $pet->setObservation($content["observation"]);
         $pet->setBreed($content["breed"]);
-        $pet->setOwner_email($content["Owner_email"]);
+        $pet->setOwner_id($content["owner_id"]);
         $pet->setType($content["type"]);
+        $pet->setPet_img($content["pet_img"]);
+        $pet->setPet_video($content["pet_video"]);
 
         return $pet;
     }
 
-    public function GetPetsByOwner($owner_email)
+    public function GetPetsByOwner($owner_id)
     {
         //$new_pet_list = array();
         $this->RetrieveData();
-        $new_pet_list = array_filter($this->pet_list, function ($pet) use ($owner_email) {
-            return $pet->getOwner_Email() == $owner_email;
+        $new_pet_list = array_filter($this->pet_list, function ($pet) use ($owner_id) {
+            return $pet->getOwner_id() == $owner_id;
         });
 
         return $new_pet_list;
@@ -113,8 +119,10 @@ class PetDAO implements IPetDAO
         $valuesPet["vaccination_plan"] = $pet->getVaccination_plan();
         $valuesPet["observation"] = $pet->getObservation();
         $valuesPet["breed"] = $pet->getBreed();
-        $valuesPet["Owner_email"] = $pet->getOwner_email();
+        $valuesPet["owner_id"] = $pet->getOwner_id();
         $valuesPet["type"] = $pet->getType();
+        $valuesPet["pet_img"] = $pet->getPet_img();
+        $valuesPet["pet_video"] = $pet->getPet_video();
 
         return $valuesPet;
     }
