@@ -170,3 +170,62 @@ BEGIN
 
 END;
 
+/* ------------------------------------------------ PAYMENTS ------------------------------------------ *
+
+/* Insertar un payment */
+
+INSERT INTO payments (amount, date, reservation_id, owner_id, guardian_id, payment_number) VALUES (10, now(), 36, 2, 1, 1023456);
+
+/* Tipos de pagos */
+
+/* Card | Cash | ? */ 
+
+/* Obtener payment por id */
+
+SELECT p.amount as 'amount', p.date as 'date', p.payment_number as 'payment_number', CONCAT(uo.name, " ", uo.last_name) as 'owner_name', CONCAT(ug.name, " ", ug.last_name) as 'guardian_name', r.price as 'price'
+
+FROM payments p 
+INNER JOIN users uo ON uo.user_id = p.owner_id
+INNER JOIN users ug ON ug.user_id = p.guardian_id
+INNER JOIN reservations r ON r.reservation_id = p.reservation_id
+WHERE p.payment_id = 2;
+
+/* Falta fecha de vencimiento!!  NO VA*/
+/* Falta numero de tarjeta!! */
+/* Falta tipo de tarjeta? */
+
+
+/* Obtener payment(s) por reserva */
+
+/*
+amount
+date
+payment_number
+owner_name
+guardian_name
+price
+*/
+
+SELECT p.amount as 'amount', p.date as 'date', p.payment_number as 'payment_number', CONCAT(uo.name, " ", uo.last_name) as 'owner_name', CONCAT(ug.name, " ", ug.last_name) as 'guardian_name', r.price as 'price'
+
+FROM payments p 
+INNER JOIN users uo ON uo.user_id = p.owner_id
+INNER JOIN users ug ON ug.user_id = p.guardian_id
+INNER JOIN reservations r ON r.reservation_id = p.reservation_id
+WHERE r.reservation_id = 36;
+
+
+/* Obtener todos lo Payments */
+
+SELECT p.amount as 'amount', p.date as 'date', p.payment_number as 'payment_number', CONCAT(uo.name, " ", uo.last_name) as 'owner_name', CONCAT(ug.name, " ", ug.last_name) as 'guardian_name', r.price as 'price'
+FROM payments p 
+INNER JOIN users uo ON uo.user_id = p.owner_id
+INNER JOIN users ug ON ug.user_id = p.guardian_id
+INNER JOIN reservations r ON r.reservation_id = p.reservation_id;
+
+/* Desactivar un payment */
+
+UPDATE payments SET active=false WHERE payment_id=2;
+
+SELECT * FROM pet_sizes;
+
