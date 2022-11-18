@@ -82,7 +82,6 @@ class OwnerDAO implements IModels
     public function GetAll()
     {
         try {
-            $OwnersSQLList = array();
 
             $query = "SELECT * FROM " . $this->tableName . " g INNER JOIN users u ON g.user_id=u.user_id WHERE u.active=true";
 

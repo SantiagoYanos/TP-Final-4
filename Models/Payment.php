@@ -2,27 +2,14 @@
 
 namespace Models;
 
-class Payment {
-    private $id;
+class Payment
+{
     private $amount;
     private $date;
     private $reservation_id;
     private $owner_id;
     private $guardian_id;
-    private $method;
     private $payment_number;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     public function getAmount()
     {
@@ -47,7 +34,7 @@ class Payment {
 
         return $this;
     }
- 
+
     public function getReservation_id()
     {
         return $this->reservation_id;
@@ -84,18 +71,6 @@ class Payment {
         return $this;
     }
 
-    public function getMethod()
-    {
-        return $this->method;
-    }
-
-    public function setMethod($method)
-    {
-        $this->method = $method;
-
-        return $this;
-    }
-
     public function getPayment_number()
     {
         return $this->payment_number;
@@ -107,4 +82,4 @@ class Payment {
 
         return $this;
     }
-    }
+}

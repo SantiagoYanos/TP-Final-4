@@ -6,7 +6,7 @@ use SQLDAO\ReservationDAO as ReservationDAO;
 
 class PaymentController
 {
-    public function ShowPayment()
+    public function ShowPayment($id)
     {
         //Ver un pago ya hecho desde el guardian o el owner
         echo "algo1";
