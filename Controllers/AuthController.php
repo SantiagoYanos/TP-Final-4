@@ -78,7 +78,7 @@ class AuthController
             return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         } catch (Exception $ex) {
 
-            header("location: " . FRONT_ROOT . "Auth/ShowRegister");
+            header("location: " . FRONT_ROOT . "Auth/ShowRegisterOwner");
         }
     }
 
@@ -119,7 +119,7 @@ class AuthController
 
             return require_once(VIEWS_PATH . "login.php");
         } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowRegister");
+            header("location: " . FRONT_ROOT . "Auth/ShowRegisterGuardian");
         }
     }
 

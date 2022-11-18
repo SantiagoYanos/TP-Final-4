@@ -179,7 +179,7 @@ class GuardianDAO implements IModels
             // 2022-11-24') , (:id ,'2022-11-25
             $queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (:id, '" . $datesString . "')";
             //$queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (:id,   :datesString )";
-            var_dump($datesString);
+           
             $this->connection->ExecuteNonQuery($queryInsert, $parameters2);
         } catch (Exception $ex) {
             throw $ex;
