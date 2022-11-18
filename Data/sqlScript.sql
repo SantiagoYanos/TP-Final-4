@@ -132,7 +132,6 @@ create table payments(
     owner_id bigint not null,
     guardian_id bigint not null,
     active boolean not null  default 1,
-    method varchar(150) not null,
     payment_number int not null,
     constraint pk_payments primary key (payment_id),
     constraint fk_payment_guardian foreign key (guardian_id) references users(user_id),
@@ -140,7 +139,6 @@ create table payments(
     constraint fk_payment_reservation foreign key (reservation_id) references reservations (reservation_id),
     constraint chk_negative_amount check ( amount>=0 )
 );
-
 
 INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Santiago", "Yanosky", "costa 12222", "02235887965", "santi@gmail.com", "elmascapito", '2002-11-13');
 INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Agus", "Kumar", "basural 5555", "02235 1256987", "agus@gmail.com", "elmascapoto", '1999-11-12');
