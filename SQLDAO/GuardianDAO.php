@@ -164,7 +164,6 @@ class GuardianDAO implements IModels
 
             $parameters1["id"] = $id;
 
-
             $this->connection->ExecuteNonQuery($queryDelete, $parameters1);
 
             if ($available_dates == []) {

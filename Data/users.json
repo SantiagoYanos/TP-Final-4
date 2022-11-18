@@ -1,0 +1,22 @@
+[
+    {
+        "user_id": 1,
+        "name": "Santiago",
+        "last_name": "Nicolas",
+        "adress": "RioNegroLOL",
+        "phone": "asdasd789654",
+        "email": "shaknexd@gmail.com",
+        "password": "1234",
+        "birth_date": "2022-11-07"
+    },
+    {
+        "user_id": 2,
+        "name": "Agustin",
+        "last_name": "Si",
+        "adress": "Aguland",
+        "phone": "4554657",
+        "email": "agus@gmail.com",
+        "password": "456",
+        "birth_date": "2022-11-01"
+    }
+]

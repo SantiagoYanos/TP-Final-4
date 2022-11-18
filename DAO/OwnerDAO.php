@@ -2,24 +2,59 @@
 
 namespace DAO;
 
-use DAO\IOwnerDAO as IOwnerDAO;
+use DAO\IModels as IModels;
+use Models\User as User;
 use Models\Owner as Owner;
 use Models\Pet as Pet;
-
+use DAO\UserDAO as UserDAO;
 use DAO\PetDAO as PetDAO;
 
-class OwnerDAO implements IOwnerDAO
+class OwnerDAO implements IModels
 {
     private $ownerList = array();
     private $fileName = ROOT . 'Data/owners.json';
 
-    function Add(Owner $owner)
+    function Add(User $user, Owner $owner)
     {
+        $userDAO = new UserDAO();
+
         $this->RetrieveData();
 
-        $owner->setId($this->GetNextId());
+        $newId = $userDAO->Add($user);
 
-        array_push($this->ownerList, $owner);
+        $newUser = new User();
+
+        $newUser->setId($newId);
+
+        $owner->setUser_id($newId);
+
+        $newUser->setType_data($owner);
+
+        array_push($this->ownerList, $newUser);
+
+        $this->SaveData();
+    }
+
+
+    function Edit(User $user, Owner $ownerEdit)
+    {
+        $userDAO = new UserDAO();
+
+        $this->RetrieveData();
+
+        $owners = array_map(function ($owner) use ($user, $ownerEdit, $userDAO) {
+
+            if ($owner->getId() == $user->getId()) {
+
+                $userDAO->Edit($user);
+
+                $owner->setType_data($ownerEdit);
+            }
+
+            return $owner;
+        }, $this->ownerList);
+
+        $this->ownerList = $owners;
 
         $this->SaveData();
     }
@@ -49,24 +84,6 @@ class OwnerDAO implements IOwnerDAO
         }
     }
 
-    function GetByDni($dni){
-        $this->RetrieveData();
-
-        $owns = array_filter($this->ownerList, function ($owner) use ($dni) {
-
-            return $owner->getDni() == $dni;
-        });
-
-        $owners = array_values($this->ownerList);
-
-        if (count($owners) > 0) {
-            return $owners[0];
-        } else {
-            return null;
-        }
-    }
-
-
     function GetByEmail($email)
     {
         $this->RetrieveData();
@@ -86,9 +103,15 @@ class OwnerDAO implements IOwnerDAO
 
     function Remove($id)
     {
+        $userDAO = new UserDAO();
+
         $this->RetrieveData();
 
-        $this->ownerList = array_filter($this->ownerList, function ($owner) use ($id) {
+        $this->ownerList = array_filter($this->ownerList, function ($owner) use ($id, $userDAO) {
+
+            if ($owner->getId() == $id) {
+                $userDAO->Remove($id);
+            }
 
             return $owner->getId() != $id;
         });
@@ -101,94 +124,54 @@ class OwnerDAO implements IOwnerDAO
         $this->ownerList = array();
 
         if (file_exists($this->fileName)) {
-            $jsonToDecode = file_get_contents($this->fileName); //Agarra el contenido del json en formato String
+            $jsonToDecode = file_get_contents($this->fileName);
 
-            $contentArray = array();
+            $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
 
-            if ($jsonToDecode) //Si el String tiene contenido...
-            {
-                $contentArray = json_decode($jsonToDecode, true); //Transforma el String a formato Json
-            }
+            $userDAO = new UserDAO();
 
-            foreach ($contentArray as $content) //Por cada owner del array de owners (que trajo del archivo)...
-            {
-                $owner = $this->jsonToOwner($content);
+            foreach ($contentArray as $content) {
 
-                array_push($this->ownerList, $owner); //Agrega el owner a la lista de owners (ahora con formato Owner)
+                $user = $userDAO->getById($content["user_id"]);
+
+                $owner = $this->LoadData($content);
+
+                $user->setType_data($owner);
+
+                array_push($this->ownerList, $user);
+
+                //guardianList es una lista de Usuarios con Type_data de Guardianes
             }
         }
     }
 
-    private function jsonToOwner($content)
+
+    public function LoadData($resultSet)
     {
-        $owner = new Owner(); //Crea un owner de tipo Owner
+        $Owner = new Owner();
+        $Owner->setUser_id($resultSet["user_id"]);
+        $Owner->setDni($resultSet["dni"]);
 
-        $pet_DAO = new PetDAO();
-
-        $owner->setId($content["id"]); //Le asigna los datos con los set
-        $owner->setName($content["name"]);
-        $owner->setLast_name($content["last_name"]);
-        $owner->setAdress($content["adress"]);
-        $owner->setDni($content["dni"]);
-        $owner->setPhone($content["phone"]);
-        //$owner->setPets($pet_DAO->GetPetsByOwner($content["email"])); //Ejecuta la función del DAO de Pets obteniendo todas las mascotas del dueño en formato Pet
-        $owner->setEmail($content["email"]);
-        $owner->setPassword($content["password"]);
-        $owner->setBirth_date($content["birth_date"]);
-
-        return $owner;
+        return $Owner;
     }
 
     private function SaveData()
     {
-        $arrayToDecode = array(); //Arreglo de arreglos (que después van a pasar a ser un Json)
+        $arrayToEncode = array();
 
-        foreach ($this->ownerList as $owner) //Por cada Owner de la lista de Owners...
-        {
-            $ownerArray = $this->OwnerToArray($owner); //Pasa cada Owner a un Array
+        foreach ($this->ownerList as $user) {
 
-            array_push($arrayToDecode, $ownerArray); //Agrega al Array de Owners
+            $owner = $user->getType_data();
+
+            $valuesArray = array();
+            $valuesArray["user_id"] = $user->getId();
+            $valuesArray["dni"] = $owner->getDni();
+
+            array_push($arrayToEncode, $valuesArray);
         }
 
-        $fileContent = json_encode($arrayToDecode, JSON_PRETTY_PRINT); //Lo transforma a formato JSON
+        $fileContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
 
-        file_put_contents($this->fileName, $fileContent); //Lo carga en un archivo (o crea el archivo)
-    }
-
-    private function OwnerToArray($owner)
-    {
-        $pet_DAO = new PetDAO();
-
-        $valuesOwner = array();
-        $valuesOwner["id"] = $owner->getId(); //Se pasa del Owner al array owner los datos
-        $valuesOwner["name"] = $owner->getName();
-        $valuesOwner["last_name"] = $owner->getLast_name();
-        $valuesOwner["adress"] = $owner->getAdress();
-        $valuesOwner["dni"] = $owner->getDni();
-        $valuesOwner["phone"] = $owner->getPhone();
-        //$valuesOwner["pets"] = array();
-        $valuesOwner["birth_date"] = $owner->getBirth_date();
-
-        /*foreach ($owner->getPets() as $pet) {
-            $petArray = $pet_DAO->PetToArray($pet);
-
-            array_push($valuesOwner["pets"], $petArray);
-        }*/
-
-        $valuesOwner["email"] = $owner->getEmail();
-        $valuesOwner["password"] = $owner->getPassword();
-
-        return $valuesOwner;
-    }
-
-    private function GetNextId()
-    {
-        $id = 0;
-
-        foreach ($this->ownerList as $owner) {
-            $id = ($owner->getId() > $id) ? $owner->getId() : $id;
-        }
-
-        return $id + 1;
+        file_put_contents($this->fileName, $fileContent);
     }
 }

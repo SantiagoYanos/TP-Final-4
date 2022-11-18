@@ -10,6 +10,7 @@ class Guardian
     private $reputation;
     private $available_date;
     private $price;
+    private $user_id;
 
     public function getCuil()
     {
@@ -79,6 +80,18 @@ class Guardian
     public function setPrice($price)
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getUser_id()
+    {
+        return $this->user_id;
+    }
+
+    public function setUser_Id($user_id)
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }

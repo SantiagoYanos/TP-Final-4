@@ -2,22 +2,57 @@
 
 namespace DAO;
 
-use DAO\IGuardianDAO as IGuardianDAO;
+use DAO\UserDAO as UserDAO;
 use Models\Guardian as Guardian;
+use Models\User as User;
 
-
-class GuardianDAO implements IGuardianDAO
+class GuardianDAO implements IModels
 {
     private $guardianList = array();
     private $fileName = ROOT . "Data/guardians.json";
 
-    function Add(guardian $guardian)
+    function Add(User $user, Guardian $guardian)
     {
+        $userDAO = new UserDAO();
+
         $this->RetrieveData();
 
-        $guardian->setId($this->GetNextId());
+        $newId = $userDAO->Add($user);
 
-        array_push($this->guardianList, $guardian);
+        $newUser = new User();
+
+        $newUser->setId($newId);
+
+        $guardian->setUser_id($newId);
+
+        $guardian->setReputation(3);
+
+        $newUser->setType_data($guardian);
+
+        array_push($this->guardianList, $newUser);
+
+        $this->SaveData();
+    }
+
+    function Edit(User $user, Guardian $guardianEdit)
+    {
+        $userDAO = new UserDAO();
+
+        $this->RetrieveData();
+
+        $guardians = array_map(function ($guardian) use ($user, $guardianEdit, $userDAO) {
+
+            if ($guardian->getId() == $user->getId()) {
+
+                $userDAO->Edit($user);
+
+                $guardian->setType_data($guardianEdit);
+            }
+
+            return $guardian;
+        }, $this->guardianList);
+
+        $this->guardianList = $guardians;
 
         $this->SaveData();
     }
@@ -56,25 +91,18 @@ class GuardianDAO implements IGuardianDAO
         return (count($guardians) > 0) ? $guardians[0] : null;
     }
 
-    function GetByCUIL($cuil)
-    {
-        $this->RetrieveData();
-
-        $guardians = array_filter($this->guardianList, function ($guardian) use ($cuil) {
-
-            return $guardian->GetCuil() == $cuil;
-        });
-
-        $guardians = array_values($guardians);
-
-        return (count($guardians) > 0) ? $guardians[0] : null;
-    }
-
     function Remove($id)
     {
+        $userDAO = new UserDAO();
+
         $this->RetrieveData();
 
-        $this->guardianList = array_filter($this->guardianList, function ($guardian) use ($id) {
+        $this->guardianList = array_filter($this->guardianList, function ($guardian) use ($id, $userDAO) {
+
+            if ($guardian->getId() == $id) {
+                $userDAO->Remove($id);
+            }
+
             return $guardian->getId() != $id;
         });
 
@@ -90,25 +118,43 @@ class GuardianDAO implements IGuardianDAO
 
             $contentArray = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
 
+            $userDAO = new UserDAO();
+
             foreach ($contentArray as $content) {
 
-                $guardian = new guardian();
-                $guardian->setId($content["id"]);
-                $guardian->setCuil($content["cuil"]);
-                $guardian->setName($content["name"]);
-                $guardian->setLast_name($content["last_name"]);
-                $guardian->setAdress($content["adress"]);
-                $guardian->setPhone($content["phone"]);
-                $guardian->setPreferred_size($content["preferred_size"]);
-                $guardian->setPreferred_size_cat($content["preferred_size_cat"]);
-                $guardian->setPrice($content["price"]);
-                $guardian->setReputation($content["reputation"]);
-                $guardian->setEmail($content["email"]);
-                $guardian->setPassword($content["password"]);
-                $guardian->setAvailable_date($content["available_date"]);
-                $guardian->setBirth_date($content["birth_date"]);
+                switch ($content["preferred_size"]) {
+                    case 1:
+                        $content["preferred_size"] = "big";
+                        break;
+                    case 2:
+                        $content["preferred_size"] = "medium";
+                        break;
+                    case 3:
+                        $content["preferred_size"] = "small";
+                        break;
+                }
 
-                array_push($this->guardianList, $guardian);
+                switch ($content["preferred_size_cat"]) {
+                    case 1:
+                        $content["preferred_size_cat"] = "big";
+                        break;
+                    case 2:
+                        $content["peeferred_size_cat"] = "medium";
+                        break;
+                    case 3:
+                        $content["preferred_size_cat"] = "small";
+                        break;
+                }
+
+                $user = $userDAO->getById($content["user_id"]);
+
+                $guardian = $this->LoadData($content, $content["available_date"]);
+
+                $user->setType_data($guardian);
+
+                array_push($this->guardianList, $user);
+
+                //guardianList es una lista de Usuarios con Type_data de Guardianes
             }
         }
     }
@@ -117,22 +163,18 @@ class GuardianDAO implements IGuardianDAO
     {
         $arrayToEncode = array();
 
-        foreach ($this->guardianList as $guardian) {
+        foreach ($this->guardianList as $user) {
+
+            $guardian = $user->getType_data();
+
             $valuesArray = array();
-            $valuesArray["id"] = $guardian->getId();
+            $valuesArray["user_id"] = $user->getId();
             $valuesArray["cuil"] = $guardian->getCuil();
-            $valuesArray["name"] = $guardian->getName();
-            $valuesArray["last_name"] = $guardian->getLast_name();
-            $valuesArray["adress"] = $guardian->getAdress();
-            $valuesArray["phone"] = $guardian->getPhone();
             $valuesArray["preferred_size"] = $guardian->getPreferred_size();
             $valuesArray["preferred_size_cat"] = $guardian->getPreferred_size_cat();
             $valuesArray["reputation"] = $guardian->getReputation();
             $valuesArray["price"] = $guardian->getPrice();
-            $valuesArray["email"] = $guardian->getEmail();
-            $valuesArray["password"] = $guardian->getPassword();
             $valuesArray["available_date"] = $guardian->getAvailable_date();
-            $valuesArray["birth_date"] = $guardian->getBirth_date();
             array_push($arrayToEncode, $valuesArray);
         }
 
@@ -167,15 +209,15 @@ class GuardianDAO implements IGuardianDAO
         $this->SaveData();
     }*/
 
-    function UpdateAvailableDates($email, $availableDates)
+    public function AddAvailableDates($id, $availableDates)
     {
         $this->RetrieveData();
 
-        $guardians = array_map(function ($guardian) use ($email, $availableDates) {
+        $guardians = array_map(function ($guardian) use ($id, $availableDates) {
 
-            if ($guardian->getEmail() == $email) {
+            if ($guardian->getId() == $id) {
 
-                $guardian->setAvailable_date($availableDates);
+                $guardian->getType_data()->setAvailable_date($availableDates);
             }
 
             return $guardian;
@@ -186,14 +228,69 @@ class GuardianDAO implements IGuardianDAO
         $this->SaveData();
     }
 
-    private function GetNextId()
+    public function GetAvailableDates($id)
     {
-        $id = 0;
+        $this->RetrieveData();
 
-        foreach ($this->guardianList as $guardian) {
-            $id = ($guardian->getId() > $id) ? $guardian->getId() : $id;
+        $guardians = array_filter($this->guardianList, function ($guardian) use ($id) {
+
+            return $guardian->getId() == $id;
+        });
+
+        if (!$guardians[0]) {
+            return null;
         }
 
-        return $id + 1;
+        return $guardians[0]->getType_data()->getAvailable_date();
+    }
+
+    public function SearchGuardiansByFilters($filters)
+    {
+        $this->RetrieveData();
+
+        return $this->guardianList;
+
+        //No estaba en la primera entrega (Retorna todos los guardianes)
+    }
+
+    // function UpdateAvailableDates($user_id, $availableDates)
+    // {
+    //     $this->RetrieveData();
+
+    //     $guardians = array_map(function ($guardian) use ($email, $availableDates) {
+
+    //         if ($guardian->getEmail() == $email) {
+
+    //             $guardian->setAvailable_date($availableDates);
+    //         }
+
+    //         return $guardian;
+    //     }, $this->guardianList);
+
+    //     $this->guardianList = $guardians;
+
+    //     $this->SaveData();
+    // }
+
+    public function LoadData($resultSet, $available_dates)
+    {
+        $Guardian = new Guardian();
+        $Guardian->setUser_id($resultSet["user_id"]);
+        $Guardian->setCuil($resultSet["cuil"]);
+        $Guardian->setPreferred_size($resultSet["preferred_size"]);
+        $Guardian->setPreferred_size_cat($resultSet["preferred_size_cat"]);
+        if ($resultSet["reputation"]) {
+            $Guardian->setReputation($resultSet["reputation"]);
+        }
+        if ($available_dates) {
+            $Guardian->setAvailable_date($available_dates);
+        } else {
+            $Guardian->setAvailable_date(NULL);
+        }
+        if ($resultSet["price"]) {
+            $Guardian->setPrice($resultSet["price"]);
+        }
+
+        return $Guardian;
     }
 }
