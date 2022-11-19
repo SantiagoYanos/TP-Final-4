@@ -59,7 +59,7 @@ class PaymentController
 
         $paymentDAO->Add($payment);
         
-        $this->ShowPayment($reservation_id);
+        header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id= $reservation_id");
     } catch (Exception $e) {
         header("location: " . FRONT_ROOT . "Auth/ShowLogin");
     }

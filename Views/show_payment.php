@@ -11,6 +11,7 @@
 
 
 tu pago
+<?php var_dump($arrayPayment)  ?>
     
 </body>
 </html>
