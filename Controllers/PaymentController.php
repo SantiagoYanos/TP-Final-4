@@ -13,7 +13,7 @@ class PaymentController
 
 
 
-    public function ShowPayment($id_reservation)
+    public function ShowPayment($reservation_id)
     {
         try{
 
@@ -21,7 +21,7 @@ class PaymentController
         $payment=new PaymentDAO();
 
         $arrayPayment=array();
-        $arrayPayment=$payment->GetByReservationId($id_reservation);
+        $arrayPayment=$payment->GetByReservationId($reservation_id);
         
         
         return require_once(VIEWS_PATH . "show_payment.php");
@@ -58,6 +58,10 @@ class PaymentController
         $payment->setPayment_number(random_int(0,999999999));
 
         $paymentDAO->Add($payment);
+
+        $reservationDAO=new ReservationDAO;
+
+        $reservationDAO->updateState($reservation_id,"Paid");
         
         header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id= $reservation_id");
     } catch (Exception $e) {

@@ -116,7 +116,7 @@
 
                             break;?>
 
-                                <?php case "Payed":
+                                <?php case "Paid":
                                 ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
                                 <button type="submit"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form><?php 

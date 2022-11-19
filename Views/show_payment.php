@@ -13,5 +13,9 @@
 tu pago
 <?php var_dump($arrayPayment)  ?>
     
+
+<form action="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>" method="post">
+<button type="submit"> back</button>
+</form>
 </body>
 </html>
