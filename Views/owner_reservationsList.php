@@ -32,6 +32,7 @@
             <th>Pets</th>
             <th>Dates</th>
             <th>State</th>
+            <th>Payment</th>
 
         </thead>
 
@@ -101,6 +102,29 @@
                     <!----------------CALENDARIO--------------------->
 
                     <td><?php echo $reservation->getState() ?> </td>
+
+                    <td>
+                        <?php switch ($reservation->getState())
+                        {
+
+                        
+    
+                            case "Accepted":
+                                ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?> " method="post">
+                                <button type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                            </form><?php 
+
+                            break;?>
+
+                                <?php case "Payed":
+                                ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
+                                <button type="submit"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                            </form><?php 
+
+                            break;?>
+                            
+                        <?php } ?>
+                    </td>
                 </tr>
 
                 <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
@@ -144,12 +168,18 @@
                                         <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
                                         <td style="width: 150px;"> <a href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
+                    
                 <?php
                                     $idCont++;
                                 }
                 ?>
 
+
                 </tr>
+                        
+ 
+
+
 
         </tbody>
 

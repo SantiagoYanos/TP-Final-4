@@ -3,12 +3,12 @@
 namespace Controllers;
 
 
-use DAO\OwnerDAO as OwnerDAO;
-use DAO\GuardianDAO as GuardianDAO;
-use DAO\PetDAO as PetDAO;
-//use SQLDAO\PetDAO as PetDAO;
-// use SQLDAO\OwnerDAO as OwnerDAO;
-// use SQLDAO\GuardianDAO as GuardianDAO;
+//use DAO\OwnerDAO as OwnerDAO;
+//use DAO\GuardianDAO as GuardianDAO;
+//use DAO\PetDAO as PetDAO;
+use SQLDAO\PetDAO as PetDAO;
+use SQLDAO\OwnerDAO as OwnerDAO;
+use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\ReservationDAO as ReservationDAO;
 use Models\Pet as Pet;
 use Models\User as User;

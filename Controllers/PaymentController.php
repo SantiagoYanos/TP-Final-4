@@ -18,30 +18,32 @@ class PaymentController
         try{
 
         
-        $payment=new PaymentDAO;
+        $payment=new PaymentDAO();
 
-
+        $arrayPayment=array();
         $arrayPayment=$payment->GetByReservationId($id_reservation);
         
-        header("location: " . FRONT_ROOT . "Payment/show_payment");
+        
+        return require_once(VIEWS_PATH . "show_payment.php");
     } catch (Exception $e) {
         header("location: " . FRONT_ROOT . "Auth/ShowLogin");
     }
     }
 
-    public function ShowMakePayment($id_reservation)
+    public function ShowMakePayment($reservation_id)
     {
+        
         try{
         $reservationDAO=new ReservationDAO;
-        $reservation=$reservationDAO->getById($id_reservation);
-
+        $reservation=$reservationDAO->getById($reservation_id);
+        var_dump($reservation);
         return require_once(VIEWS_PATH . "ShowMakePayment.php");
     } catch (Exception $e) {
         header("location: " . FRONT_ROOT . "Auth/ShowLogin");
     }
     }
 
-    public function MakePayment($amount, $reservation_id, $owner_id, $guardian_id)
+    public function MakePayment($price, $reservation_id, $owner_id, $guardian_id)
     {
         try{
         echo "algo2";
@@ -49,7 +51,7 @@ class PaymentController
 
         $paymentDAO=new PaymentDAO;
         $payment=new Payment;
-        $payment->setAmount($amount);
+        $payment->setAmount($price);
         $payment->setReservation_id($reservation_id);
         $payment->setOwner_id($owner_id);
         $payment->setGuardian_id($guardian_id);

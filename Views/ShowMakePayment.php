@@ -7,11 +7,8 @@
     <title>makePayment</title>
 </head>
 <body>
+    <div>
 
-<form action="<?php echo FRONT_ROOT . "Payment/ShowMakePayment" ?>" method="post">
-
-
-<div class="txt_field">
                 <input type="text" name="card_number" required></br>
                 <label for="name">Card number </label>
             </div>
@@ -34,23 +31,19 @@
                 <label for="">Security code </label>
             </div>
          
-         
-                
+            asd1
+            <form action="<?php echo FRONT_ROOT . "Payment/MakePayment" ?>" method="post">
+            asd2
            
-            <input name="amount" value="<?php echo $reservation->getAmount() ?>" hidden>
-            <input name="reservation_id" value="<?php echo $reservation->getId() ?>" hidden>
-            <input name="owner_id" value="<?php echo $reservation->getOwner_id() ?>" hidden>
-            <input name="guardian_id" value="<?php echo $reservation->getGuardian_id() ?>" hidden>
+            <input name="price" value="<?php echo $reservation->getPrice() ?>" hidden>
+            <input  name="reservation_id" value="<?php echo $reservation->getId() ?>" hidden>
+            <input  name="owner_id" value="<?php echo $reservation->getOwner_id() ?>" hidden>
+            <input  name="guardian_id" value="<?php echo $reservation->getGuardian_id() ?>" hidden>
+            asd3
+            <button type="submit"> Pay </button>
 
-            <button type="submit"> Pay</button>
-
-
-
-
-
-
-
-</form>
+        </form>
+</div>
 
 
 
