@@ -173,12 +173,12 @@ class ReservationController
 
                     header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
                 } else {
-                    $reservationDAO->updateState($reservation->getId(), "Accepted");
+                    $reservationDAO->updateState($reservation->getId(), "Payment pending");
                     header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
                 }
             } else {
 
-                $reservationDAO->updateState($reservation->getId(), "Accepted");
+                $reservationDAO->updateState($reservation->getId(), "Payment pending");
 
                 header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
             }

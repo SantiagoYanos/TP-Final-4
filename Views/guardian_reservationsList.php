@@ -102,17 +102,29 @@
                     <td><?php echo $reservation->getState() ?> </td>
 
                     <td>
-                        <?php if ($reservation->getState() == "Pending") { ?>
+                        <?php 
+                        switch ($reservation->getState())
+                        {
+                        
+                        case "Pending" ?>
                             <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
                                 <button type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
 
-
                             <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> " method="post">
-                                <button type="submit"> Reject </button>
-                                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
-
+                            <button type="submit"> Reject </button>
+                            <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
+
+                            <?php break;?>
+
+                            <?php case "Paid":
+                            ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
+                            <button type="submit"> View payment </button>
+                            <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                            </form>
+                            <?php break;?>
+
                         <?php } ?>
                     </td>
 
