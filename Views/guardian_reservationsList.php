@@ -42,7 +42,7 @@
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
                     <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id=" . $reservation->GetOwner_id() ?>><button class="mt-2">Owner Profile</button></a> </td>
-                    <td><?php echo $reservation->getPrice() ?></td>
+                    <td>$<?php echo $reservation->getPrice() ?></td>
                     <td>
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
@@ -102,30 +102,30 @@
                     <td><?php echo $reservation->getState() ?> </td>
 
                     <td>
-                        <?php 
-                        switch ($reservation->getState())
-                        {
-                        
-                        case "Pending" ?>
+                        <?php
+                        switch ($reservation->getState()) {
+
+                            case "Pending" ?>
                             <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
                                 <button type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
 
                             <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> " method="post">
-                            <button type="submit"> Reject </button>
-                            <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                <button type="submit"> Reject </button>
+                                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
 
-                            <?php break;?>
+                            <?php break; ?>
 
-                            <?php case "Paid":
-                            ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
-                            <button type="submit"> View payment </button>
-                            <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                        <?php
+                            case "Paid":
+                        ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
+                                <button type="submit"> View payment </button>
+                                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
-                            <?php break;?>
+                            <?php break; ?>
 
-                        <?php } ?>
+                    <?php } ?>
                     </td>
 
                 </tr>
@@ -172,9 +172,9 @@
                                         <td style="width: 150px;"> <a href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
                 <?php
-                                $idCont++;
+                                    $idCont++;
                                 }
-                                ?>
+                ?>
                 </tr>
 
         </tbody>

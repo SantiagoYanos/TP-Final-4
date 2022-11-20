@@ -44,7 +44,7 @@
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
                     <td><?php echo $reservation->getGuardian_id() ?></td>
-                    <td><?php echo $reservation->getPrice() ?></td>
+                    <td>$<?php echo $reservation->getPrice() ?></td>
                     <td>
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
@@ -104,25 +104,25 @@
                     <td><?php echo $reservation->getState() ?> </td>
 
                     <td>
-                        <?php switch ($reservation->getState())
-                        {
+                        <?php switch ($reservation->getState()) {
 
-                        
-    
+
+
                             case "Payment pending":
-                                ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?> " method="post">
-                                <button type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
-                            </form><?php 
+                        ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?> " method="post">
+                                    <button type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                </form><?php
 
-                            break;?>
+                                        break; ?>
 
-                                <?php case "Paid":
-                                ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
-                                <button type="submit"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
-                            </form><?php 
+                            <?php
+                            case "Paid":
+                            ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
+                                    <button type="submit"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                </form><?php
 
-                            break;?>
-                            
+                                        break; ?>
+
                         <?php } ?>
                     </td>
                 </tr>
@@ -168,7 +168,7 @@
                                         <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
                                         <td style="width: 150px;"> <a href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
-                    
+
                 <?php
                                     $idCont++;
                                 }
@@ -176,8 +176,8 @@
 
 
                 </tr>
-                        
- 
+
+
 
 
 
