@@ -1,8 +1,8 @@
 <?php
 
 namespace Controllers;
-use DAO\PetDAO as PetDAO;
-//use SQLDAO\PetDAO as PetDAO;
+//use DAO\PetDAO as PetDAO;
+use SQLDAO\PetDAO as PetDAO;
 use Models\Pet as Pet;
 use \Exception as Exception;
 

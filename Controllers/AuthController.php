@@ -145,6 +145,7 @@ class AuthController
 
                 $_SESSION["email"] = $detectedUser->getEmail();
                 $_SESSION["id"] = $detectedUser->getId();
+                $_SESSION["token"] = random_bytes(16);
 
                 if ($typeDetected["type"] == "owner") {
                     $_SESSION["type"] = "owner";

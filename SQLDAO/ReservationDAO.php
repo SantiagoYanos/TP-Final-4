@@ -90,6 +90,7 @@ class ReservationDAO implements IModels
     public function updateState($reservation_id, $state)
     {
         try {
+
             $query = "UPDATE reservations SET state = :state WHERE reservation_id = :reservation_id";
 
             $parameters["state"] = $state;
