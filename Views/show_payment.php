@@ -10,8 +10,8 @@
 
 
 
-tu pago
-<?php var_dump($arrayPayment)  ?>
+<h1>Your payment</h1>
+
 
 <table class="table table-striped table-bordered" style="text-align:center;" border="2">
         <thead>
