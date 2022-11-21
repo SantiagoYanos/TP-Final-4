@@ -137,7 +137,8 @@ create table payments(
     constraint fk_payment_guardian foreign key (guardian_id) references users(user_id),
     constraint fk_payment_owner foreign key (owner_id) references users(user_id),
     constraint fk_payment_reservation foreign key (reservation_id) references reservations (reservation_id),
-    constraint chk_negative_amount check ( amount>=0 )
+    constraint chk_negative_amount check ( amount>=0 ),
+    CONSTRAINT unq_reservation_id UNIQUE (reservation_id)
 );
 
 INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Santiago", "Yanosky", "costa 12222", "02235887965", "santi@gmail.com", "elmascapito", '2002-11-13');

@@ -24,7 +24,6 @@ class PaymentController
             $arrayPayment = array();
             $arrayPayment = $payment->GetByReservationId($reservation_id);
 
-
             return require_once(VIEWS_PATH . "show_payment.php");
         } catch (Exception $e) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
