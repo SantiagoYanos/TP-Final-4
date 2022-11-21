@@ -81,6 +81,10 @@
                 <input type="tel" class="form-control" id="phone" name="phone" placeholder="123-456-7890">
             </div>
 
+            <div>
+                <a href=<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>><button class="btn btn-dark float-end">Back</button></a>
+            </div>
+
 
             <form action="<?php echo FRONT_ROOT . "Payment/MakePayment" ?>" method="post">
 
