@@ -114,13 +114,10 @@ class ReservationController
             }
 
             if ($flag == 0) {
-                $cant_pets = 0;
 
-                foreach ($pets_ids as $pet) {
-                    $cant_pets++;
-                }
+                $price = count($pets_ids) * $guardian_user->getType_data()->getPrice();
 
-                $price = $cant_pets * $guardian_user->getType_data()->getPrice();
+                $price = $price * count($reservation_dates);
 
                 $reservation = new Reservation();
                 $reservation->setGuardian_id($guardian_id);
