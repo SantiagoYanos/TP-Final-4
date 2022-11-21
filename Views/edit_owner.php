@@ -16,7 +16,7 @@
     <title>Owner Edit</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
 
     <h1>Owner Edit</h1> <i class="fa fa-house"></i>
 

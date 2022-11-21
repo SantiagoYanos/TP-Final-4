@@ -32,7 +32,7 @@
     <title>Guardian Profile</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
 
     <h1><?php echo $guardian->getName() ?>'s profile</h1> <i class="fa fa-house"></i>
 

@@ -18,9 +18,9 @@
     <title>Guardian Home</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
 
-    <h1><?php echo $user_guardian->getName()?>'s Profile</h1> <i class="fa fa-house"></i>
+    <h1><?php echo $user_guardian->getName() ?>'s Profile</h1> <i class="fa fa-house"></i>
 
 
     <h2>Reputation</h2>
@@ -147,8 +147,8 @@
                 <div>
                     <label for="pet_name">Select Your Pet: </label>
                     <select name="pet_name" id="pet_name" required>
-                        <?php foreach ($petList as $pet)?>
-                        <option name="<?php $pet->getName()?>" value=<?php $pet->getId()?>><?php echo $pet->getName() ?></option>
+                        <?php foreach ($petList as $pet) ?>
+                        <option name="<?php $pet->getName() ?>" value=<?php $pet->getId() ?>><?php echo $pet->getName() ?></option>
                     </select></br>
                 </div>
             </div>
@@ -156,12 +156,13 @@
             <div class="container align-items-end">
                 <div>
                     <label for="dates">Select Dates: </label>
-                  
+
                 </div>
             </div>
         </form>
 
         <!--<a href-<?php require_once VIEWS_PATH . "guardianList.php" ?>><button class="float-end mt-2">Back</button></a>>-->
-        
+
 </body>
+
 </html>

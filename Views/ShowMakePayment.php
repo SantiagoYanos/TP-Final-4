@@ -33,7 +33,7 @@
     }
 </style>
 
-<body style="height: 100vh">
+<body style="height: 100vh" class="ms-2 me-2">
 
     <h1 class="fixed-top p-2">Make Payment</h1>
 

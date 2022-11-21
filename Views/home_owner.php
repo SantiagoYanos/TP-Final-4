@@ -11,30 +11,30 @@
     <title>Home</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
     <div>
-        <h1><?php echo $user->getName()?>'s Home</h1>
+        <h1><?php echo $user->getName() ?>'s Home</h1>
     </div>
 
     <div>
         <form action="<?php echo FRONT_ROOT . "Pet/PetList" ?>" method="post">
-            <button type="submit">View Pets</button></br>
+            <button class="mb-2 mt-3" type="submit">View Pets</button></br>
         </form>
     </div>
 
     <div>
         <form action="<?php echo FRONT_ROOT . "Owner/SearchGuardian" ?>" method="post">
-            <button type="submit">Visualize Guardians</button></br>
+            <button class="mb-2" type="submit">Visualize Guardians</button></br>
         </form>
     </div>
 
     <div>
-        <form action="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>"  method="post">
-            <button type="submit">See Reservations</button>
+        <form action="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>" method="post">
+            <button class="mb-2" type="submit">See Reservations</button>
         </form>
     </div>
 
-    </br></br>
+    </br>
 
     <div>
         <h2>Owner's Information</h2>

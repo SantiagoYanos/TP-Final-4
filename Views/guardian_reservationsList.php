@@ -16,7 +16,27 @@
     <title>My Reservations</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
+
+    <div class="row w-100 mt-3 ms-1">
+
+        <div class="col col-2">
+
+            <form <?php echo FRONT_ROOT . "Guardian/ViewReservationsGuardian" ?> method="post">
+                <b><label for="state" class="form-label">State filter</label></b>
+                <select class="form-select" aria-label="registration_filter" name="state">
+                    <option selected>*</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Payment pending">Payment pending</option>
+                    <option value="Paid">Paid</option>
+                </select>
+
+                <input class="mt-3" type="submit" value="Filtrar">
+            </form>
+
+        </div>
+
+    </div>
 
 
     <table class="table table-striped table-bordered mt-3 mb-1">

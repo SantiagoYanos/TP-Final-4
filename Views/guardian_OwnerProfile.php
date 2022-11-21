@@ -11,7 +11,7 @@
     <title>Owner's Profile</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
     <div>
         <h1>Owner's profile</h1>
     </div>

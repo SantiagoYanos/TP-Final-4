@@ -13,7 +13,7 @@
     <title>view_pets</title>
 </head>
 
-<body class="bImageFix" style="background-image: url(../Views/images/gary.png) ">
+<body class="bImageFix ms-2 me-2" style="background-image: url(../Views/images/gary.png) ">
     <h1>My pets</h1>
 
     <table class="table table-striped table-bordered" style="text-align:center;" border="2">
@@ -84,7 +84,7 @@
     </table>
     <div>
         <form action="<?php echo FRONT_ROOT . "Pet/ShowRegisterPet" ?>" method="post">
-            <button type="submit">Add new pet</button>
+            <button class="mb-2" type="submit">Add new pet</button>
         </form>
 
         <form action=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>>

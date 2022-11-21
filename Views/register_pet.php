@@ -8,7 +8,7 @@
     <title>Pet Register</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
     <h1>Add Pet</h1>
     <h2>Add your pet info: </h2><br>
 

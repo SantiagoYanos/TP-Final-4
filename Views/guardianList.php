@@ -16,7 +16,7 @@
   <title>Guardian List</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
 
   <form action="">
 
@@ -83,7 +83,7 @@
 
       </tbody>
     </table>
-    
+
     <div>
       <button type="submit" onclick="alertMessage()">Add Filter</button>
 

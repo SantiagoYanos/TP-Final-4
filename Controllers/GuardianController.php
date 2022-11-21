@@ -7,7 +7,7 @@ namespace Controllers;
 
 
 use  SQLDAO\GuardianDAO as GuardianDAO;
- use SQLDAO\OwnerDAO as OwnerDAO;
+use SQLDAO\OwnerDAO as OwnerDAO;
 use SQLDAO\ReservationDAO;
 use Models\User as User;
 use Models\Guardian as Guardian;
@@ -117,13 +117,17 @@ class GuardianController
         }
     }
 
-    public function ViewReservations($alert = null)
+    public function ViewReservations($state = null, $alert = null)
     {
         try {
 
             $reservationDAO = new ReservationDAO();
 
-            $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian");
+            if ($state && $state != "*") {
+                $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian", $state);
+            } else {
+                $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian");
+            }
 
             require_once VIEWS_PATH . "guardian_reservationsList.php";
         } catch (Exception $e) {

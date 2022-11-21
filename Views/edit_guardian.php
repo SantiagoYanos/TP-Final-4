@@ -18,7 +18,7 @@
     <title>Guardian Edit</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
 
     <h1>Guardian Edit</h1> <i class="fa fa-house"></i>
 

@@ -219,7 +219,7 @@ class ReservationDAO implements IModels
         }
     }
 
-    public function GetByGuardianOrOwner($id, $type)
+    public function GetByGuardianOrOwner($id, $type, $state = null)
     {
         $reservationList = array();
         /* 
@@ -230,14 +230,19 @@ class ReservationDAO implements IModels
         try {
 
             if ($type == "guardian") {
-                $queryType = "guardian_id = :id ;";
+                $queryType = "guardian_id = :id ";
             } else {
-                $queryType = "owner_id = :id ;";
+                $queryType = "owner_id = :id ";
             }
 
             $queryReservation = "SELECT * FROM " . $this->tableName . " WHERE active=true AND " . $queryType;
 
             $parameters["id"] = $id;
+
+            if ($state) {
+                $queryReservation = $queryReservation . " AND state=:state";
+                $parameters["state"] = $state;
+            }
 
             $this->connection = Connection::GetInstance();
 

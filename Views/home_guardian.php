@@ -18,7 +18,7 @@
     <title>Guardian Home</title>
 </head>
 
-<body>
+<body class="ms-2 me-2">
 
     <h1>Guardian's home</h1> <i class="fa fa-house"></i>
 
