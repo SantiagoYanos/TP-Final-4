@@ -163,7 +163,7 @@
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
                                         <td style="width: 150px;"><?php echo $pet->getName() ?> </td>
                                         <td style="width: 150px;"><?php echo $pet->getBreed() ?> </td>
-                                        <td style="width: 150px;"><?php echo $pet->getType() ?> </td>
+                                        <td style="width: 150px;"><?php echo ucfirst($pet->getType()) ?> </td>
                                         <td style="width: 150px;">
 
                                             <?php switch ($pet->getSize()) {
@@ -186,7 +186,7 @@
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
                                         <td style="width: 150px;"><?php echo $pet->getObservation() ?> </td>
                                         <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
-                                        <td style="width: 150px;"> <a href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
+                                        <td style="width: 150px;"> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
 
                 <?php
