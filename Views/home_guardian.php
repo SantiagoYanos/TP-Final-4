@@ -27,7 +27,6 @@
 
     <div class="container">
 
-
         <b>0 Stars</b>
         <b class="float-end">5 Stars</b>
 
@@ -51,7 +50,7 @@
                         </span>
                     </div>
 
-                    <button type="submit">Save Dates Changes</button>
+                    <button class="btn btn-primary" type="submit">Save Dates Changes</button>
 
                 </form>
             </section>
@@ -86,7 +85,7 @@
 
         <br>
 
-        <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="pl-1">Visualize Reservations</button></a>
+        <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn pl-1" style="background-color: purple; color: white">Visualize Reservations</button></a>
 
         <div class="container align-items-end">
 
@@ -158,12 +157,12 @@
             }
             ?>
 
-            <a href=<?php echo FRONT_ROOT . "Guardian/ShowEdit" ?>><button class="float-end mt-2">Edit</button></a>
+            <a href=<?php echo FRONT_ROOT . "Guardian/ShowEdit" ?>><button class="btn btn-info border-dark float-end mt-2">Edit</button></a>
 
         </div>
 
         <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
-            <button type="submit" class="mt-2" onclick="alertMessage()">Logout</button>
+            <button type="submit" class="btn btn-dark mt-2" onclick="alertMessage()">Logout</button>
 
             <script>
                 function alertMessage() {

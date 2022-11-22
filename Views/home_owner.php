@@ -18,19 +18,19 @@
 
     <div>
         <form action="<?php echo FRONT_ROOT . "Pet/PetList" ?>" method="post">
-            <button class="mb-2 mt-3" type="submit">View Pets</button></br>
+            <button class="btn btn-warning mb-2 mt-3 border-dark" type="submit">View Pets</button></br>
         </form>
     </div>
 
     <div>
         <form action="<?php echo FRONT_ROOT . "Owner/SearchGuardian" ?>" method="post">
-            <button class="mb-2" type="submit">Visualize Guardians</button></br>
+            <button class="btn btn-primary mb-2 border-dark" type="submit">Visualize Guardians</button></br>
         </form>
     </div>
 
     <div>
         <form action="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>" method="post">
-            <button class="mb-2" type="submit">See Reservations</button>
+            <button class="btn mb-2 border-dark" style="background-color: purple; color: white" type="submit">See Reservations</button>
         </form>
     </div>
 
@@ -41,7 +41,7 @@
     </div>
 
     <div>
-        <table class="table table-striped table-bordered mt-2">
+        <table class="table table-striped table-bordered mt-2 border-dark">
 
             <tbody>
                 <tr>
@@ -85,11 +85,11 @@
     </div>
 
     <div>
-        <a href=<?php echo FRONT_ROOT . "Owner/ShowEdit" ?>><button class="float-end mt-2">Edit</button></a>
+        <a href=<?php echo FRONT_ROOT . "Owner/ShowEdit" ?>><button class="btn btn-info float-end btn-outline-dark">Edit</button></a>
     </div>
 
     <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
-        <button type="submit" onclick="alertMessage()">Logout</button>
+        <button class="btn btn-dark" type="submit" onclick="alertMessage()">Logout</button>
 
         <script>
             function alertMessage() {

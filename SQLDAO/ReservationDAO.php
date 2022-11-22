@@ -144,11 +144,14 @@ class ReservationDAO implements IModels
     {
         if ($dates) {
             try {
+
+                $reservationList = array();
+
                 foreach ($dates as $date) {
                     //$query = "SELECT * FROM " . $this->tableName . ";";
 
                     //$query = "select * from " . $this->tableName. " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date = " . "'$date'" ." and guardian_id= " . $guardian_id .";";
-                    $query = "select * from " . $this->tableName . " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date =:date and guardian_id=:guardian_id;";
+                    $query = "select * from " . $this->tableName . " inner join reservations_x_dates rxd on reservations.reservation_id = rxd.reservation_id where date=:date and guardian_id=:guardian_id;";
 
                     $parameters["date"] = $date;
                     $parameters["guardian_id"] = $guardian_id;
@@ -157,11 +160,9 @@ class ReservationDAO implements IModels
 
                     $resultSet = $this->connection->Execute($query, $parameters);
 
-                    if (!$resultSet[0]) {
+                    if (!$resultSet || !$resultSet[0]) {
                         return [];
                     }
-
-                    $reservationList = array();
 
                     foreach ($resultSet as $reservation) {
 

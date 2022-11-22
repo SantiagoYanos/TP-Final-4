@@ -31,7 +31,7 @@
                     <option value="Paid">Paid</option>
                 </select>
 
-                <input class="mt-3" type="submit" value="Filtrar">
+                <input class="btn btn-primary mt-3" type="submit" value="Filter">
             </form>
 
         </div>
@@ -61,10 +61,10 @@
             ?>
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
-                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id=" . $reservation->GetOwner_id() ?>><button class="mt-2">Owner Profile</button></a> </td>
+                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id=" . $reservation->GetOwner_id() ?>><button class="btn btn-primary mt-2">Owner Profile</button></a> </td>
                     <td>$<?php echo $reservation->getPrice() ?></td>
                     <td>
-                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
                         </a>
                     </td>
@@ -127,11 +127,11 @@
 
                             case "Pending" ?>
                             <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
-                                <button type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                <button class="btn btn-success" type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
 
                             <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> " method="post">
-                                <button type="submit"> Reject </button>
+                                <button class="btn btn-danger mt-2" type="submit"> Reject </button>
                                 <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
 
@@ -140,7 +140,7 @@
                         <?php
                             case "Paid":
                         ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
-                                <button type="submit"> View payment </button>
+                                <button class="btn" style="background-color: purple; color: white" type="submit"> View payment </button>
                                 <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
                             <?php break; ?>
@@ -166,7 +166,7 @@
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
                                         <td style="width: 150px;"><?php echo $pet->getName() ?> </td>
                                         <td style="width: 150px;"><?php echo $pet->getBreed() ?> </td>
-                                        <td style="width: 150px;"><?php echo $pet->getType() ?> </td>
+                                        <td style="width: 150px;"><?php echo ucfirst($pet->getType()) ?> </td>
                                         <td style="width: 150px;">
 
                                             <?php switch ($pet->getSize()) {
@@ -189,7 +189,7 @@
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
                                         <td style="width: 150px;"><?php echo $pet->getObservation() ?> </td>
                                         <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
-                                        <td style="width: 150px;"> <a href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
+                                        <td style="width: 150px;"> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
                 <?php
                                     $idCont++;
@@ -209,9 +209,7 @@
 
 </table>
 
-<br>
-
-<a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
+<a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="btn btn-dark mt-3">Back</button></a>
 
 <?php
 if ($alert) {

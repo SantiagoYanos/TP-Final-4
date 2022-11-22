@@ -13,22 +13,22 @@
     <title>view_pets</title>
 </head>
 
-<body class="bImageFix ms-2 me-2" style="background-image: url(../Views/images/gary.png) ">
+<body class="bImageFix ms-2 me-2" style="background-image: url(../Views/images/gary.png);">
     <h1>My pets</h1>
 
-    <table class="table table-striped table-bordered" style="text-align:center;" border="2">
+    <table class="table table-striped table-bordered" style="text-align:center; font-weight:bold" border="2">
         <thead>
             <tr>
 
-                <th style="width: 150px;">photo</th>
-                <th style="width: 150px;">name</th>
-                <th style="width: 150px;">breed</th>
-                <th style="width: 150px;">type</th>
-                <th style="width: 50px;">size</th>
-                <th style="width: 150px;">vaccination note</th>
-                <th style="width: 250px;">observations</th>
-                <th style="width: 150px;">video</th>
-                <th style="width: 150px;">action</th>
+                <th style="width: 150px;">Photo</th>
+                <th style="width: 150px;">Name</th>
+                <th style="width: 150px;">Breed</th>
+                <th style="width: 150px;">Type</th>
+                <th style="width: 50px;">Size</th>
+                <th style="width: 150px;">Vaccination note</th>
+                <th style="width: 250px;">Observations</th>
+                <th style="width: 150px;">Video</th>
+                <th style="width: 150px;">Action</th>
 
             </tr>
 
@@ -41,18 +41,18 @@
                     <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
                     <td><?php echo $pet->getName() ?> </td>
                     <td><?php echo $pet->getBreed() ?> </td>
-                    <td><?php echo $pet->getType() ?> </td>
+                    <td><?php echo ucfirst($pet->getType()) ?> </td>
                     <td><?php echo $pet->getSize() ?></td>
                     <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
                     <td><?php echo $pet->getObservation() ?> </td>
                     <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
-                    <td> <a href=" <?php echo $pet->getPet_video();   ?>" alt="pet video"> Video </a> </td>
+                    <td> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
 
                     <td>
                         <form id=<?php echo $pet->getId(); ?> action="<?php echo FRONT_ROOT . "Pet/deletePet" ?>" method="post">
                             <input type="hidden" name="petId" value="<?php echo $pet->getId() ?>"></input>
                         </form>
-                        <button type="submit" class="mt-2" onclick="confirming(<?php echo $pet->getId(); ?>)">delete</button>
+                        <button type="submit" class="btn btn-danger" onclick="confirming(<?php echo $pet->getId(); ?>)">delete</button>
 
                         <script>
                             function confirming(id) {
@@ -78,11 +78,11 @@
     </table>
     <div>
         <form action="<?php echo FRONT_ROOT . "Pet/ShowRegisterPet" ?>" method="post">
-            <button class="mb-2" type="submit">Add new pet</button>
+            <button class="btn btn-warning border-dark mb-2" type="submit">Add new pet</button>
         </form>
 
         <form action=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>>
-            <button type="submit">Back</button>
+            <button class="btn btn-dark" type="submit">Back</button>
         </form>
 
 

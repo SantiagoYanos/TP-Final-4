@@ -126,13 +126,11 @@
                     </tbody>
                 </table>
 
-                <button type=" submit">Edit</button>
+                <button class="btn btn-info border-dark" type="submit">Edit</button>
 
             </form>
 
-            <br>
-
-            <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="mt-2">Back</button></a>
+            <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="btn btn-dark mt-3">Back</button></a>
 
         </div>
 

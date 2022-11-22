@@ -28,11 +28,11 @@ class PetController
 
             foreach ($petList as $pet) {
                 if ($pet->getSize() == 1) {
-                    $pet->setSize("big");
+                    $pet->setSize("Big");
                 } elseif ($pet->getSize() == 2) {
-                    $pet->setSize("medium");
+                    $pet->setSize("Medium");
                 } else {
-                    $pet->setSize("small");
+                    $pet->setSize("Small");
                 }
             }
 

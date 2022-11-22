@@ -35,7 +35,7 @@
                     <option value="Paid">Paid</option>
                 </select>
 
-                <input class="mt-3" type="submit" value="Filtrar">
+                <input class="btn btn-primary mt-3" type="submit" value="Add filter">
             </form>
 
         </div>
@@ -66,7 +66,7 @@
                     <td><?php echo $reservation->getGuardian_id() ?></td>
                     <td>$<?php echo $reservation->getPrice() ?></td>
                     <td>
-                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
                         </a>
                     </td>
@@ -130,7 +130,7 @@
 
                             case "Payment pending":
                         ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?> " method="post">
-                                    <button type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                    <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                                 </form><?php
 
                                         break; ?>
@@ -138,7 +138,7 @@
                             <?php
                             case "Paid":
                             ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
-                                    <button type="submit"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                    <button class="btn" type="submit" style="background-color: purple; color: white"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                                 </form><?php
 
                                         break; ?>
@@ -215,7 +215,7 @@
 
 <br>
 
-<a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="mt-2">Back</button></a>
+<a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="btn btn-dark ">Back</button></a>
 
 <?php
 if ($alert) {

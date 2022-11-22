@@ -41,7 +41,7 @@ class ReservationController
             header("location: "  . FRONT_ROOT . "Owner/ViewGuardianProfile?guardian_id=" . $guardian_id . '&alert="You need to select one or more pets!"');
         }
 
-        if (!$reservation_dates) {
+        if (!$reservation_dates || $reservation_dates == "") {
             header("location: "  . FRONT_ROOT . "Owner/ViewGuardianProfile?guardian_id=" . $guardian_id . '&alert="You need to select one or more dates!"');
         }
 
@@ -117,7 +117,7 @@ class ReservationController
 
                 $price = count($pets_ids) * $guardian_user->getType_data()->getPrice();
 
-                $price = $price * count($reservation_dates);
+                $price = $price * count(explode(",", $reservation_dates));
 
                 $reservation = new Reservation();
                 $reservation->setGuardian_id($guardian_id);

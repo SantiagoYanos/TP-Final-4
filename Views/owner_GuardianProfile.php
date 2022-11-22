@@ -112,7 +112,7 @@
 
         </div>
 
-        <a href=<?php echo FRONT_ROOT . "Owner/SearchGuardian" ?>><button class="mt-2">Back</button></a>
+        <a href=<?php echo FRONT_ROOT . "Owner/SearchGuardian" ?>><button class="btn btn-dark mt-2">Back</button></a>
 
         <hr>
 
@@ -135,7 +135,7 @@
                         <?php
                         $cont = 0;
                         foreach ($PetList as $pet) {
-                            echo "<input type='checkbox' name='pets_ids[]' value=" . $pet->getId() . "> " . $pet->getName() . "</option> <br>";
+                            echo '<input type="checkbox" name="pets_ids[]" value=' . $pet->getId() . " > " . "<b class='ms-2'>" . $pet->getName() . "</b>" . "</option> <br>";
                         }
                         echo "<br>"
                         ?>
@@ -192,7 +192,7 @@
 
             <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
 
-            <button type="submit">Make Reservation </button></br>
+            <button class="btn btn-primary mb-3" type="submit">Make Reservation </button></br>
 
             <!--<script>
                 function alertMessage() {

@@ -84,22 +84,19 @@
       </tbody>
     </table>
 
-    <div>
-      <button type="submit" onclick="alertMessage()">Add Filter</button>
-
-      <h4 class="pt-4 pb-1">Select Dates</h4>
-      <div class="input-group date mb-3" id="datepicker">
-        <input name="stringDates" type="text" class="form-control" hidden>
-        <span class="input-group-append">
-          <span class="input-group-text bg-white">
-            <i class="fa fa-calendar pt-1 pb-1"></i>
-          </span>
+    <h4 class="pb-1">Select Dates</h4>
+    <div class="input-group date mb-3" id="datepicker">
+      <input name="stringDates" type="text" class="form-control" hidden>
+      <span class="input-group-append">
+        <span class="input-group-text bg-white">
+          <i class="fa fa-calendar pt-1 pb-1"></i>
         </span>
-      </div>
+      </span>
+    </div>
 
-      <?php
+    <?php
 
-      $calendario = "<script type='text/javascript'>
+    $calendario = "<script type='text/javascript'>
             $(function() {
                 $('#datepicker').datepicker({
 
@@ -111,26 +108,28 @@
                 
                 ";
 
-      if ($stringDates) {
-        $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "'])";
-      }
+    if ($stringDates) {
+      $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "'])";
+    }
 
-      $calendario = $calendario . "
+    $calendario = $calendario . "
                 });
             </script>";
 
-      echo $calendario;
+    echo $calendario;
 
-      ?>
+    ?>
 
     </div>
 
+    <div>
+      <button class="btn btn-primary border-dark mb-3" type="submit" onclick="alertMessage()">Add Filter</button>
 
-    <script>
-      function alertMessage() {
-        alert("Filter added successfully!");
-      }
-    </script>
+      <script>
+        function alertMessage() {
+          alert("Filter added successfully!");
+        }
+      </script>
 
   </form>
 
@@ -155,12 +154,12 @@
           <td><?php echo $guardian->GetName() ?></td>
           <td><?php echo $guardian->getAdress() ?></td>
           <td><?php echo $guardian->getType_data()->getReputation() ?></td>
-          <td><?php echo $guardian->getType_data()->getPreferred_size() ?></td>
-          <td><?php echo $guardian->getType_data()->getPreferred_size_cat() ?></td>
+          <td><?php echo ucfirst($guardian->getType_data()->getPreferred_size()) ?></td>
+          <td><?php echo ucfirst($guardian->getType_data()->getPreferred_size_cat()) ?></td>
           <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
           <form action=<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?> method=GET>
             <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
-            <td><button type="submit">Check Profile</button></td>
+            <td><button class="btn btn-primary" type="submit">Check Profile</button></td>
           </form>
         </tr>
       <?php } ?>
@@ -169,7 +168,7 @@
   </table>
 
   <form action=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>>
-    <button type="submit">Back</button>
+    <button class="btn btn-dark" type="submit">Back</button>
   </form>
 
   <?php

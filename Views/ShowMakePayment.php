@@ -39,7 +39,7 @@
 
     <div class="row h-100 w-100 d-flex">
 
-        <div class="col-sm-4 border rounded border-warning m-auto align-items-center pt-2 pb-3" style="border-width: 5px !important">
+        <div class="col-sm-4 border rounded border-success m-auto align-items-center pt-2 pb-3" style="border-width: 5px !important">
 
             <h4 class="text-center mb-3">New Payment</h4>
 
@@ -92,7 +92,7 @@
                 <input name="reservation_id" value="<?php echo  $encryptedReservation_id ?>" hidden>
                 <input name="owner_id" value="<?php echo  $encryptedOwner_id ?>" hidden>
                 <input name="guardian_id" value="<?php echo  $encryptedGuardian_id ?>" hidden>
-                <button class="btn btn-outline-dark btn-warning" type="submit"> <b> Pay </b> </button>
+                <button class="btn btn-outline-success " type="submit"> <b> Pay </b> </button>
 
             </form>
 
