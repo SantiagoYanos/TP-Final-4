@@ -5,59 +5,81 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment_data</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
+    <title>Payment Data</title>
 </head>
 
-<body class="ms-2 me-2">
+<body style="height: 100vh" class="ms-2 me-2">
+
+    <h1 class="fixed-top p-2">Your payment</h1>
+
+    <div class="row h-100 w-100 d-flex">
+
+        <div class="col-sm-4 border rounded m-auto align-items-center pt-2 pb-3" style="border-width: 5px !important; border-color: purple !important">
+
+            <b>Payment Number: <?php echo $arrayPayment["payment_number"] ?></b>
+
+            <table class="table mt-3" style="text-align:center;" border="2">
 
 
 
-    <h1>Your payment</h1>
+                <!-- <th style="width: 150px;">amount</th>
+                        <th style="width: 150px;">date</th>
+                        <th style="width: 150px;">payment number</th>
+                        <th style="width: 150px;">owner's name</th>
+                        <th style="width: 150px;">guardian's name</th>
+                        <th style="width: 150px;">price</th> -->
 
 
-    <table class="table table-striped table-bordered" style="text-align:center;" border="2">
-        <thead>
-            <tr>
+                <tbody>
 
-                <th style="width: 150px;">amount</th>
-                <th style="width: 150px;">date</th>
-                <th style="width: 150px;">payment number</th>
-                <th style="width: 150px;">owner's name</th>
-                <th style="width: 150px;">guardian's name</th>
-                <th style="width: 150px;">price</th>
+                    <tr>
+                        <th>Payment Date</th>
+                        <td><?php echo $arrayPayment["date"] ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>Owner</th>
+                        <td><?php echo $arrayPayment["owner_name"] ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>Guardian</th>
+                        <td><?php echo $arrayPayment["guardian_name"] ?></td>
+                    </tr>
+
+                    <tr>
+                        <th>Total Price</th>
+                        <td><b>$<?php echo $arrayPayment["price"] ?></b></td>
+                    </tr>
+
+                    <tr>
+                        <th>Amount Payed</th>
+                        <td><b>$<?php echo $arrayPayment["amount"] ?></b></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <?php if ($_SESSION["type"] == "guardian") { ?>
+
+                <a href="<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>"><button class="btn btn-dark" type="submit"> Back</button></a>
+
+            <?php } else { ?>
+
+                <a href="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>"><button class="btn btn-dark" type="submit"> Back</button></a>
+
+            <?php } ?>
 
 
-            </tr>
 
-        </thead>
+        </div>
 
-        <tbody>
-            <tr>
-                <td><?php echo $arrayPayment["amount"] ?> </td>
-                <td><?php echo $arrayPayment["date"] ?> </td>
-                <td><?php echo $arrayPayment["payment_number"] ?> </td>
-                <td><?php echo $arrayPayment["owner_name"] ?></td>
-                <td><?php echo $arrayPayment["guardian_name"] ?></td>
-                <td><?php echo $arrayPayment["price"] ?></td>
+    </div>
 
-
-
-
-
-            </tr>
-
-        </tbody>
-
-
-
-
-
-    </table>
-
-
-    <form action="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>" method="post">
-        <button type="submit"> back</button>
-    </form>
 </body>
 
 </html>
