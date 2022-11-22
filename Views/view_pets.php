@@ -72,14 +72,8 @@
                 <?php
             }
                 ?>
-
                 </tr>
-
         </tbody>
-
-
-
-
 
     </table>
     <div>
