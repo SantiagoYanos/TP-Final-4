@@ -168,16 +168,16 @@ class ReservationController
 
                 if ($this->checkBreed($petList) != true) {
 
-                    header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation cannot be accepted"');
+                    header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation cannot be accepted!!"');
                 } else {
                     $reservationDAO->updateState($reservation->getId(), "Payment pending");
-                    header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
+                    header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation accepted"');
                 }
             } else {
 
                 $reservationDAO->updateState($reservation->getId(), "Payment pending");
 
-                header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation accepted"');
+                header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation accepted"');
             }
         } catch (Exception $ex) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
@@ -207,7 +207,7 @@ class ReservationController
             $reservationDAO = new ReservationDAO;
             $reservation = $reservationDAO->getById($reservation_id);
             $reservationDAO->updateState($reservation->getId(), "Rejected");
-            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?alert="reservation rejected"');
+            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation rejected"');
         } catch (Exception $ex) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }

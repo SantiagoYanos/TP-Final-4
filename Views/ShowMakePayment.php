@@ -66,7 +66,7 @@
 
                 <div class="col col-3 mb-3">
                     <label for="security_code" class="form-label">Security Number</label>
-                    <input type="number" min="0" max="9999" class="form-control" id="security_code" name="security_code" placeholder="Ex. 456">
+                    <input type="number" min="0" max="9999" class="form-control" id="security_code" name="security_code" placeholder="Ex. 1234">
                 </div>
             </div>
 
