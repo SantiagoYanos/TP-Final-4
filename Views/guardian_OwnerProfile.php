@@ -63,7 +63,7 @@
     </div>
 
 
-    <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="mt-2">Back</button></a>
+    <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn btn-dark mt-2">Back</button></a>
 
 
 
