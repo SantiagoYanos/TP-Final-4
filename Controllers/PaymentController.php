@@ -41,7 +41,7 @@ class PaymentController
                 header("location: " . FRONT_ROOT . "/Owner/ViewReservationsOwner");
             }
 
-            $encryptedPrice = openssl_encrypt($reservation->getPrice() /2 , "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
+            $encryptedPrice = openssl_encrypt($reservation->getPrice() / 2, "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
             $encryptedReservation_id = openssl_encrypt($reservation->getId(), "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
             $encryptedOwner_id = openssl_encrypt($reservation->getOwner_id(), "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
             $encryptedGuardian_id = openssl_encrypt($reservation->getGuardian_id(), "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
@@ -68,7 +68,7 @@ class PaymentController
             $paymentExist = $paymentDAO->GetByReservationId($decryptedReservation_id);
 
             if ($paymentExist) {
-                header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?alert="This reservation has been already paid"');
+                header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&alert="This reservation has been already paid"');
             }
 
             $paymentDAO = new PaymentDAO;
