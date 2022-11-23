@@ -129,7 +129,7 @@
 
 
                             case "Payment pending":
-                        ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?> " method="post">
+                        ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPaymentCupon" ?> " method="post">
                                     <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                                 </form><?php
 
