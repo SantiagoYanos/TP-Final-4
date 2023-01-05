@@ -141,6 +141,34 @@ create table payments(
     CONSTRAINT unq_reservation_id UNIQUE (reservation_id)
 );
 
+
+create table reviews(
+    review_id bigint auto_increment,
+    comment varchar(250),
+    rating int not null,
+    review_owner_id bigint not null,
+    review_guardian_id bigint not null,
+
+    constraint pk_review primary key (review_id),
+    constraint fk_review_owner_id foreign key (review_owner_id) references users (user_id),
+    constraint fk_review_guardian_id foreign key (review_guardian_id) references users (user_id)
+);
+
+
+create table messages(
+    message_id bigint auto_increment,
+    description varchar(250),
+    sender_id bigint not null,
+    receiver_id bigint not null,
+    date date not null,
+    active boolean not null default 1,
+
+    constraint pk_message primary key (message_id),
+    constraint fk_sender_id foreign key (sender_id) references users (user_id),
+    constraint fk_receiver_id foreign key (receiver_id) references users (user_id)
+);
+
+
 INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Santiago", "Yanosky", "costa 12222", "02235887965", "santi@gmail.com", "elmascapito", '2002-11-13');
 INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Agus", "Kumar", "basural 5555", "02235 1256987", "agus@gmail.com", "elmascapoto", '1999-11-12');
 
