@@ -8,7 +8,7 @@ use SQLDAO\Connection as Connection;
 
 class MessageDAO
 {
-
+    private $MessageList = array();
     private $connection;
     private $tableName = "Messages";
     public function GetAll()
