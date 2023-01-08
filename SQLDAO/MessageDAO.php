@@ -71,7 +71,6 @@ class MessageDAO
     public function GetByIds($senderId, $receiverId)
     {
         try {
-            $this->MessageList = array();
 
             $query = "SELECT * FROM " . $this->tableName . " WHERE sender_id=:senderId AND receiver_id=:receiverId AND active=true ";
 
