@@ -39,8 +39,6 @@ class PetDAO implements IModels
     public function GetById($id)
     {
         try {
-            $this->PetList = array();
-
             $query = "SELECT * FROM " . $this->tableName . " WHERE pet_id=:id AND active=true";
 
             $parameters["id"] = $id;
