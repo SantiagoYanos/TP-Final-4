@@ -1,16 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
+
+:root {
+  --gradient: linear-gradient(
+    45deg,
+    #845ec2,
+    #d65db1,
+    #ff6f91,
+    #ff9671,
+    #ffc75f,
+    #f9f871
+  );
+}
+
 body{
   margin: 0;
   padding: 0;
-  background: linear-gradient(120deg,#245677, #cbcacc);
   height: 100vh;
   overflow: hidden;
+  color:  #333;
+  background: #ddd;
+  background-image: var(--gradient);
+  background-size: 400%;
+  animation: bg-animation 5s infinite alternate;
 }
 .center{
   position: absolute;
@@ -116,4 +133,14 @@ button[type="submit"]:hover{
 }
 .signup_link a:hover{
   text-decoration: underline;
+}
+
+@keyframes bg-animation{
+  0% {
+    background-position: left;
+  }
+
+  100% {
+    background-position: right;
+  }
 }

@@ -39,8 +39,6 @@ class UserDAO implements IModels
     public function GetById($id)
     {
         try {
-            $this->UserList = array();
-
             $query = "SELECT * FROM " . $this->tableName . "WHERE user_id=:id AND active=true";
 
             $parameters["id"] = $id;
@@ -63,7 +61,6 @@ class UserDAO implements IModels
     public function GetByEmail($email)
     {
         try {
-            $this->UserList = array();
 
             $query = "SELECT * FROM " . $this->tableName . " WHERE email=:email AND active=true;";
 
@@ -118,7 +115,6 @@ class UserDAO implements IModels
     public function getTypeById($id)
     {
         try {
-            $this->UserList = array();
 
             $query = "SELECT user_id, 'guardian' as type FROM guardians where user_id=:id UNION all SELECT user_id, 'owner' as type FROM owners where user_id=:id;";
 

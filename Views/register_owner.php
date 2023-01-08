@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="center">
+    <div class="center" >
         <h1>Owner Register</h1>
         <h2>Add your info: </h2><br>
 
@@ -51,8 +51,16 @@
             <!--<input type="checkbox" name="terms_conditions" value="terms_conditions"></input>-->
             <!--<a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
 
-            <button style="margin-bottom:15px" type="submit">Continue</button>
+            <button style="margin-bottom:15px" type="submit" onclick="alertMessage()">Register</button>
+
         </form>
+
+        <script>
+            function alertMessage() {
+                alert("Success ! Your account has been created.");
+            }
+        </script>
+
     </div>
 </body>
 
