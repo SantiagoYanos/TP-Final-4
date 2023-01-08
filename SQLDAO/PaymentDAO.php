@@ -8,12 +8,9 @@ use SQLDAO\IModels as IModels;
 // use SQLDAO\ReservationDAO as ReservationDAO;
 
 class PaymentDAO implements IModels
-{
-    private $connection;
-
 {   
     private $connection;
-    
+
     public function GetAll()
     {
         $query = "SELECT p.amount, p.date, p.payment_number, CONCAT(uo.name, ' ', uo.last_name) as 'owner_name', CONCAT(ug.name, ' ', ug.last_name) as 'guardian_name', r.price
