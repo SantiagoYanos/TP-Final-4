@@ -39,12 +39,11 @@ class MessageDAO
     public function Add(Message $MessageSQL)
     {
         try {
-            $queryMessage = "insert into . $this->tableName . VALUES (:description, :sender_id, :receiver_id, :date);";
+            $queryMessage = "insert into ". $this->tableName ." (description, sender_id, receiver_id, date) VALUES (:description, :sender_id, :receiver_id, now());";
 
             $parametersMessage["description"] = $MessageSQL->getDescription();
             $parametersMessage["sender_id"] = $MessageSQL->getSender();
             $parametersMessage["receiver_id"] = $MessageSQL->getReceiver();
-            $parametersMessage["date"] = $MessageSQL->getDate();
             
             $this->connection = Connection::GetInstance();
 
@@ -72,6 +71,8 @@ class MessageDAO
     {
         try {
 
+            $messageList = array();
+
             $query = "SELECT * FROM " . $this->tableName . " WHERE sender_id=:senderId AND receiver_id=:receiverId AND active=true ";
 
             $parameters["senderId"] = $senderId;
@@ -80,13 +81,14 @@ class MessageDAO
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query, $parameters);
 
-            if (!$resultSet[0]) {
-                return null;
+            foreach ($resultSet as $row) {
+
+                $messageSQL = $this->LoadData($row);
+
+                array_push($messageList, $messageSQL);
             }
 
-            $MessageSQL = $this->LoadData($resultSet[0]);
-
-            return $MessageSQL;
+            return $messageList;
         } catch (Exception $e) {
             throw $e;
         }
