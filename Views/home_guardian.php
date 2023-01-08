@@ -30,10 +30,11 @@
         <b>0 Stars</b>
         <b class="float-end">5 Stars</b>
 
+        <!-- Traer la reputación transformada desde el servidor -->
+
         <div class="progress mb-3">
             <div class="progress-bar" style="width:<?php echo (($user->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
         </div>
-
 
         <div>
 
@@ -54,6 +55,8 @@
 
                 </form>
             </section>
+
+            <!-- Funcion calendario... -->
 
             <?php
 
@@ -164,6 +167,8 @@
         <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
             <button type="submit" class="btn btn-dark mt-2" onclick="alertMessage()">Logout</button>
 
+            <!-- Only alertMessage -->
+
             <script>
                 function alertMessage() {
                     alert("Goodbye!");
@@ -177,8 +182,6 @@
             echo " <script> alert('" . $alert . "'); </script>";
         };
         ?>
-
-
 
 </body>
 

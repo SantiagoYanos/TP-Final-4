@@ -90,6 +90,8 @@
 
                                     </section>
 
+                                    <!-- Calendario -->
+
                                     <?php
 
                                     $calendario = "<script type='text/javascript'>
@@ -125,9 +127,6 @@
 
                     <td>
                         <?php switch ($reservation->getState()) {
-
-
-
                             case "Payment pending":
                         ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?> " method="post">
                                     <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
@@ -165,6 +164,8 @@
                                         <td style="width: 150px;"><?php echo $pet->getBreed() ?> </td>
                                         <td style="width: 150px;"><?php echo ucfirst($pet->getType()) ?> </td>
                                         <td style="width: 150px;">
+
+                                            <!-- Hacer funcion switch -->
 
                                             <?php switch ($pet->getSize()) {
                                                 case 1:
@@ -217,6 +218,8 @@
 
 <a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="btn btn-dark ">Back</button></a>
 
+<!-- alertMessage -->
+
 <?php
 if ($alert) {
     echo " <script> alert('" . $alert . "'); </script>";
@@ -224,6 +227,8 @@ if ($alert) {
 ?>
 
 <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
+
+<!-- Fijarse funcion javascript -->
 
 <script>
     const availableDatesJson = '<?php echo $availableDatesJson ?>'

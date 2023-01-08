@@ -88,6 +88,8 @@
 
                                     </section>
 
+                                    <!-- Meterlo en una función (o un a archivo calendario.js) -->
+
                                     <?php
 
                                     $calendario = "<script type='text/javascript'>
@@ -125,6 +127,8 @@
                         <?php
                         switch ($reservation->getState()) {
 
+                                //No usar las ID's de las reservas directamente (En ninguno de los 3 casos)
+
                             case "Pending" ?>
                             <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
                                 <button class="btn btn-success" type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
@@ -150,6 +154,8 @@
 
                 </tr>
 
+                <!-- No usar las ID's de las reservas directamente (de vuelta) -->
+
                 <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
                     <td colspan="7">
                         <table class="table table-bordered">
@@ -162,12 +168,17 @@
 
                                 <?php foreach ($reservation->getPets() as $pet) {
                                 ?>
+
+                                    <!-- No usar la id de pets -->
+
                                     <tr>
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
                                         <td style="width: 150px;"><?php echo $pet->getName() ?> </td>
                                         <td style="width: 150px;"><?php echo $pet->getBreed() ?> </td>
                                         <td style="width: 150px;"><?php echo ucfirst($pet->getType()) ?> </td>
                                         <td style="width: 150px;">
+
+                                            <!-- Arreglar switch con un utils Size -->
 
                                             <?php switch ($pet->getSize()) {
                                                 case 1:
@@ -211,6 +222,8 @@
 
 <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="btn btn-dark mt-3">Back</button></a>
 
+<!-- Juntar el alert con el archivo alertMessage -->
+
 <?php
 if ($alert) {
     echo " <script> alert('" . $alert . "'); </script>";
@@ -218,6 +231,8 @@ if ($alert) {
 ?>
 
 <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
+
+<!-- Chequear el funcionamiento de esto -->
 
 <script>
     const availableDatesJson = '<?php echo $availableDatesJson ?>'

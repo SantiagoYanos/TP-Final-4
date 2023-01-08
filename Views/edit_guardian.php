@@ -62,6 +62,8 @@
                             <td>********</td>
                         </tr>
 
+                        <!-- Arreglar el selected -->
+
                         <tr>
                             <th>Dog Size Preference</th>
                             <td>
@@ -84,6 +86,8 @@
                                 </div>
                             </td>
                         </tr>
+
+                        <!-- Arreglar el selected -->
 
                         <tr>
                             <th>Cat Size Peference</th>

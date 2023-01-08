@@ -34,6 +34,9 @@
         <tr>
           <th>Dog size</th>
           <td>
+
+            <!-- Quizas se puedan arreglar los selected? !-->
+
             <select class="form-select" name="preferred_size" id="preferred_size" value="<?php echo $preferred_size ?>">
               <option <?php if ($preferred_size == null) {
                         echo "selected='selected'";
@@ -54,6 +57,9 @@
         <tr>
           <th>Cat size</th>
           <td>
+
+            <!-- Quizas se puedan arreglar los selected? x2 !-->
+
             <select class="form-select" name="preferred_size_cat" id="preferred_size_cat" value="<?php echo $preferred_size_cat ?>">
               <option <?php if ($preferred_size_cat == null) {
                         echo "selected='selected'";
@@ -96,6 +102,8 @@
 
     <?php
 
+    //Meter todo esto en un archivo script calendario.js (Fijarse porque usa una función autoejecutada)
+
     $calendario = "<script type='text/javascript'>
             $(function() {
                 $('#datepicker').datepicker({
@@ -124,6 +132,8 @@
 
     <div>
       <button class="btn btn-primary border-dark mb-3" type="submit" onclick="alertMessage()">Add Filter</button>
+
+      <!-- Mandarlo al fondo -->
 
       <script>
         function alertMessage() {
@@ -170,6 +180,9 @@
   <form action=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>>
     <button class="btn btn-dark" type="submit">Back</button>
   </form>
+
+
+  <!-- Mejor que use la función alertMessage -->
 
   <?php
   if ($alert) {

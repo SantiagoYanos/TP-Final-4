@@ -44,6 +44,8 @@
         <b>0 Stars</b>
         <b class="float-end">5 Stars</b>
 
+        <!-- Calcular la reputación desde el servidor -->
+
         <div class="progress mb-3">
             <div class="progress-bar" style="width:<?php echo (($guardian->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
         </div>
@@ -121,6 +123,9 @@
         <!----------------------------------------------------------------------------------------------------------------->
 
         <!-----------SELECCION DE PETS------------------------------------------------------------------------------------->
+
+        <!-- Está todo bien?? -->
+
         <script>
             require(['bootstrap-multiselect'], function(purchase) {
                 $('#pets_ids').multiselect();
@@ -134,6 +139,9 @@
                     <div class="checkboxlist" id="skills">
                         <?php
                         $cont = 0;
+
+                        // Chequear ese input 
+
                         foreach ($PetList as $pet) {
                             echo '<input type="checkbox" name="pets_ids[]" value=' . $pet->getId() . " > " . "<b class='ms-2'>" . $pet->getName() . "</b>" . "</option> <br>";
                         }
@@ -167,6 +175,8 @@
 
                         </section>
 
+                        <!-- Funcion calendario? -->
+
                         <?php
 
                         $calendario = "<script type='text/javascript'>
@@ -190,6 +200,8 @@
                 </div>
             </div>
 
+            <!-- GuardianID a la vista -->
+
             <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
 
             <button class="btn btn-primary mb-3" type="submit">Make Reservation </button></br>
@@ -202,6 +214,8 @@
 
         </form>
 
+        <!-- AlertMessage -->
+
         <?php
 
         if ($alert) {
@@ -211,6 +225,9 @@
 
 
         <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
+
+
+        <!-- Se puede hacer mejor? -->
 
         <script>
             const availableDatesJson = '<?php echo $availableDatesJson ?>'

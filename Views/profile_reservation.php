@@ -31,6 +31,8 @@
         <b>0 Stars</b>
         <b class="float-end">5 Stars</b>
 
+        <!-- Calcular reputation en el servidor -->
+
         <div class="progress mb-3">
             <div class="progress-bar" style="width:<?php echo (($user_guardian->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
         </div>
@@ -55,6 +57,8 @@
                 </form>
             </section>
 
+            <!-- Calendario función -->
+
             <?php
 
             $calendario = "<script type='text/javascript'>
@@ -69,6 +73,8 @@
                 ";
 
             if ($user_guardian->getType_data()->getAvailable_date()) {
+
+                //Cambiarlo con truco JSON (o función);
                 $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $user_guardian->getType_data()->getAvailable_date()) . "'])";
             }
 

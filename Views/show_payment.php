@@ -21,6 +21,8 @@
 
             <b>Payment Number: <?php echo $arrayPayment["payment_number"] ?></b>
 
+            <!-- Border error -->
+
             <table class="table mt-3" style="text-align:center;" border="2">
 
 
@@ -63,6 +65,8 @@
                 </tbody>
 
             </table>
+
+            <!-- Se puede mejorar seguramente -->
 
             <?php if ($_SESSION["type"] == "guardian") { ?>
 

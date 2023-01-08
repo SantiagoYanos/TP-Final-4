@@ -20,6 +20,8 @@
         <thead>
             <tr>
 
+                <!-- Un poco de css y se arregla -->
+
                 <th style="width: 150px;">Photo</th>
                 <th style="width: 150px;">Name</th>
                 <th style="width: 150px;">Breed</th>
@@ -53,6 +55,8 @@
                             <input type="hidden" name="petId" value="<?php echo $pet->getId() ?>"></input>
                         </form>
                         <button type="submit" class="btn btn-danger" onclick="confirming(<?php echo $pet->getId(); ?>)">delete</button>
+
+                        <!-- Hacer una función -->
 
                         <script>
                             function confirming(id) {
