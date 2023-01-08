@@ -1,9 +1,11 @@
 <?php
 
+Namespace Controllers;
+
 use SQLDAO\MessageDAO as MessageDAO;
 use Models\User as User;
 use \Exception as Exception;
-use Models\message;
+use Models\Message as Message;
 
 class ChatController
 {
@@ -11,14 +13,14 @@ class ChatController
     {
         require_once(ROOT . "/Utils/validateSession.php");
 
-        if ($_SESSION["type"] == "guardian") {
+        /*if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-        }
+        }*/
     }
 
  
 
-    public function showChat($idReceiver)
+    public function ShowChat($idReceiver)
     {
         $messageDAO=new MessageDAO;
 
@@ -29,9 +31,8 @@ class ChatController
         $sended=$messageDAO->GetByIds($_SESSION["id"],$idReceiver);
         $received=$messageDAO->GetByIds($idReceiver,$_SESSION["id"]);
 
-       $total=$sended+$received;
+        $total = array_merge($sended, $received);
 
-       
         usort($total, function($a, $b) {
 
             if ($a->getDate() == $b->getDate())
@@ -41,8 +42,7 @@ class ChatController
             return $a->getDate() < $b->getDate() ? -1 : 1;
         });
 
-
-
+        return require_once(VIEWS_PATH . "chat.php");
     }
 
     public function sendMessage($description,$userId)
@@ -54,10 +54,12 @@ class ChatController
         $message->setDescription($description);
         $message->setReceiver($userId);
         $message->setSender($_SESSION["id"]);
-        $message->setDate(date("Y-m-d"));
+        //$message->setDate(date("Y-m-d-H-i-s") );
          
         $messageDAO->Add($message);
 
+
+        header("location: " . FRONT_ROOT . "Chat/ShowChat" . "/?id=" . $userId);
     }
 
 
