@@ -23,7 +23,7 @@
         </thead>
 
         <tbody>
-            <?php foreach ($messages as $message) {
+            <?php foreach ($total as $message) {
             ?>
                 <tr>
                     
@@ -41,7 +41,7 @@
         <form action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="GET">
             <label for="" > message</label>
             <input type="text" name="description" required></br>
-            <input type="hidden" name="user_id" value="<?php echo $user->getID() ?>"></input>
+            <input type="hidden" name="userId" value="<?php echo $idReceiver ?>"></input>
             <button class="btn btn-dark" type="submit">send</button>
         </form>
 

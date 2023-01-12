@@ -53,7 +53,7 @@
             <th>Dates</th>
             <th>State</th>
             <th>Payment</th>
-
+            <th>Chat</th>
         </thead>
 
         <tbody>
@@ -143,6 +143,12 @@
                                         break; ?>
 
                         <?php } ?>
+                    </td>
+                    <td>
+                    <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
+                                    <button class="btn" type="submit" style="background-color: purple; color: white"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getGuardian_id() ?>"></input>
+                            </form><?php
+                        break; ?>
                     </td>
                 </tr>
 

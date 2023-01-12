@@ -70,7 +70,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($messages as $message) { ?>
+            <?php foreach ($total as $message) { ?>
                 <tr>
                     <td><?php echo $message->getDate() ?></td>
                     <td><?php echo $message->getSender() ?></td>
@@ -83,7 +83,7 @@
         <form action="<?php echo FRONT_ROOT . "Chat/SendMessage" ?>" method="GET">
             <label for ="" > message</label>
             <input type="text" name="description" required>
-            <input type="hidden" name="user_id" value="<?php echo $user->getID() ?>">
+            <input type="hidden" name="userId" value="<?php echo $idReceiver ?>">
             <button class="btn btn-dark" type="submit">Send</button>
         </form>
     </div>
