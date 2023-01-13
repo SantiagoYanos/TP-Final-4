@@ -57,6 +57,9 @@
         <tbody>
             <?php
             $idCont = 0;
+
+            var_dump($reservations);
+
             foreach ($reservations as $reservation) {
             ?>
                 <tr>
@@ -147,15 +150,15 @@
                                 <button class="btn" style="background-color: purple; color: white" type="submit"> View payment </button>
                                 <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
-                            <?php break; ?>
+                            <?php break;
+                            ?>
 
                     <?php } ?>
                     </td>
                     <td>
-                    <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
-                                    <button class="btn" type="submit" style="background-color: purple; color: white"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getOwner_id() ?>"></input>
-                            </form><?php
-                        break; ?>
+                        <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
+                            <button class="btn" type="submit" style="background-color: purple; color: white"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getOwner_id() ?>"></input>
+                        </form>
                     </td>
 
                 </tr>

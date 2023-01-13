@@ -51,11 +51,14 @@ class ReservationController
 
         $reservationList = $reservationDAO->GetAllByDates($guardian_id, $reservation_dates_array);
 
+        //Saber si ya hay una reserva con esa pet;
+
         foreach ($reservationList as $reservation) {
             foreach ($reservation->getPets() as $pet) {
                 foreach ($pets_ids as $pet_id) {
                     if ($pet->getId() == $pet_id) {
                         $flag = 2;
+                        break 3;
                     }
                 }
             }
@@ -65,30 +68,40 @@ class ReservationController
             /////Chequear size
             $PetDAO = new PetDAO();
             $guardianDAO = new GuardianDAO();
-            $owner_DAO = new OwnerDAO();
+            //$owner_DAO = new OwnerDAO();
             $guardian_user = $guardianDAO->GetById($guardian_id);
 
-            $guardianPetSize = $guardian_user->getType_Data()->getPreferred_size();
-            $guardianPetSizeCat = $guardian_user->getType_Data()->getPreferred_size_Cat();
+            // $guardianPetSize = $guardian_user->getType_Data()->getPreferred_size();
+            // $guardianPetSizeCat = $guardian_user->getType_Data()->getPreferred_size_Cat();
 
-            if ($guardianPetSizeCat == "big") {
-                $guardianPetSizeCat = 1;
-            }
-            if ($guardianPetSizeCat == "medium") {
-                $guardianPetSizeCat = 2;
-            }
-            if ($guardianPetSizeCat == "small") {
-                $guardianPetSizeCat = 3;
-            }
-            if ($guardianPetSize == "big") {
-                $guardianPetSize = 1;
-            }
-            if ($guardianPetSize == "medium") {
-                $guardianPetSize = 2;
-            }
-            if ($guardianPetSize == "small") {
-                $guardianPetSize = 3;
-            }
+            $petSizesEnum = array(
+                "big" => 1,
+                "medium" => 2,
+                "small" => 3
+            );
+
+            $guardianPetSize = $petSizesEnum[$guardian_user->getType_Data()->getPreferred_size()];
+            $guardianPetSizeCat = $petSizesEnum[$guardian_user->getType_Data()->getPreferred_size_Cat()];
+
+
+            // if ($guardianPetSizeCat == "big") {
+            //     $guardianPetSizeCat = 1;
+            // }
+            // if ($guardianPetSizeCat == "medium") {
+            //     $guardianPetSizeCat = 2;
+            // }
+            // if ($guardianPetSizeCat == "small") {
+            //     $guardianPetSizeCat = 3;
+            // }
+            // if ($guardianPetSize == "big") {
+            //     $guardianPetSize = 1;
+            // }
+            // if ($guardianPetSize == "medium") {
+            //     $guardianPetSize = 2;
+            // }
+            // if ($guardianPetSize == "small") {
+            //     $guardianPetSize = 3;
+            // }
 
             $petList = array();
 
@@ -109,7 +122,6 @@ class ReservationController
             }
 
             if ($this->checkBreed($petList) != true) {
-
                 $flag = 3;
             }
 
