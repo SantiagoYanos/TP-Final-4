@@ -58,8 +58,6 @@
             <?php
             $idCont = 0;
 
-            var_dump($reservations);
-
             foreach ($reservations as $reservation) {
             ?>
                 <tr>

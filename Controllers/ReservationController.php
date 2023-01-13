@@ -125,33 +125,44 @@ class ReservationController
                 $flag = 3;
             }
 
-            if ($flag == 0) {
+            switch ($flag) {
+                case 0:
 
-                $price = count($pets_ids) * $guardian_user->getType_data()->getPrice();
+                    $price = count($pets_ids) * $guardian_user->getType_data()->getPrice();
 
-                $price = $price * count(explode(",", $reservation_dates));
+                    $price = $price * count(explode(",", $reservation_dates));
 
-                $reservation = new Reservation();
-                $reservation->setGuardian_id($guardian_id);
-                $reservation->setOwner_id($_SESSION["id"]);
-                $reservation->setPrice($price);
+                    $reservation = new Reservation();
+                    $reservation->setGuardian_id($guardian_id);
+                    $reservation->setOwner_id($_SESSION["id"]);
+                    $reservation->setPrice($price);
 
-                $reservation_dates = explode(",", $reservation_dates);
+                    $reservation_dates = explode(",", $reservation_dates);
 
-                $reservation_DAO = new ReservationDAO();
-                $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids); //Cambiar los valores de prueba;
+                    $reservation_DAO = new ReservationDAO();
+                    $reservation_DAO->Add($reservation, $reservation_dates, $pets_ids);
 
-                header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="Reservation request sent to Guardian!"');
-            } else {
-                if ($flag == 1) {
+                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="Reservation request sent to Guardian!"');
+
+                    break;
+
+                case 1:
+
                     header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="The Guardian does not support that pet size!"');
-                } else {
-                    if ($flag == 2) {
-                        header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="This pet has already been requested to this Guardian at that date!"');
-                    } else {
-                        header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="You cant add two different breeds into one reservation!"');
-                    }
-                }
+
+                    break;
+
+                case 2:
+
+                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="This pet has already been requested to this Guardian at that date!"');
+
+                    break;
+
+                case 3:
+
+                    header("location: " . FRONT_ROOT . 'Owner/SearchGuardian?name=&rating=&preferred_size=*&preferred_size_cat=*&location=&price=&stringDates=&alert="You cant add two different breeds into one reservation!"');
+
+                    break;
             }
         } catch (Exception $ex) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
@@ -165,19 +176,23 @@ class ReservationController
                 header("location: " . FRONT_ROOT . "Owner/HomeOwner");
             }
 
-            $flag = 0;
-
             $reservationDAO = new ReservationDAO;
             $reservation = $reservationDAO->getById($reservation_id);
 
-
             $pet = $reservationDAO->getExistingReservations($reservation->getDates());
+
+
             if ($pet) {
 
                 $petList = array();
+
+                //Agrega a un array la mascota de las reservas ya existentes
                 array_push($petList, $pet);
+
+                //Agrega al array la primer mascota de nuestra nueva Reserva que queremos hacer
                 array_push($petList, $reservation->getPets()[0]);
 
+                //Chequea si las 2 mascotas son de la misma raza y tipo.
                 if ($this->checkBreed($petList) != true) {
 
                     header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation cannot be accepted!!"');

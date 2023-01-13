@@ -348,7 +348,7 @@ class ReservationDAO implements IModels
        INNER JOIN reservations r ON rd.reservation_id = r.reservation_id
        INNER JOIN reservations_x_pets rp ON r.reservation_id = rp.reservation_id
        INNER JOIN pets p ON rp.pet_id = p.pet_id
-       WHERE date IN (' . $datesJson . ') AND r.state = "Accepted" AND r.active=true
+       WHERE date IN (' . $datesJson . ') AND (r.state = "Payment pending" OR r.state="Paid") AND r.active=true
        GROUP BY r.reservation_id
        HAVING include_dates >=1 LIMIT 1';
 
