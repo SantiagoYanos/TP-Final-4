@@ -104,11 +104,11 @@ class GuardianDAO implements IModels
 
             $UserDAO = new UserDAO();
 
-            foreach ($resultSet as $row) {
+            foreach ($resultSet as $user) {
 
-                $UserSQL = $UserDAO->LoadData($row);
+                $UserSQL = $UserDAO->LoadData($user);
 
-                $GuardianSQL = $this->LoadData($row, $this->GetAvailableDates($UserSQL->getId()));
+                $GuardianSQL = $this->LoadData($user, $this->GetAvailableDates($UserSQL->getId()));
 
                 $UserSQL->setType_data($GuardianSQL);
 
@@ -172,13 +172,13 @@ class GuardianDAO implements IModels
                 return NULL;
             }
 
-            //$datesString = join("') , (" . $id . ",'", $available_dates);
+            //$datesString = join("') , (" . $id . ",'", $available_dates);  //Ex. 2022-11-24') , (:id ,'2022-11-25
             $datesString = join("') , (:id ,'", $available_dates);
 
 
             $parameters2["id"] = $id;
             // $parameters2["datesString"] = $datesString;
-            // 2022-11-24') , (:id ,'2022-11-25
+
             $queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (:id, '" . $datesString . "')";
             //$queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (:id,   :datesString )";
 
