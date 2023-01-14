@@ -73,7 +73,7 @@ class ReservationDAO implements IModels
                 $parametersDates["reservation_id"] = $id_reservation;
 
                 $petsString = join(") , (" . $id_reservation . ",", $pets_ids);
-                $queryPetsReservations = " INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (:reservation_id," . $petsString . ")";
+                $queryPetsReservations = "INSERT INTO reservations_x_pets (reservation_id, pet_id ) VALUES (:reservation_id," . $petsString . ")";
                 $parametersPetsReservations["reservation_id"] = $id_reservation;
 
                 $this->connection->ExecuteNonQuery($queryDates, $parametersDates);
@@ -223,10 +223,8 @@ class ReservationDAO implements IModels
     public function GetByGuardianOrOwner($id, $type, $state = null)
     {
         $reservationList = array();
-        /* 
-        $type = "guardian" OR "owner"
-        
-        */
+
+        //$type = "guardian" OR "owner"
 
         try {
 

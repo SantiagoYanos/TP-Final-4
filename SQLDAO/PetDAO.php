@@ -23,11 +23,11 @@ class PetDAO implements IModels
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query);
 
-            foreach ($resultSet as $row) {
+            foreach ($resultSet as $pet) {
 
-                $petsQL = $this->LoadData($row);
+                $petSQL = $this->LoadData($pet);
 
-                array_push($PetList, $petsQL);
+                array_push($PetList, $petSQL);
             }
 
             return $PetList;
@@ -50,9 +50,9 @@ class PetDAO implements IModels
                 return null;
             }
 
-            $petsQL = $this->LoadData($resultSet[0]);
+            $petSQL = $this->LoadData($resultSet[0]);
 
-            return $petsQL;
+            return $petSQL;
         } catch (Exception $e) {
             throw $e;
         }
