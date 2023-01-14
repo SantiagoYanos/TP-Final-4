@@ -34,7 +34,6 @@ class OwnerController
 
             $user = $owner_DAO->GetById($_SESSION["id"]);
 
-
             require_once VIEWS_PATH . "home_owner.php";
         } catch (Exception $e) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");

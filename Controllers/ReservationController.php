@@ -109,15 +109,18 @@ class ReservationController
 
                 $pet = $PetDAO->GetById($pet_id);
                 array_push($petList, $pet);
-                if ($pet->getType() == "dog") {
-                    if ($guardianPetSize > $pet->getSize()) {
-                        $flag = 1;
-                    }
-                }
-                if ($pet->getType() == "cat") {
-                    if ($guardianPetSizeCat > $pet->getSize()) {
-                        $flag = 1;
-                    }
+
+                switch ($pet->getType()) {
+                    case "dog":
+                        if ($guardianPetSize > $pet->getSize()) {
+                            $flag = 1;
+                        }
+                        break 2;
+                    case "cat":
+                        if ($guardianPetSizeCat > $pet->getSize()) {
+                            $flag = 1;
+                        }
+                        break 2;
                 }
             }
 
@@ -218,9 +221,6 @@ class ReservationController
         $type = $petList[0]->getType();
 
         foreach ($petList as $pet) {
-            /*var_dump($pet->getBreed());
-            var_dump($petList[1]);
-            var_dump($petList[1]->getBreed());*/
             if ($pet->getBreed() != $breed || $pet->getType() != $type) {
                 return false;
             }
