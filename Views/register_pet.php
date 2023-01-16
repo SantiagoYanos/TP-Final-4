@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+
     <title>Pet Register</title>
 </head>
 
@@ -56,17 +59,9 @@
                 </a>
             </div>
 
-            <button class="btn btn-outline-success" type="submit" onclick="alertMessage()">Add Pet</button>
+            <button class="btn btn-outline-success" type="submit" onclick="alertMessage('Pet added successfully!')">Add Pet</button>
 
         </form>
-
-        <script>
-            function alertMessage() {
-                alert("Pet added successfully!");
-            }
-        </script>
-
-
 
     </div>
 

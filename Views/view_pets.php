@@ -67,7 +67,6 @@
                                 } else {
                                     txt = "You pressed Cancel!";
                                 }
-
                             }
                         </script>
 
