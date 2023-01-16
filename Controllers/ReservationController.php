@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+
+
 use Exception;
 use Models\Guardian;
 use Models\Reservation as Reservation;
@@ -74,11 +76,7 @@ class ReservationController
             // $guardianPetSize = $guardian_user->getType_Data()->getPreferred_size();
             // $guardianPetSizeCat = $guardian_user->getType_Data()->getPreferred_size_Cat();
 
-            $petSizesEnum = array(
-                "big" => 1,
-                "medium" => 2,
-                "small" => 3
-            );
+            require_once(ROOT . "/Utils/selectSize.php");
 
             $guardianPetSize = $petSizesEnum[$guardian_user->getType_Data()->getPreferred_size()];
             $guardianPetSizeCat = $petSizesEnum[$guardian_user->getType_Data()->getPreferred_size_Cat()];

@@ -1,3 +1,5 @@
+<?php require_once(ROOT . "/Utils/selectSize.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,21 +37,20 @@
           <th>Dog size</th>
           <td>
 
-            <!-- Quizas se puedan arreglar los selected? !-->
+            <!-- Quizas se puedan arreglar los selected? - ARREGLADO !-->
 
             <select class="form-select" name="preferred_size" id="preferred_size" value="<?php echo $preferred_size ?>">
-              <option <?php if ($preferred_size == null) {
-                        echo "selected='selected'";
-                      } ?> value="*">*</option>
-              <option <?php if ($preferred_size == 3) {
-                        echo "selected='selected'";
-                      } ?> value="3">Small</option>
-              <option <?php if ($preferred_size == 2) {
-                        echo "selected='selected'";
-                      } ?> value="2">Medium</option>
-              <option <?php if ($preferred_size == 1) {
-                        echo "selected='selected'";
-                      } ?>value="1">Big</option>
+              <!-- <option <?php // if ($preferred_size == null) {echo "selected='selected'";} 
+                            ?> value="*">*</option>
+              <option <?php //if ($preferred_size == 3) { echo "selected='selected'";} 
+                      ?> value="3">Small</option>
+              <option <?php // if ($preferred_size == 2) {echo "selected='selected'";} 
+                      ?> value="2">Medium</option>
+              <option <?php // if ($preferred_size == 1) {echo "selected='selected'";} 
+                      ?>value="1">Big</option> -->
+
+              <?php createOptionsByIndex($preferred_size, $petSizesEnum); ?>
+
             </select>
           </td>
         </tr>
@@ -58,21 +59,21 @@
           <th>Cat size</th>
           <td>
 
-            <!-- Quizas se puedan arreglar los selected? x2 !-->
+            <!-- Quizas se puedan arreglar los selected? x2 - ARREGLADO !-->
 
             <select class="form-select" name="preferred_size_cat" id="preferred_size_cat" value="<?php echo $preferred_size_cat ?>">
-              <option <?php if ($preferred_size_cat == null) {
-                        echo "selected='selected'";
-                      } ?> value="*">*</option>
-              <option <?php if ($preferred_size_cat == 3) {
-                        echo "selected='selected'";
-                      } ?> value="3">Small</option>
-              <option <?php if ($preferred_size_cat == 2) {
-                        echo "selected='selected'";
-                      } ?> value="2">Medium</option>
-              <option <?php if ($preferred_size_cat == 1) {
-                        echo "selected='selected'";
-                      } ?>value="1">Big</option>
+
+              <!-- <option <?php // if ($preferred_size == null) {echo "selected='selected'";} 
+                            ?> value="*">*</option>
+                            <option <?php //if ($preferred_size == 3) { echo "selected='selected'";} 
+                                    ?> value="3">Small</option>
+                            <option <?php // if ($preferred_size == 2) {echo "selected='selected'";} 
+                                    ?> value="2">Medium</option>
+                            <option <?php // if ($preferred_size == 1) {echo "selected='selected'";} 
+                                    ?>value="1">Big</option> -->
+
+              <?php createOptionsByIndex($preferred_size_cat, $petSizesEnum); ?>
+
             </select>
           </td>
         </tr>

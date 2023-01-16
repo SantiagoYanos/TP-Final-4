@@ -1,3 +1,5 @@
+<?php require_once(ROOT . "/Utils/selectSize.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -170,23 +172,9 @@
                                         <td style="width: 150px;"><?php echo ucfirst($pet->getType()) ?> </td>
                                         <td style="width: 150px;">
 
-                                            <!-- Hacer funcion switch -->
+                                            <!-- Hacer funcion switch - HECHO -->
 
-                                            <?php switch ($pet->getSize()) {
-                                                case 1:
-                                                    echo "Big";
-                                                    break;
-                                                case 2:
-                                                    echo "Medium";
-                                                    break;
-                                                case 3:
-                                                    echo "Small";
-                                                    break;
-                                                default:
-                                                    echo "Undefined";
-                                                    break;
-                                            }
-                                            ?>
+                                            <?php ShowValuePetSize($pet->getSize()) ?>
 
                                         </td>
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
