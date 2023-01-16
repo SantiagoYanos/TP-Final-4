@@ -30,6 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+    <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
 
     <title>Guardian Profile</title>
 </head>
@@ -177,26 +178,30 @@
 
                         </section>
 
-                        <!-- Funcion calendario? -->
+                        <!-- Funcion calendario? - HECHO -->
 
-                        <?php
+                        <!-- <?php
 
-                        $calendario = "<script type='text/javascript'>
-                        $(function() {
-                            $('#datepicker').datepicker({
+                                // $calendario = "<script type='text/javascript'>
+                                // $(function() {
+                                //     $('#datepicker').datepicker({
 
-                                multidate: true,
-                                format: 'yyyy-mm-dd',
-                                enableOnReadonly: true,
-                                startDate: '" . date("Y-m-d") . "'
+                                //         multidate: true,
+                                //         format: 'yyyy-mm-dd',
+                                //         enableOnReadonly: true,
+                                //         startDate: '" . date("Y-m-d") . "'
 
-                            });
-                            });
-                        </script>";
+                                //     });
+                                //     });
+                                // </script>";
 
-                        echo $calendario;
+                                // echo $calendario;
 
-                        ?>
+                                ?> -->
+
+                        <script>
+                            crearDatepicker("datepicker", null, 'date("Y-m-d")');
+                        </script>
 
                     </div>
                 </div>

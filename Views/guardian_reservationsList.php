@@ -18,6 +18,7 @@
 
     <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
     <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
+    <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
 
     <title>My Reservations</title>
 </head>
@@ -95,31 +96,13 @@
 
                                     </section>
 
-                                    <!-- Meterlo en una función (o un a archivo calendario.js) -->
+                                    <!-- Meterlo en una función (o un a archivo calendario.js) - HECHO -->
 
-                                    <?php
+                                    <?php $reservationDates =  "['" . join("','", $reservation->getDates()) . "']"; ?>
 
-                                    $calendario = "<script type='text/javascript'>
-                                    $(function() {
-                                        $('#" . $idCont . "').datepicker({
-
-                                            multidate: true,
-                                            format: 'yyyy-mm-dd'
-
-                                        });
-                                        
-                                        ";
-
-                                    if ($reservation->getDates()) {
-                                        $calendario = $calendario . "$('#" . $idCont . "').datepicker('setDates',['" . join("','", $reservation->getDates()) . "'])";
-                                    }
-
-                                    $calendario = $calendario . "
-                                        });
-                                    </script>";
-                                    echo $calendario;
-
-                                    ?>
+                                    <script>
+                                        crearDatepicker(<?php echo $idCont ?>, <?php echo $reservationDates ?>, null)
+                                    </script>
 
                                 </div>
                             </div>

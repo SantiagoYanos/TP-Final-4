@@ -17,6 +17,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
   <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+  <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
 
   <title>Guardian List</title>
 </head>
@@ -106,31 +107,37 @@
 
     <?php
 
-    //Meter todo esto en un archivo script calendario.js (Fijarse porque usa una función autoejecutada)
+    //Meter todo esto en un archivo script calendario.js (Fijarse porque usa una función autoejecutada) - HECHO
 
-    $calendario = "<script type='text/javascript'>
-            $(function() {
-                $('#datepicker').datepicker({
+    // $calendario = "<script type='text/javascript'>
+    //         $(function() {
+    //             $('#datepicker').datepicker({
 
-                    multidate: true,
-                    format: 'yyyy-mm-dd',
-                    startDate: '" . date("Y-m-d") . "'
+    //                 multidate: true,
+    //                 format: 'yyyy-mm-dd',
+    //                 startDate: '" . date("Y-m-d") . "'
 
-                });
-                
-                ";
+    //             });
 
-    if ($stringDates) {
-      $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "'])";
-    }
+    //             ";
 
-    $calendario = $calendario . "
-                });
-            </script>";
+    // if ($stringDates) {
+    //   $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "'])";
+    // }
 
-    echo $calendario;
+    // $calendario = $calendario . "
+    //             });
+    //         </script>";
+
+    // echo $calendario;
 
     ?>
+
+    <?php $dates =  "['" . join("','", $stringDates) . "']"; ?>
+
+    <script>
+      crearDatepicker("datepicker", <?php echo $dates; ?>, 'date("Y-m-d")');
+    </script>
 
     </div>
 

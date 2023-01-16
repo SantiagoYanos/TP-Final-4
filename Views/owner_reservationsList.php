@@ -21,6 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+    <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
 
     <title>My Reservations</title>
 </head>
@@ -95,31 +96,37 @@
 
                                     </section>
 
-                                    <!-- Calendario -->
+                                    <!-- Calendario - HECHO -->
 
                                     <?php
 
-                                    $calendario = "<script type='text/javascript'>
-                                    $(function() {
-                                        $('#" . $idCont . "').datepicker({
+                                    // $calendario = "<script type='text/javascript'>
+                                    // $(function() {
+                                    //     $('#" . $idCont . "').datepicker({
 
-                                            multidate: true,
-                                            format: 'yyyy-mm-dd'
+                                    //         multidate: true,
+                                    //         format: 'yyyy-mm-dd'
 
-                                        });
-                                        
-                                        ";
+                                    //     });
 
-                                    if ($reservation->getDates()) {
-                                        $calendario = $calendario . "$('#" . $idCont . "').datepicker('setDates',['" . join("','", $reservation->getDates()) . "'])";
-                                    }
+                                    //     ";
 
-                                    $calendario = $calendario . "
-                                        });
-                                    </script>";
-                                    echo $calendario;
+                                    // if ($reservation->getDates()) {
+                                    //     $calendario = $calendario . "$('#" . $idCont . "').datepicker('setDates',['" . join("','", $reservation->getDates()) . "'])";
+                                    // }
+
+                                    // $calendario = $calendario . "
+                                    //     });
+                                    // </script>";
+                                    // echo $calendario;
 
                                     ?>
+
+                                    <?php $reservationDates =  "['" . join("','", $reservation->getDates()) . "']"; ?>
+
+                                    <script>
+                                        crearDatepicker(<?php echo $idCont ?>, <?php echo $reservationDates ?>, null)
+                                    </script>
 
                                 </div>
                             </div>

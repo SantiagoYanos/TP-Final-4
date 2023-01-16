@@ -64,7 +64,7 @@
                             <td>********</td>
                         </tr>
 
-                        <!-- Arreglar el selected - ARREGLADO -->
+                        <!-- Arreglar el selected - HECHO -->
 
                         <?php $preferedSizeDog = $user->getType_data()->getPreferred_size() ?>
                         <?php $preferedSizeCat = $user->getType_data()->getPreferred_size_Cat() ?>
@@ -85,7 +85,7 @@
                             </td>
                         </tr>
 
-                        <!-- Arreglar el selected - ARREGLADO -->
+                        <!-- Arreglar el selected - HECHO -->
 
                         <tr>
                             <th>Cat Size Peference</th>

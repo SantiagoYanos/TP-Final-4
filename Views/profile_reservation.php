@@ -15,6 +15,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+    <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
+
     <title>Guardian Home</title>
 </head>
 
@@ -57,34 +59,40 @@
                 </form>
             </section>
 
-            <!-- Calendario función -->
+            <!-- Calendario función - HECHO -->
 
             <?php
 
-            $calendario = "<script type='text/javascript'>
-            $(function() {
-                $('#datepicker').datepicker({
+            // $calendario = "<script type='text/javascript'>
+            // $(function() {
+            //     $('#datepicker').datepicker({
 
-                    multidate: true,
-                    format: 'yyyy-mm-dd'
+            //         multidate: true,
+            //         format: 'yyyy-mm-dd'
 
-                });
-                
-                ";
+            //     });
 
-            if ($user_guardian->getType_data()->getAvailable_date()) {
+            //     ";
 
-                //Cambiarlo con truco JSON (o función);
-                $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $user_guardian->getType_data()->getAvailable_date()) . "'])";
-            }
+            // if ($user_guardian->getType_data()->getAvailable_date()) {
 
-            $calendario = $calendario . "
-                });
-            </script>";
+            //     //Cambiarlo con truco JSON (o función);
+            //     $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $user_guardian->getType_data()->getAvailable_date()) . "'])";
+            // }
 
-            echo $calendario;
+            // $calendario = $calendario . "
+            //     });
+            // </script>";
+
+            // echo $calendario;
 
             ?>
+
+            <?php $dates =  "['" . join("','", $user_guardian->getType_data()->getAvailable_date()) . "']"; ?>
+
+            <script>
+                crearDatepicker("datepicker", <?php echo $dates ?>, null)
+            </script>
 
         </div>
 

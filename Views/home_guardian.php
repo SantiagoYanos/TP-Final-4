@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+    <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
 
     <title>Guardian Home</title>
 </head>
@@ -58,33 +59,13 @@
                 </form>
             </section>
 
-            <!-- Funcion calendario... -->
+            <!-- Funcion calendario... - HECHO -->
 
-            <?php
+            <?php $dates =  "['" . join("','", $user->getType_data()->getAvailable_date()) . "']"; ?>
 
-            $calendario = "<script type='text/javascript'>
-            $(function() {
-                $('#datepicker').datepicker({
-
-                    multidate: true,
-                    format: 'yyyy-mm-dd',
-                    startDate: '" . date("Y-m-d") . "'
-
-                });
-                
-                ";
-
-            if ($user->getType_data()->getAvailable_date()) {
-                $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $user->getType_data()->getAvailable_date()) . "'])";
-            }
-
-            $calendario = $calendario . "
-                });
-            </script>";
-
-            echo $calendario;
-
-            ?>
+            <script>
+                crearDatepicker("datepicker", <?php echo $dates; ?>, 'date("Y-m-d")');
+            </script>
 
         </div>
 
