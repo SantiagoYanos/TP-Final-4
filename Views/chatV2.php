@@ -25,7 +25,7 @@
             </div>
 
             <!-- Todos los divs con mensajes (área de mensajes) -->
-            <div class="row border border-2 border-dark p-2" name="messagesArea" style="height: 70%; overflow-y: scroll; scroll-behavior: smooth;">
+            <div class="row border border-2 border-dark p-2" name="messagesArea" style="height: 70%; overflow-y: scroll; display: flex; flex-direction: column-reverse;">
 
                 <div class="col align-items-start">
 
@@ -72,9 +72,10 @@
 
             <!-- Los inputs del user, texto de nuevo mensaje, enviar, etc... -->
 
-            <div class="row align-items-center" name="userInputs" style="height: 20%">
+            <form action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post">
 
-                <form action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post">
+                <div class="row align-items-center my-3" name="userInputs" style="height: 20%">
+
 
                     <input type="hidden" name="userId" value="<?php echo $idReceiver ?>"></input>
 
@@ -84,21 +85,20 @@
 
                     </div>
 
-
-
                     <div class="col-3 text-center">
 
                         <input type="submit" class="btn btn-primary btn-lg" value="Send">
 
                     </div>
 
-                </form>
 
-            </div>
+
+                </div>
+
+            </form>
 
         </div>
     </div>
-
 
 </body>
 
