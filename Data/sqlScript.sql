@@ -160,7 +160,7 @@ create table messages(
     description varchar(250),
     sender_id bigint not null,
     receiver_id bigint not null,
-    date date not null,
+    date datetime not null,
     active boolean not null default 1,
 
     constraint pk_message primary key (message_id),

@@ -1,6 +1,6 @@
 <?php
 
-Namespace Controllers;
+namespace Controllers;
 
 use SQLDAO\MessageDAO as MessageDAO;
 use Models\User as User;
@@ -18,50 +18,50 @@ class ChatController
         }*/
     }
 
- 
+
 
     public function ShowChat($idReceiver)
     {
-        $messageDAO=new MessageDAO;
+        $messageDAO = new MessageDAO;
 
-        $sended= array();
-        $received= array();
-        $total= array();
+        $sended = array();
+        $received = array();
+        $total = array();
 
-        $sended=$messageDAO->GetByIds($_SESSION["id"],$idReceiver);
-        $received=$messageDAO->GetByIds($idReceiver,$_SESSION["id"]);
+        $total = $messageDAO->GetByIdsV2($_SESSION["id"], $idReceiver);
 
-        $total = array_merge($sended, $received);
+        // $sended=$messageDAO->GetByIds($_SESSION["id"],$idReceiver);
+        // $received=$messageDAO->GetByIds($idReceiver,$_SESSION["id"]);
 
-        usort($total, function($a, $b) {
+        // $total = array_merge($sended, $received);
 
-            if ($a->getDate() == $b->getDate())
-            {
-                return 0;
-            }
-            return $a->getDate() < $b->getDate() ? -1 : 1;
-        });
+        // usort($total, function($a, $b) {
 
-        return require_once(VIEWS_PATH . "PrettyChat.php");
+        //     if ($a->getDate() == $b->getDate())
+        //     {
+        //         return 0;
+        //     }
+        //     return $a->getDate() < $b->getDate() ? -1 : 1;
+        // });
+
+        //return require_once(VIEWS_PATH . "PrettyChat.php");
+
+        return require_once(VIEWS_PATH . "chatV2.php");
     }
 
-    public function sendMessage($description,$userId)
+    public function sendMessage($description, $userId)
     {
-        $messageDAO =new MessageDAO;
+        $messageDAO = new MessageDAO;
 
-        $message= new Message;
+        $message = new Message;
 
         $message->setDescription($description);
         $message->setReceiver($userId);
         $message->setSender($_SESSION["id"]);
         //$message->setDate(date("Y-m-d-H-i-s") );
-         
-        $messageDAO->Add($message);
 
+        $messageDAO->Add($message);
 
         header("location: " . FRONT_ROOT . "Chat/ShowChat" . "/?id=" . $userId);
     }
-
-
-
 }
