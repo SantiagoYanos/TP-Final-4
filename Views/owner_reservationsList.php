@@ -98,30 +98,6 @@
 
                                     <!-- Calendario - HECHO -->
 
-                                    <?php
-
-                                    // $calendario = "<script type='text/javascript'>
-                                    // $(function() {
-                                    //     $('#" . $idCont . "').datepicker({
-
-                                    //         multidate: true,
-                                    //         format: 'yyyy-mm-dd'
-
-                                    //     });
-
-                                    //     ";
-
-                                    // if ($reservation->getDates()) {
-                                    //     $calendario = $calendario . "$('#" . $idCont . "').datepicker('setDates',['" . join("','", $reservation->getDates()) . "'])";
-                                    // }
-
-                                    // $calendario = $calendario . "
-                                    //     });
-                                    // </script>";
-                                    // echo $calendario;
-
-                                    ?>
-
                                     <?php $reservationDates =  "['" . join("','", $reservation->getDates()) . "']"; ?>
 
                                     <script>
@@ -198,12 +174,7 @@
                                 }
                 ?>
 
-
                 </tr>
-
-
-
-
 
         </tbody>
 
