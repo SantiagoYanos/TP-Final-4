@@ -8,6 +8,7 @@ use Models\User as User;
 use SQLDAO\Connection as Connection;
 use SQLDAO\IModels as IModels;
 use SQLDAO\UserDAO as UserDAO;
+use SQLDAO\ReviewDAO as ReviewDAO;
 
 class GuardianDAO implements IModels
 {
@@ -297,12 +298,11 @@ class GuardianDAO implements IModels
     public function LoadData($resultSet, $available_dates)
     {
         $GuardianSQL = new Guardian();
+        $ReviewDAO = new ReviewDAO(); 
         $GuardianSQL->setCuil($resultSet["cuil"]);
         $GuardianSQL->setPreferred_size($resultSet["preferred_size_dog"]);
         $GuardianSQL->setPreferred_size_cat($resultSet["preferred_size_cat"]);
-        if ($resultSet["reputation"]) {
-            $GuardianSQL->setReputation($resultSet["reputation"]);
-        }
+        $GuardianSQL->setReputation($ReviewDAO->calculateRating($resultSet["user_id"]));
         if ($available_dates) {
             $GuardianSQL->setAvailable_date($available_dates);
         } else {
