@@ -134,6 +134,7 @@ class OwnerController
 
             require_once VIEWS_PATH . "guardianList.php";
         } catch (Exception $e) {
+
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
     }

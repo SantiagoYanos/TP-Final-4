@@ -39,7 +39,7 @@ class UserDAO implements IModels
     public function GetById($id)
     {
         try {
-            $query = "SELECT * FROM " . $this->tableName . "WHERE user_id=:id AND active=true";
+            $query = "SELECT * FROM " . $this->tableName . " WHERE user_id=:id AND active=true";
 
             $parameters["id"] = $id;
 

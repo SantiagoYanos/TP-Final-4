@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use SQLDAO\MessageDAO as MessageDAO;
+use SQLDAO\UserDAO as UserDAO;
 use Models\User as User;
 use \Exception as Exception;
 use Models\Message as Message;
@@ -23,10 +24,19 @@ class ChatController
     public function ShowChat($idReceiver)
     {
         $messageDAO = new MessageDAO;
+        $userDAO = new UserDAO;
 
         $sended = array();
         $received = array();
         $total = array();
+
+        $me = $userDAO->GetById($_SESSION["id"]);
+
+        $you = $userDAO->GetById($idReceiver);
+
+        $meName = $me->getName() . " " . $me->getLast_name();
+
+        $youName = $you->getName() . " " . $you->getLast_name();
 
         $total = $messageDAO->GetByIdsV2($_SESSION["id"], $idReceiver);
 
