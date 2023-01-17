@@ -8,7 +8,7 @@ use SQLDAO\IModels as IModels;
 // use SQLDAO\ReservationDAO as ReservationDAO;
 
 class PaymentDAO implements IModels
-{   
+{
     private $connection;
 
     public function GetAll()
@@ -45,16 +45,16 @@ class PaymentDAO implements IModels
             return null;
         }
 
-        $paymentArray = array();
+        // $paymentArray = array();
 
-        $paymentArray["amount"] = $resultSet[0]["amount"];
-        $paymentArray["date"] = $resultSet[0]["date"];
-        $paymentArray["payment_number"] = $resultSet[0]["payment_number"];
-        $paymentArray["owner_name"] = $resultSet[0]["owner_name"];
-        $paymentArray["guardian_name"] = $resultSet[0]["guardian_name"];
-        $paymentArray["price"] = $resultSet[0]["price"];
+        // $paymentArray["amount"] = $resultSet[0]["amount"];
+        // $paymentArray["date"] = $resultSet[0]["date"];
+        // $paymentArray["payment_number"] = $resultSet[0]["payment_number"];
+        // $paymentArray["owner_name"] = $resultSet[0]["owner_name"];
+        // $paymentArray["guardian_name"] = $resultSet[0]["guardian_name"];
+        // $paymentArray["price"] = $resultSet[0]["price"];
 
-        return $paymentArray;
+        return $resultSet[0];
     }
 
     public function Add($payment)
@@ -97,15 +97,15 @@ class PaymentDAO implements IModels
             return null;
         }
 
-        $paymentArray = array();
+        // $paymentArray = array();
 
-        $paymentArray["amount"] = $resultSet[0]["amount"];
-        $paymentArray["date"] = $resultSet[0]["date"];
-        $paymentArray["payment_number"] = $resultSet[0]["payment_number"];
-        $paymentArray["owner_name"] = $resultSet[0]["owner_name"];
-        $paymentArray["guardian_name"] = $resultSet[0]["guardian_name"];
-        $paymentArray["price"] = $resultSet[0]["price"];
+        // $paymentArray["amount"] = $resultSet[0]["amount"];
+        // $paymentArray["date"] = $resultSet[0]["date"];
+        // $paymentArray["payment_number"] = $resultSet[0]["payment_number"];
+        // $paymentArray["owner_name"] = $resultSet[0]["owner_name"];
+        // $paymentArray["guardian_name"] = $resultSet[0]["guardian_name"];
+        // $paymentArray["price"] = $resultSet[0]["price"];
 
-        return $paymentArray;
+        return $resultSet[0];
     }
 }

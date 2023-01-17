@@ -1,3 +1,5 @@
+<?php require_once(ROOT . "/Utils/selectSize.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +64,10 @@
                             <td>********</td>
                         </tr>
 
-                        <!-- Arreglar el selected -->
+                        <!-- Arreglar el selected - HECHO -->
+
+                        <?php $preferedSizeDog = $user->getType_data()->getPreferred_size() ?>
+                        <?php $preferedSizeCat = $user->getType_data()->getPreferred_size_Cat() ?>
 
                         <tr>
                             <th>Dog Size Preference</th>
@@ -70,24 +75,17 @@
                                 <div>
                                     <label for="preferred_size">Dog Size Preference: </label>
                                     <select name="preferred_size" id="preferred_size" required>
-                                        <option <?php if ($user->getType_data()->getPreferred_size() == null) {
-                                                    echo "selected='selected'";
-                                                } ?> value="*">*</option>
-                                        <option <?php if ($user->getType_data()->getPreferred_size() == "small") {
-                                                    echo "selected='selected'";
-                                                } ?> value="3">Small</option>
-                                        <option <?php if ($user->getType_data()->getPreferred_size() == "medium") {
-                                                    echo "selected='selected'";
-                                                } ?> value="2">Medium</option>
-                                        <option <?php if ($user->getType_data()->getPreferred_size() == "big") {
-                                                    echo "selected='selected'";
-                                                } ?>value="1">Big</option>
+                                        <?php
+
+                                        createOptions($preferedSizeDog, $petSizesEnum);
+
+                                        ?>
                                     </select></br>
                                 </div>
                             </td>
                         </tr>
 
-                        <!-- Arreglar el selected -->
+                        <!-- Arreglar el selected - HECHO -->
 
                         <tr>
                             <th>Cat Size Peference</th>
@@ -95,18 +93,13 @@
                                 <div>
                                     <label for="preferred_size_cat">Cat Size Preference: </label>
                                     <select name="preferred_size_cat" id="preferred_size_cat" required>
-                                        <option <?php if ($user->getType_data()->getPreferred_size_cat() == null) {
-                                                    echo "selected='selected'";
-                                                } ?> value="*">*</option>
-                                        <option <?php if ($user->getType_data()->getPreferred_size_cat() == "small") {
-                                                    echo "selected='selected'";
-                                                } ?> value="3">Small</option>
-                                        <option <?php if ($user->getType_data()->getPreferred_size_cat() == "medium") {
-                                                    echo "selected='selected'";
-                                                } ?> value="2">Medium</option>
-                                        <option <?php if ($user->getType_data()->getPreferred_size_cat() == "big") {
-                                                    echo "selected='selected'";
-                                                } ?>value="1">Big</option>
+
+                                        <?php
+
+                                        createOptions($preferedSizeCat, $petSizesEnum);
+
+                                        ?>
+
                                     </select></br>
                                 </div>
                             </td>

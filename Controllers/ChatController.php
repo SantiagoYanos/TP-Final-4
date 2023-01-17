@@ -42,7 +42,7 @@ class ChatController
             return $a->getDate() < $b->getDate() ? -1 : 1;
         });
 
-        return require_once(VIEWS_PATH . "chat.php");
+        return require_once(VIEWS_PATH . "PrettyChat.php");
     }
 
     public function sendMessage($description,$userId)

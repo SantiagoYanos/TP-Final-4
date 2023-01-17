@@ -67,11 +67,8 @@
                                 } else {
                                     txt = "You pressed Cancel!";
                                 }
-
                             }
                         </script>
-
-
                     </td>
                 <?php
             }

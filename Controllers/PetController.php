@@ -27,12 +27,17 @@ class PetController
             $petList = $pet_DAO->GetPetsByOwner($_SESSION["id"]);
 
             foreach ($petList as $pet) {
-                if ($pet->getSize() == 1) {
-                    $pet->setSize("Big");
-                } elseif ($pet->getSize() == 2) {
-                    $pet->setSize("Medium");
-                } else {
-                    $pet->setSize("Small");
+
+                switch ($pet->getSize()) {
+                    case 1:
+                        $pet->setSize("Big");
+                        break;
+                    case 2:
+                        $pet->setSize("Medium");
+                        break;
+                    case 3:
+                        $pet->setSize("Small");
+                        break;
                 }
             }
 

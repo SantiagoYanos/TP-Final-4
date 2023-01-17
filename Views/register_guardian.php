@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="..\Views\css\styleRegisterGuardian.css">
+
+    <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+
     <title>Guardian Register</title>
 </head>
 
@@ -70,15 +73,9 @@
             <!--<input type="checkbox" name="terms_conditions" value="terms_conditions" required> </input>-->
             <!--<a href="./images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
 
-            <button style="margin-bottom:15px" type="submit" onclick="alertMessage()">Register</button>
+            <button style="margin-bottom:15px" type="submit" onclick="alertMessage('Success! Your account has been created.')">Register</button>
 
         </form>
-    
-        <script>
-            function alertMessage() {
-                alert("Success ! Your account has been created.");
-            }
-        </script>
 
     </div>
 </body>

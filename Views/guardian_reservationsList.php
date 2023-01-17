@@ -1,3 +1,5 @@
+<?php require_once(ROOT . "/Utils/selectSize.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +15,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+    <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
+    <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
+
     <title>My Reservations</title>
 </head>
 
@@ -57,6 +64,7 @@
         <tbody>
             <?php
             $idCont = 0;
+
             foreach ($reservations as $reservation) {
             ?>
                 <tr>
@@ -88,31 +96,13 @@
 
                                     </section>
 
-                                    <!-- Meterlo en una función (o un a archivo calendario.js) -->
+                                    <!-- Meterlo en una función (o un a archivo calendario.js) - HECHO -->
 
-                                    <?php
+                                    <?php $reservationDates =  "['" . join("','", $reservation->getDates()) . "']"; ?>
 
-                                    $calendario = "<script type='text/javascript'>
-                                    $(function() {
-                                        $('#" . $idCont . "').datepicker({
-
-                                            multidate: true,
-                                            format: 'yyyy-mm-dd'
-
-                                        });
-                                        
-                                        ";
-
-                                    if ($reservation->getDates()) {
-                                        $calendario = $calendario . "$('#" . $idCont . "').datepicker('setDates',['" . join("','", $reservation->getDates()) . "'])";
-                                    }
-
-                                    $calendario = $calendario . "
-                                        });
-                                    </script>";
-                                    echo $calendario;
-
-                                    ?>
+                                    <script>
+                                        crearDatepicker(<?php echo $idCont ?>, <?php echo $reservationDates ?>, null)
+                                    </script>
 
                                 </div>
                             </div>
@@ -147,15 +137,15 @@
                                 <button class="btn" style="background-color: purple; color: white" type="submit"> View payment </button>
                                 <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
-                            <?php break; ?>
+                            <?php break;
+                            ?>
 
                     <?php } ?>
                     </td>
                     <td>
-                    <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
-                                    <button class="btn" type="submit" style="background-color: purple; color: white"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getOwner_id() ?>"></input>
-                            </form><?php
-                        break; ?>
+                        <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
+                            <button class="btn" type="submit" style="background-color: purple; color: white"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getOwner_id() ?>"></input>
+                        </form>
                     </td>
 
                 </tr>
@@ -184,23 +174,11 @@
                                         <td style="width: 150px;"><?php echo ucfirst($pet->getType()) ?> </td>
                                         <td style="width: 150px;">
 
-                                            <!-- Arreglar switch con un utils Size -->
+                                            <!-- Arreglar switch con un utils Size - HECHO -->
 
-                                            <?php switch ($pet->getSize()) {
-                                                case 1:
-                                                    echo "Big";
-                                                    break;
-                                                case 2:
-                                                    echo "Medium";
-                                                    break;
-                                                case 3:
-                                                    echo "Small";
-                                                    break;
-                                                default:
-                                                    echo "Undefined";
-                                                    break;
-                                            }
-                                            ?>
+                                            <!-- Big | Medium | Small | Undefined -->
+
+                                            <?php ShowValuePetSize($pet->getSize()) ?>
 
                                         </td>
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
@@ -228,15 +206,11 @@
 
 <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="btn btn-dark mt-3">Back</button></a>
 
-<!-- Juntar el alert con el archivo alertMessage -->
+<!-- Juntar el alert con el archivo alertMessage - HECHO -->
 
-<?php
-if ($alert) {
-    echo " <script> alert('" . $alert . "'); </script>";
-};
-?>
-
-<script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
+<script>
+    alertMessage(<?php echo $alert; ?>)
+</script>
 
 <!-- Chequear el funcionamiento de esto -->
 

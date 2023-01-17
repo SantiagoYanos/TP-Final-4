@@ -1,3 +1,5 @@
+<?php require_once(ROOT . "/Utils/selectSize.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +15,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+  <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+  <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
+
   <title>Guardian List</title>
 </head>
 
@@ -35,21 +41,20 @@
           <th>Dog size</th>
           <td>
 
-            <!-- Quizas se puedan arreglar los selected? !-->
+            <!-- Quizas se puedan arreglar los selected? - ARREGLADO !-->
 
             <select class="form-select" name="preferred_size" id="preferred_size" value="<?php echo $preferred_size ?>">
-              <option <?php if ($preferred_size == null) {
-                        echo "selected='selected'";
-                      } ?> value="*">*</option>
-              <option <?php if ($preferred_size == 3) {
-                        echo "selected='selected'";
-                      } ?> value="3">Small</option>
-              <option <?php if ($preferred_size == 2) {
-                        echo "selected='selected'";
-                      } ?> value="2">Medium</option>
-              <option <?php if ($preferred_size == 1) {
-                        echo "selected='selected'";
-                      } ?>value="1">Big</option>
+              <!-- <option <?php // if ($preferred_size == null) {echo "selected='selected'";} 
+                            ?> value="*">*</option>
+              <option <?php //if ($preferred_size == 3) { echo "selected='selected'";} 
+                      ?> value="3">Small</option>
+              <option <?php // if ($preferred_size == 2) {echo "selected='selected'";} 
+                      ?> value="2">Medium</option>
+              <option <?php // if ($preferred_size == 1) {echo "selected='selected'";} 
+                      ?>value="1">Big</option> -->
+
+              <?php createOptionsByIndex($preferred_size, $petSizesEnum); ?>
+
             </select>
           </td>
         </tr>
@@ -58,21 +63,21 @@
           <th>Cat size</th>
           <td>
 
-            <!-- Quizas se puedan arreglar los selected? x2 !-->
+            <!-- Quizas se puedan arreglar los selected? x2 - ARREGLADO !-->
 
             <select class="form-select" name="preferred_size_cat" id="preferred_size_cat" value="<?php echo $preferred_size_cat ?>">
-              <option <?php if ($preferred_size_cat == null) {
-                        echo "selected='selected'";
-                      } ?> value="*">*</option>
-              <option <?php if ($preferred_size_cat == 3) {
-                        echo "selected='selected'";
-                      } ?> value="3">Small</option>
-              <option <?php if ($preferred_size_cat == 2) {
-                        echo "selected='selected'";
-                      } ?> value="2">Medium</option>
-              <option <?php if ($preferred_size_cat == 1) {
-                        echo "selected='selected'";
-                      } ?>value="1">Big</option>
+
+              <!-- <option <?php // if ($preferred_size == null) {echo "selected='selected'";} 
+                            ?> value="*">*</option>
+                            <option <?php //if ($preferred_size == 3) { echo "selected='selected'";} 
+                                    ?> value="3">Small</option>
+                            <option <?php // if ($preferred_size == 2) {echo "selected='selected'";} 
+                                    ?> value="2">Medium</option>
+                            <option <?php // if ($preferred_size == 1) {echo "selected='selected'";} 
+                                    ?>value="1">Big</option> -->
+
+              <?php createOptionsByIndex($preferred_size_cat, $petSizesEnum); ?>
+
             </select>
           </td>
         </tr>
@@ -102,44 +107,42 @@
 
     <?php
 
-    //Meter todo esto en un archivo script calendario.js (Fijarse porque usa una función autoejecutada)
+    //Meter todo esto en un archivo script calendario.js (Fijarse porque usa una función autoejecutada) - HECHO
 
-    $calendario = "<script type='text/javascript'>
-            $(function() {
-                $('#datepicker').datepicker({
+    // $calendario = "<script type='text/javascript'>
+    //         $(function() {
+    //             $('#datepicker').datepicker({
 
-                    multidate: true,
-                    format: 'yyyy-mm-dd',
-                    startDate: '" . date("Y-m-d") . "'
+    //                 multidate: true,
+    //                 format: 'yyyy-mm-dd',
+    //                 startDate: '" . date("Y-m-d") . "'
 
-                });
-                
-                ";
+    //             });
 
-    if ($stringDates) {
-      $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "'])";
-    }
+    //             ";
 
-    $calendario = $calendario . "
-                });
-            </script>";
+    // if ($stringDates) {
+    //   $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "'])";
+    // }
 
-    echo $calendario;
+    // $calendario = $calendario . "
+    //             });
+    //         </script>";
+
+    // echo $calendario;
 
     ?>
+
+    <?php $dates =  "['" . join("','", $stringDates) . "']"; ?>
+
+    <script>
+      crearDatepicker("datepicker", <?php echo $dates; ?>, 'date("Y-m-d")');
+    </script>
 
     </div>
 
     <div>
-      <button class="btn btn-primary border-dark mb-3" type="submit" onclick="alertMessage()">Add Filter</button>
-
-      <!-- Mandarlo al fondo -->
-
-      <script>
-        function alertMessage() {
-          alert("Filter added successfully!");
-        }
-      </script>
+      <button class="btn btn-primary border-dark mb-3" type="submit" onclick="alertMessage('Filter added successfully!')">Add Filter</button>
 
   </form>
 
@@ -182,13 +185,11 @@
   </form>
 
 
-  <!-- Mejor que use la función alertMessage -->
+  <!-- Mejor que use la función alertMessage - HECHO -->
 
-  <?php
-  if ($alert) {
-    echo " <script> alert('" . $alert . "'); </script>";
-  };
-  ?>
+  <script>
+    alertMessage(<?php echo $alert; ?>)
+  </script>
 
 </body>
 

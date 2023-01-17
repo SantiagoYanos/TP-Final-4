@@ -86,24 +86,25 @@ class PaymentController
 
             $reservationDAO->updateState($decryptedReservation_id, "Paid");
 
-            header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id= $decryptedReservation_id");
+            header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id=$decryptedReservation_id");
         } catch (Exception $e) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
     }
 
 
-    public function ShowPaymentCupon($reservation_id){
+    public function ShowPaymentCupon($reservation_id)
+    {
 
-        $reservationDAO= new ReservationDAO;
+        $reservationDAO = new ReservationDAO;
 
-        $reservation=$reservationDAO->getById($reservation_id);
+        $reservation = $reservationDAO->getById($reservation_id);
 
-        $guardianDAO=new GuardianDAO;
+        $guardianDAO = new GuardianDAO;
 
-        $guardian=$guardianDAO->getById($reservation->getGuardian_id());
+        $guardian = $guardianDAO->getById($reservation->getGuardian_id());
 
 
-        return require_once (VIEWS_PATH . "paymentcupon.php");
+        return require_once(VIEWS_PATH . "paymentcupon.php");
     }
 }

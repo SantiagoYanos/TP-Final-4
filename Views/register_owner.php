@@ -6,11 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="..\Views\css\styleRegisterOwner.css">
+
+    <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+
     <title>Owner Register</title>
 </head>
 
 <body>
-    <div class="center" >
+    <div class="center">
         <h1>Owner Register</h1>
         <h2>Add your info: </h2><br>
 
@@ -51,15 +54,9 @@
             <!--<input type="checkbox" name="terms_conditions" value="terms_conditions"></input>-->
             <!--<a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
 
-            <button style="margin-bottom:15px" type="submit" onclick="alertMessage()">Register</button>
+            <button style="margin-bottom:15px" type="submit" onclick="alertMessage('Success! Your account has been created.')">Register</button>
 
         </form>
-
-        <script>
-            function alertMessage() {
-                alert("Success ! Your account has been created.");
-            }
-        </script>
 
     </div>
 </body>
