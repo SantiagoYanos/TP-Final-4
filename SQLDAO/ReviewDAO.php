@@ -12,6 +12,7 @@ class ReviewDAO
     private $ReviewList = array();
     private $connection;
     private $tableName = "reviews";
+
     public function GetAll()
     {
         try {
@@ -31,6 +32,24 @@ class ReviewDAO
             }
 
             return $ReviewList;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function Add(Review $ReviewSQL)
+    {
+        try {
+            $queryReview = "insert into " . $this->tableName . " (comment, rating, review_owner_id, review_guardian_id, date) VALUES (:comment, :rating, :review_owner_id, :review_guardian_id, now());";
+
+            $parametersReview["comment"] = $ReviewSQL->getComment();
+            $parametersReview["rating"] = $ReviewSQL->getRating();
+            $parametersReview["review_owner_id"] = $ReviewSQL->getOwnerId();
+            $parametersReview["review_guardian_id"] = $ReviewSQL->getGuardianId();
+           
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->ExecuteNonQuery($queryReview, $parametersReview);
         } catch (Exception $e) {
             throw $e;
         }

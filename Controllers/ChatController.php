@@ -59,7 +59,7 @@ class ChatController
         $message->setReceiver($userId);
         $message->setSender($_SESSION["id"]);
         //$message->setDate(date("Y-m-d-H-i-s") );
-
+        
         $messageDAO->Add($message);
 
         header("location: " . FRONT_ROOT . "Chat/ShowChat" . "/?id=" . $userId);

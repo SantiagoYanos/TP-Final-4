@@ -2,10 +2,10 @@
 
 namespace Controller;
 
-use SQLDAO\MessageDAO as MessageDAO;
+use SQLDAO\ReviewDAO as ReviewDAO;
 use Models\User as User;
 use \Exception as Exception;
-use Models\Message as Message;
+use Models\Review as Review;
 
 class ReviewController
 {
@@ -19,26 +19,28 @@ class ReviewController
     }
 
 
-    public function ShowReviews($guardianid)
+    public function ShowReviews($guardianId)
     {
-        $messageDAO=new MessageDAO;
-        return require_once(VIEWS_PATH . "PrettyChat.php");
+        $reviewDAO = new ReviewDAO;
+        
+        $total = $reviewDAO->GetById($guardianId);
+
+        return require_once(VIEWS_PATH . "view_reviews.php");
     }
 
-    public function sendMessage($description,$userId)
+    public function makeReview($comment, $guardianId, $rating)
     {
-        $messageDAO =new MessageDAO;
+        $reviewDAO = new ReviewDAO;
 
-        $message= new Message;
+        $review = new Review;
 
-        $message->setDescription($description);
-        $message->setReceiver($userId);
-        $message->setSender($_SESSION["id"]);
-        //$message->setDate(date("Y-m-d-H-i-s") );
-         
-        $messageDAO->Add($message);
+        $review->setComment($comment);
+        $review->setRating($rating);
+        $review->setOwnerId($_SESSION["id"]);
+        $review->setGuardianId($guardianId);
 
+        $reviewDAO->Add($review);
 
-        header("location: " . FRONT_ROOT . "Chat/ShowChat" . "/?id=" . $userId);
+        header("location: " . FRONT_ROOT . "Review/ShowReviews" . "/?id=" . $guardianId);
     }
 }
