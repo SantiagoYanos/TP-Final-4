@@ -9,6 +9,7 @@ class Review
   private $ownerId;
   private $guardianId;
   private $date;
+  private $owner_name;
 
 
   /**
@@ -127,6 +128,26 @@ class Review
   public function setDate($date)
   {
     $this->date = $date;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of owner_name
+   */ 
+  public function getOwner_name()
+  {
+    return $this->owner_name;
+  }
+
+  /**
+   * Set the value of owner_name
+   *
+   * @return  self
+   */ 
+  public function setOwner_name($owner_name)
+  {
+    $this->owner_name = $owner_name;
 
     return $this;
   }
