@@ -14,8 +14,6 @@
 
 <body>
 
-
-
     <div class="container vh-100 h-100 p-3" name="maximum">
         <div class="border border-2 border-dark h-100 p-4" name="chat">
 
@@ -38,7 +36,8 @@
                                 <!-- DERECHA -->
                                 <div class="border border-dark border-1 ps-2 my-2">
 
-                                    <p> <b class="pe-2"><?php echo $meName ?> </b> <?php echo $message->getDate() ?> </p>
+
+                                    <p> <b>Sender: <?php echo $message->getSender(); ?> </b> <?php echo "Date: " . $message->getDate() ?> </p>
 
                                     <p><?php echo $message->getDescription() ?></p>
 
@@ -54,7 +53,7 @@
 
                                 <div class="border border-dark border-1 pe-2 my-2">
 
-                                    <p> <?php echo $message->getDate() ?> <b class="ps-2"><?php echo $youName ?></b> </p>
+                                    <p> <?php echo "Date: " . $message->getDate() ?> <b>Sender: <?php echo $message->getSender(); ?></b> </p>
 
                                     <p><?php echo $message->getDescription() ?></p>
 
@@ -71,20 +70,17 @@
             </div>
 
             <!-- Los inputs del user, texto de nuevo mensaje, enviar, etc... -->
+            <form action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post" >
 
-            <div class="row align-items-center" name="userInputs" style="height: 20%">
-
-                <form action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post">
-
-                    <input type="hidden" name="userId" value="<?php echo $idReceiver ?>"></input>
+                <div class="row align-items-center my-3 "  name="userInputs" style="height: 20%">
 
                     <div class="col-9">
 
-                        <textarea class="form-control m-2" id="newMessage" name="description" rows="4" style="resize: none" placeholder="Insert your message"></textarea>
+                        <textarea class="form-control m-2" id="newMessage" name="description" rows="4" style="resize: none" placeholder="Insert your message" ></textarea>
 
                     </div>
 
-
+                    <input type="hidden" name="userId" value="<?php echo $idReceiver ?>"></input>
 
                     <div class="col-3 text-center">
 
@@ -92,10 +88,9 @@
 
                     </div>
 
-                </form>
+                </div>
 
-            </div>
-
+            </form>
         </div>
     </div>
 
