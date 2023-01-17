@@ -117,7 +117,12 @@
 
         </div>
 
-        <a href=<?php echo FRONT_ROOT . "Owner/SearchGuardian" ?>><button class="btn btn-dark mt-2">Back</button></a>
+        <form action=<?php echo FRONT_ROOT . "Review/ViewReviews"?> method=GET>
+            <input type="hidden" name="id" value="<?php echo $guardian->getId() ?>">
+            <button class="btn btn-dark mt-2">View Reviews</button>
+        </form>
+
+        <a href=<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?>><button class="btn btn-dark mt-2">Back</button></a>
 
         <hr>
 
