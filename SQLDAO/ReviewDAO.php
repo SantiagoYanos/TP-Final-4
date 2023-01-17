@@ -12,6 +12,7 @@ class ReviewDAO
     private $ReviewList = array();
     private $connection;
     private $tableName = "reviews";
+
     public function GetAll()
     {
         try {
@@ -36,6 +37,24 @@ class ReviewDAO
         }
     }
 
+    public function Add(Review $ReviewSQL)
+    {
+        try {
+            $queryReview = "insert into " . $this->tableName . " (comment, rating, review_owner_id, review_guardian_id, date) VALUES (:comment, :rating, :review_owner_id, :review_guardian_id, now());";
+
+            $parametersReview["comment"] = $ReviewSQL->getComment();
+            $parametersReview["rating"] = $ReviewSQL->getRating();
+            $parametersReview["review_owner_id"] = $ReviewSQL->getOwnerId();
+            $parametersReview["review_guardian_id"] = $ReviewSQL->getGuardianId();
+           
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->ExecuteNonQuery($queryReview, $parametersReview);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function LoadData($resultSet)
     {
         $ReviewSQL = new Review();
@@ -55,7 +74,7 @@ class ReviewDAO
 
             $ReviewList = array();
 
-            $query = "SELECT r.*, CONCAT(u.name, ' ', u.last_name)  as 'owner_name' FROM " . $this->tableName . " r WHERE review_guardian_id=:guardianId  AND active=true inner join users u on  review_owner_id = user_id  ";
+            $query = "SELECT r.*, CONCAT(u.name, ' ', u.last_name)  as 'owner_name' FROM " . $this->tableName . " r inner join users u on  r.review_owner_id = u.user_id WHERE r.review_guardian_id=:guardianId  AND r.active=true   ";
 
             $parameters["guardianId"] = $guardianId;
             
