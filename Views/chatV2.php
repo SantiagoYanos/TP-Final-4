@@ -73,10 +73,9 @@ flex-direction: column-reverse;">
 
             <!-- Los inputs del user, texto de nuevo mensaje, enviar, etc... -->
 
-            <form action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post">
+            <form action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post" style="display:inline">
 
-                <div class="row align-items-center my-3" name="userInputs" style="height: 20%">
-
+                <div class="row align-items-center" name="userInputs" style="height: 20%">
 
                     <input type="hidden" name="userId" value="<?php echo $idReceiver ?>"></input>
 
@@ -91,8 +90,6 @@ flex-direction: column-reverse;">
                         <input type="submit" class="btn btn-primary btn-lg" value="Send">
 
                     </div>
-
-
 
                 </div>
 
