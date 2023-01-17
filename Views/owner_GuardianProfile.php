@@ -117,7 +117,7 @@
 
         </div>
 
-        <form action=<?php echo FRONT_ROOT . "Review/ViewReviews"?> method=GET>
+        <form action=<?php echo FRONT_ROOT . "Review/ShowReviews"?> method=GET>
             <input type="hidden" name="id" value="<?php echo $guardian->getId() ?>">
             <button class="btn btn-dark mt-2">View Reviews</button>
         </form>
