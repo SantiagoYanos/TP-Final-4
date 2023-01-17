@@ -148,6 +148,9 @@ create table reviews(
     rating int not null,
     review_owner_id bigint not null,
     review_guardian_id bigint not null,
+    date date not null,
+    active boolean not null default 1,
+
 
     constraint pk_review primary key (review_id),
     constraint fk_review_owner_id foreign key (review_owner_id) references users (user_id),

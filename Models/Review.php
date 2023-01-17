@@ -8,6 +8,8 @@ class Review
   private $rating;
   private $ownerId;
   private $guardianId;
+  private $date;
+
 
   /**
    * Get the value of id
@@ -105,6 +107,26 @@ class Review
   public function setGuardianId($guardianId)
   {
     $this->guardianId = $guardianId;
+
+    return $this;
+  }
+
+  /**
+   * Get the value of date
+   */ 
+  public function getDate()
+  {
+    return $this->date;
+  }
+
+  /**
+   * Set the value of date
+   *
+   * @return  self
+   */ 
+  public function setDate($date)
+  {
+    $this->date = $date;
 
     return $this;
   }
