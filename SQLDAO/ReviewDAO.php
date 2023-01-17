@@ -40,6 +40,7 @@ class ReviewDAO
     {
         $ReviewSQL = new Review();
         $ReviewSQL->setId($resultSet["review_id"]);
+        $ReviewSQL->setOwner_name($resultSet["owner_name"]);
         $ReviewSQL->setComment($resultSet["comment"]);
         $ReviewSQL->setRating($resultSet["rating"]);
         $ReviewSQL->setOwnerId($resultSet["review_owner_id"]);
