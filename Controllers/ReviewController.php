@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller;
+namespace Controllers;
 
 use SQLDAO\ReviewDAO as ReviewDAO;
 use Models\User as User;
