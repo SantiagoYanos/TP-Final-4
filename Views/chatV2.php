@@ -14,8 +14,6 @@
 
 <body>
 
-
-
     <div class="container vh-100 h-100 p-3" name="maximum">
         <div class="border border-2 border-dark h-100 p-4" name="chat">
 
@@ -38,7 +36,8 @@
                                 <!-- DERECHA -->
                                 <div class="border border-dark border-1 ps-2 my-2">
 
-                                    <p> <b class="pe-2"><?php echo $meName ?> </b> <?php echo $message->getDate() ?> </p>
+
+                                    <p> <b>Sender: <?php echo $message->getSender(); ?> </b> <?php echo "Date: " . $message->getDate() ?> </p>
 
                                     <p><?php echo $message->getDescription() ?></p>
 
@@ -54,7 +53,7 @@
 
                                 <div class="border border-dark border-1 pe-2 my-2">
 
-                                    <p> <?php echo $message->getDate() ?> <b class="ps-2"><?php echo $youName ?></b> </p>
+                                    <p> <?php echo "Date: " . $message->getDate() ?> <b>Sender: <?php echo $message->getSender(); ?></b> </p>
 
                                     <p><?php echo $message->getDescription() ?></p>
 
@@ -85,19 +84,19 @@
 
                     </div>
 
+
+
                     <div class="col-3 text-center">
 
                         <input type="submit" class="btn btn-primary btn-lg" value="Send">
 
                     </div>
 
-
-
-                </div>
-
             </form>
 
         </div>
+
+    </div>
     </div>
 
 </body>
