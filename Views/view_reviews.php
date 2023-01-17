@@ -22,7 +22,7 @@
         </thead>
 
         <tbody>
-            <?php foreach ($reviews as $review) 
+            <?php foreach ($total as $review) 
             { ?>
                 <td style="width: 150px;"><?php echo $review->getOwner_name() ?></td>
                 <td style="width: 150px;"><?php echo ".$review->getComment()." ?></td>
