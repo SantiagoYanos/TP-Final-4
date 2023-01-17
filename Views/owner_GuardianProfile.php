@@ -180,25 +180,6 @@
 
                         <!-- Funcion calendario? - HECHO -->
 
-                        <!-- <?php
-
-                                // $calendario = "<script type='text/javascript'>
-                                // $(function() {
-                                //     $('#datepicker').datepicker({
-
-                                //         multidate: true,
-                                //         format: 'yyyy-mm-dd',
-                                //         enableOnReadonly: true,
-                                //         startDate: '" . date("Y-m-d") . "'
-
-                                //     });
-                                //     });
-                                // </script>";
-
-                                // echo $calendario;
-
-                                ?> -->
-
                         <script>
                             crearDatepicker("datepicker", null, 'date("Y-m-d")');
                         </script>

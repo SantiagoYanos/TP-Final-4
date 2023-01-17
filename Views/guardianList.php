@@ -41,17 +41,9 @@
           <th>Dog size</th>
           <td>
 
-            <!-- Quizas se puedan arreglar los selected? - ARREGLADO !-->
+            <!-- Quizas se puedan arreglar los selected? - HECHO !-->
 
             <select class="form-select" name="preferred_size" id="preferred_size" value="<?php echo $preferred_size ?>">
-              <!-- <option <?php // if ($preferred_size == null) {echo "selected='selected'";} 
-                            ?> value="*">*</option>
-              <option <?php //if ($preferred_size == 3) { echo "selected='selected'";} 
-                      ?> value="3">Small</option>
-              <option <?php // if ($preferred_size == 2) {echo "selected='selected'";} 
-                      ?> value="2">Medium</option>
-              <option <?php // if ($preferred_size == 1) {echo "selected='selected'";} 
-                      ?>value="1">Big</option> -->
 
               <?php createOptionsByIndex($preferred_size, $petSizesEnum); ?>
 
@@ -63,18 +55,9 @@
           <th>Cat size</th>
           <td>
 
-            <!-- Quizas se puedan arreglar los selected? x2 - ARREGLADO !-->
+            <!-- Quizas se puedan arreglar los selected? x2 - HECHO !-->
 
             <select class="form-select" name="preferred_size_cat" id="preferred_size_cat" value="<?php echo $preferred_size_cat ?>">
-
-              <!-- <option <?php // if ($preferred_size == null) {echo "selected='selected'";} 
-                            ?> value="*">*</option>
-                            <option <?php //if ($preferred_size == 3) { echo "selected='selected'";} 
-                                    ?> value="3">Small</option>
-                            <option <?php // if ($preferred_size == 2) {echo "selected='selected'";} 
-                                    ?> value="2">Medium</option>
-                            <option <?php // if ($preferred_size == 1) {echo "selected='selected'";} 
-                                    ?>value="1">Big</option> -->
 
               <?php createOptionsByIndex($preferred_size_cat, $petSizesEnum); ?>
 
@@ -108,28 +91,6 @@
     <?php
 
     //Meter todo esto en un archivo script calendario.js (Fijarse porque usa una función autoejecutada) - HECHO
-
-    // $calendario = "<script type='text/javascript'>
-    //         $(function() {
-    //             $('#datepicker').datepicker({
-
-    //                 multidate: true,
-    //                 format: 'yyyy-mm-dd',
-    //                 startDate: '" . date("Y-m-d") . "'
-
-    //             });
-
-    //             ";
-
-    // if ($stringDates) {
-    //   $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $stringDates) . "'])";
-    // }
-
-    // $calendario = $calendario . "
-    //             });
-    //         </script>";
-
-    // echo $calendario;
 
     ?>
 
