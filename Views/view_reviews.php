@@ -61,11 +61,47 @@
     </div>
 
     <div>
+<<<<<<< HEAD
         <form action="<?php echo  FRONT_ROOT . "Owner/ViewGuardianProfile" ?>" method="post">
             <button class="btn btn-success" type="submit">Back</button> <input type="hidden" name="guardian_id" value="<?php echo $total[0]->getGuardian_id() ?>"></input>
         </form>
     </div>
 
+=======
+        <form action="<?php echo FRONT_ROOT . "Review/makereview" ?>" method="post">
+
+        <div class="txt_field">
+        <label for="rating">Rating: </label>
+            <select name="rating" id="rating" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select></br>
+            
+            
+        </div>
+
+        
+        <div>
+            <label for="comment">comment</label>
+            <input type="text" name="comment" ></br>
+        </div>
+
+        <input type="hidden" name="guardianId" value="<?php echo $review->getGuardianId() ?>"></input>
+
+        
+        <div>
+        <button type="submit">make review</button>
+        </div> 
+
+        </form>
+    </div>
+
+    <div>
+        <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button>Back</button></a>
+>>>>>>> e5e3a3b699e6ff81423717de7244f8d20331906d
     </div>
 
 </body>
