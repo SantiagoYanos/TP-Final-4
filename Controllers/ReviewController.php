@@ -25,7 +25,7 @@ class ReviewController
         
         $total = $reviewDAO->GetById($guardianId);
 
-        return require_once(VIEWS_PATH . "view_reviews.php");
+        return require_once(VIEWS_PATH . "view_reviewsV2.php");
     }
 
     public function makeReview($comment, $guardianId, $rating)

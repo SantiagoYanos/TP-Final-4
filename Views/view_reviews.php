@@ -37,6 +37,38 @@
     </table>
 
     <div>
+        <form action="<?php echo FRONT_ROOT . "Review/makereview" ?>" method="post">
+
+        <div class="txt_field">
+        <label for="rating">Rating: </label>
+            <select name="rating" id="rating" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select></br>
+            
+            
+        </div>
+
+        
+        <div>
+            <label for="comment">comment</label>
+            <input type="text" name="comment" ></br>
+        </div>
+
+        <input type="hidden" name="guardianId" value="<?php echo $review->getGuardianId() ?>"></input>
+
+        
+        <div>
+        <button type="submit">make review</button>
+        </div> 
+
+        </form>
+    </div>
+
+    <div>
         <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button>Back</button></a>
     </div>
 
