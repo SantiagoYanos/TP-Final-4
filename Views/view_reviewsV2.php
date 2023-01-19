@@ -15,6 +15,7 @@
     <div class="container">
         <h1 class="text-center mb-5">Reviews from the guardian</h1>
         <table class="table table-striped table-bordered text-center">
+            <?php if($noreview==0) { ?>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -22,16 +23,18 @@
                     <th>Rating</th>
                     <th>Date</th>
                 </tr>
-            </thead>
+            </thead><?php } ?>
             <tbody>
-                <?php foreach ($total as $review) { ?>
+                <?php
+                if($noreview==0) {
+                foreach ($total as $review) { ?>
                 <tr>
                     <td><?php echo $review->getOwner_name() ?></td>
                     <td><?php echo $review->getComment() ?></td>
                     <td><?php echo $review->getRating() ?></td>
                     <td><?php echo $review->getDate() ?></td>
                 </tr>
-                <?php } ?>
+                <?php } }else{  } ?>
             </tbody>
         </table>
         <div class="mt-5">
@@ -50,7 +53,7 @@
                     <label for="comment">Comment:</label>
                     <input type="text" class="form-control" name="comment">
                 </div>
-                <input type="hidden" name="guardianId" value="<?php echo $review->getGuardianId() ?>">
+                <input type="hidden" name="guardianId" value="<?php if ($noreview ==0){ echo $review->getGuardianId(); }else {echo $noreview;} ?>">
                 <button type="submit" class="btn btn-primary">Make Review</button>
             </form>
         </div>

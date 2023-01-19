@@ -22,8 +22,13 @@ class ReviewController
     public function ShowReviews($guardianId)
     {
         $reviewDAO = new ReviewDAO;
+        $noreview=0;
         
         $total = $reviewDAO->GetById($guardianId);
+        if(!$total)
+        {
+            $noreview=$guardianId;
+        }
 
         return require_once(VIEWS_PATH . "view_reviewsV2.php");
     }
