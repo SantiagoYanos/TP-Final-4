@@ -69,7 +69,7 @@
             ?>
                 <tr>
                     <td><?php echo $reservation->GetId() ?></td>
-                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?owner_id=" . $reservation->GetOwner_id() ?>><button class="btn btn-primary mt-2">Owner Profile</button></a> </td>
+                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . $reservation->GetOwner_id() ?>><button class="btn btn-primary mt-2">Owner Profile</button></a> </td>
                     <td>$<?php echo $reservation->getPrice() ?></td>
                     <td>
                         <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">

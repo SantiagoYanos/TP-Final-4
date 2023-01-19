@@ -1,0 +1,23 @@
+.upperButtons {
+    height: 10%;
+}
+
+.messagesArea {
+    height: 70%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction:column-reverse;
+}
+
+.userInputs {
+    height: 20%;
+}
+
+.messageForm {
+    display:inline;
+}
+
+.messageTextArea {
+    resize: none;
+    height: fit-content;
+}

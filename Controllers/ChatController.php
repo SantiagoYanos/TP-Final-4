@@ -40,6 +40,16 @@ class ChatController
 
         $total = $messageDAO->GetByIdsV2($_SESSION["id"], $idReceiver);
 
+        if ($_SESSION["type"] == "guardian") {
+            $backLink = FRONT_ROOT . "Guardian/HomeGuardian";
+            $receiverLink = FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . $you->getId();
+            $reservationsLink = FRONT_ROOT . "Guardian/ViewReservations";
+        } else {
+            $backLink = FRONT_ROOT . "Owner/HomeOwner";
+            $receiverLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $you->getId();
+            $reservationsLink = FRONT_ROOT . "Owner/ViewReservationsOwner";
+        }
+
         // $sended=$messageDAO->GetByIds($_SESSION["id"],$idReceiver);
         // $received=$messageDAO->GetByIds($idReceiver,$_SESSION["id"]);
 
@@ -69,9 +79,9 @@ class ChatController
         $message->setReceiver($userId);
         $message->setSender($_SESSION["id"]);
         //$message->setDate(date("Y-m-d-H-i-s") );
-        
+
         $messageDAO->Add($message);
 
-        header("location: " . FRONT_ROOT . "Chat/ShowChat" . "/?id=" . $userId);
+        header("location: " . FRONT_ROOT . "Chat/ShowChat" . "?id=" . $userId);
     }
 }

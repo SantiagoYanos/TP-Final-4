@@ -135,12 +135,12 @@ class GuardianController
         }
     }
 
-    function ViewOwnerProfile($owner_id)
+    function ViewOwnerProfile($id)
     {
         try {
             $ownerDAO = new OwnerDAO();
 
-            $owner = $ownerDAO->GetById($owner_id);
+            $owner = $ownerDAO->GetById($id);
 
             if ($owner) {
                 require_once VIEWS_PATH . "guardian_OwnerProfile.php";
