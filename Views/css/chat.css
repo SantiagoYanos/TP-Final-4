@@ -1,3 +1,10 @@
+.chatBox {
+    border-style: solid;
+    border-color: #000C85;
+    border-width: 1ch;
+    border-radius: 15px;
+}
+
 .upperButtons {
     height: 10%;
 }
@@ -7,6 +14,29 @@
     overflow-y: scroll;
     display: flex;
     flex-direction:column-reverse;
+    border-style: solid;
+    border-color: #105EE9;
+    border-width: 0.7ch;
+    border-radius: 2px;
+}
+
+.chatMessage {
+    border-style: solid;
+    border-radius: 15px;
+    border-width: thin;
+    border-color: #000C85;
+}
+
+.senderMessage {
+    background-color:cornflowerblue; color:white;
+}
+
+.receiverMessage {
+    background-color:ghostwhite;
+}
+
+.messageDate {
+    font-size: small;
 }
 
 .userInputs {
@@ -20,4 +50,11 @@
 .messageTextArea {
     resize: none;
     height: fit-content;
+    border-style: solid;
+    border-color: #105EE9;
+}
+
+.viewReservationsButton {
+    background-color: purple;
+    color: white;
 }

@@ -41,11 +41,11 @@ class ChatController
         $total = $messageDAO->GetByIdsV2($_SESSION["id"], $idReceiver);
 
         if ($_SESSION["type"] == "guardian") {
-            $backLink = FRONT_ROOT . "Guardian/HomeGuardian";
+            //$backLink = FRONT_ROOT . "Guardian/HomeGuardian";
             $receiverLink = FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . $you->getId();
             $reservationsLink = FRONT_ROOT . "Guardian/ViewReservations";
         } else {
-            $backLink = FRONT_ROOT . "Owner/HomeOwner";
+            //$backLink = FRONT_ROOT . "Owner/HomeOwner";
             $receiverLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $you->getId();
             $reservationsLink = FRONT_ROOT . "Owner/ViewReservationsOwner";
         }

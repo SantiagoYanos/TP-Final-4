@@ -17,22 +17,22 @@
 <body>
 
     <div class="container vh-100 h-100 p-4" name="maximum">
-        <div class="border border-2 border-dark h-100 px-4" name="chat">
+        <div class="h-100 px-4 chatBox" name="chat">
 
             <!-- Mensajes de volver, Perfil del Guardian y ver Reservas -->
             <div class="row align-items-center upperButtons" name="upperButtons">
 
                 <span>
                     <!-- <button class="btn btn-dark" onclick="history.go(-1);">Back</button>-->
-                    <a href="<?php echo $receiverLink ?>"><button class="btn btn-primary" type="button">Check Profile</button></a>
-                    <a href="<?php echo $reservationsLink ?>" class="ms-2"><button class="btn btn-primary" type="button">View Reservations</button></a>
+                    <a href="<?php echo $receiverLink; ?>"><button class="btn btn-primary" type="button">Check Profile</button></a>
+                    <a href="<?php echo $reservationsLink; ?>" class="btn ms-2 border-dark viewReservationsButton" type="button">View Reservations</a>
 
                 </span>
 
             </div>
 
             <!-- Todos los divs con mensajes (área de mensajes) -->
-            <div class="row border border-2 border-dark p-2 messagesArea" name="messagesArea">
+            <div class="row p-2 messagesArea" name="messagesArea">
 
                 <div class="col align-items-start">
 
@@ -45,13 +45,20 @@
                                 <!-- MENSAJES DEL USUARIO -->
 
                                 <!-- DERECHA -->
-                                <div class="border border-dark border-1 ps-2 my-2">
 
-                                    <p> <b class="pe-2"><?php echo $meName ?> </b> <?php echo $message->getDate() ?> </p>
+                                <div class="text-end">
 
-                                    <p><?php echo $message->getDescription() ?></p>
+                                    <div class="chatMessage senderMessage px-3 py-2 my-2">
+
+                                        <p> <span class="messageDate"><?php echo $message->getDate() ?></span> <b class="ps-2"><?php echo $meName;  ?></b> </p>
+
+                                        <p><?php echo $message->getDescription() ?></p>
+
+                                    </div>
 
                                 </div>
+
+
 
                             </div>
 
@@ -61,15 +68,11 @@
 
                             <!-- IZQUIERDA -->
 
-                            <div class="text-end">
+                            <div class="chatMessage receiverMessage px-3 py-2 my-2">
 
-                                <div class="border border-dark border-1 pe-2 my-2">
+                                <p> <b><?php echo $youName; ?> </b> <span class="messageDate"> <?php echo $message->getDate() ?> </span> </p>
 
-                                    <p> <?php echo $message->getDate() ?> <b class="ps-2"><?php echo $youName ?></b> </p>
-
-                                    <p><?php echo $message->getDescription() ?></p>
-
-                                </div>
+                                <p><?php echo $message->getDescription() ?></p>
 
                             </div>
 
