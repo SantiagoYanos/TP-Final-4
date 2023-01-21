@@ -62,6 +62,9 @@
 
     </div>
 
+    <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . $owner->getId(); ?> type="button" class="btn btn-primary" style="background-color: #033793; color: white">View Chat</a>
+
+    <br>
 
     <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn btn-dark mt-2">Back</button></a>
 

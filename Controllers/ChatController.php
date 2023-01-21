@@ -19,8 +19,6 @@ class ChatController
         }*/
     }
 
-
-
     public function ShowChat($idReceiver)
     {
         $messageDAO = new MessageDAO;
