@@ -22,12 +22,17 @@ class ReviewController
     public function ShowReviews($guardianId)
     {
         $reviewDAO = new ReviewDAO;
-        $noreview=0;
-        
+        $noreview = 0;
+
         $total = $reviewDAO->GetById($guardianId);
-        if(!$total)
-        {
-            $noreview=$guardianId;
+        if (!$total) {
+            $noreview = $guardianId;
+        }
+
+        if ($_SESSION["type"] == "guardian") {
+            $backLink = FRONT_ROOT . "Guardian/HomeGuardian";
+        } else {
+            $backLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $guardianId;
         }
 
         return require_once(VIEWS_PATH . "view_reviewsV2.php");

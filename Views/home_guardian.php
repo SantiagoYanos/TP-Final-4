@@ -71,7 +71,14 @@
 
         <br>
 
-        <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn pl-1" style="background-color: purple; color: white">Visualize Reservations</button></a>
+        <span>
+            <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn pl-1" style="background-color: purple; color: white">Visualize Reservations</button></a>
+
+            <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=GET style="display:inline">
+                <input type="hidden" name="id" value="<?php echo $user->getId() ?>">
+                <button class="btn btn-dark ms-2">View Reviews</button>
+            </form>
+        </span>
 
         <div class="container align-items-end">
 
