@@ -41,30 +41,42 @@
                 } ?>
             </tbody>
         </table>
-        <div class="mt-5">
-            <form action="<?php echo FRONT_ROOT . "Review/makereview" ?>" method="post">
-                <div class="form-group">
-                    <label for="rating">Rating:</label>
-                    <select class="form-control" name="rating" id="rating" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="comment">Comment:</label>
-                    <input type="text" class="form-control" name="comment">
-                </div>
-                <input type="hidden" name="guardianId" value="<?php if ($noreview == 0) {
-                                                                    echo $review->getGuardianId();
-                                                                } else {
-                                                                    echo $noreview;
-                                                                } ?>">
-                <button type="submit" class="btn btn-primary">Make Review</button>
-            </form>
-        </div>
+
+        <?php if ($guardianId != $_SESSION["id"]) { ?>
+
+            <div class="mt-5">
+                <form action="<?php echo FRONT_ROOT . "Review/makereview" ?>" method="post">
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <select class="form-control" name="rating" id="rating" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <input type="text" class="form-control" name="comment">
+                    </div>
+                    <input type="hidden" name="guardianId" value="<?php if ($noreview == 0) {
+                                                                        echo $review->getGuardianId();
+                                                                    } else {
+                                                                        echo $noreview;
+                                                                    } ?>">
+                    <button type="submit" class="btn btn-primary">Make Review</button>
+                </form>
+            </div>
+
+        <?php
+
+        }
+
+        ?>
+
+
+
         <div class="text-center mt-5">
             <a href="<?php echo $backLink; ?>">
                 <button class="btn btn-secondary">Back</button>
