@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <h1 class="text-center mb-5">Reviews from the guardian</h1>
-        <table class="table table-striped table-bordered text-center">
+        <table class="table table-striped table-bordered text-center" style="table-layout: fixed;">
             <?php if ($noreview == 0) { ?>
                 <thead>
                     <tr>
@@ -31,10 +31,10 @@
                 if ($noreview == 0) {
                     foreach ($total as $review) { ?>
                         <tr>
-                            <td><?php echo $review->getOwner_name() ?></td>
-                            <td><?php echo $review->getComment() ?></td>
-                            <td><?php echo $review->getRating() ?></td>
-                            <td><?php echo $review->getDate() ?></td>
+                            <td><?php echo $review->getOwner_name(); ?></td>
+                            <td style="overflow-wrap: break-word;"><?php echo $review->getComment(); ?></td>
+                            <td><?php echo $review->getRating(); ?></td>
+                            <td><?php echo $review->getDate(); ?></td>
                         </tr>
                 <?php }
                 } else {
