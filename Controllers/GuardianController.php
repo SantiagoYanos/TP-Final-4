@@ -34,6 +34,10 @@ class GuardianController
 
             $user = $user->GetByid($_SESSION["id"]);
 
+            $ratingPercent = (($user->getType_Data()->getReputation() * 100) / 5);
+
+            //Guardar la cantidad de reviews para poder mostrarla.
+
             require_once VIEWS_PATH . "home_guardian.php";
         } catch (Exception $e) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
@@ -135,12 +139,12 @@ class GuardianController
         }
     }
 
-    function ViewOwnerProfile($owner_id)
+    function ViewOwnerProfile($id)
     {
         try {
             $ownerDAO = new OwnerDAO();
 
-            $owner = $ownerDAO->GetById($owner_id);
+            $owner = $ownerDAO->GetById($id);
 
             if ($owner) {
                 require_once VIEWS_PATH . "guardian_OwnerProfile.php";

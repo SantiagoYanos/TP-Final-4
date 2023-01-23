@@ -9,24 +9,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <link rel="stylesheet" href="../Views/css/chat.css" type="text/css">
+
     <title>Chat</title>
 </head>
 
 <body>
 
-
-
-    <div class="container vh-100 h-100 p-3" name="maximum">
-        <div class="border border-2 border-dark h-100 p-4" name="chat">
+    <div class="container vh-100 h-100 p-4" name="maximum">
+        <div class="h-100 px-4 chatBox" name="chat">
 
             <!-- Mensajes de volver, Perfil del Guardian y ver Reservas -->
-            <div class="row" name="upperButtons" style="height: 10%">
+            <div class="row align-items-center upperButtons" name="upperButtons">
+
+                <span>
+                    <!-- <button class="btn btn-dark" onclick="history.go(-1);">Back</button>-->
+                    <a href="<?php echo $receiverLink; ?>"><button class="btn btn-primary" type="button">Check Profile</button></a>
+                    <a href="<?php echo $reservationsLink; ?>" class="btn ms-2 border-dark viewReservationsButton" type="button">View Reservations</a>
+
+                </span>
 
             </div>
 
             <!-- Todos los divs con mensajes (área de mensajes) -->
-            <div class="row border border-2 border-dark p-2" name="messagesArea" style="height: 70%; overflow-y: scroll; display: flex; 
-flex-direction: column-reverse;">
+            <div class="row p-2 messagesArea" name="messagesArea">
 
                 <div class="col align-items-start">
 
@@ -36,30 +42,37 @@ flex-direction: column-reverse;">
 
                             <div>
 
+                                <!-- MENSAJES DEL USUARIO -->
+
                                 <!-- DERECHA -->
-                                <div class="border border-dark border-1 ps-2 my-2">
 
-                                    <p> <b class="pe-2"><?php echo $meName ?> </b> <?php echo $message->getDate() ?> </p>
+                                <div class="text-end">
 
-                                    <p><?php echo $message->getDescription() ?></p>
+                                    <div class="chatMessage senderMessage px-3 py-2 my-2">
+
+                                        <p> <span class="messageDate"><?php echo $message->getDate() ?></span> <b class="ps-2"><?php echo $meName;  ?></b> </p>
+
+                                        <p><?php echo $message->getDescription() ?></p>
+
+                                    </div>
 
                                 </div>
+
+
 
                             </div>
 
                         <?php } else { ?>
 
+                            <!-- MENSAJES DEL OTRO USUARIO -->
+
                             <!-- IZQUIERDA -->
 
-                            <div class="text-end">
+                            <div class="chatMessage receiverMessage px-3 py-2 my-2">
 
-                                <div class="border border-dark border-1 pe-2 my-2">
+                                <p> <b><?php echo $youName; ?> </b> <span class="messageDate"> <?php echo $message->getDate() ?> </span> </p>
 
-                                    <p> <?php echo $message->getDate() ?> <b class="ps-2"><?php echo $youName ?></b> </p>
-
-                                    <p><?php echo $message->getDescription() ?></p>
-
-                                </div>
+                                <p><?php echo $message->getDescription() ?></p>
 
                             </div>
 
@@ -73,15 +86,15 @@ flex-direction: column-reverse;">
 
             <!-- Los inputs del user, texto de nuevo mensaje, enviar, etc... -->
 
-            <form action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post" style="display:inline">
+            <form class="messageForm" action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post">
 
-                <div class="row align-items-center" name="userInputs" style="height: 20%">
+                <div class="row align-items-center userInputs" name="userInputs">
 
                     <input type="hidden" name="userId" value="<?php echo $idReceiver ?>"></input>
 
                     <div class="col-9">
 
-                        <textarea class="form-control m-2" id="newMessage" name="description" rows="4" style="resize: none" placeholder="Insert your message"></textarea>
+                        <textarea class="form-control m-2 messageTextArea" id="newMessage" name="description" rows="4" placeholder="Insert your message"></textarea>
 
                     </div>
 

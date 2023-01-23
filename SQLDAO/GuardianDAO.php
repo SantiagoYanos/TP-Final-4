@@ -200,7 +200,7 @@ class GuardianDAO implements IModels
             $resultSet = $this->connection->Execute($query, $parameters1);
 
             if ($resultSet == []) {
-                return NULL;
+                return [];
             }
 
             $available_dates = array_map(function ($dateArray) {
@@ -298,16 +298,18 @@ class GuardianDAO implements IModels
     public function LoadData($resultSet, $available_dates)
     {
         $GuardianSQL = new Guardian();
-        $ReviewDAO = new ReviewDAO(); 
+        $ReviewDAO = new ReviewDAO();
         $GuardianSQL->setCuil($resultSet["cuil"]);
         $GuardianSQL->setPreferred_size($resultSet["preferred_size_dog"]);
         $GuardianSQL->setPreferred_size_cat($resultSet["preferred_size_cat"]);
-        $GuardianSQL->setReputation($ReviewDAO->calculateRating($resultSet["user_id"]));
-        if ($available_dates) {
-            $GuardianSQL->setAvailable_date($available_dates);
+        if ($resultSet["user_id"]) {
+            $GuardianSQL->setReputation($ReviewDAO->calculateRating($resultSet["user_id"]));
         } else {
-            $GuardianSQL->setAvailable_date(NULL);
+            $GuardianSQL->setReputation(null);
         }
+
+        $GuardianSQL->setAvailable_date($available_dates);
+
         if ($resultSet["price"]) {
             $GuardianSQL->setPrice($resultSet["price"]);
         }

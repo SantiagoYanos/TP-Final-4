@@ -1,0 +1,20 @@
+.reviewBox {
+    border-style: solid;
+    border-color: black;
+    border-width: 0.5ch;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewsList {
+    overflow-y:scroll;
+}
+
+.reviewDate {
+    display:inline; font-size:small;
+}
+
+.reviewComment {
+    overflow-wrap:break-word;
+}

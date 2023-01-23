@@ -139,13 +139,13 @@ class OwnerController
         }
     }
 
-    function ViewGuardianProfile($guardian_id, $alert = null)
+    function ViewGuardianProfile($id, $alert = null)
     {
         try {
             $guardianDAO = new GuardianDAO();
             $PetDAO = new PetDAO();
 
-            $guardian = $guardianDAO->GetById($guardian_id);
+            $guardian = $guardianDAO->GetById($id);
             $PetList = $PetDAO->GetPetsByOwner($_SESSION["id"]);
 
             $availableDatesJson = json_encode($guardian->getType_data()->getAvailable_date());

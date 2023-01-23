@@ -117,12 +117,19 @@
 
         </div>
 
-        <form action=<?php echo FRONT_ROOT . "Review/ShowReviews"?> method=GET>
-            <input type="hidden" name="id" value="<?php echo $guardian->getId() ?>">
-            <button class="btn btn-dark mt-2">View Reviews</button>
-        </form>
+        <span>
+            <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=GET style="display:inline">
+                <input type="hidden" name="id" value="<?php echo $guardian->getId() ?>">
+                <button class="btn btn-warning mt-3">View Reviews</button>
+            </form>
 
-        <a href=<?php echo FRONT_ROOT . "Owner/SearchGuardian"?>><button class="btn btn-dark mt-2">Back</button></a>
+            <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . $guardian->getId(); ?> type="button" class="btn btn-primary mt-3" style="background-color: #033793; color: white">View Chat</a>
+
+        </span>
+
+        <br>
+
+        <a href=<?php echo FRONT_ROOT . "Owner/SearchGuardian" ?>><button class="btn btn-dark mt-3">Back</button></a>
 
         <hr>
 
