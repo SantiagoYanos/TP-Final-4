@@ -33,10 +33,16 @@
         <b>0 Stars</b>
         <b class="float-end">5 Stars</b>
 
-        <!-- Traer la reputación transformada desde el servidor -->
+        <!-- Traer la reputación transformada desde el servidor - HECHO -->
 
         <div class="progress mb-3">
-            <div class="progress-bar" style="width:<?php echo (($user->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
+            <div class="progress-bar" style="width:<?php echo $ratingPercent ?>%"></div>
+        </div>
+
+        <div>
+
+            <!-- Mostrar el porcentaje de reviews a escala de 100% y la cantidad. Ex. 87% (15 Reviews) -->
+            <?php  ?>
         </div>
 
         <div>
@@ -76,7 +82,7 @@
 
             <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=GET style="display:inline">
                 <input type="hidden" name="id" value="<?php echo $user->getId() ?>">
-                <button class="btn btn-dark ms-2">View Reviews</button>
+                <button class="btn btn-warning ms-2">View Reviews</button>
             </form>
         </span>
 

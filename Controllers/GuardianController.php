@@ -34,6 +34,10 @@ class GuardianController
 
             $user = $user->GetByid($_SESSION["id"]);
 
+            $ratingPercent = (($user->getType_Data()->getReputation() * 100) / 5);
+
+            //Guardar la cantidad de reviews para poder mostrarla.
+
             require_once VIEWS_PATH . "home_guardian.php";
         } catch (Exception $e) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");

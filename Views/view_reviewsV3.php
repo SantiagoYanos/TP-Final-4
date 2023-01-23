@@ -54,7 +54,7 @@
                                                                                 echo $noreview;
                                                                             } ?>">
                             <br>
-                            <button type="submit" class="btn btn-primary">Make Review</button>
+                            <button type="submit" class="btn btn-warning btn-outline-dark">Make Review</button>
 
                         </form>
                     </div>
@@ -65,9 +65,9 @@
 
                 ?>
 
-                <div class="text-center">
+                <div class=" text-center">
                     <a href="<?php echo $backLink; ?>">
-                        <button class="btn btn-secondary">Back</button>
+                        <button class="btn btn-secondary mt-2">Back</button>
                     </a>
                 </div>
             </div>
