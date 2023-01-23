@@ -307,11 +307,9 @@ class GuardianDAO implements IModels
         } else {
             $GuardianSQL->setReputation(null);
         }
-        if ($available_dates) {
-            $GuardianSQL->setAvailable_date($available_dates);
-        } else {
-            $GuardianSQL->setAvailable_date(NULL);
-        }
+
+        $GuardianSQL->setAvailable_date($available_dates);
+
         if ($resultSet["price"]) {
             $GuardianSQL->setPrice($resultSet["price"]);
         }
