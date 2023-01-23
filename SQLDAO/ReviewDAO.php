@@ -143,4 +143,27 @@ class ReviewDAO
             throw $e;
         }
     }
+
+    public function Remove($id)
+    {
+        try {
+
+            $query = "UPDATE " . $this->tableName . " SET active=false WHERE review_id=:id";
+
+            $parameters["id"] = $id;
+
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    public function EditReview($newReview,$reviewId)
+    {
+        $this->remove($reviewId);
+
+        $this->add($newReview);
+        
+    }
 }
