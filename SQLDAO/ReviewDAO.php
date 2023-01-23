@@ -98,7 +98,7 @@ class ReviewDAO
     public function calculateRating ($guardianId)
     {
         try {
-            $query = "SELECT sum(r.rating)/ count(review_id) as promedio FROM " . $this->tableName . " r WHERE review_guardian_id=:guardianId  AND active=true ";
+            $query = "SELECT sum(r.rating)/ count(review_id) as average ,  count(review_id) as quantity as c FROM " . $this->tableName . " r WHERE review_guardian_id=:guardianId  AND active=true ";
 
             //Obtener también la cantidad de reviews.
 
@@ -109,7 +109,7 @@ class ReviewDAO
 
 
 
-            return $resultSet[0]["promedio"];
+            return $resultSet[0];
         } catch (Exception $e) {
             throw $e;
         }
