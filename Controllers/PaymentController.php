@@ -6,7 +6,10 @@ use SQLDAO\GuardianDAO;
 use Models\Payment;
 use SQLDAO\ReservationDAO as ReservationDAO;
 use SQLDAO\PaymentDAO as PaymentDAO;
-use Exception as Exception;
+//use Exception as Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 class PaymentController
 {
@@ -15,11 +18,64 @@ class PaymentController
         require_once(ROOT . "/Utils/validateSession.php");
     }
 
+    public function SendEmailPayment($email)
+    {
+        /*require ROOT . "PHPMailer\Exception.php";
+        require ROOT . "PHPMailer\PHPMailer.php";
+        require ROOT . "PHPMailer\SMTP.php";
+
+        $mail = new \PHPMailer\PHPMailer\PHPMailer();
+        //$email->isSMTP();
+        $email->Host="smtp.gmail.com";
+        $email->Port=587;
+        $email->SMTPSecure="tls";
+        $email->Usermail="pethero30000@gmail.com";
+        $email->Password="Pethero30000!";
+        $mail->setFrom("pethero30000@gmail.com", "asdasd");
+        $email->addAddress($email);
+        $email->Subject="Pagaste !";
+        $email->msgHTML("Gracias por pagar!");
+
+        if($email->send()){
+            echo "<script type='text/javascript'>alert('Receipt sent!');</script>";
+            return require_once(VIEWS_PATH . "show_payment.php");
+        }*/
+
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'pethero30000@gmail.com';                     //SMTP username
+            $mail->Password   = 'uybgwehmdppanzkv';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        
+            //Recipients
+            $mail->setFrom('pethero30000@gmail.com', "Pet Hero Support");
+            $mail->addAddress($email, "Dear Customer");     //Add a recipient
+        
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Payment Receipt';
+            $mail->Body    = 'Thank you for using Pet Hero! Here is your receipt. :-)';
+            $mail->AddAttachment(ROOT . 'PHPMailer/PHPMailer/recibo.png');
+        
+            $mail->send();
+
+            return header("location: " . FRONT_ROOT . "/Owner/ViewReservationsOwner");
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+        
+    }
+
     public function ShowPayment($reservation_id)
     {
         try {
-
-
             $payment = new PaymentDAO();
 
             $arrayPayment = array();
