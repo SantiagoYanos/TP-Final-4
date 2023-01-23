@@ -39,11 +39,10 @@
             <div class="progress-bar" style="width:<?php echo $ratingPercent ?>%"></div>
         </div>
 
-        <div>
-
+        <b>
             <!-- Mostrar el porcentaje de reviews a escala de 100% y la cantidad. Ex. 87% (15 Reviews) -->
-            <?php  ?>
-        </div>
+            <?php echo "(" . $ratingPercent . ") " . $reviewsAmount . " Reviews" ?>
+        </b>
 
         <div>
 

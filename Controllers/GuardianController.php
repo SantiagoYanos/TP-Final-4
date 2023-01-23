@@ -5,7 +5,7 @@ namespace Controllers;
 //use DAO\GuardianDAO as GuardianDAO;
 //use DAO\OwnerDAO as OwnerDAO;
 
-
+use SQLDAO\ReviewDAO as ReviewDAO;
 use  SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 use SQLDAO\ReservationDAO;
@@ -31,10 +31,13 @@ class GuardianController
             //var_dump($_SESSION);
 
             $user = new GuardianDAO();
+            $reviewDAO = new ReviewDAO();
 
             $user = $user->GetByid($_SESSION["id"]);
 
             $ratingPercent = (($user->getType_Data()->getReputation() * 100) / 5);
+
+            $reviewsAmount = $reviewDAO->calculateRating($_SESSION["id"])["cantidad"];
 
             //Guardar la cantidad de reviews para poder mostrarla.
 
