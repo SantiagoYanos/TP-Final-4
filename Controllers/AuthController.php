@@ -106,6 +106,7 @@ class AuthController
 
             $guardianArray = array();
 
+
             $guardianArray["cuil"] = $cuil;
             $guardianArray["preferred_size_dog"] = $preferred_size;
             $guardianArray["preferred_size_cat"] = $preferred_size_cat;
