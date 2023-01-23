@@ -153,8 +153,8 @@
                 <!-- No usar las ID's de las reservas directamente (de vuelta) -->
 
                 <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
-                    <td colspan="7">
-                        <table class="table table-bordered">
+                    <td colspan="8">
+                        <table class="table table-bordered" style="table-layout: fixed;">
 
                             <thead>
                                 <th>Reservation Pets</th>
@@ -182,7 +182,7 @@
 
                                         </td>
                                         <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
-                                        <td style="width: 150px;"><?php echo $pet->getObservation() ?> </td>
+                                        <td style="width: 150px;overflow-wrap:break-word"><?php echo $pet->getObservation() ?> </td>
                                         <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
                                         <td style="width: 150px;"> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
