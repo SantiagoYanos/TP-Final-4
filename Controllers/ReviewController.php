@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use SQLDAO\ReviewDAO as ReviewDAO;
+use SQLDAO\UserDAO as UserDAO;
 use Models\User as User;
 use \Exception as Exception;
 use Models\Review as Review;
@@ -22,8 +23,10 @@ class ReviewController
     public function ShowReviews($guardianId)
     {
         $reviewDAO = new ReviewDAO;
+        $userDAO = new UserDAO;
         $noreview = 0;
 
+        $guardian = $userDAO->GetById($guardianId);
         $total = $reviewDAO->GetById($guardianId);
         if (!$total) {
             $noreview = $guardianId;
@@ -35,7 +38,8 @@ class ReviewController
             $backLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $guardianId;
         }
 
-        return require_once(VIEWS_PATH . "view_reviewsV2.php");
+        //return require_once(VIEWS_PATH . "view_reviewsV2.php");
+        return require_once(VIEWS_PATH . "view_reviewsV3.php");
     }
 
     public function makeReview($comment, $guardianId, $rating)
@@ -51,6 +55,6 @@ class ReviewController
 
         $reviewDAO->Add($review);
 
-        header("location: " . FRONT_ROOT . "Review/ShowReviews" . "/?id=" . $guardianId);
+        header("location: " . FRONT_ROOT . "Review/ShowReviews" . "?id=" . $guardianId);
     }
 }
