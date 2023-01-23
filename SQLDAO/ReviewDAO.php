@@ -116,13 +116,13 @@ class ReviewDAO
     }
 
 
-    public function GetByOwner($guardianId,$ownerId)
+    public function GetByOwner($guardianId, $ownerId)
     {
         try {
 
             $ReviewList = array();
 
-            $query = "SELECT r.*, CONCAT(u.name, ' ', u.last_name)  as 'owner_name' FROM " . $this->tableName . " r inner join users u on  r.review_owner_id = u.user_id WHERE r.review_guardian_id=:guardianId and r.review_owner_id=:ownerId  AND r.active=true ORDER BY date DESC LIMIT 1";
+            $query = "SELECT r.*, CONCAT(u.name, ' ', u.last_name)  as 'owner_name' FROM " . $this->tableName . " r inner join users u on  r.review_owner_id = u.user_id WHERE r.review_guardian_id=:guardianId and r.review_owner_id=:ownerId AND r.active=true LIMIT 1";
 
             $parameters["guardianId"] = $guardianId;
             $parameters["ownerId"] = $ownerId;
@@ -131,14 +131,11 @@ class ReviewDAO
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query, $parameters);
 
-            foreach ($resultSet as $row) {
-
-                $ReviewSQL = $this->LoadData($row);
-
-                array_push($ReviewList, $ReviewSQL);
+            if (!$resultSet[0]) {
+                return null;
             }
 
-            return $ReviewList;
+            return $this->LoadData($resultSet[0]);
         } catch (Exception $e) {
             throw $e;
         }
