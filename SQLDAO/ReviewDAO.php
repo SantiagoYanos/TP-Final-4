@@ -6,7 +6,7 @@ use \Exception as Exception;
 use Models\Review as Review;
 use SQLDAO\Connection as Connection;
 
-class ReviewDAO
+class ReviewDAO 
 {
 
     private $ReviewList = array();
@@ -46,7 +46,7 @@ class ReviewDAO
             $parametersReview["rating"] = $ReviewSQL->getRating();
             $parametersReview["review_owner_id"] = $ReviewSQL->getOwnerId();
             $parametersReview["review_guardian_id"] = $ReviewSQL->getGuardianId();
-
+           
             $this->connection = Connection::GetInstance();
 
             $resultSet = $this->connection->ExecuteNonQuery($queryReview, $parametersReview);
@@ -77,7 +77,7 @@ class ReviewDAO
             $query = "SELECT r.*, CONCAT(u.name, ' ', u.last_name)  as 'owner_name' FROM " . $this->tableName . " r inner join users u on  r.review_owner_id = u.user_id WHERE r.review_guardian_id=:guardianId  AND r.active=true ORDER BY date DESC";
 
             $parameters["guardianId"] = $guardianId;
-
+            
 
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query, $parameters);
@@ -95,7 +95,7 @@ class ReviewDAO
         }
     }
 
-    public function calculateRating($guardianId)
+    public function calculateRating ($guardianId)
     {
         try {
             $query = "SELECT sum(r.rating)/ count(review_id) as promedio FROM " . $this->tableName . " r WHERE review_guardian_id=:guardianId  AND active=true ";
@@ -107,9 +107,12 @@ class ReviewDAO
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query, $parameters);
 
-            return $resultSet[0];
+
+
+            return $resultSet[0]["promedio"];
         } catch (Exception $e) {
             throw $e;
         }
     }
+
 }
