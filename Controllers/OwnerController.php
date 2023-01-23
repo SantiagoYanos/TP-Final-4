@@ -10,6 +10,7 @@ use SQLDAO\PetDAO as PetDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\ReservationDAO as ReservationDAO;
+use SQLDAO\ReviewDAO as ReviewDAO;
 use Models\Pet as Pet;
 use Models\User as User;
 use Models\Owner as Owner;
@@ -144,11 +145,16 @@ class OwnerController
         try {
             $guardianDAO = new GuardianDAO();
             $PetDAO = new PetDAO();
+            $reviewDAO = new ReviewDAO();
 
             $guardian = $guardianDAO->GetById($id);
             $PetList = $PetDAO->GetPetsByOwner($_SESSION["id"]);
 
             $availableDatesJson = json_encode($guardian->getType_data()->getAvailable_date());
+
+            $ratingPercent = (($guardian->getType_Data()->getReputation() * 100) / 5);
+
+            $reviewsAmount = $reviewDAO->calculateRating($guardian->getId())["quantity"];
 
             if ($guardian) {
                 require_once VIEWS_PATH . "owner_GuardianProfile.php";

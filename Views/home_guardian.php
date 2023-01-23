@@ -40,11 +40,9 @@
         </div>
 
         <b>
-            <!-- Mostrar el porcentaje de reviews a escala de 100% y la cantidad. Ex. 87% (15 Reviews) -->
+            <!-- Mostrar el porcentaje de reviews a escala de 100% y la cantidad. Ex. 87% (15 Reviews) - HECHO -->
             <?php echo "(" . number_format((float)$ratingPercent, 1, ',', '') . "%) " . $reviewsAmount . " Reviews" ?>
         </b>
-
-
 
         <div>
 
