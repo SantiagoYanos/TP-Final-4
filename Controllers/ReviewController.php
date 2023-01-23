@@ -36,7 +36,17 @@ class ReviewController
             $backLink = FRONT_ROOT . "Guardian/HomeGuardian";
         } else {
             $backLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $guardianId;
+
+            $ownerReview = $reviewDAO->GetByOwner($guardianId, $_SESSION["id"]);
+
+            if ($ownerReview) {
+                $formLink = FRONT_ROOT . "Review/editReview";
+            } else {
+                $formLink = FRONT_ROOT . "Review/makeReview";
+            }
         }
+
+
 
         //return require_once(VIEWS_PATH . "view_reviewsV2.php");
         return require_once(VIEWS_PATH . "view_reviewsV3.php");

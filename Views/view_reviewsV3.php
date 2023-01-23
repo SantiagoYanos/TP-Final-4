@@ -32,7 +32,8 @@
                 <?php if ($guardianId != $_SESSION["id"]) { ?>
 
                     <div class="mt-5">
-                        <form action="<?php echo FRONT_ROOT . "Review/makereview" ?>" method="post">
+
+                        <form action="<?php echo $formLink ?>" method="post">
                             <div class="form-group">
                                 <label for="rating">Rating:</label>
                                 <select class="form-control" name="rating" id="rating" required>
@@ -54,7 +55,12 @@
                                                                                 echo $noreview;
                                                                             } ?>">
                             <br>
-                            <button type="submit" class="btn btn-warning btn-outline-dark">Make Review</button>
+
+                            <?php if ($ownerReview) { ?>
+                                <button type="submit" class="btn btn-primary btn-outline-dark">Edit Review</button>
+                            <?php } else { ?>
+                                <button type="submit" class="btn btn-warning btn-outline-dark">Make Review</button>
+                            <?php } ?>
 
                         </form>
                     </div>
@@ -79,6 +85,30 @@
                 <?php
 
                 if ($noreview == 0) {
+                    if ($guardianId != $_SESSION["id"] && $ownerReview) { ?>
+
+                        <div class="border border-primary mx-3 my-4 pt-2 px-2">
+                            <b><?php echo $ownerReview->getOwner_name(); ?></b><br>
+                            <span>
+
+                                <?php for ($i = 0; $i < 5; $i++) {
+
+                                    if ($i < $ownerReview->getRating()) {
+                                        echo "&#9733";
+                                    } else {
+                                        echo "&#9734";
+                                    }
+                                } ?>
+
+                                <div class="ms-2 reviewDate"><?php echo $ownerReview->getDate(); ?></div>
+                            </span>
+
+                            <p class="mx-1 mt-2 reviewComment"><?php echo $ownerReview->getComment(); ?></p>
+
+                        </div>
+
+                    <?php }
+
                     foreach ($total as $review) { ?>
 
                         <div class="border border-dark mx-3 my-4 pt-2 px-2">
