@@ -57,7 +57,9 @@
                             <br>
 
                             <?php if ($ownerReview) { ?>
-                                <button type="submit" class="btn btn-primary btn-outline-dark">Edit Review</button>
+                                <input type="hidden" name="oldReviewId" value=<?php echo $ownerReview->getId(); ?>></input>
+                                <button type="submit" class="btn btn-primary">Edit Review</button>
+
                             <?php } else { ?>
                                 <button type="submit" class="btn btn-warning btn-outline-dark">Make Review</button>
                             <?php } ?>
@@ -87,7 +89,7 @@
                 if ($noreview == 0) {
                     if ($guardianId != $_SESSION["id"] && $ownerReview) { ?>
 
-                        <div class="border border-primary mx-3 my-4 pt-2 px-2">
+                        <div class="border border-primary border-2 mx-3 my-4 pt-2 px-2">
                             <b><?php echo $ownerReview->getOwner_name(); ?></b><br>
                             <span>
 
