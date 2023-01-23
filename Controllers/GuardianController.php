@@ -37,13 +37,14 @@ class GuardianController
 
             $ratingPercent = (($user->getType_Data()->getReputation() * 100) / 5);
 
-            $reviewsAmount = $reviewDAO->calculateRating($_SESSION["id"])["cantidad"];
+            $reviewsAmount = $reviewDAO->calculateRating($_SESSION["id"])["quantity"];
 
             //Guardar la cantidad de reviews para poder mostrarla.
 
             require_once VIEWS_PATH . "home_guardian.php";
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            //header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            var_dump($e);
         }
     }
 

@@ -303,7 +303,7 @@ class GuardianDAO implements IModels
         $GuardianSQL->setPreferred_size($resultSet["preferred_size_dog"]);
         $GuardianSQL->setPreferred_size_cat($resultSet["preferred_size_cat"]);
         if ($resultSet["user_id"]) {
-            $GuardianSQL->setReputation($ReviewDAO->calculateRating($resultSet["user_id"])["promedio"]);
+            $GuardianSQL->setReputation($ReviewDAO->calculateRating($resultSet["user_id"])["average"]);
         } else {
             $GuardianSQL->setReputation(null);
         }
