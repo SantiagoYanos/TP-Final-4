@@ -74,7 +74,7 @@ class ReviewDAO
 
             $ReviewList = array();
 
-            $query = "SELECT r.*, CONCAT(u.name, ' ', u.last_name)  as 'owner_name' FROM " . $this->tableName . " r inner join users u on  r.review_owner_id = u.user_id WHERE r.review_guardian_id=:guardianId  AND r.active=true   ";
+            $query = "SELECT r.*, CONCAT(u.name, ' ', u.last_name)  as 'owner_name' FROM " . $this->tableName . " r inner join users u on  r.review_owner_id = u.user_id WHERE r.review_guardian_id=:guardianId  AND r.active=true ORDER BY date DESC";
 
             $parameters["guardianId"] = $guardianId;
             
@@ -104,17 +104,15 @@ class ReviewDAO
 
             $parameters["guardianId"] = $guardianId;
 
-
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query, $parameters);
 
 
 
-        return $resultSet[0]["promedio"];
-    } catch (Exception $e) {
-        throw $e;
-    }
-
+            return $resultSet[0]["promedio"];
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 
 }
