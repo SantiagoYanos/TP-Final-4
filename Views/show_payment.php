@@ -67,6 +67,14 @@
 
             <!-- Se puede mejorar seguramente -->
 
+            <form action="<?php echo FRONT_ROOT . "Payment/SendEmailPayment" ?>" method="post">
+                <div class="control-group">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <button class="btn btn-success" type="submit">Send Receipt</button>
+            </form> 
+
+
             <?php if ($_SESSION["type"] == "guardian") { ?>
 
                 <a href="<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>"><button class="btn btn-dark" type="submit"> Back</button></a>
@@ -76,8 +84,6 @@
                 <a href="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>"><button class="btn btn-dark" type="submit"> Back</button></a>
 
             <?php } ?>
-
-
 
         </div>
 
