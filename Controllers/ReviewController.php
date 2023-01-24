@@ -67,4 +67,20 @@ class ReviewController
 
         header("location: " . FRONT_ROOT . "Review/ShowReviews" . "?id=" . $guardianId);
     }
+
+    public function editReview($comment, $guardianId, $rating, $oldReviewId)
+    {
+        $reviewDAO = new ReviewDAO;
+
+        $review = new Review;
+
+        $review->setComment($comment);
+        $review->setRating($rating);
+        $review->setOwnerId($_SESSION["id"]);
+        $review->setGuardianId($guardianId);
+
+        $reviewDAO->EditReview($review, $oldReviewId);
+
+        header("location: " . FRONT_ROOT . "Review/ShowReviews" . "?id=" . $guardianId);
+    }
 }

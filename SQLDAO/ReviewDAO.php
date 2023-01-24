@@ -131,7 +131,7 @@ class ReviewDAO
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query, $parameters);
 
-            if (!$resultSet[0]) {
+            if (!$resultSet) {
                 return null;
             }
 
@@ -156,11 +156,10 @@ class ReviewDAO
         }
     }
 
-    public function EditReview($newReview,$reviewId)
+    public function EditReview($newReview, $oldReviewId)
     {
-        $this->remove($reviewId);
+        $this->Remove($oldReviewId);
 
-        $this->add($newReview);
-        
+        $this->Add($newReview);
     }
 }
