@@ -25,8 +25,6 @@
 
             <table class="table mt-3" style="text-align:center;" border="2">
 
-
-
                 <!-- <th style="width: 150px;">amount</th>
                         <th style="width: 150px;">date</th>
                         <th style="width: 150px;">payment number</th>
@@ -72,7 +70,7 @@
                     <input type="email" name="email" placeholder="Email" required>
                 </div>
                 <button class="btn btn-success" type="submit">Send Receipt</button>
-            </form> 
+            </form>
 
 
             <?php if ($_SESSION["type"] == "guardian") { ?>

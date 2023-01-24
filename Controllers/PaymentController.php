@@ -3,9 +3,11 @@
 namespace Controllers;
 
 use SQLDAO\GuardianDAO;
-use Models\Payment;
 use SQLDAO\ReservationDAO as ReservationDAO;
 use SQLDAO\PaymentDAO as PaymentDAO;
+use SQLDAO\OwnerDAO as OwnerDAO;
+
+use Models\Payment;
 //use Exception as Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -53,24 +55,23 @@ class PaymentController
             $mail->Password   = 'uybgwehmdppanzkv';                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        
+
             //Recipients
             $mail->setFrom('pethero30000@gmail.com', "Pet Hero Support");
             $mail->addAddress($email, "Dear Customer");     //Add a recipient
-        
+
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Payment Receipt';
             $mail->Body    = 'Thank you for using Pet Hero! Here is your receipt. :-)';
             $mail->AddAttachment(ROOT . 'PHPMailer/PHPMailer/recibo.png');
-        
+
             $mail->send();
 
             return header("location: " . FRONT_ROOT . "/Owner/ViewReservationsOwner");
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-        
     }
 
     public function ShowPayment($reservation_id)
@@ -153,12 +154,25 @@ class PaymentController
     {
 
         $reservationDAO = new ReservationDAO;
+        $guardianDAO = new GuardianDAO;
+        $ownerDAO = new OwnerDAO;
 
         $reservation = $reservationDAO->getById($reservation_id);
 
-        $guardianDAO = new GuardianDAO;
-
         $guardian = $guardianDAO->getById($reservation->getGuardian_id());
+
+        $owner = $ownerDAO->getById($reservation->getOwner_id());
+
+        $coupon["guardianName"] = $guardian->getName() . " " . $guardian->getLast_name();
+        $coupon["ownerName"] = $owner->getName() . " " . $owner->getLast_name();
+        $coupon["guardianCUIL"] = $guardian->getType_data()->getCuil();
+        $coupon["ownerDNI"] = $owner->getType_data()->getDni();
+        $coupon["import"] = $reservation->getPrice() / 2;
+        $coupon["daysAmount"] = count($reservation->getDates());
+        $coupon["petsAmount"] = count($reservation->getPets());
+
+
+        //"Pet-sitting reservation | " . count($reservation->getDates()) . " days | " . count($reservation->getPets()) . " pets";
 
 
         return require_once(VIEWS_PATH . "paymentcupon.php");
