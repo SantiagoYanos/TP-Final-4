@@ -11,7 +11,7 @@
   <title>Register Side</title>
 </head>
 
-<body style="height: 100vh">
+<body>
 
   <div class="container w-auto">
 
