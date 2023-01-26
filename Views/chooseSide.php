@@ -11,29 +11,40 @@
   <title>Register Side</title>
 </head>
 
-<body>
+<body style="height: 100vh">
 
-  <div class="row text-center">
-    <div class="col-sm mt-5 border-end border-4 border-dark">
-      <h1 class="role-title">Guardian<h1>
-          <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterGuardian" ?>><img class="img-fluid role-image mt-3" src="../Views/images/Guardian.png"></a>
+  <div class="container w-auto">
 
-    </div>
-    <div class="col-sm mt-5">
+    <div class="row py-5">
 
-      <h1 class="role-title">Pet Owner</h1>
-      <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterOwner" ?>><img class="img-fluid role-image mt-3" src="../Views/images/Pet_Owner.png"></a>
+      <div class="col">
 
+        <div class="row text-center mt-2">
 
-    </div>
-  </div>
-  <div class="row">
+          <div class="col-sm-6 border-end border-4 border-dark">
+            <h1 class="role-title">Guardian<h1>
+                <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterGuardian" ?>><img class="role-image" src="../Views/images/Guardian.png"></a>
 
-    <div class="col text-center">
+          </div>
 
-      <div class="container align-items-center border border-dark chooseYourSide">
+          <div class="col-sm-6">
 
-        <b class="f1"> CHOOSE YOUR SIDE</b>
+            <h1 class="role-title">Pet Owner</h1>
+            <a href=<?php echo FRONT_ROOT . "Auth/ShowRegisterOwner" ?>><img class="role-image" src="../Views/images/Pet_Owner.png"></a>
+
+          </div>
+
+        </div>
+
+        <div class="row text-center">
+
+          <div class="align-items-center border border-dark chooseYourSide mt-2">
+
+            <b> CHOOSE YOUR SIDE</b>
+
+          </div>
+
+        </div>
 
       </div>
 

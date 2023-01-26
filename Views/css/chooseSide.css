@@ -5,7 +5,10 @@
 }
 
 .role-image{
-    max-height: 70%;
+    max-height: 100%;
+    max-width: 90%;
+    display:inline-block;
+    margin-top: 10px;
 }
 
 .role-image:hover{
