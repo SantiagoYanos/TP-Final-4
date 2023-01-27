@@ -122,10 +122,14 @@
         </div>
 
         <span>
+            <!-- ID a la vista -->
+
             <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=GET style="display:inline">
                 <input type="hidden" name="id" value="<?php echo $guardian->getId() ?>">
                 <button class="btn btn-warning mt-3">View Reviews</button>
             </form>
+
+            <!-- ID a la vista -->
 
             <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . $guardian->getId(); ?> type="button" class="btn btn-primary mt-3 viewChatButton">View Chat</a>
 
@@ -142,8 +146,6 @@
         <!----------------------------------------------------------------------------------------------------------------->
 
         <!-----------SELECCION DE PETS------------------------------------------------------------------------------------->
-
-        <!-- Está todo bien?? -->
 
         <script>
             require(['bootstrap-multiselect'], function(purchase) {
@@ -221,7 +223,7 @@
         <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
 
 
-        <!-- Mirar funcion availableDates -->
+        <!-- Mirar funcion availableDates - HECHO -->
 
         <script>
             const availableDatesJson = '<?php echo $availableDatesJson ?>'

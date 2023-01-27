@@ -22,6 +22,7 @@
 
     <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
     <script type="text/javascript" src="../Views/js/datepickerCreator.js"></script>
+    <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
 
     <title>My Reservations</title>
 </head>
@@ -207,16 +208,6 @@
 
 <script>
     alertMessage(<?php echo $alert; ?>)
-</script>
-
-<script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
-
-<!-- Fijarse funcion javascript -->
-
-<script>
-    const availableDatesJson = '<?php echo $availableDatesJson ?>'
-
-    InitializeAvailableDates(availableDatesJson);
 </script>
 
 </body>

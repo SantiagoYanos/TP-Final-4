@@ -28,13 +28,6 @@
 
                 <table class="table table-bordered mt-3 paymentTable">
 
-                    <!-- <th style="width: 150px;">amount</th>
-                        <th style="width: 150px;">date</th>
-                        <th style="width: 150px;">payment number</th>
-                        <th style="width: 150px;">owner's name</th>
-                        <th style="width: 150px;">guardian's name</th>
-                        <th style="width: 150px;">price</th> -->
-
                     <thead>
                         <tr>
                             <th colspan="4">

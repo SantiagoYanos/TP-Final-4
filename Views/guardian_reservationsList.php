@@ -224,14 +224,6 @@
     alertMessage(<?php echo $alert; ?>)
 </script>
 
-<!-- Chequear el funcionamiento de esto -->
-
-<script>
-    const availableDatesJson = '<?php echo $availableDatesJson ?>'
-
-    InitializeAvailableDates(availableDatesJson);
-</script>
-
 </body>
 
 </html>

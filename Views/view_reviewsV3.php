@@ -9,8 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="../Views/css/review.css" type="text/css">
 
     <title>Reviews</title>
