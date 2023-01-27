@@ -18,6 +18,7 @@ class PaymentController
     function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
+        require_once(ROOT . "/Utils/encrypt.php");
     }
 
     public function SendEmailPayment($email)
@@ -99,10 +100,10 @@ class PaymentController
                 header("location: " . FRONT_ROOT . "/Owner/ViewReservationsOwner");
             }
 
-            $encryptedPrice = openssl_encrypt($reservation->getPrice() / 2, "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
-            $encryptedReservation_id = openssl_encrypt($reservation->getId(), "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
-            $encryptedOwner_id = openssl_encrypt($reservation->getOwner_id(), "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
-            $encryptedGuardian_id = openssl_encrypt($reservation->getGuardian_id(), "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
+            $encryptedPrice = encrypt($reservation->getPrice() / 2);
+            $encryptedReservation_id = encrypt($reservation->getId());
+            $encryptedOwner_id = encrypt($reservation->getOwner_id());
+            $encryptedGuardian_id = encrypt($reservation->getGuardian_id());
 
             return require_once(VIEWS_PATH . "ShowMakePayment.php");
         } catch (Exception $e) {
@@ -118,10 +119,10 @@ class PaymentController
 
             //Crear el pago (agregarlo)
 
-            $decryptedPrice = openssl_decrypt($price, "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
-            $decryptedReservation_id = openssl_decrypt($reservation_id, "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
-            $decryptedOwner_id = openssl_decrypt($owner_id, "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
-            $decryptedGuardian_id = openssl_decrypt($guardian_id, "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
+            $decryptedPrice = decrypt($price);
+            $decryptedReservation_id = decrypt($reservation_id);
+            $decryptedOwner_id = decrypt($owner_id);
+            $decryptedGuardian_id = decrypt($guardian_id);
 
             $paymentExist = $paymentDAO->GetByReservationId($decryptedReservation_id);
 
