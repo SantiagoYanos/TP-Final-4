@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
 
@@ -17,7 +16,7 @@
 <body class="ms-2 me-2">
     <h1>Add Pet</h1>
 
-    <div class="col-sm-4 border rounded border-warning pt-2 pb-3 m-auto" style="border-width: 5px !important">
+    <div class="col-sm-4 border rounded border-warning pt-2 pb-3 m-auto petCol">
 
         <h2 class="ms-2 me-2">Add your pet info: </h2>
 

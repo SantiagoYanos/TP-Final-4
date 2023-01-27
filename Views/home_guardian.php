@@ -7,11 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
 
-
+    <!-- CSS Files-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../Views/css/home_guardian.css">
+
+    <!-- JS Files-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
@@ -48,8 +50,7 @@
 
             <section class="container">
                 <h4 class="pt-4 pb-1">Available Dates</h4>
-                <form action=<?php echo FRONT_ROOT . "Guardian/updateAvDates"
-                                ?> method="post">
+                <form action=<?php echo FRONT_ROOT . "Guardian/updateAvDates" ?> method="post">
                     <div class="input-group date mb-3" id="datepicker">
                         <input name="stringDates" type="text" class="form-control" hidden>
                         <span class="input-group-append">
@@ -77,9 +78,12 @@
         <br>
 
         <span>
-            <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn pl-1" style="background-color: purple; color: white">Visualize Reservations</button></a>
+            <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn pl-1 visualizeReservationsButton">Visualize Reservations</button></a>
 
-            <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=GET style="display:inline">
+            <form class="formShowReviews" action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=GET>
+
+                <!-- Id a la vista -->
+
                 <input type="hidden" name="id" value="<?php echo $user->getId() ?>">
                 <button class="btn btn-warning ms-2">View Reviews</button>
             </form>

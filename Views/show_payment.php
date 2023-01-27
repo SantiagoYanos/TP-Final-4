@@ -7,23 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
     <title>Payment Data</title>
 </head>
 
-<body style="height: 100vh" class="ms-2 me-2">
+<body class="ms-2 me-2">
 
     <h1 class="fixed-top p-2">Your payment</h1>
 
     <div class="row h-100 w-100 d-flex">
 
-        <div class="col-sm-4 border rounded m-auto align-items-center pt-2 pb-3" style="border-width: 5px !important; border-color: purple !important">
+        <div class="col-sm-4 border rounded m-auto align-items-center pt-2 pb-3 borderDiv">
 
             <b>Payment Number: <?php echo $arrayPayment["payment_number"] ?></b>
 
-            <!-- Border error -->
-
-            <table class="table mt-3" style="text-align:center;" border="2">
+            <table class="table mt-3">
 
                 <!-- <th style="width: 150px;">amount</th>
                         <th style="width: 150px;">date</th>

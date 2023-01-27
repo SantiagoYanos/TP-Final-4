@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
 
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../Views/css/home_owner.css">
+
+    <!-- JS Files-->
     <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
 
     <title>Home</title>
@@ -33,7 +36,7 @@
 
     <div>
         <form action="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>" method="post">
-            <button class="btn mb-2 border-dark" style="background-color: purple; color: white" type="submit">See Reservations</button>
+            <button class="btn mb-2 border-dark seeReservationsButton" type="submit">See Reservations</button>
         </form>
     </div>
 

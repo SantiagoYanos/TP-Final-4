@@ -9,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="../Views/css/guardianList.css" rel="stylesheet">
 
+    <!-- CSS Files -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../Views/css/owner_reservationsList.css">
+
+    <!-- JS Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
@@ -72,6 +72,8 @@
                     <td><?php echo $reservation->getGuardian_id() ?></td>
                     <td>$<?php echo $reservation->getPrice() ?></td>
                     <td>
+
+                        <!-- ID de reserva -->
                         <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
                         </a>
@@ -117,15 +119,19 @@
                         <?php switch ($reservation->getState()) {
                             case "Payment pending":
                         ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPaymentCupon" ?> " method="post">
+
+                                    <!-- Id a la vista -->
                                     <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                                 </form><?php
 
                                         break; ?>
 
+
+                                <!-- Id a la vista -->
                             <?php
                             case "Paid":
                             ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
-                                    <button class="btn" type="submit" style="background-color: purple; color: white"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                    <button class="btn viewPaymentButton" type="submit"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                                 </form><?php
 
                                         break; ?>
@@ -133,15 +139,17 @@
                         <?php } ?>
                     </td>
                     <td>
+                        <!-- Id a la vista -->
                         <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
-                            <button class="btn" type="submit" style="background-color: #033793; color: white"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getGuardian_id() ?>"></input>
+                            <button class="btn viewChatButton" type="submit"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getGuardian_id() ?>"></input>
                         </form>
                     </td>
                 </tr>
 
+                <!-- Id a la vista -->
                 <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
                     <td colspan="8">
-                        <table class="table table-bordered" style="table-layout: fixed;">
+                        <table class="table table-bordered petsTable">
 
                             <thead>
                                 <th>Reservation Pets</th>
@@ -152,21 +160,24 @@
                                 <?php foreach ($reservation->getPets() as $pet) {
                                 ?>
                                     <tr>
-                                        <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
-                                        <td style="width: 150px;"><?php echo $pet->getName() ?> </td>
-                                        <td style="width: 150px;"><?php echo $pet->getBreed() ?> </td>
-                                        <td style="width: 150px;"><?php echo ucfirst($pet->getType()) ?> </td>
-                                        <td style="width: 150px;">
+                                        <td class="petTableColumn"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
+                                        <td class="petTableColumn"><?php echo $pet->getName() ?> </td>
+                                        <td class="petTableColumn"><?php echo $pet->getBreed() ?> </td>
+                                        <td class="petTableColumn"><?php echo ucfirst($pet->getType()) ?> </td>
+                                        <td class="petTableColumn">
 
                                             <!-- Hacer funcion switch - HECHO -->
 
                                             <?php ShowValuePetSize($pet->getSize()) ?>
 
                                         </td>
-                                        <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
-                                        <td style="width: 150px;  overflow-wrap:break-word;" ;><?php echo $pet->getObservation() ?> </td>
+
+                                        <!-- Id a la vista (posiblemente dejarlo así) -->
+
+                                        <td class="petTableColumn"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
+                                        <td class="petTableColumn"><?php echo $pet->getObservation() ?> </td>
                                         <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
-                                        <td style="width: 150px;"> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
+                                        <td class="petTableColumn"> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
 
                 <?php

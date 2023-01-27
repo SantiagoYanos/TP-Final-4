@@ -9,10 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="../Views/css/guardianList.css" rel="stylesheet">
 
+    <!-- CSS files-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="../Views/css/guardian_reservationsList.css" rel="stylesheet">
+
+    <!-- JS files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
@@ -68,9 +71,18 @@
             foreach ($reservations as $reservation) {
             ?>
                 <tr>
+
+                    <!-- Se muestra la ID de la reserva !-->
+
                     <td><?php echo $reservation->GetId() ?></td>
+
+                    <!-- HACER UN FORM PARA NO MOSTRAR LA ID AL AIRE | O ENCRIPTAR LA ID -->
+
                     <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . $reservation->GetOwner_id() ?>><button class="btn btn-primary mt-2">Owner Profile</button></a> </td>
                     <td>$<?php echo $reservation->getPrice() ?></td>
+
+                    <!-- Se usa la id de la reserva !-->
+
                     <td>
                         <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
@@ -144,7 +156,7 @@
                     </td>
                     <td>
                         <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
-                            <button class="btn" type="submit" style="background-color: #033793; color: white"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getOwner_id() ?>"></input>
+                            <button class="btn viewChatButton" type="submit"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getOwner_id() ?>"></input>
                         </form>
                     </td>
 
@@ -154,7 +166,7 @@
 
                 <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
                     <td colspan="8">
-                        <table class="table table-bordered" style="table-layout: fixed;">
+                        <table class="table table-bordered">
 
                             <thead>
                                 <th>Reservation Pets</th>
@@ -168,11 +180,11 @@
                                     <!-- No usar la id de pets -->
 
                                     <tr>
-                                        <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
-                                        <td style="width: 150px;"><?php echo $pet->getName() ?> </td>
-                                        <td style="width: 150px;"><?php echo $pet->getBreed() ?> </td>
-                                        <td style="width: 150px;"><?php echo ucfirst($pet->getType()) ?> </td>
-                                        <td style="width: 150px;">
+                                        <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
+                                        <td><?php echo $pet->getName() ?> </td>
+                                        <td><?php echo $pet->getBreed() ?> </td>
+                                        <td><?php echo ucfirst($pet->getType()) ?> </td>
+                                        <td>
 
                                             <!-- Arreglar switch con un utils Size - HECHO -->
 
@@ -181,10 +193,10 @@
                                             <?php ShowValuePetSize($pet->getSize()) ?>
 
                                         </td>
-                                        <td style="width: 150px;"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
-                                        <td style="width: 150px;overflow-wrap:break-word"><?php echo $pet->getObservation() ?> </td>
+                                        <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
+                                        <td><?php echo $pet->getObservation() ?> </td>
                                         <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
-                                        <td style="width: 150px;"> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
+                                        <td> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
                 <?php
                                     $idCont++;

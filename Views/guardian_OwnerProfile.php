@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
+    <link href="../Views/css/guardian_OwnerProfile.css" rel="stylesheet">
     <title>Owner's Profile</title>
 </head>
 
@@ -62,7 +62,7 @@
 
     </div>
 
-    <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . $owner->getId(); ?> type="button" class="btn btn-primary" style="background-color: #033793; color: white">View Chat</a>
+    <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . $owner->getId(); ?> type="button" class="btn btn-primary viewButton">View Chat</a>
 
     <br>
 

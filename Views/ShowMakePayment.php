@@ -7,39 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/dec9278e05.js" crossorigin="anonymous"></script>
 
-
+    <!-- CSS Files -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../Views/css/show_make_payment.css">
+
+    <!-- JS Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <title>Make Payment</title>
-
 </head>
 
-<style>
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    /* Firefox */
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-</style>
-
-<body style="height: 100vh" class="ms-2 me-2">
+<body class="ms-2 me-2">
 
     <h1 class="fixed-top p-2">Make Payment</h1>
 
     <div class="row h-100 w-100 d-flex">
 
-        <div class="col-sm-4 border rounded border-success m-auto align-items-center pt-2 pb-3" style="border-width: 5px !important">
+        <div class="col-sm-4 border rounded border-success m-auto align-items-center pt-2 pb-3 borderDiv">
 
             <h4 class="text-center mb-3">New Payment</h4>
 

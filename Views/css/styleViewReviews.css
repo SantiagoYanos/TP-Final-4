@@ -221,3 +221,7 @@ button:hover{
       display: none;
     }
   }
+
+  th {
+    width:150px;
+  }

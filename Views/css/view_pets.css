@@ -1,0 +1,18 @@
+body{
+    background-image: url("../images/gary.png")
+}
+
+.tablePets{
+    text-align:center;
+    font-weight:bold;
+    table-layout: fixed;
+    overflow-wrap:break-word;
+}
+
+th {
+    width: 150px;
+}
+
+td {
+    width: 150px;
+}

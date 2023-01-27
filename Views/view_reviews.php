@@ -18,27 +18,27 @@
             <thead>
                 <tr>
                     <div class="txt_field">
-                        <th style="width: 150px;">Name </th>
+                        <th>Name </th>
                     </div>
-                    <th style="width: 150px;">Comment </th>
-                    <th style="width: 150px;">Rating </th>
-                    <th style="width: 150px;">Date </th>
+                    <th>Comment </th>
+                    <th>Rating </th>
+                    <th>Date </th>
                 </tr>
             </thead>
+
+            <!-- Id a la vista -->
 
             <tbody>
                 <?php foreach ($total as $review) { ?>
                     <tr>
-                        <td style="width: 150px;"><?php echo $review->getOwner_name() ?></td>
-                        <td style="width: 150px;"><?php echo $review->getComment() ?></td>
-                        <td style="width: 150px;"><?php echo $review->getRating() ?></td>
-                        <td style="width: 150px;"><?php echo $total[0]->getGuardian_id() ?></td>
+                        <td><?php echo $review->getOwner_name() ?></td>
+                        <td><?php echo $review->getComment() ?></td>
+                        <td><?php echo $review->getRating() ?></td>
+                        <td><?php echo $total[0]->getGuardian_id() ?></td>
                     <?php } ?>
                     </tr>
             </tbody>
         </table>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <span class="heading">User Rating</span>
         <span class="fa fa-star checked"></span>
