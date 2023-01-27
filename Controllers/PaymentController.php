@@ -8,9 +8,10 @@ use SQLDAO\PaymentDAO as PaymentDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 
 use Models\Payment;
-//use Exception as Exception;
+use Exception as Exception;
+use Models\message;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\Exception as MailerException;
 use PHPMailer\PHPMailer\SMTP;
 
 class PaymentController
@@ -75,10 +76,14 @@ class PaymentController
         }
     }
 
-    public function ShowPayment($reservation_id)
+    public function ShowPayment($reservation_id) //Encripted
     {
         try {
             $payment = new PaymentDAO();
+
+            $reservation_id = decrypt($reservation_id);
+
+            $reservation_id ? null : throw new Exception("Decrypt Error");
 
             $arrayPayment = array();
             $arrayPayment = $payment->GetByReservationId($reservation_id);
@@ -89,11 +94,16 @@ class PaymentController
         }
     }
 
-    public function ShowMakePayment($reservation_id)
+    public function ShowMakePayment($reservation_id) //Encripted
     {
 
         try {
             $reservationDAO = new ReservationDAO;
+
+            $reservation_id = decrypt($reservation_id);
+
+            $reservation_id ? null : throw new Exception("Decrypt Error");
+
             $reservation = $reservationDAO->getById($reservation_id);
 
             if ($reservation->getOwner_id() != $_SESSION["id"]) {
@@ -111,7 +121,7 @@ class PaymentController
         }
     }
 
-    public function MakePayment($price, $reservation_id, $owner_id, $guardian_id)
+    public function MakePayment($price, $reservation_id, $owner_id, $guardian_id) //Encripted
     {
         try {
 
@@ -123,6 +133,10 @@ class PaymentController
             $decryptedReservation_id = decrypt($reservation_id);
             $decryptedOwner_id = decrypt($owner_id);
             $decryptedGuardian_id = decrypt($guardian_id);
+
+            if (!($decryptedPrice && $decryptedReservation_id && $decryptedOwner_id && $decryptedGuardian_id)) {
+                throw new Exception("Decrypt Error");
+            }
 
             $paymentExist = $paymentDAO->GetByReservationId($decryptedReservation_id);
 
@@ -144,38 +158,43 @@ class PaymentController
 
             $reservationDAO->updateState($decryptedReservation_id, "Paid");
 
-            header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id=$decryptedReservation_id");
+            header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id=$reservation_id");
         } catch (Exception $e) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }
     }
 
 
-    public function ShowPaymentCupon($reservation_id)
+    public function ShowPaymentCupon($reservation_id) //Encripted
     {
 
         $reservationDAO = new ReservationDAO;
         $guardianDAO = new GuardianDAO;
         $ownerDAO = new OwnerDAO;
 
-        $reservation = $reservationDAO->getById($reservation_id);
+        try {
 
-        $guardian = $guardianDAO->getById($reservation->getGuardian_id());
+            $reservation_id = decrypt($reservation_id);
 
-        $owner = $ownerDAO->getById($reservation->getOwner_id());
+            $reservation_id ? null : throw new Exception("Decrypt Error");
 
-        $coupon["guardianName"] = $guardian->getName() . " " . $guardian->getLast_name();
-        $coupon["ownerName"] = $owner->getName() . " " . $owner->getLast_name();
-        $coupon["guardianCUIL"] = $guardian->getType_data()->getCuil();
-        $coupon["ownerDNI"] = $owner->getType_data()->getDni();
-        $coupon["import"] = $reservation->getPrice() / 2;
-        $coupon["daysAmount"] = count($reservation->getDates());
-        $coupon["petsAmount"] = count($reservation->getPets());
+            $reservation = $reservationDAO->getById($reservation_id);
 
+            $guardian = $guardianDAO->getById($reservation->getGuardian_id());
 
-        //"Pet-sitting reservation | " . count($reservation->getDates()) . " days | " . count($reservation->getPets()) . " pets";
+            $owner = $ownerDAO->getById($reservation->getOwner_id());
 
+            $coupon["guardianName"] = $guardian->getName() . " " . $guardian->getLast_name();
+            $coupon["ownerName"] = $owner->getName() . " " . $owner->getLast_name();
+            $coupon["guardianCUIL"] = $guardian->getType_data()->getCuil();
+            $coupon["ownerDNI"] = $owner->getType_data()->getDni();
+            $coupon["import"] = $reservation->getPrice() / 2;
+            $coupon["daysAmount"] = count($reservation->getDates());
+            $coupon["petsAmount"] = count($reservation->getPets());
 
-        return require_once(VIEWS_PATH . "paymentcupon.php");
+            return require_once(VIEWS_PATH . "paymentcupon.php");
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }

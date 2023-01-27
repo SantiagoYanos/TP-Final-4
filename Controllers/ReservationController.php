@@ -19,6 +19,7 @@ class ReservationController
     function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
+        require_once(ROOT . "/Utils/encrypt.php");
     }
 
     /*public function SeeProfile($guardian_id){

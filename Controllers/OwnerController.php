@@ -22,6 +22,7 @@ class OwnerController
     function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
+        require_once(ROOT . "/Utils/encrypt.php");
 
         if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
@@ -169,8 +170,6 @@ class OwnerController
     function ViewReservationsOwner($state = null, $alert = null)
     {
         try {
-
-
             $reservationDAO = new ReservationDAO();
 
             if ($state && $state != "*") {

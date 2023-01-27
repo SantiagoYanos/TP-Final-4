@@ -13,6 +13,7 @@ class ChatController
     function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
+        require_once(ROOT . "/Utils/encrypt.php");
 
         /*if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");

@@ -76,7 +76,7 @@
 
                 <span>
                     <form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?>" method="post" style="display:inline">
-                        <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId()
+                        <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId())
                                                                                                                                         ?>"></input>
                     </form>
 

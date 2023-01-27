@@ -19,6 +19,7 @@ class GuardianController
     function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
+        require_once(ROOT . "/Utils/encrypt.php");
 
         if ($_SESSION["type"] == "owner") {
             header("location: " . FRONT_ROOT . "Owner/HomeOwner");

@@ -122,7 +122,7 @@
                         ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPaymentCupon" ?> " method="post">
 
                                     <!-- Id a la vista -->
-                                    <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                    <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()) ?>"></input>
                                 </form><?php
 
                                         break; ?>
@@ -132,7 +132,7 @@
                             <?php
                             case "Paid":
                             ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
-                                    <button class="btn viewPaymentButton" type="submit"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                    <button class="btn viewPaymentButton" type="submit"> View Payment </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()) ?>"></input>
                                 </form><?php
 
                                         break; ?>
