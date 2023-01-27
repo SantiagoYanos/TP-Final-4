@@ -90,6 +90,8 @@
 
                 <div class="row align-items-center userInputs" name="userInputs">
 
+                    <!-- Id a la vista -->
+
                     <input type="hidden" name="userId" value="<?php echo $idReceiver ?>"></input>
 
                     <div class="col-9">
