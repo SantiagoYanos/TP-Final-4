@@ -92,7 +92,7 @@
 
                     <!-- Id a la vista -->
 
-                    <input type="hidden" name="userId" value="<?php echo $idReceiver ?>"></input>
+                    <input type="hidden" name="userId" value="<?php echo $encryptedId ?>"></input>
 
                     <div class="col-9">
 

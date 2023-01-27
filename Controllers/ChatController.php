@@ -20,67 +20,87 @@ class ChatController
         }*/
     }
 
-    public function ShowChat($idReceiver)
+    public function ShowChat($idReceiver) //Encripted
     {
         $messageDAO = new MessageDAO;
         $userDAO = new UserDAO;
 
-        $sended = array();
-        $received = array();
-        $total = array();
+        try {
 
-        $me = $userDAO->GetById($_SESSION["id"]);
+            $idReceiver = decrypt($idReceiver);
 
-        $you = $userDAO->GetById($idReceiver);
+            $idReceiver ? null : throw new Exception("Chat not found");
 
-        $meName = $me->getName() . " " . $me->getLast_name();
+            $sended = array();
+            $received = array();
+            $total = array();
 
-        $youName = $you->getName() . " " . $you->getLast_name();
+            $me = $userDAO->GetById($_SESSION["id"]);
 
-        $total = $messageDAO->GetByIdsV2($_SESSION["id"], $idReceiver);
+            $you = $userDAO->GetById($idReceiver);
 
-        if ($_SESSION["type"] == "guardian") {
-            //$backLink = FRONT_ROOT . "Guardian/HomeGuardian";
-            $receiverLink = FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . $you->getId();
-            $reservationsLink = FRONT_ROOT . "Guardian/ViewReservations";
-        } else {
-            //$backLink = FRONT_ROOT . "Owner/HomeOwner";
-            $receiverLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $you->getId();
-            $reservationsLink = FRONT_ROOT . "Owner/ViewReservationsOwner";
+            $meName = $me->getName() . " " . $me->getLast_name();
+
+            $youName = $you->getName() . " " . $you->getLast_name();
+
+            $total = $messageDAO->GetByIdsV2($_SESSION["id"], $idReceiver);
+
+            $encryptedId = encrypt($idReceiver);
+
+            if ($_SESSION["type"] == "guardian") {
+                //$backLink = FRONT_ROOT . "Guardian/HomeGuardian";
+                $receiverLink = FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . $encryptedId;
+                $reservationsLink = FRONT_ROOT . "Guardian/ViewReservations";
+            } else {
+                //$backLink = FRONT_ROOT . "Owner/HomeOwner";
+                $receiverLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $encryptedId;
+                $reservationsLink = FRONT_ROOT . "Owner/ViewReservationsOwner";
+            }
+
+            // $sended=$messageDAO->GetByIds($_SESSION["id"],$idReceiver);
+            // $received=$messageDAO->GetByIds($idReceiver,$_SESSION["id"]);
+
+            // $total = array_merge($sended, $received);
+
+            // usort($total, function($a, $b) {
+
+            //     if ($a->getDate() == $b->getDate())
+            //     {
+            //         return 0;
+            //     }
+            //     return $a->getDate() < $b->getDate() ? -1 : 1;
+            // });
+
+            //return require_once(VIEWS_PATH . "PrettyChat.php");
+
+            return require_once(VIEWS_PATH . "chatV2.php");
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-
-        // $sended=$messageDAO->GetByIds($_SESSION["id"],$idReceiver);
-        // $received=$messageDAO->GetByIds($idReceiver,$_SESSION["id"]);
-
-        // $total = array_merge($sended, $received);
-
-        // usort($total, function($a, $b) {
-
-        //     if ($a->getDate() == $b->getDate())
-        //     {
-        //         return 0;
-        //     }
-        //     return $a->getDate() < $b->getDate() ? -1 : 1;
-        // });
-
-        //return require_once(VIEWS_PATH . "PrettyChat.php");
-
-        return require_once(VIEWS_PATH . "chatV2.php");
     }
 
-    public function sendMessage($description, $userId)
+    public function sendMessage($description, $userId) //Encripted
     {
         $messageDAO = new MessageDAO;
 
         $message = new Message;
 
-        $message->setDescription($description);
-        $message->setReceiver($userId);
-        $message->setSender($_SESSION["id"]);
-        //$message->setDate(date("Y-m-d-H-i-s") );
+        try {
 
-        $messageDAO->Add($message);
+            $decryptedUserId = decrypt($userId);
 
-        header("location: " . FRONT_ROOT . "Chat/ShowChat" . "?id=" . $userId);
+            $decryptedUserId ? null : throw new Exception("User not found");
+
+            $message->setDescription($description);
+            $message->setReceiver($decryptedUserId);
+            $message->setSender($_SESSION["id"]);
+            //$message->setDate(date("Y-m-d-H-i-s") );
+
+            $messageDAO->Add($message);
+
+            header("location: " . FRONT_ROOT . "Chat/ShowChat" . "?id=" . $userId);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }

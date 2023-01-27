@@ -64,7 +64,7 @@
 
     <!-- Id a la vista -->
 
-    <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . $owner->getId(); ?> type="button" class="btn btn-primary viewButton">View Chat</a>
+    <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . encrypt($owner->getId()); ?> type="button" class="btn btn-primary viewButton">View Chat</a>
 
     <br>
 

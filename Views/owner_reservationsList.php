@@ -142,7 +142,7 @@
                     <td>
                         <!-- Id a la vista -->
                         <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
-                            <button class="btn viewChatButton" type="submit"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getGuardian_id() ?>"></input>
+                            <button class="btn viewChatButton" type="submit"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo encrypt($reservation->getGuardian_id()) ?>"></input>
                         </form>
                     </td>
                 </tr>

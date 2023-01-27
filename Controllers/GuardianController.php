@@ -144,10 +144,15 @@ class GuardianController
         }
     }
 
-    function ViewOwnerProfile($id)
+    function ViewOwnerProfile($id) //Encripted
     {
         try {
+
             $ownerDAO = new OwnerDAO();
+
+            $id = decrypt($id);
+
+            $id ? null : throw new Exception("Owner not found");
 
             $owner = $ownerDAO->GetById($id);
 

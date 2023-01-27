@@ -78,7 +78,7 @@
 
                     <!-- HACER UN FORM PARA NO MOSTRAR LA ID AL AIRE | O ENCRIPTAR LA ID -->
 
-                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . $reservation->GetOwner_id() ?>><button class="btn btn-primary mt-2">Owner Profile</button></a> </td>
+                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . encrypt($reservation->GetOwner_id()) ?>><button class="btn btn-primary mt-2">Owner Profile</button></a> </td>
                     <td>$<?php echo $reservation->getPrice() ?></td>
 
                     <!-- Se usa la id de la reserva !-->
@@ -156,7 +156,7 @@
                     </td>
                     <td>
                         <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
-                            <button class="btn viewChatButton" type="submit"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo $reservation->getOwner_id() ?>"></input>
+                            <button class="btn viewChatButton" type="submit"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo encrypt($reservation->getOwner_id()); ?>"></input>
                         </form>
                     </td>
 

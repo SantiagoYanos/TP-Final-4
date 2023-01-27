@@ -131,7 +131,7 @@
 
             <!-- ID a la vista -->
 
-            <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . $guardian->getId(); ?> type="button" class="btn btn-primary mt-3 viewChatButton">View Chat</a>
+            <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . encrypt($guardian->getId()); ?> type="button" class="btn btn-primary mt-3 viewChatButton">View Chat</a>
 
         </span>
 

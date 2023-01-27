@@ -141,12 +141,16 @@ class OwnerController
         }
     }
 
-    function ViewGuardianProfile($id, $alert = null)
+    function ViewGuardianProfile($id, $alert = null) //Encripted
     {
         try {
             $guardianDAO = new GuardianDAO();
             $PetDAO = new PetDAO();
             $reviewDAO = new ReviewDAO();
+
+            $id = decrypt($id);
+
+            $id ? null : throw new Exception("Guardian not found");
 
             $guardian = $guardianDAO->GetById($id);
             $PetList = $PetDAO->GetPetsByOwner($_SESSION["id"]);
