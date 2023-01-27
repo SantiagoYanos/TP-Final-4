@@ -3,6 +3,12 @@
     color: white;
 }
 
+.visualizeReservationsButton:hover {
+    background-color: purple !important ;
+    color: white !important;
+    filter: brightness(110%);
+}
+
 .formShowReviews {
     display:inline;
 }

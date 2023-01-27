@@ -2,3 +2,9 @@
     background-color: purple;
     color: white;
 }
+
+.seeReservationsButton:hover {
+    background-color: purple !important;
+    color: white !important;
+    filter: brightness(110%) !important;
+}

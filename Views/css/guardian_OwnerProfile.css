@@ -2,3 +2,9 @@
     background-color: #033793; 
     color: white;
 }
+
+.viewButton:hover {
+    background-color: #033793 !important; 
+    color: white !important;
+    filter: brightness(110%) !important;
+}

@@ -65,7 +65,7 @@
 
                         <!-- Id a la vista (Posiblemente no cambiable) -->
 
-                        <button type="submit" class="btn btn-danger" onclick="confirming(<?php echo $pet->getId(); ?>)">delete</button>
+                        <button type="submit" class="btn btn-danger" onclick="confirming(<?php echo $pet->getId(); ?>)">Delete</button>
 
                     </td>
                 <?php

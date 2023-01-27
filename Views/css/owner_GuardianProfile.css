@@ -6,3 +6,9 @@ select {
 .viewChatButton {
     background-color: #033793; color: white;
 }
+
+.viewChatButton:hover {
+    background-color: #033793 !important; 
+    color: white !important;
+    filter: brightness(110%);
+}

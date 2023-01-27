@@ -58,3 +58,9 @@
     background-color: purple;
     color: white;
 }
+
+.viewReservationsButton:hover {
+    background-color: purple !important;
+    color: white !important;
+    filter:brightness(110%);
+}

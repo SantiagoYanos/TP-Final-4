@@ -1,6 +1,23 @@
 .viewChatButton {
     background-color: #033793;
-     color: white;
+    color: white;
+}
+
+.viewChatButton:hover {
+    filter: brightness(110%) !important;
+    background-color: #033793 !important;
+    color: white !important;
+}
+
+.viewPaymentButton {
+    background-color: purple;
+    color: white;
+}
+
+.viewPaymentButton:hover{
+    filter: brightness(110%) !important;
+    background-color: purple !important;
+    color:white !important;
 }
 
 table{
