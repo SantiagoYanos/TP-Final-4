@@ -89,6 +89,8 @@
                 <input type="text" name="comment"></br>
             </div>
 
+            <!-- Se ve la ID -->
+
             <input type="hidden" name="guardianId" value="<?php echo $review->getGuardianId() ?>"></input>
 
 

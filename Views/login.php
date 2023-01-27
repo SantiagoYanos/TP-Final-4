@@ -12,9 +12,6 @@
 
 <a href=<?php echo FRONT_ROOT . "Auth/ShowChooseSide" ?>></a>
 
-<!--<body  style="background-image: url(<?php // echo ROOT . 'Views/images/ducky.jpg' 
-                                        ?>)" style=background-repeat:no-repeat;>-->
-
 <body>
     <div class="center">
         <h1>PET HERO</h1>

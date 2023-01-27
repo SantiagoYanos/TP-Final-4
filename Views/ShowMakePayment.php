@@ -73,7 +73,7 @@
 
             <form action="<?php echo FRONT_ROOT . "Payment/MakePayment" ?>" method="post">
 
-                <!-- Ya está encriptado -->
+                <!-- Ya está encriptado - HECHO -->
 
                 <input name="price" value="<?php echo $encryptedPrice ?>" hidden>
                 <input name="reservation_id" value="<?php echo  $encryptedReservation_id ?>" hidden>

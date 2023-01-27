@@ -23,8 +23,6 @@
         <thead>
             <tr>
 
-                <!-- Un poco de css y se arregla -->
-
                 <th>Photo</th>
                 <th>Name</th>
                 <th>Breed</th>
