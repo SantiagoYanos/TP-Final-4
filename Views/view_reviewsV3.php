@@ -48,17 +48,13 @@
 
                             <!-- Id a la vista -->
 
-                            <input type="hidden" name="guardianId" value="<?php if ($noreview == 0) {
-                                                                                echo $guardian->getId();
-                                                                            } else {
-                                                                                echo $noreview;
-                                                                            } ?>">
+                            <input type="hidden" name="guardianId" value="<?php echo $encryptedId ?>">
                             <br>
 
                             <!-- Id a la vista -->
 
                             <?php if ($ownerReview) { ?>
-                                <input type="hidden" name="oldReviewId" value=<?php echo $ownerReview->getId(); ?>></input>
+                                <input type="hidden" name="oldReviewId" value=<?php echo encrypt($ownerReview->getId()); ?>></input>
                                 <button type="submit" class="btn btn-primary">Edit Review</button>
 
                             <?php } else { ?>

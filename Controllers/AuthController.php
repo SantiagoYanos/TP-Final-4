@@ -127,8 +127,6 @@ class AuthController
     public function Login($email, $password)
     {
         try {
-
-
             $userDAO = new UserDAO();
 
             $detectedUser = $userDAO->GetByEmail($email);

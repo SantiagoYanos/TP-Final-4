@@ -21,7 +21,7 @@ class ReviewController
     }
 
 
-    public function ShowReviews($guardianId)
+    public function ShowReviews($guardianId) //Encrypted
     {
         $reviewDAO = new ReviewDAO;
         $userDAO = new UserDAO;
@@ -37,9 +37,6 @@ class ReviewController
 
             $guardian = $userDAO->GetById($guardianId);
             $total = $reviewDAO->GetById($guardianId);
-            if (!$total) {
-                $noreview = $guardianId;
-            }
 
             if ($_SESSION["type"] == "guardian") {
                 $backLink = FRONT_ROOT . "Guardian/HomeGuardian";
@@ -62,35 +59,58 @@ class ReviewController
         }
     }
 
-    public function makeReview($comment, $guardianId, $rating)
+    public function makeReview($comment, $guardianId, $rating) //Encripted
     {
         $reviewDAO = new ReviewDAO;
 
         $review = new Review;
 
-        $review->setComment($comment);
-        $review->setRating($rating);
-        $review->setOwnerId($_SESSION["id"]);
-        $review->setGuardianId($guardianId);
+        try {
 
-        $reviewDAO->Add($review);
+            $encryptedId = $guardianId;
 
-        header("location: " . FRONT_ROOT . "Review/ShowReviews" . "?id=" . $guardianId);
+            $guardianId = decrypt($guardianId);
+
+            $guardianId ? null : throw new Exception("Guardian not found");
+
+            $review->setComment($comment);
+            $review->setRating($rating);
+            $review->setOwnerId($_SESSION["id"]);
+            $review->setGuardianId($guardianId);
+
+            $reviewDAO->Add($review);
+
+            header("location: " . FRONT_ROOT . "Review/ShowReviews" . "?id=" . $encryptedId);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
-    public function editReview($comment, $guardianId, $rating, $oldReviewId)
+    public function editReview($comment, $guardianId, $rating, $oldReviewId) //Encrypted
     {
         $reviewDAO = new ReviewDAO;
 
         $review = new Review;
 
-        $review->setComment($comment);
-        $review->setRating($rating);
-        $review->setOwnerId($_SESSION["id"]);
-        $review->setGuardianId($guardianId);
+        $encryptedId = $guardianId;
 
-        $reviewDAO->EditReview($review, $oldReviewId);
+        try {
+            $guardianId = decrypt($guardianId);
 
-        header("location: " . FRONT_ROOT . "Review/ShowReviews" . "?id=" . $guardianId);
+            $oldReviewId = decrypt($oldReviewId);
+
+            ($guardianId && $oldReviewId) ? null : throw new Exception("Guardian or Review not found");
+
+            $review->setComment($comment);
+            $review->setRating($rating);
+            $review->setOwnerId($_SESSION["id"]);
+            $review->setGuardianId($guardianId);
+
+            $reviewDAO->EditReview($review, $oldReviewId);
+
+            header("location: " . FRONT_ROOT . "Review/ShowReviews" . "?id=" . $encryptedId);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
