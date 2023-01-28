@@ -92,9 +92,10 @@ class ReviewController
 
         $review = new Review;
 
-        $encryptedId = $guardianId;
-
         try {
+
+            $encryptedId = $guardianId;
+
             $guardianId = decrypt($guardianId);
 
             $oldReviewId = decrypt($oldReviewId);
