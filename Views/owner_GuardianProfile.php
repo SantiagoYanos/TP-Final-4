@@ -124,14 +124,17 @@
         <span>
             <!-- ID a la vista -->
 
-            <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=GET style="display:inline">
-                <input type="hidden" name="id" value="<?php echo $guardian->getId() ?>">
+            <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=POST style="display:inline">
+                <input type="hidden" name="guardianId" value="<?php echo encrypt($guardian->getId()); ?>">
                 <button class="btn btn-warning mt-3">View Reviews</button>
             </form>
 
             <!-- ID a la vista -->
 
-            <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . encrypt($guardian->getId()); ?> type="button" class="btn btn-primary mt-3 viewChatButton">View Chat</a>
+            <form action=<?php echo FRONT_ROOT . "Chat/ShowChat" ?> method=POST style="display:inline">
+                <input type="hidden" name="idReceiver" value=<?php echo encrypt($guardian->getId()); ?>></input>
+                <input type="submit" class="btn btn-primary mt-3 viewChatButton" value="View Chat">
+            </form>
 
         </span>
 

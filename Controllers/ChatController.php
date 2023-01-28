@@ -49,11 +49,11 @@ class ChatController
 
             if ($_SESSION["type"] == "guardian") {
                 //$backLink = FRONT_ROOT . "Guardian/HomeGuardian";
-                $receiverLink = FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . $encryptedId;
+                $receiverLink = FRONT_ROOT . "Guardian/ViewOwnerProfile";
                 $reservationsLink = FRONT_ROOT . "Guardian/ViewReservations";
             } else {
                 //$backLink = FRONT_ROOT . "Owner/HomeOwner";
-                $receiverLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $encryptedId;
+                $receiverLink = FRONT_ROOT . "Owner/ViewGuardianProfile";
                 $reservationsLink = FRONT_ROOT . "Owner/ViewReservationsOwner";
             }
 

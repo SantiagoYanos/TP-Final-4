@@ -26,7 +26,7 @@ class GuardianController
         }
     }
 
-    public function HomeGuardian($alert = null)
+    public function HomeGuardian($alert = null, $id = null)
     {
         try {
             //var_dump($_SESSION);

@@ -74,10 +74,11 @@
 
                 ?>
 
-                <div class=" text-center">
-                    <a href="<?php echo $backLink; ?>">
-                        <button class="btn btn-secondary mt-2">Back</button>
-                    </a>
+                <div class="text-center">
+                    <form action=<?php echo $backLink; ?> method=POST>
+                        <input type="hidden" name="id" value=<?php echo $encryptedId; ?>>
+                        <button type="submit" class="btn btn-secondary mt-2">Back</button>
+                    </form>
                 </div>
             </div>
 

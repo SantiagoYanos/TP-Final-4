@@ -27,30 +27,39 @@ class ReviewController
         $userDAO = new UserDAO;
         $noreview = 0;
 
-        $guardian = $userDAO->GetById($guardianId);
-        $total = $reviewDAO->GetById($guardianId);
-        if (!$total) {
-            $noreview = $guardianId;
-        }
+        try {
 
-        if ($_SESSION["type"] == "guardian") {
-            $backLink = FRONT_ROOT . "Guardian/HomeGuardian";
-        } else {
-            $backLink = FRONT_ROOT . "Owner/ViewGuardianProfile?id=" . $guardianId;
+            $encryptedId = $guardianId;
 
-            $ownerReview = $reviewDAO->GetByOwner($guardianId, $_SESSION["id"]);
+            $guardianId = decrypt($guardianId);
 
-            if ($ownerReview) {
-                $formLink = FRONT_ROOT . "Review/editReview";
-            } else {
-                $formLink = FRONT_ROOT . "Review/makeReview";
+            $guardianId ? null : throw new Exception("Guardian not found");
+
+            $guardian = $userDAO->GetById($guardianId);
+            $total = $reviewDAO->GetById($guardianId);
+            if (!$total) {
+                $noreview = $guardianId;
             }
+
+            if ($_SESSION["type"] == "guardian") {
+                $backLink = FRONT_ROOT . "Guardian/HomeGuardian";
+            } else {
+                $backLink = FRONT_ROOT . "Owner/ViewGuardianProfile";
+
+                $ownerReview = $reviewDAO->GetByOwner($guardianId, $_SESSION["id"]);
+
+                if ($ownerReview) {
+                    $formLink = FRONT_ROOT . "Review/editReview";
+                } else {
+                    $formLink = FRONT_ROOT . "Review/makeReview";
+                }
+            }
+
+            //return require_once(VIEWS_PATH . "view_reviewsV2.php");
+            return require_once(VIEWS_PATH . "view_reviewsV3.php");
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-
-
-
-        //return require_once(VIEWS_PATH . "view_reviewsV2.php");
-        return require_once(VIEWS_PATH . "view_reviewsV3.php");
     }
 
     public function makeReview($comment, $guardianId, $rating)

@@ -146,8 +146,8 @@
                         <?php
                             case "Paid":
                         ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
+                                <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()); ?>">
                                 <button class="btn viewPaymentButton" type="submit"> View payment </button>
-                                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
                             </form>
                             <?php break;
                             ?>

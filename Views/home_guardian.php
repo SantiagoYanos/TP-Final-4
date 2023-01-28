@@ -80,11 +80,11 @@
         <span>
             <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn pl-1 visualizeReservationsButton">Visualize Reservations</button></a>
 
-            <form class="formShowReviews" action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=GET>
+            <form class="formShowReviews" action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=POST>
 
                 <!-- Id a la vista -->
 
-                <input type="hidden" name="id" value="<?php echo $user->getId() ?>">
+                <input type="hidden" name="guardianId" value="<?php echo encrypt($user->getId()); ?>">
                 <button class="btn btn-warning ms-2">View Reviews</button>
             </form>
         </span>

@@ -137,7 +137,7 @@
 
           <!-- ID a la vista (guardian ID) -->
 
-          <form action=<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?> method=GET>
+          <form action=<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?> method=POST>
             <input type="hidden" name="id" value="<?php echo encrypt($guardian->getID()) ?>"></input>
             <td><button class="btn btn-primary" type="submit">Check Profile</button></td>
           </form>

@@ -24,7 +24,14 @@
 
                 <span>
                     <!-- <button class="btn btn-dark" onclick="history.go(-1);">Back</button>-->
-                    <a href="<?php echo $receiverLink; ?>"><button class="btn btn-primary" type="button">Check Profile</button></a>
+
+                    <form action=<?php echo $receiverLink ?> method=POST style="display:inline">
+
+                        <input type="hidden" name="id" value="<?php echo $encryptedId ?>">
+                        <button class="btn btn-primary" type="submit">Check Profile</button>
+
+                    </form>
+
                     <a href="<?php echo $reservationsLink; ?>" class="btn ms-2 border-dark viewReservationsButton" type="button">View Reservations</a>
 
                 </span>
