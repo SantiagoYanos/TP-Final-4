@@ -144,7 +144,7 @@ class GuardianController
         }
     }
 
-    function ViewOwnerProfile($id) //Encripted
+    function ViewOwnerProfile($id, $back = null) //Encripted
     {
         try {
 

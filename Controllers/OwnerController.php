@@ -141,7 +141,7 @@ class OwnerController
         }
     }
 
-    function ViewGuardianProfile($id, $back, $alert = null) //Encripted
+    function ViewGuardianProfile($id, $back = null, $alert = null) //Encripted
     {
         try {
             $guardianDAO = new GuardianDAO();
