@@ -130,15 +130,24 @@
         <tr>
           <td><?php echo $guardian->GetName() ?></td>
           <td><?php echo $guardian->getAdress() ?></td>
-          <td><?php echo $guardian->getType_data()->getReputation() ?></td>
+          <td><?php
+              $reputation = $guardian->getType_data()->getReputation();
+
+              if ($reputation) {
+                echo number_format((float)$reputation, 1, ',', '');
+              } else {
+                echo "-";
+              }
+              ?></td>
           <td><?php echo ucfirst($guardian->getType_data()->getPreferred_size()) ?></td>
           <td><?php echo ucfirst($guardian->getType_data()->getPreferred_size_cat()) ?></td>
           <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
 
-          <!-- ID a la vista (guardian ID) -->
+          <!-- ID a la vista (guardian ID) - HECHO -->
 
           <form action=<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?> method=POST>
             <input type="hidden" name="id" value="<?php echo encrypt($guardian->getID()) ?>"></input>
+            <input type="hidden" name="back" value="guardianList">
             <td><button class="btn btn-primary" type="submit">Check Profile</button></td>
           </form>
         </tr>

@@ -66,25 +66,40 @@
 
         <tbody>
             <?php
-            $idCont = 0;
+
+            //$idCont = Número de reserva (Contador de reservas del user)
+            $idCont = 1;
 
             foreach ($reservations as $reservation) {
             ?>
                 <tr>
 
-                    <!-- Se muestra la ID de la reserva !-->
+                    <!-- Se muestra la ID de la reserva ! - HECHO -->
 
-                    <td><?php echo $reservation->GetId() ?></td>
+                    <!-- <td><?php // echo $reservation->GetId() 
+                                ?></td> -->
+
+                    <td><?php echo $idCont ?></td>
 
                     <!-- HACER UN FORM PARA NO MOSTRAR LA ID AL AIRE | O ENCRIPTAR LA ID -->
 
-                    <td> <a href=<?php echo  FRONT_ROOT . "Guardian/ViewOwnerProfile?id=" . encrypt($reservation->GetOwner_id()) ?>><button class="btn btn-primary mt-2">Owner Profile</button></a> </td>
-                    <td>$<?php echo $reservation->getPrice() ?></td>
-
-                    <!-- Se usa la id de la reserva !-->
+                    <!-- Id a la vista - HECHO -->
 
                     <td>
-                        <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+
+                        <form action="<?php echo FRONT_ROOT . "Guardian/ViewOwnerProfile" ?>" method=POST>
+
+                            <input type="hidden" name="id" value="<?php echo encrypt($reservation->getOwner_id()); ?>">
+                            <button class="btn btn-primary mt-2">Owner Profile</button>
+
+                        </form>
+
+                    </td>
+
+                    <td>$<?php echo $reservation->getPrice() ?></td>
+
+                    <td>
+                        <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $idCont ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
                         </a>
                     </td>
@@ -129,16 +144,16 @@
                         <?php
                         switch ($reservation->getState()) {
 
-                                //No usar las ID's de las reservas directamente (En ninguno de los 3 casos)
+                                //No usar las ID's de las reservas directamente (En ninguno de los 3 casos) - HECHO
 
                             case "Pending" ?>
-                            <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?> " method="post">
-                                <button class="btn btn-success" type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                            <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?>" method="post">
+                                <button class="btn btn-success" type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()); ?>"></input>
                             </form>
 
                             <form action="<?php echo  FRONT_ROOT . "Reservation/rejectReservation" ?> " method="post">
                                 <button class="btn btn-danger mt-2" type="submit"> Reject </button>
-                                <input type="hidden" name="reservation_id" value="<?php echo $reservation->getId() ?>"></input>
+                                <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()); ?>"></input>
                             </form>
 
                             <?php break; ?>
@@ -162,9 +177,9 @@
 
                 </tr>
 
-                <!-- No usar las ID's de las reservas directamente (de vuelta) -->
+                <!-- No usar las ID's de las reservas directamente (de vuelta) - HECHO -->
 
-                <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
+                <tr class="collapse" id="pets-<?php echo $idCont ?>">
                     <td colspan="8">
                         <table class="table table-bordered">
 
@@ -177,7 +192,7 @@
                                 <?php foreach ($reservation->getPets() as $pet) {
                                 ?>
 
-                                    <!-- No usar la id de pets -->
+                                    <!-- No usar la id de pets (No se puede cambiar) -->
 
                                     <tr>
                                         <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
@@ -199,7 +214,7 @@
                                         <td> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
                 <?php
-                                    $idCont++;
+
                                 }
                 ?>
                 </tr>
@@ -211,7 +226,8 @@
     </td>
     </tr>
 
-<?php } ?>
+<?php $idCont++;
+            } ?>
 </tbody>
 
 </table>

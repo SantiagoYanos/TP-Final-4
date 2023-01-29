@@ -19,7 +19,7 @@
     <div class="container vh-100 h-100 p-4" name="maximum">
         <div class="h-100 px-4 pb-4 reviewBox" name="reviews">
 
-            <!-- Formulario de nueva reserva !-->
+            <!-- Formulario de nueva reserva -->
 
             <div name="makeReservationInputs">
 
@@ -46,12 +46,12 @@
                                 <input type="text" class="form-control" name="comment">
                             </div>
 
-                            <!-- Id a la vista -->
+                            <!-- Id a la vista - HECHO -->
 
                             <input type="hidden" name="guardianId" value="<?php echo $encryptedId ?>">
                             <br>
 
-                            <!-- Id a la vista -->
+                            <!-- Id a la vista - HECHO -->
 
                             <?php if ($ownerReview) { ?>
                                 <input type="hidden" name="oldReviewId" value=<?php echo encrypt($ownerReview->getId()); ?>></input>

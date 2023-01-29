@@ -72,7 +72,7 @@
 
                 </table>
 
-                <!-- ID a la vista -->
+                <!-- ID a la vista - HECHO -->
 
                 <span>
                     <form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?>" method="post" style="display:inline">

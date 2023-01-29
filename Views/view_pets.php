@@ -41,7 +41,7 @@
             <?php foreach ($petList as $pet) {
             ?>
                 <tr>
-                    <!-- Se ve la id (Posiblemente no cambiable) -->
+                    <!-- Se ve la id (Posiblemente no cambiable) - HECHO -->
 
                     <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
                     <td><?php echo $pet->getName() ?> </td>
@@ -54,16 +54,16 @@
                     <td> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
 
                     <td>
-                        <form id=<?php echo $pet->getId(); ?> action="<?php echo FRONT_ROOT . "Pet/deletePet" ?>" method="post">
+                        <form id="<?php echo encrypt($pet->getId()); ?>" action="<?php echo FRONT_ROOT . "Pet/deletePet" ?>" method="post">
 
-                            <!-- Se ve la id -->
+                            <!-- Se ve la id - HECHO -->
 
-                            <input type="hidden" name="petId" value="<?php echo $pet->getId() ?>"></input>
+                            <input type="hidden" name="petId" value="<?php echo encrypt($pet->getId()); ?>"></input>
                         </form>
 
-                        <!-- Id a la vista (Posiblemente no cambiable) -->
+                        <!-- Id a la vista - HECHO -->
 
-                        <button type="submit" class="btn btn-danger" onclick="confirming(<?php echo $pet->getId(); ?>)">Delete</button>
+                        <button type="submit" class="btn btn-danger" onclick=confirming(<?php echo '"' . encrypt($pet->getId()) . '"'; ?>)>Delete</button>
 
                     </td>
                 <?php

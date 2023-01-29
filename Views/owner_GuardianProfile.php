@@ -122,14 +122,14 @@
         </div>
 
         <span>
-            <!-- ID a la vista -->
+            <!-- ID a la vista - HECHO -->
 
             <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=POST style="display:inline">
                 <input type="hidden" name="guardianId" value="<?php echo encrypt($guardian->getId()); ?>">
                 <button class="btn btn-warning mt-3">View Reviews</button>
             </form>
 
-            <!-- ID a la vista -->
+            <!-- ID a la vista - HECHO -->
 
             <form action=<?php echo FRONT_ROOT . "Chat/ShowChat" ?> method=POST style="display:inline">
                 <input type="hidden" name="idReceiver" value=<?php echo encrypt($guardian->getId()); ?>></input>
@@ -140,7 +140,7 @@
 
         <br>
 
-        <a href=<?php echo FRONT_ROOT . "Owner/SearchGuardian" ?>><button class="btn btn-dark mt-3">Back</button></a>
+        <a href="<?php echo $backLink ?>"><button class="btn btn-dark mt-3">Back</button></a>
 
         <hr>
 
@@ -167,7 +167,8 @@
                         // Chequear ese input // ID a la vista
 
                         foreach ($PetList as $pet) {
-                            echo '<input type="checkbox" name="pets_ids[]" value=' . $pet->getId() . " > " . "<b class='ms-2'>" . $pet->getName() . "</b>" . "</option> <br>";
+                            echo '<input type="checkbox" name="pets_ids[' . $cont . ']" value=' . encrypt($pet->getId()) . " > " . "<b class='ms-2'>" . $pet->getName() . "</b>" . "</option> <br>";
+                            $cont++;
                         }
                         echo "<br>"
                         ?>
@@ -211,7 +212,7 @@
 
             <!-- GuardianID a la vista -->
 
-            <input type="hidden" name="guardian_id" value="<?php echo $guardian->getID() ?>"></input>
+            <input type="hidden" name="guardian_id" value="<?php echo encrypt($guardian->getID()); ?>"></input>
 
             <button class="btn btn-primary mb-3" type="submit">Make Reservation </button></br>
 

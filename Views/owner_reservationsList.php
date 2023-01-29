@@ -65,17 +65,30 @@
 
         <tbody>
             <?php
-            $idCont = 0;
+            //$idCont es el número de reserva (Contador de reservas del usuario)
+            $idCont = 1;
             foreach ($reservations as $reservation) {
             ?>
                 <tr>
-                    <td><?php echo $reservation->GetId() ?></td>
-                    <td><?php echo $reservation->getGuardian_id() ?></td>
+                    <td><?php echo $idCont ?></td>
+
+                    <!-- Agregar boton de ver Owner - HECHO -->
+
+                    <td>
+                        <form action="<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?>" method=POST>
+
+                            <input type="hidden" name="id" value="<?php echo encrypt($reservation->getGuardian_id()); ?>">
+                            <input type="hidden" name="back" value="reservationsList">
+                            <button class="btn btn-primary mt-2">Guardian Profile</button>
+
+                        </form>
+
+                    </td>
                     <td>$<?php echo $reservation->getPrice() ?></td>
                     <td>
 
-                        <!-- ID de reserva -->
-                        <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $reservation->getId() ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <!-- ID de reserva - HECHO -->
+                        <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $idCont ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
                         </a>
                     </td>
@@ -121,14 +134,14 @@
                             case "Payment pending":
                         ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPaymentCupon" ?> " method="post">
 
-                                    <!-- Id a la vista -->
+                                    <!-- Id a la vista - HECHO -->
                                     <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()) ?>"></input>
                                 </form><?php
 
                                         break; ?>
 
 
-                                <!-- Id a la vista -->
+                                <!-- Id a la vista - HECHO -->
                             <?php
                             case "Paid":
                             ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
@@ -140,15 +153,15 @@
                         <?php } ?>
                     </td>
                     <td>
-                        <!-- Id a la vista -->
+                        <!-- Id a la vista - HECHO -->
                         <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
                             <button class="btn viewChatButton" type="submit"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo encrypt($reservation->getGuardian_id()) ?>"></input>
                         </form>
                     </td>
                 </tr>
 
-                <!-- Id a la vista -->
-                <tr class="collapse" id="pets-<?php echo $reservation->getId() ?>">
+                <!-- Id a la vista - HECHO -->
+                <tr class="collapse" id="pets-<?php echo $idCont ?>">
                     <td colspan="8">
                         <table class="table table-bordered petsTable">
 
@@ -173,7 +186,7 @@
 
                                         </td>
 
-                                        <!-- Id a la vista (posiblemente dejarlo así) -->
+                                        <!-- Id a la vista (posiblemente dejarlo así) - HECHO -->
 
                                         <td class="petTableColumn"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
                                         <td class="petTableColumn"><?php echo $pet->getObservation() ?> </td>
@@ -182,7 +195,7 @@
                     </td>
 
                 <?php
-                                    $idCont++;
+
                                 }
                 ?>
 
@@ -190,12 +203,12 @@
 
         </tbody>
 
-
     </table>
     </td>
     </tr>
 
-<?php } ?>
+<?php $idCont++;
+            } ?>
 </tbody>
 
 </table>

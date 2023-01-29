@@ -141,7 +141,7 @@ class OwnerController
         }
     }
 
-    function ViewGuardianProfile($id, $alert = null) //Encripted
+    function ViewGuardianProfile($id, $back, $alert = null) //Encripted
     {
         try {
             $guardianDAO = new GuardianDAO();
@@ -160,6 +160,18 @@ class OwnerController
             $ratingPercent = (($guardian->getType_Data()->getReputation() * 100) / 5);
 
             $reviewsAmount = $reviewDAO->calculateRating($guardian->getId())["quantity"];
+
+            switch ($back) {
+                case "reservationsList":
+                    $backLink = FRONT_ROOT . "Owner/ViewReservationsOwner";
+                    break;
+                case "guardianList":
+                    $backLink = FRONT_ROOT . "Owner/SearchGuardian";
+                    break;
+                default:
+                    $backLink = FRONT_ROOT . "Owner/SearchGuardian";
+                    break;
+            }
 
             if ($guardian) {
                 require_once VIEWS_PATH . "owner_GuardianProfile.php";

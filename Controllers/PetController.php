@@ -109,9 +109,14 @@ class PetController
     }
 
 
-    public function deletePet($petId)
+    public function deletePet($petId) //Encripted
     {
         try {
+
+            $petId = decrypt($petId);
+
+            $petId ? null : throw new Exception("Pet not found");
+
             $petDAO = new PetDAO();
             $petDAO->Remove($petId);
             return header("location: " . FRONT_ROOT . "Pet/PetList");

@@ -62,15 +62,16 @@
 
     </div>
 
-    <!-- Id a la vista -->
+    <!-- Id a la vista - HECHO -->
 
-    <a href=<?php echo FRONT_ROOT . "Chat/ShowChat?id=" . encrypt($owner->getId()); ?> type="button" class="btn btn-primary viewButton">View Chat</a>
+    <form action=<?php echo FRONT_ROOT . "Chat/ShowChat" ?> method=POST style="display:inline">
+        <input type="hidden" name="idReceiver" value=<?php echo encrypt($owner->getId()); ?>></input>
+        <input type="submit" class="btn btn-primary mt-3 viewChatButton" value="View Chat">
+    </form>
 
     <br>
 
     <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn btn-dark mt-2">Back</button></a>
-
-
 
 </body>
 

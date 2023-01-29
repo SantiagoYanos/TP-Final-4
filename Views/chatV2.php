@@ -28,6 +28,8 @@
                     <form action=<?php echo $receiverLink ?> method=POST style="display:inline">
 
                         <input type="hidden" name="id" value="<?php echo $encryptedId ?>">
+                        <input type="hidden" name="back" value="chat">
+
                         <button class="btn btn-primary" type="submit">Check Profile</button>
 
                     </form>
@@ -97,7 +99,7 @@
 
                 <div class="row align-items-center userInputs" name="userInputs">
 
-                    <!-- Id a la vista -->
+                    <!-- Id a la vista - HECHO -->
 
                     <input type="hidden" name="userId" value="<?php echo $encryptedId ?>"></input>
 

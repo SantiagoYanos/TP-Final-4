@@ -82,7 +82,7 @@
 
             <form class="formShowReviews" action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=POST>
 
-                <!-- Id a la vista -->
+                <!-- Id a la vista - HECHO -->
 
                 <input type="hidden" name="guardianId" value="<?php echo encrypt($user->getId()); ?>">
                 <button class="btn btn-warning ms-2">View Reviews</button>
@@ -171,7 +171,7 @@
         </form>
 
         <script>
-            alertMessage(<?php echo $alert; ?>)
+            alertMessage("<?php echo $alert; ?>")
         </script>
 
 </body>

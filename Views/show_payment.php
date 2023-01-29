@@ -60,7 +60,7 @@
 
             </table>
 
-            <!-- Se puede mejorar seguramente -->
+            <!-- Hay que encriptar el email -->
 
             <form action="<?php echo FRONT_ROOT . "Payment/SendEmailPayment" ?>" method="post">
                 <div class="control-group">

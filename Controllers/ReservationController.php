@@ -32,7 +32,7 @@ class ReservationController
         require_once(VIEWS_PATH . "owner_GuardianProfile.php");
     }*/
 
-    public function MakeReservation($guardian_id, $reservation_dates = null, $pets_ids = [])
+    public function MakeReservation($guardian_id, $reservation_dates = null, $pets_ids = []) //Encripted
     {
 
         if ($_SESSION["type"] == "guardian") {
@@ -52,26 +52,42 @@ class ReservationController
 
         $reservation_dates_array = explode(",", $reservation_dates);
 
-        $reservationList = $reservationDAO->GetAllByDates($guardian_id, $reservation_dates_array);
+        try {
 
-        //Saber si ya hay una reserva con esa pet;
+            $reservationList = $reservationDAO->GetAllByDates($guardian_id, $reservation_dates_array);
 
-        foreach ($reservationList as $reservation) {
-            foreach ($reservation->getPets() as $pet) {
-                foreach ($pets_ids as $pet_id) {
-                    if ($pet->getId() == $pet_id) {
-                        $flag = 2;
-                        break 3;
+            //Desencriptar las idis de pets...
+
+            $pets_ids = array_map(function ($petId) {
+                $decryptedPet = decrypt($petId);
+
+                $decryptedPet ? null : throw new Exception("Pet not found");
+
+                return $decryptedPet;
+            }, $pets_ids);
+
+            //Saber si ya hay una reserva con esa pet;
+
+            foreach ($reservationList as $reservation) {
+                foreach ($reservation->getPets() as $pet) {
+                    foreach ($pets_ids as $pet_id) {
+                        if ($pet->getId() == $pet_id) {
+                            $flag = 2;
+                            break 3;
+                        }
                     }
                 }
             }
-        }
 
-        try {
             /////Chequear size
             $PetDAO = new PetDAO();
             $guardianDAO = new GuardianDAO();
             //$owner_DAO = new OwnerDAO();
+
+            $guardian_id = decrypt($guardian_id);
+
+            $guardian_id ? null : throw new Exception("Guardian not found");
+
             $guardian_user = $guardianDAO->GetById($guardian_id);
 
             // $guardianPetSize = $guardian_user->getType_Data()->getPreferred_size();
@@ -171,7 +187,7 @@ class ReservationController
         }
     }
 
-    public function acceptReservation($reservation_id)
+    public function acceptReservation($reservation_id) //Encripted
     {
         try {
             if ($_SESSION["type"] == "owner") {
@@ -179,10 +195,14 @@ class ReservationController
             }
 
             $reservationDAO = new ReservationDAO;
+
+            $reservation_id = decrypt($reservation_id);
+
+            $reservation_id ? null : throw new Exception("Reservation not found");
+
             $reservation = $reservationDAO->getById($reservation_id);
 
             $pet = $reservationDAO->getExistingReservations($reservation->getDates());
-
 
             if ($pet) {
 
@@ -213,6 +233,23 @@ class ReservationController
         }
     }
 
+    public function rejectReservation($reservation_id) //Encripted
+    {
+        try {
+            $reservationDAO = new ReservationDAO;
+
+            $reservation_id = decrypt($reservation_id);
+
+            $reservation_id ? null : throw new Exception("Reservation not found");
+
+            $reservation = $reservationDAO->getById($reservation_id);
+            $reservationDAO->updateState($reservation->getId(), "Rejected");
+            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation rejected"');
+        } catch (Exception $ex) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
+    }
+
     public function checkBreed($petList)
     {
 
@@ -225,17 +262,5 @@ class ReservationController
             }
         }
         return true;
-    }
-
-    public function rejectReservation($reservation_id)
-    {
-        try {
-            $reservationDAO = new ReservationDAO;
-            $reservation = $reservationDAO->getById($reservation_id);
-            $reservationDAO->updateState($reservation->getId(), "Rejected");
-            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation rejected"');
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-        }
     }
 }

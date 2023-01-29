@@ -1,9 +1,9 @@
-.viewButton {
+.viewChatButton {
     background-color: #033793; 
     color: white;
 }
 
-.viewButton:hover {
+.viewChatButton:hover {
     background-color: #033793 !important; 
     color: white !important;
     filter: brightness(110%) !important;
