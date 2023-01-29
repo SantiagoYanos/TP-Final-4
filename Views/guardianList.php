@@ -141,7 +141,7 @@
               ?></td>
           <td><?php echo ucfirst($guardian->getType_data()->getPreferred_size()) ?></td>
           <td><?php echo ucfirst($guardian->getType_data()->getPreferred_size_cat()) ?></td>
-          <td><?php echo $guardian->getType_data()->GetPrice() ?></td>
+          <td>$<?php echo $guardian->getType_data()->GetPrice() ?></td>
 
           <!-- ID a la vista (guardian ID) - HECHO -->
 
