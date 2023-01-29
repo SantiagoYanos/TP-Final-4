@@ -2,16 +2,17 @@
 
 namespace Controllers;
 
-
-
 use Exception;
-use Models\Guardian;
+use Models\Guardian as Guardian;
 use Models\Reservation as Reservation;
 use Models\Pet as Pet;
+use Models\User as User;
 use SQLDAO\PetDAO as PetDAO;
 use SQLDAO\ReservationDAO as ReservationDAO;
 use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
+use Controllers\PaymentController as PaymentController;
+use DAO\UserDAO as UserDAO;
 
 class ReservationController
 {
@@ -201,6 +202,16 @@ class ReservationController
             $reservation_id ? null : throw new Exception("Reservation not found");
 
             $reservation = $reservationDAO->getById($reservation_id);
+
+            ////Mandar Cupon////
+            $owner_DAO = new OwnerDAO();
+            $user = new User();
+            $user = $owner_DAO->GetById($reservation->getOwner_id());
+
+
+            $payment = new PaymentController();
+            $payment->SendEmailCoupon($user->getEmail());
+            ////Mandar Cupon////
 
             $pet = $reservationDAO->getExistingReservations($reservation->getDates());
 
