@@ -53,13 +53,13 @@ class PaymentController
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'pethero50000@gmail.com';                     //SMTP username
-            $mail->Password   = '';                               //SMTP password
+            $mail->Username   = EMAIL_USERNAME;                     //SMTP username
+            $mail->Password   = EMAIL_PASSWORD;                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('pethero50000@gmail.com', "Pet Hero Support");
+            $mail->setFrom(EMAIL_USERNAME, "Pet Hero Support");
             $mail->addAddress($email, "Dear Customer");     //Add a recipient
 
             //Content
@@ -107,13 +107,13 @@ class PaymentController
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'pethero50000@gmail.com';                     //SMTP username
-            $mail->Password   = '';                               //SMTP password
+            $mail->Username   = EMAIL_USERNAME;                     //SMTP username
+            $mail->Password   = EMAIL_PASSWORD;                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('pethero50000@gmail.com', "Pet Hero Support");
+            $mail->setFrom(EMAIL_USERNAME, "Pet Hero Support");
             $mail->addAddress($email, "Dear Customer");     //Add a recipient
 
             //Content
@@ -131,14 +131,13 @@ class PaymentController
     public function ShowPayment($reservation_id) //Encripted
     {
         try {
-            $payment = new PaymentDAO();
+            $paymentDAO = new PaymentDAO();
 
             $reservation_id = decrypt($reservation_id);
 
             $reservation_id ? null : throw new Exception("Decrypt Error");
 
-            $arrayPayment = array();
-            $arrayPayment = $payment->GetByReservationId($reservation_id);
+            $payment = $paymentDAO->GetByReservationId($reservation_id);
 
             return require_once(VIEWS_PATH . "show_payment.php");
         } catch (Exception $e) {

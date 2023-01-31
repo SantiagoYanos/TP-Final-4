@@ -147,6 +147,7 @@
                                 //No usar las ID's de las reservas directamente (En ninguno de los 3 casos) - HECHO
 
                             case "Pending" ?>
+
                             <form action="<?php echo  FRONT_ROOT . "Reservation/acceptReservation" ?>" method="post">
                                 <button class="btn btn-success" type="submit"> Accept </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()); ?>"></input>
                             </form>
@@ -155,6 +156,7 @@
                                 <button class="btn btn-danger mt-2" type="submit"> Reject </button>
                                 <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()); ?>"></input>
                             </form>
+
 
                             <?php break; ?>
 

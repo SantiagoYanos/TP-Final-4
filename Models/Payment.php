@@ -8,8 +8,11 @@ class Payment
     private $date;
     private $reservation_id;
     private $owner_id;
+    private $owner_name;
     private $guardian_id;
+    private $guardian_name;
     private $payment_number;
+    private $price;
 
     public function getAmount()
     {
@@ -79,6 +82,42 @@ class Payment
     public function setPayment_number($payment_number)
     {
         $this->payment_number = $payment_number;
+
+        return $this;
+    }
+
+    public function getOwner_name()
+    {
+        return $this->owner_name;
+    }
+
+    public function setOwner_name($owner_name)
+    {
+        $this->owner_name = $owner_name;
+
+        return $this;
+    }
+
+    public function getGuardian_name()
+    {
+        return $this->guardian_name;
+    }
+
+    public function setGuardian_name($guardian_name)
+    {
+        $this->guardian_name = $guardian_name;
+
+        return $this;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
 
         return $this;
     }

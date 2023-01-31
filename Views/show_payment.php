@@ -18,7 +18,7 @@
 
         <div class="col-sm-4 border rounded m-auto align-items-center pt-2 pb-3 borderDiv">
 
-            <b>Payment Number: <?php echo $arrayPayment["payment_number"] ?></b>
+            <b>Payment Number: <?php echo $payment->getPayment_number() ?></b>
 
             <table class="table mt-3">
 
@@ -33,27 +33,27 @@
 
                     <tr>
                         <th>Payment Date</th>
-                        <td><?php echo $arrayPayment["date"] ?></td>
+                        <td><?php echo $payment->getDate(); ?></td>
                     </tr>
 
                     <tr>
                         <th>Owner</th>
-                        <td><?php echo $arrayPayment["owner_name"] ?></td>
+                        <td><?php echo $payment->getOwner_name(); ?></td>
                     </tr>
 
                     <tr>
                         <th>Guardian</th>
-                        <td><?php echo $arrayPayment["guardian_name"] ?></td>
+                        <td><?php echo $payment->getGuardian_name(); ?></td>
                     </tr>
 
                     <tr>
                         <th>Total Price</th>
-                        <td><b>$<?php echo $arrayPayment["price"] ?></b></td>
+                        <td><b>$<?php echo $payment->getPrice(); ?></b></td>
                     </tr>
 
                     <tr>
                         <th>Amount Payed</th>
-                        <td><b>$<?php echo $arrayPayment["amount"] ?></b></td>
+                        <td><b>$<?php echo $payment->getAmount(); ?></b></td>
                     </tr>
 
                 </tbody>
