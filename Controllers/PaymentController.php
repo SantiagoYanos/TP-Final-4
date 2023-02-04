@@ -24,7 +24,7 @@ class PaymentController
         require_once(ROOT . "/Utils/fpdf/fpdf.php");
     }
 
-    public function SendEmailPayment($email, $reservationId)
+    public function SendEmailPayment($reservationId)
     {
         $reservationId = decrypt($reservationId);
 
@@ -35,6 +35,10 @@ class PaymentController
             $reservationId ? null : throw new Exception("Reservation not found");
 
             $payment = $paymentDAO->GetByReservationId($reservationId);
+
+            $ownerDAO = new OwnerDAO();
+            $owner = $ownerDAO->GetById($_SESSION["id"]);
+            $email = $owner->getEmail();
 
             //----------------------------- CREACION MAIL --------------------------
 
