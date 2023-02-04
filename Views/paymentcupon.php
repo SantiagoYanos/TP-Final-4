@@ -38,11 +38,6 @@
 
                     <tbody>
 
-                        <tr>
-                            <th colspan="2">Date</th>
-                            <td colspan="2"><? //php echo $arrayPayment["date"] 
-                                            ?> - </td>
-                        </tr>
 
                         <tr>
                             <th>Guardian</th>

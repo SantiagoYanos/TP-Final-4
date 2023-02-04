@@ -210,7 +210,7 @@ class ReservationController
 
 
             $payment = new PaymentController();
-            $payment->SendEmailCoupon($user->getEmail());
+            $payment->SendEmailCoupon($user->getEmail(), $reservation_id);
             ////Mandar Cupon////
 
             $pet = $reservationDAO->getExistingReservations($reservation->getDates());
