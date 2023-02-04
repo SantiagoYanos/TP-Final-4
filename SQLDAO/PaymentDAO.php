@@ -6,6 +6,7 @@ use SQLDAO\IModels as IModels;
 // use SQLDAO\GuardianDAO as GuardianDAO;
 // use SQLDAO\OwnerDAO as OwnerDAO;
 // use SQLDAO\ReservationDAO as ReservationDAO;
+use Models\Payment as Payment;
 
 class PaymentDAO implements IModels
 {
@@ -54,7 +55,9 @@ class PaymentDAO implements IModels
         // $paymentArray["guardian_name"] = $resultSet[0]["guardian_name"];
         // $paymentArray["price"] = $resultSet[0]["price"];
 
-        return $resultSet[0];
+        $PaymentSQL = $this->LoadData($resultSet[0]);
+
+        return $PaymentSQL;
     }
 
     public function Add($payment)
@@ -106,6 +109,21 @@ class PaymentDAO implements IModels
         // $paymentArray["guardian_name"] = $resultSet[0]["guardian_name"];
         // $paymentArray["price"] = $resultSet[0]["price"];
 
-        return $resultSet[0];
+        $PaymentSQL = $this->LoadData($resultSet[0]);
+
+        return $PaymentSQL;
+    }
+
+    public function LoadData($resultSet)
+    {
+        $PaymentSQL = new Payment();
+        $PaymentSQL->setAmount($resultSet["amount"]);
+        $PaymentSQL->setDate($resultSet["date"]);
+        $PaymentSQL->setPayment_number($resultSet["payment_number"]);
+        $PaymentSQL->setOwner_name($resultSet["owner_name"]);
+        $PaymentSQL->setGuardian_name($resultSet["guardian_name"]);
+        $PaymentSQL->setPrice($resultSet["price"]);
+
+        return $PaymentSQL;
     }
 }
