@@ -22,65 +22,61 @@
 
     <div class="row h-100 w-100 d-flex">
 
-        <div class="row h-100 w-100 d-flex">
+        <div class="col-sm-4 border border-dark rounded m-auto align-items-center pt-2 pb-3 borderDiv">
 
-            <div class="col-sm-4 border border-dark rounded m-auto align-items-center pt-2 pb-3 borderDiv">
+            <table class="table table-bordered mt-3 paymentTable">
 
-                <table class="table table-bordered mt-3 paymentTable">
+                <thead>
+                    <tr>
+                        <th colspan="4">
+                            <h2>Pet Hero</h2>
+                        </th>
+                    </tr>
+                </thead>
 
-                    <thead>
-                        <tr>
-                            <th colspan="4">
-                                <h2>Pet Hero</h2>
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
+                <tbody>
 
 
-                        <tr>
-                            <th>Guardian</th>
-                            <td><?php echo $coupon["guardianName"] ?></td>
-                            <th>Guardian CUIL</th>
-                            <td><?php echo $coupon["guardianCUIL"] ?></td>
-                        </tr>
+                    <tr>
+                        <th>Guardian</th>
+                        <td><?php echo $coupon["guardianName"] ?></td>
+                        <th>Guardian CUIL</th>
+                        <td><?php echo $coupon["guardianCUIL"] ?></td>
+                    </tr>
 
-                        <tr>
-                            <th>Owner</th>
-                            <td><?php echo $coupon["ownerName"] ?></td>
-                            <th>Owner DNI</th>
-                            <td><?php echo $coupon["ownerDNI"] ?></td>
-                        </tr>
+                    <tr>
+                        <th>Owner</th>
+                        <td><?php echo $coupon["ownerName"] ?></td>
+                        <th>Owner DNI</th>
+                        <td><?php echo $coupon["ownerDNI"] ?></td>
+                    </tr>
 
-                        <tr>
-                            <th colspan="2">Import</th>
-                            <td colspan="2"><b>$<?php echo $coupon["import"] ?></b> (1/2)</td>
-                        </tr>
+                    <tr>
+                        <th colspan="2">Import</th>
+                        <td colspan="2"><b>$<?php echo $coupon["import"] ?></b> (1/2)</td>
+                    </tr>
 
-                        <tr>
-                            <th colspan="2">Description</th>
-                            <td colspan="2"><b>Pet-sitting reservation | <?php echo $coupon["daysAmount"] ?> days | <?php echo $coupon["petsAmount"] ?> pet/s</b></td>
-                        </tr>
+                    <tr>
+                        <th colspan="2">Description</th>
+                        <td colspan="2"><b>Pet-sitting reservation | <?php echo $coupon["daysAmount"] ?> days | <?php echo $coupon["petsAmount"] ?> pet/s</b></td>
+                    </tr>
 
-                    </tbody>
+                </tbody>
 
-                </table>
+            </table>
 
-                <!-- ID a la vista - HECHO -->
+            <!-- ID a la vista - HECHO -->
 
-                <span>
-                    <form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?>" method="post" style="display:inline">
-                        <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId())
-                                                                                                                                        ?>"></input>
-                    </form>
+            <span>
+                <form action="<?php echo  FRONT_ROOT . "Payment/ShowMakePayment" ?>" method="post" style="display:inline">
+                    <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId())
+                                                                                                                                    ?>"></input>
+                </form>
 
-                    <a class="float-end" href="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>"><button class="btn btn-dark" type="submit"> Back</button></a>
+                <a class="float-end" href="<?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?>"><button class="btn btn-dark" type="submit"> Back</button></a>
 
 
-                </span>
-
-            </div>
+            </span>
 
         </div>
 

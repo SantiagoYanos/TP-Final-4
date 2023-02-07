@@ -36,6 +36,8 @@
 
                     <a href="<?php echo $reservationsLink; ?>" class="btn ms-2 border-dark viewReservationsButton" type="button">View Reservations</a>
 
+                    <b class="float-end h2"><?php echo $youName; ?></b>
+
                 </span>
 
             </div>

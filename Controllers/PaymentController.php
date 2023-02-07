@@ -122,7 +122,7 @@ class PaymentController
             $guardian = $guardianDAO->getById($reservation->getGuardian_id());
 
             $owner = $ownerDAO->getById($reservation->getOwner_id());
-            
+
             $coupon["guardianName"] = $guardian->getName() . " " . $guardian->getLast_name();
             $coupon["ownerName"] = $owner->getName() . " " . $owner->getLast_name();
             $coupon["guardianCUIL"] = $guardian->getType_data()->getCuil();
@@ -130,9 +130,9 @@ class PaymentController
             $coupon["import"] = $reservation->getPrice() / 2;
             $coupon["daysAmount"] = count($reservation->getDates());
             $coupon["petsAmount"] = count($reservation->getPets());
-            
+
             $mail = new PHPMailer(true);
-            
+
             //Server settings
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
@@ -142,33 +142,32 @@ class PaymentController
             $mail->Password   = EMAIL_PASSWORD;                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-            
+
             //Recipients
             $mail->setFrom(EMAIL_USERNAME, "Pet Hero Support");
             $mail->addAddress($email, "Dear Customer");     //Add a recipient
-            
+
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Payment Coupon';
             $mail->Body    = 'Thank you for using Pet Hero! Your reservation was accepted by the Guardian and here is the coupon for you payment. :-)';
             $mail->AddAttachment(ROOT . 'PHPMailer/PHPMailer/cupon.png');
-            
 
             // ---------------------------- CREACION PDF ---------------------------
-            
+
             $pdf = new FPDF();
-            
+
             $pdf->SetMargins(0, 0, 0);
-            
+
             $pdf->AddPage();
             $pdf->SetFont('Times', 'B', 16);
-            
+
             $pdf->Image(ROOT . "/Views/images/pethero.png", $pdf->GetPageWidth() / 2 - 60, null, 120, 70);
-            
+
             $pdf->Cell(0, 10, "", 0, 1, 'C');
-            
+
             $pdf->Cell(0, 10, 'Pet Hero - Payment Coupon', 0, 1, 'C');
-            
+
             $pdf->SetFont('Times', 'B', 12);
 
             $pdf->Cell(0, 10, 'Guardian: ' . $coupon["guardianName"], 0, 1, 'C');
@@ -176,7 +175,7 @@ class PaymentController
             $pdf->Cell(0, 10, 'Owner: ' . $coupon["ownerName"], 0, 1, 'C');
             $pdf->Cell(0, 10, 'Owner DNI: ' . $coupon["ownerDNI"], 0, 1, 'C');
             $pdf->Cell(0, 10, 'Amount: $' . $coupon["import"] . ' (1/2)', 0, 1, 'C');
-            $pdf->Cell(0, 10, 'Description: ' . $coupon["daysAmount"] .  ' days ' .  $coupon["petsAmount"] .' pet/s', 0, 1, 'C');
+            $pdf->Cell(0, 10, 'Description: ' . $coupon["daysAmount"] .  ' days ' .  $coupon["petsAmount"] . ' pet/s', 0, 1, 'C');
 
             $pdf->Cell(0, 10, "", 0, 1, 'C');
 
@@ -266,7 +265,7 @@ class PaymentController
             $payment->setAmount($decryptedPrice);
             $payment->setReservation_id($decryptedReservation_id);
             $payment->setOwner_id($decryptedOwner_id);
-            $payment->setGuardian_id($decryptedGuardian_id); 
+            $payment->setGuardian_id($decryptedGuardian_id);
             $payment->setPayment_number(random_int(0, 999999999));
 
             $paymentDAO->Add($payment);

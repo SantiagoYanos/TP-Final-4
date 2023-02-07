@@ -2,6 +2,10 @@ body{
     height: 100vh;
 }
 
+form{
+    display:inline;
+}
+
 .borderDiv {
     border-width: 5px !important; 
     border-color: purple !important;
