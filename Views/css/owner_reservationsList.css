@@ -1,3 +1,7 @@
+form{
+    display: inline;
+}
+
 .viewPaymentButton {
     background-color: purple;
     color: white;

@@ -247,15 +247,60 @@ class ReservationController
     public function rejectReservation($reservation_id) //Encripted
     {
         try {
+
+            if ($_SESSION["type"] == "owner") {
+                header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+            }
+
             $reservationDAO = new ReservationDAO;
 
             $reservation_id = decrypt($reservation_id);
 
             $reservation_id ? null : throw new Exception("Reservation not found");
 
+
             $reservation = $reservationDAO->getById($reservation_id);
-            $reservationDAO->updateState($reservation->getId(), "Rejected");
-            header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation rejected"');
+
+            if (!$reservation) {
+                throw new Exception("Reservation not found");
+            }
+
+            if ($reservation->getState() == "Pending") {
+                $reservationDAO->updateState($reservation->getId(), "Rejected");
+                header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation rejected"');
+            }
+        } catch (Exception $ex) {
+            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        }
+    }
+
+    public function cancelReservation($reservation_id)
+    {
+        try {
+
+            if ($_SESSION["type"] == "guardian") {
+                header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+            }
+
+            $reservationDAO = new ReservationDAO;
+
+            $reservation_id = decrypt($reservation_id);
+
+            $reservation_id ? null : throw new Exception("Reservation not found");
+
+
+            $reservation = $reservationDAO->getById($reservation_id);
+
+            if (!$reservation) {
+                throw new Exception("Reservation not found");
+            }
+
+            $state = $reservation->getState();
+
+            if ($state == "Pending" || $state == "Payment pending") {
+                $reservationDAO->updateState($reservation_id, "Canceled");
+                header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&alert="Reservation canceled"');
+            }
         } catch (Exception $ex) {
             header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         }

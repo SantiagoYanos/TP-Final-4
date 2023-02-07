@@ -59,7 +59,7 @@
             <th>Pets</th>
             <th>Dates</th>
             <th>State</th>
-            <th>Payment</th>
+            <th>Action</th>
             <th>Chat</th>
         </thead>
 
@@ -132,13 +132,20 @@
                     <td>
                         <?php switch ($reservation->getState()) {
                             case "Payment pending":
-                        ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPaymentCupon" ?> " method="post">
+                        ?>
+                                <form action="<?php echo  FRONT_ROOT . "Payment/ShowPaymentCupon" ?> " method="post">
 
                                     <!-- Id a la vista - HECHO -->
                                     <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()) ?>"></input>
-                                </form><?php
+                                </form>
+                                <form action="<?php echo FRONT_ROOT . "Reservation/cancelReservation" ?>" method="post">
+                                    <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()) ?>"></input>
+                                    <button class="btn btn-danger float-end" type="submit"> Cancel </button>
+                                </form>
 
-                                        break; ?>
+                                <?php
+
+                                break; ?>
 
 
                                 <!-- Id a la vista - HECHO -->
@@ -149,6 +156,13 @@
                                 </form><?php
 
                                         break; ?>
+
+                            <?php
+                            case "Pending":
+                            ?><form action="<?php echo FRONT_ROOT . "Reservation/cancelReservation" ?>" method="post">
+                                    <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()) ?>"></input>
+                                    <button class="btn btn-danger" type="submit"> Cancel </button>
+                                </form>
 
                         <?php } ?>
                     </td>
