@@ -126,17 +126,20 @@ class GuardianController
         }
     }
 
-    public function ViewReservations($state = null, $alert = null)
+    public function ViewReservations($state = null, $rejected = false, $canceled = false, $alert = null)
     {
+
         try {
 
             $reservationDAO = new ReservationDAO();
 
-            if ($state && $state != "*") {
-                $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian", $state);
-            } else {
-                $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian");
-            }
+            $state = $state && $state == "*" ? null : $state;
+
+            $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "guardian", $state, $rejected, $canceled);
+
+            $rejectedCheck = $rejected ? "checked" : "";
+
+            $canceledCheck = $canceled ? "checked" : "";
 
             require_once VIEWS_PATH . "guardian_reservationsList.php";
         } catch (Exception $e) {

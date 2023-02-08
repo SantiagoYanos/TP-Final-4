@@ -35,12 +35,22 @@
 
             <form <?php echo FRONT_ROOT . "Owner/ViewReservationsOwner" ?> method="post">
                 <b><label for="state" class="form-label">State filter</label></b>
-                <select class="form-select" aria-label="registration_filter" name="state">
+                <select class="form-select mb-3" aria-label="registration_filter" name="state">
                     <option selected>*</option>
                     <option value="Pending">Pending</option>
                     <option value="Payment pending">Payment pending</option>
                     <option value="Paid">Paid</option>
                 </select>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="on" id="rejected" name="rejected" <?php echo $rejectedCheck ?>>
+                    <label class="form-check-label" for="rejected">Rejected</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="on" id="canceled" name="canceled" <?php echo $canceledCheck ?>>
+                    <label class="form-check-label" for="canceled">Canceled</label>
+                </div>
 
                 <input class="btn btn-primary mt-3" type="submit" value="Add filter">
             </form>

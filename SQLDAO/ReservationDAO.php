@@ -220,7 +220,7 @@ class ReservationDAO implements IModels
         }
     }
 
-    public function GetByGuardianOrOwner($id, $type, $state = null)
+    public function GetByGuardianOrOwner($id, $type, $state = null, $rejected = false, $canceled = false)
     {
         $reservationList = array();
 
@@ -241,6 +241,14 @@ class ReservationDAO implements IModels
             if ($state) {
                 $queryReservation = $queryReservation . " AND state=:state";
                 $parameters["state"] = $state;
+            }
+
+            if (!$canceled) {
+                $queryReservation = $queryReservation . " AND state!='Canceled'";
+            }
+
+            if (!$rejected) {
+                $queryReservation = $queryReservation . " AND state!='Rejected'";
             }
 
             $this->connection = Connection::GetInstance();

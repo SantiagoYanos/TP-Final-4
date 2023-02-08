@@ -183,16 +183,18 @@ class OwnerController
         }
     }
 
-    function ViewReservationsOwner($state = null, $alert = null)
+    function ViewReservationsOwner($state = null, $rejected = false, $canceled = false, $alert = null)
     {
         try {
             $reservationDAO = new ReservationDAO();
 
-            if ($state && $state != "*") {
-                $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "owner", $state);
-            } else {
-                $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "owner");
-            }
+            $state = $state && $state == "*" ? null : $state;
+
+            $reservations = $reservationDAO->GetByGuardianOrOwner($_SESSION["id"], "owner", $state, $rejected, $canceled);
+
+            $rejectedCheck = $rejected ? "checked" : "";
+
+            $canceledCheck = $canceled ? "checked" : "";
 
             require_once VIEWS_PATH . "owner_reservationsList.php";
         } catch (Exception $e) {

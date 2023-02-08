@@ -203,11 +203,13 @@ class ReservationController
 
             $reservation = $reservationDAO->getById($reservation_id);
 
-            ////Mandar Cupon////
+            if (!$reservation) {
+                throw new Exception("Reservation not found");
+            }
+
             $owner_DAO = new OwnerDAO();
             $user = new User();
             $user = $owner_DAO->GetById($reservation->getOwner_id());
-
 
             $payment = new PaymentController();
             $payment->SendEmailCoupon($user->getEmail(), $reservation_id);
