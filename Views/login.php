@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="..\Views\css\utils.css">
     <link rel="stylesheet" href="../Views/css/login.css">
+
+    <script type="text/javascript" src="../Views/js/alertMessage.js"></script>
+
     <title>Login</title>
 </head>
 
@@ -37,6 +40,10 @@
         <p>¿Aún no tiene una cuenta? <a href=<?php echo FRONT_ROOT . "Auth/ShowChooseSide" ?>>Regístrese aquí</a></p>
 
     </div>
+
+    <script>
+        alertMessage("<?php echo $alert; ?>")
+    </script>
 
 
 </body>

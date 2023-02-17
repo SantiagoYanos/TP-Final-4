@@ -17,6 +17,19 @@ use Models\Owner as Owner;
 class AuthController
 {
 
+    function __construct()
+    {
+        session_start();
+
+        if (isset($_SESSION["email"])) {
+            if ($_SESSION["type"] == "owner") {
+                return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+            } else {
+                return header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+            }
+        }
+    }
+
     public function ShowChooseSide()
     {
         require_once(VIEWS_PATH . "ChooseSide.php");
@@ -32,7 +45,7 @@ class AuthController
         return require_once(VIEWS_PATH . "register_guardian.php");
     }
 
-    public function ShowLogin()
+    public function ShowLogin($alert = null)
     {
         return require_once(VIEWS_PATH . "login.php");
     }
@@ -41,9 +54,6 @@ class AuthController
     {
         header("location: " . FRONT_ROOT . "Auth/ShowLogin");
     }
-
-
-
 
     public function RegisterOwner($name, $last_name, $adress, $phone, $email, $password, $birth_date, $dni)
     {
@@ -61,6 +71,10 @@ class AuthController
             $userArray["password"] = $password;
             $userArray["birth_date"] = $birth_date;
 
+            if ($userArray["birth_date"] > date("Y-m-d", time())) {
+                throw new Exception("Can't set a future date as birth date");
+            }
+
             $newUser = $userDAO->LoadData($userArray);
 
             /////
@@ -77,8 +91,9 @@ class AuthController
 
             return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
         } catch (Exception $ex) {
+            // echo "ERROR: " . $ex->getMessage();
 
-            header("location: " . FRONT_ROOT . "Auth/ShowRegisterOwner");
+            echo get_class($ex);
         }
     }
 
@@ -131,11 +146,7 @@ class AuthController
 
             $detectedUser = $userDAO->GetByEmail($email);
 
-            if (!$detectedUser) {
-                return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-            }
-
-            if ($detectedUser->getPassword() == $password) {
+            if ($detectedUser && $detectedUser->getPassword() == $password) {
 
                 $typeDetected = $userDAO->getTypeById($detectedUser->getId());
 
@@ -155,9 +166,9 @@ class AuthController
                 }
             }
 
-            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . 'Auth/ShowLogin?alert=Email or Password incorrect');
         } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $ex->getMessage());
         }
     }
 

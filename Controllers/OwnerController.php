@@ -17,12 +17,15 @@ use Models\Owner as Owner;
 use Models\Reservation;
 use \Exception as Exception;
 
+use GuardianNotFoundException as GuardianNotFoundException;
+
 class OwnerController
 {
     function __construct()
     {
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
+        require_once(ROOT . "/Exceptions/GuardianNotFoundException.php");
 
         if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
@@ -150,7 +153,7 @@ class OwnerController
 
             $id = decrypt($id);
 
-            $id ? null : throw new Exception("Guardian not found");
+            $id ? null : throw new GuardianNotFoundException();
 
             $guardian = $guardianDAO->GetById($id);
             $PetList = $PetDAO->GetPetsByOwner($_SESSION["id"]);
@@ -178,8 +181,10 @@ class OwnerController
             } else {
                 header("location: " . FRONT_ROOT . "Owner/SearchGuardian");
             }
+        } catch (GuardianNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 

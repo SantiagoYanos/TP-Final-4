@@ -15,7 +15,7 @@
 <body>
     <div class="center">
         <h1>Owner Register</h1>
-        <h2>Add your info: </h2><br>
+        <h2 style="margin-top:10px">Add your info: </h2><br>
 
         <form action="<?php echo FRONT_ROOT . "Auth/RegisterOwner" ?>" method="post">
             <div class="txt_field">

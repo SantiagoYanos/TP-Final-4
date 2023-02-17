@@ -12,6 +12,8 @@ use SQLDAO\ReservationDAO;
 use Models\User as User;
 use Models\Guardian as Guardian;
 
+use GuardianNotFoundException as GuardianNotFoundException;
+
 use \Exception as Exception;
 
 class GuardianController
@@ -20,6 +22,7 @@ class GuardianController
     {
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
+        require_once(ROOT . "/Excpetions/GuardianNotFoundException.php");
 
         if ($_SESSION["type"] == "owner") {
             header("location: " . FRONT_ROOT . "Owner/HomeOwner");
@@ -43,9 +46,11 @@ class GuardianController
             //Guardar la cantidad de reviews para poder mostrarla.
 
             require_once VIEWS_PATH . "home_guardian.php";
+        } catch (GuardianNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
             //header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-            var_dump($e);
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 

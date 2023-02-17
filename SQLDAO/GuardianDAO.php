@@ -9,6 +9,7 @@ use SQLDAO\Connection as Connection;
 use SQLDAO\IModels as IModels;
 use SQLDAO\UserDAO as UserDAO;
 use SQLDAO\ReviewDAO as ReviewDAO;
+use GuardianNotFoundException;
 
 class GuardianDAO implements IModels
 {
@@ -141,7 +142,7 @@ class GuardianDAO implements IModels
             $resultSet = $this->connection->Execute($query, $parameters);
 
             if (!$resultSet[0]) {
-                return null;
+                throw new GuardianNotFoundException();
             }
 
             $userDAO = new UserDAO();

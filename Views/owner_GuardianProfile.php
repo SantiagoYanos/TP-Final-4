@@ -218,12 +218,6 @@
 
         </form>
 
-        <!-- AlertMessage - HECHO -->
-
-        <script>
-            alertMessage(<?php echo $alert; ?>)
-        </script>
-
         <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
 
 
@@ -233,6 +227,12 @@
             const availableDatesJson = '<?php echo $availableDatesJson ?>'
 
             InitializeAvailableDates(availableDatesJson);
+        </script>
+
+        <!-- AlertMessage - HECHO -->
+
+        <script>
+            alertMessage(<?php echo $alert; ?>)
         </script>
 
 </body>
