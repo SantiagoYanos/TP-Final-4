@@ -9,6 +9,7 @@ use Models\User as User;
 use Models\Owner as Owner;
 use SQLDAO\IModels as IModels;
 use SQLDAO\Connection as Connection;
+use OwnerNotFoundException;
 
 class OwnerDAO implements IModels
 {
@@ -120,7 +121,7 @@ class OwnerDAO implements IModels
             $resultSet = $this->connection->Execute($query, $parameters);
 
             if (!$resultSet[0]) {
-                return null;
+                throw new OwnerNotFoundException();
             }
 
             $userDAO = new UserDAO();

@@ -317,7 +317,7 @@ class ReservationDAO implements IModels
 
         $resultSet = $this->connection->Execute($query, $parameters);
 
-        if (!$resultSet[0]) {
+        if (!$resultSet || !$resultSet[0]) {
             return [];
         }
 

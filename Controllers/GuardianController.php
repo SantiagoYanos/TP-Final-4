@@ -6,13 +6,14 @@ namespace Controllers;
 //use DAO\OwnerDAO as OwnerDAO;
 
 use SQLDAO\ReviewDAO as ReviewDAO;
-use  SQLDAO\GuardianDAO as GuardianDAO;
+use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 use SQLDAO\ReservationDAO;
 use Models\User as User;
 use Models\Guardian as Guardian;
 
-use GuardianNotFoundException as GuardianNotFoundException;
+use GuardianNotFoundException;
+use OwnerNotFoundException;
 
 use \Exception as Exception;
 
@@ -22,7 +23,8 @@ class GuardianController
     {
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
-        require_once(ROOT . "/Excpetions/GuardianNotFoundException.php");
+        require_once(ROOT . "/Exceptions/GuardianNotFoundException.php");
+        require_once(ROOT . "/Exceptions/OwnerNotFoundException.php");
 
         if ($_SESSION["type"] == "owner") {
             header("location: " . FRONT_ROOT . "Owner/HomeOwner");
@@ -76,7 +78,7 @@ class GuardianController
 
             header("location: " . FRONT_ROOT . 'Guardian/HomeGuardian?alert=' . "Available dates updated succesfully!");
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -88,8 +90,10 @@ class GuardianController
             $user = $user->GetByid($_SESSION["id"]);
 
             require_once VIEWS_PATH . "edit_guardian.php";
+        } catch (GuardianNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -97,6 +101,21 @@ class GuardianController
     {
         try {
             $guardianDAO = new GuardianDAO();
+
+            // Chequear si la fecha de nacimiento es del futúro 
+            if ($birth_date > date("Y-m-d", time())) {
+                return header("location: " . FRONT_ROOT . "Guardian/ShowEdit?alert=" . "Can't set a future date as birth date");
+            }
+
+            //Si los valores preferidos son los permitidos
+            if (!is_numeric($preferred_size) || !is_numeric($preferred_size_cat) || ($preferred_size > 3 || $preferred_size_cat > 3) || ($preferred_size_cat < 1 || $preferred_size < 1)) {
+                return header("location: " . FRONT_ROOT . "Guardian/ShowEdit?alert=" . "Invalid preferred size selected");
+            }
+
+            //Chequear si el precio es positivo
+            if (!is_numeric($price) || $price < 0) {
+                return header("location: " . FRONT_ROOT . "Guardian/ShowEdit?alert=" . "Can't set a negative price");
+            }
 
             $user = new User();
 
@@ -127,7 +146,7 @@ class GuardianController
 
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -148,7 +167,7 @@ class GuardianController
 
             require_once VIEWS_PATH . "guardian_reservationsList.php";
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -160,7 +179,7 @@ class GuardianController
 
             $id = decrypt($id);
 
-            $id ? null : throw new Exception("Owner not found");
+            $id ? null : throw new OwnerNotFoundException();
 
             $owner = $ownerDAO->GetById($id);
 
@@ -169,8 +188,10 @@ class GuardianController
             } else {
                 header("location: " . FRONT_ROOT . "Guardian/ViewReservations");
             }
+        } catch (OwnerNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 }
