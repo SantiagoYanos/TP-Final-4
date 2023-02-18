@@ -13,6 +13,9 @@ use SQLDAO\GuardianDAO as GuardianDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
 use Controllers\PaymentController as PaymentController;
 use DAO\UserDAO as UserDAO;
+use PetNotFoundException;
+use GuardianNotFoundException;
+use ReservationNotFoundException;
 
 class ReservationController
 {
@@ -21,6 +24,9 @@ class ReservationController
     {
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
+        require_once(ROOT . "/Exceptions/PetNotFoundException.php");
+        require_once(ROOT . "/Exceptions/GuardianNotFoundException.php");
+        require_once(ROOT . "/Exceptions/ReservationNotFoundException.php");
     }
 
     /*public function SeeProfile($guardian_id){
@@ -39,6 +45,7 @@ class ReservationController
         if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
         }
+
         $flag = 0;
 
         if ($pets_ids == []) {
@@ -57,12 +64,12 @@ class ReservationController
 
             $reservationList = $reservationDAO->GetAllByDates($guardian_id, $reservation_dates_array);
 
-            //Desencriptar las idis de pets...
+            //Desencriptar las ids de pets...
 
             $pets_ids = array_map(function ($petId) {
                 $decryptedPet = decrypt($petId);
 
-                $decryptedPet ? null : throw new Exception("Pet not found");
+                $decryptedPet ? null : throw new PetNotFoundException();
 
                 return $decryptedPet;
             }, $pets_ids);
@@ -87,7 +94,7 @@ class ReservationController
 
             $guardian_id = decrypt($guardian_id);
 
-            $guardian_id ? null : throw new Exception("Guardian not found");
+            $guardian_id ? null : throw new GuardianNotFoundException();
 
             $guardian_user = $guardianDAO->GetById($guardian_id);
 
@@ -98,7 +105,6 @@ class ReservationController
 
             $guardianPetSize = $petSizesEnum[$guardian_user->getType_Data()->getPreferred_size()];
             $guardianPetSizeCat = $petSizesEnum[$guardian_user->getType_Data()->getPreferred_size_Cat()];
-
 
             // if ($guardianPetSizeCat == "big") {
             //     $guardianPetSizeCat = 1;
@@ -183,8 +189,12 @@ class ReservationController
 
                     break;
             }
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        } catch (PetNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (GuardianNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -199,13 +209,9 @@ class ReservationController
 
             $reservation_id = decrypt($reservation_id);
 
-            $reservation_id ? null : throw new Exception("Reservation not found");
+            $reservation_id ? null : throw new ReservationNotFoundException();
 
             $reservation = $reservationDAO->getById($reservation_id);
-
-            if (!$reservation) {
-                throw new Exception("Reservation not found");
-            }
 
             $owner_DAO = new OwnerDAO();
             $user = new User();
@@ -241,8 +247,10 @@ class ReservationController
 
                 header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation accepted"');
             }
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        } catch (ReservationNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -258,21 +266,18 @@ class ReservationController
 
             $reservation_id = decrypt($reservation_id);
 
-            $reservation_id ? null : throw new Exception("Reservation not found");
-
+            $reservation_id ? null : throw new ReservationNotFoundException();
 
             $reservation = $reservationDAO->getById($reservation_id);
-
-            if (!$reservation) {
-                throw new Exception("Reservation not found");
-            }
 
             if ($reservation->getState() == "Pending") {
                 $reservationDAO->updateState($reservation->getId(), "Rejected");
                 header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&alert="Reservation rejected"');
             }
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        } catch (ReservationNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -288,14 +293,9 @@ class ReservationController
 
             $reservation_id = decrypt($reservation_id);
 
-            $reservation_id ? null : throw new Exception("Reservation not found");
-
+            $reservation_id ? null : throw new ReservationNotFoundException();
 
             $reservation = $reservationDAO->getById($reservation_id);
-
-            if (!$reservation) {
-                throw new Exception("Reservation not found");
-            }
 
             $state = $reservation->getState();
 
@@ -303,8 +303,10 @@ class ReservationController
                 $reservationDAO->updateState($reservation_id, "Canceled");
                 header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&alert="Reservation canceled"');
             }
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        } catch (ReservationNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 

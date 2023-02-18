@@ -12,6 +12,8 @@ use SQLDAO\IModels as IModels;
 use SQLDAO\UserDAO as UserDAO;
 use SQLDAO\PetDAO as PetDAO;
 
+use ReservationNotFoundException;
+
 class ReservationDAO implements IModels
 {
     private $connection;
@@ -201,7 +203,7 @@ class ReservationDAO implements IModels
             $resultSet = $this->connection->Execute($queryReservation, $parameters);
 
             if (!$resultSet[0]) {
-                return null;
+                throw new ReservationNotFoundException();
             }
 
             $getReservation = $this->LoadData($resultSet[0]);
