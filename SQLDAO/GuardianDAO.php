@@ -306,7 +306,11 @@ class GuardianDAO implements IModels
 
         $resultSet = $this->connection->Execute($query, $parameters);
 
-        return $resultSet[0];
+        if (!$resultSet || !$resultSet[0] || !$resultSet[0]["user_id"]) {
+            return null;
+        }
+
+        return $resultSet[0]["user_id"];
     }
 
     public function LoadData($resultSet, $available_dates)

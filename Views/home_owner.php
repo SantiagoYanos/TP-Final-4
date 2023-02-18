@@ -100,6 +100,11 @@
         <button class="btn btn-dark" type="submit" onclick="alertMessage('Goodbye!')">Logout</button>
 
     </form>
+
+    <script>
+        alertMessage("<?php echo $alert; ?>")
+    </script>
+
 </body>
 
 </html>

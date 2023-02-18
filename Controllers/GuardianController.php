@@ -82,7 +82,7 @@ class GuardianController
         }
     }
 
-    public function ShowEdit()
+    public function ShowEdit($alert = null)
     {
         try {
             $user = new GuardianDAO();
@@ -101,6 +101,13 @@ class GuardianController
     {
         try {
             $guardianDAO = new GuardianDAO();
+
+            //Chequear si ya existe un usuario con ese CUIL.
+            $userFound = $guardianDAO->CUILExists($cuil);
+
+            if ($userFound && $userFound != $_SESSION["id"]) {
+                return header("location: " . FRONT_ROOT . "Guardian/ShowEdit?alert=" . "CUIL is already in use");
+            }
 
             // Chequear si la fecha de nacimiento es del futúro 
             if ($birth_date > date("Y-m-d", time())) {
@@ -144,7 +151,7 @@ class GuardianController
 
             $guardianDAO->Edit($user, $guardian);
 
-            header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
+            header("location: " . FRONT_ROOT . "Guardian/HomeGuardian?alert=Profile edited succesfully");
         } catch (Exception $e) {
             return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }

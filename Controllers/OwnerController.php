@@ -17,7 +17,8 @@ use Models\Owner as Owner;
 use Models\Reservation;
 use \Exception as Exception;
 
-use GuardianNotFoundException as GuardianNotFoundException;
+use GuardianNotFoundException;
+use OwnerNotFoundException;
 
 class OwnerController
 {
@@ -26,6 +27,7 @@ class OwnerController
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
         require_once(ROOT . "/Exceptions/GuardianNotFoundException.php");
+        require_once(ROOT . "/Exceptions/OwnerNotFoundException.php");
 
         if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
@@ -40,12 +42,14 @@ class OwnerController
             $user = $owner_DAO->GetById($_SESSION["id"]);
 
             require_once VIEWS_PATH . "home_owner.php";
+        } catch (OwnerNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
-    public function ShowEdit()
+    public function ShowEdit($alert = null)
     {
         try {
             $user = new OwnerDAO();
@@ -53,8 +57,10 @@ class OwnerController
             $user = $user->GetByid($_SESSION["id"]);
 
             require_once VIEWS_PATH . "edit_owner.php";
+        } catch (OwnerNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -62,6 +68,18 @@ class OwnerController
     {
         try {
             $ownerDAO = new OwnerDAO();
+
+            //Chequear si ya existe un usuario con ese dni.
+            $userFound = $ownerDAO->DNIExists($dni);
+
+            if ($userFound && $userFound != $_SESSION["id"]) {
+                return header("location: " . FRONT_ROOT . "Owner/ShowEdit?alert=" . "DNI is already in use");
+            }
+
+            // Chequear si la fecha de nacimiento es del futúro 
+            if ($birth_date > date("Y-m-d", time())) {
+                return header("location: " . FRONT_ROOT . "Owner/ShowEdit?alert=" . "Can't set a future date as birth date");
+            }
 
             $user = new User();
 
@@ -82,12 +100,11 @@ class OwnerController
 
             $owner->setDni($dni);
 
-
             $ownerDAO->Edit($user, $owner);
 
-            header("location: " . FRONT_ROOT . "Owner/HomeOwner");
+            header("location: " . FRONT_ROOT . "Owner/HomeOwner?alert=Profile edited succesfully!");
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -139,8 +156,7 @@ class OwnerController
 
             require_once VIEWS_PATH . "guardianList.php";
         } catch (Exception $e) {
-
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -203,7 +219,7 @@ class OwnerController
 
             require_once VIEWS_PATH . "owner_reservationsList.php";
         } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 }
