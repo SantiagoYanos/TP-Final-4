@@ -35,12 +35,12 @@ class AuthController
         require_once(VIEWS_PATH . "ChooseSide.php");
     }
 
-    public function ShowRegisterOwner()
+    public function ShowRegisterOwner($alert = null)
     {
         return require_once(VIEWS_PATH . "register_owner.php");
     }
 
-    public function ShowRegisterGuardian()
+    public function ShowRegisterGuardian($alert = null)
     {
         return require_once(VIEWS_PATH . "register_guardian.php");
     }
@@ -59,7 +59,28 @@ class AuthController
     {
         try {
 
+            // Creación del User
             $userDAO = new UserDAO();
+            $ownerDAO = new OwnerDAO();
+
+            //Chequear si ya existe un usuario con ese email.
+            $userFound = $userDAO->GetByEmail($email);
+
+            if ($userFound) {
+                return header("location: " . FRONT_ROOT . "Auth/ShowRegisterOwner?alert=" . "Email is already in use");
+            }
+
+            //Chequear si ya existe un usuario con ese dni.
+            $userFound = $ownerDAO->DNIExists($dni);
+
+            if ($userFound) {
+                return header("location: " . FRONT_ROOT . "Auth/ShowRegisterOwner?alert=" . "DNI is already in use");
+            }
+
+            // Chequear si la fecha de nacimiento es del futúro 
+            if ($birth_date > date("Y-m-d", time())) {
+                return header("location: " . FRONT_ROOT . "Auth/ShowRegisterOwner?alert=" . "Can't set a future date as birth date");
+            }
 
             $userArray = array();
             $userArray["user_id"] = 0;
@@ -71,14 +92,9 @@ class AuthController
             $userArray["password"] = $password;
             $userArray["birth_date"] = $birth_date;
 
-            if ($userArray["birth_date"] > date("Y-m-d", time())) {
-                throw new Exception("Can't set a future date as birth date");
-            }
-
             $newUser = $userDAO->LoadData($userArray);
 
-            /////
-
+            // Creación del Owner
             $ownerDAO = new OwnerDAO();
 
             $ownerArray = array();
@@ -89,11 +105,9 @@ class AuthController
 
             $ownerDAO->Add($newUser, $newOwner);
 
-            return header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-        } catch (Exception $ex) {
-            // echo "ERROR: " . $ex->getMessage();
-
-            echo get_class($ex);
+            return header("location: " . FRONT_ROOT . "Auth/ShowLogin?alert=Success! Your account has been created.");
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -101,7 +115,34 @@ class AuthController
     {
 
         try {
+
             $userDAO = new UserDAO();
+
+            $guardianDAO = new GuardianDAO();
+
+            //Chequear si ya existe un usuario con ese email.
+            $userFound = $userDAO->GetByEmail($email);
+
+            if ($userFound) {
+                return header("location: " . FRONT_ROOT . "Auth/ShowRegisterGuardian?alert=" . "Email is already in use");
+            }
+
+            //Chequear si ya existe un usuario con ese CUIL.
+            $userFound = $guardianDAO->CUILExists($cuil);
+
+            if ($userFound) {
+                return header("location: " . FRONT_ROOT . "Auth/ShowRegisterGuardian?alert=" . "CUIL is already in use");
+            }
+
+            // Chequear si la fecha de nacimiento es del futúro 
+            if ($birth_date > date("Y-m-d", time())) {
+                return header("location: " . FRONT_ROOT . "Auth/ShowRegisterGuardian?alert=" . "Can't set a future date as birth date");
+            }
+
+            //Si los valores preferidos son los permitidos
+            if (!is_numeric($preferred_size) || !is_numeric($preferred_size_cat) || ($preferred_size > 3 || $preferred_size_cat > 3) || ($preferred_size_cat < 1 || $preferred_size < 1)) {
+                return header("location: " . FRONT_ROOT . "Auth/ShowRegisterGuardian?alert=" . "Invalid preferred size selected");
+            }
 
             $userArray = array();
             $userArray["user_id"] = 0;
@@ -117,10 +158,7 @@ class AuthController
 
             ///////
 
-            $guardianDAO = new GuardianDAO();
-
             $guardianArray = array();
-
 
             $guardianArray["cuil"] = $cuil;
             $guardianArray["preferred_size_dog"] = $preferred_size;
@@ -133,9 +171,9 @@ class AuthController
 
             $guardianDAO->Add($newUser, $newGuardian);
 
-            return require_once(VIEWS_PATH . "login.php");
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowRegisterGuardian");
+            return header("location: " . FRONT_ROOT . "Auth/ShowLogin?alert=Success! Your account has been created.");
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 

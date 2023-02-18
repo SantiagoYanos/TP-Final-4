@@ -296,6 +296,19 @@ class GuardianDAO implements IModels
         }
     }
 
+    public function CUILExists($cuil)
+    {
+        $query = "SELECT user_id FROM " . $this->tableName .  " WHERE cuil=:cuil";
+
+        $parameters["cuil"] = $cuil;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query, $parameters);
+
+        return $resultSet[0];
+    }
+
     public function LoadData($resultSet, $available_dates)
     {
         $GuardianSQL = new Guardian();

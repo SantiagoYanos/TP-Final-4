@@ -15,7 +15,7 @@
 <body>
     <div class="center">
         <h1>Guardian Register</h1>
-        <h2>Add your info: </h2><br>
+        <h2 style="padding-top: 20px;">Add your info: </h2>
 
         <form action="<?php echo FRONT_ROOT . "Auth/RegisterGuardian" ?>" method="post">
             <div class="txt_field">
@@ -56,6 +56,8 @@
                 </select></br>
             </div>
 
+            </br>
+
             <div>
                 <label for="preferred_size_cat">Cat Size Preference: </label>
                 <select name="preferred_size_cat" id="preferred_size_cat" required>
@@ -73,11 +75,16 @@
             <!--<input type="checkbox" name="terms_conditions" value="terms_conditions" required> </input>-->
             <!--<a href="./images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
 
-            <button style="margin-bottom:15px" type="submit" onclick="alertMessage('Success! Your account has been created.')">Register</button>
+            <button style="margin-bottom:15px" type="submit">Register</button>
 
         </form>
 
     </div>
+
+    <script>
+        alertMessage("<?php echo $alert; ?>")
+    </script>
+
 </body>
 
 </html>

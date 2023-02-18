@@ -37,10 +37,6 @@ class OwnerDAO implements IModels
 
             $user = $userDAO->GetByEmail($UserSQL->getEmail());
 
-            if (!$user) {
-                return null;
-            }
-
             $queryOwner = "INSERT INTO " . $this->tableName . " (user_id, dni) VALUES (:user_id, :dni);";
 
             $parametersOwner["dni"] = $OwnerSQL->getDni();
@@ -48,7 +44,7 @@ class OwnerDAO implements IModels
 
             $this->connection->ExecuteNonQuery($queryOwner, $parametersOwner);
         } catch (Exception $e) {
-            throw $e;
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -139,6 +135,19 @@ class OwnerDAO implements IModels
         } catch (Exception $ex) {
             throw $ex;
         }
+    }
+
+    public function DNIExists($dni)
+    {
+        $query = "SELECT user_id FROM " . $this->tableName .  " WHERE dni=:dni";
+
+        $parameters["dni"] = $dni;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query, $parameters);
+
+        return $resultSet[0];
     }
 
     public function LoadData($resultSet)

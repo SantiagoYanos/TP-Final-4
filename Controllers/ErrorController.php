@@ -4,9 +4,10 @@ namespace Controllers;
 
 class ErrorController
 {
+
     function __construct()
     {
-        require_once(ROOT . "/Utils/validateSession.php");
+        session_start();
     }
 
     function ShowError($error)

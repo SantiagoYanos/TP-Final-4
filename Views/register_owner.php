@@ -15,7 +15,7 @@
 <body>
     <div class="center">
         <h1>Owner Register</h1>
-        <h2 style="margin-top:10px">Add your info: </h2><br>
+        <h2 style="padding-top:20px">Add your info: </h2>
 
         <form action="<?php echo FRONT_ROOT . "Auth/RegisterOwner" ?>" method="post">
             <div class="txt_field">
@@ -54,11 +54,16 @@
             <!--<input type="checkbox" name="terms_conditions" value="terms_conditions"></input>-->
             <!--<a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
 
-            <button style="margin-bottom:15px" type="submit" onclick="alertMessage('Success! Your account has been created.')">Register</button>
+            <button style="margin-bottom:15px" type="submit">Register</button>
 
         </form>
 
     </div>
+
+    <script>
+        alertMessage("<?php echo $alert; ?>")
+    </script>
+
 </body>
 
 </html>

@@ -144,3 +144,12 @@ button[type="submit"]:hover{
     background-position: right;
   }
 }
+
+select{
+  margin-left: 5px;
+  font-size: medium;
+}
+
+label{
+  font-weight: bold;
+}
