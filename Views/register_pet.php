@@ -58,11 +58,15 @@
                 </a>
             </div>
 
-            <button class="btn btn-outline-success" type="submit" onclick="alertMessage('Pet added successfully!')">Add Pet</button>
+            <button class="btn btn-outline-success" type="submit">Add Pet</button>
 
         </form>
 
     </div>
+
+    <script>
+        alertMessage("<?php echo $alert; ?>")
+    </script>
 
 </body>
 

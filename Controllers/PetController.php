@@ -5,6 +5,7 @@ namespace Controllers;
 use SQLDAO\PetDAO as PetDAO;
 use Models\Pet as Pet;
 use \Exception as Exception;
+use PetNotFoundException;
 
 
 class PetController
@@ -13,6 +14,7 @@ class PetController
     {
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
+        require_once(ROOT . "/Exceptions/PetNotFoundException.php");
 
         if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
@@ -43,14 +45,24 @@ class PetController
             }
 
             require_once VIEWS_PATH . "view_pets.php";
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
     public function Add($name, $breed, $observation, $pet_size, $type, $file, $file1, $pet_video)
     {
         try {
+
+            //Si los valores preferidos son los permitidos...
+            if (!is_numeric($pet_size) || $pet_size > 3 || $pet_size < 1) {
+                return header("location: " . FRONT_ROOT . "Pet/ShowRegisterPet?alert=" . "Invalid pet size selected");
+            }
+
+            //Si el tipo de mascota es permitido...
+            if (!$type || !($type == "dog" || $type == "cat")) {
+                return header("location: " . FRONT_ROOT . "Pet/ShowRegisterPet?alert=" . "Invalid pet type selected");
+            }
 
             $fileName = $file["name"];
             $tempFileName = $file["tmp_name"];
@@ -102,12 +114,11 @@ class PetController
 
                 $message = "El archivo no corresponde a una imágen";
 
-            return header("location: " . FRONT_ROOT . "Owner/HomeOwner");
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+            return header("location: " . FRONT_ROOT . "Owner/HomeOwner?alert=Pet added successfully!");
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
-
 
     public function deletePet($petId) //Encripted
     {
@@ -115,16 +126,17 @@ class PetController
 
             $petId = decrypt($petId);
 
-            $petId ? null : throw new Exception("Pet not found");
+            $petId ? null : throw new PetNotFoundException();
 
             $petDAO = new PetDAO();
             $petDAO->Remove($petId);
             return header("location: " . FRONT_ROOT . "Pet/PetList");
-        } catch (Exception $ex) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
+        } catch (PetNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
-
 
     public function ShowRegisterPet()
     {
