@@ -47,7 +47,7 @@ class MessageDAO
 
             $this->connection = Connection::GetInstance();
 
-            $resultSet = $this->connection->ExecuteNonQuery($queryMessage, $parametersMessage);
+            $this->connection->ExecuteNonQuery($queryMessage, $parametersMessage);
         } catch (Exception $e) {
             throw $e;
         }

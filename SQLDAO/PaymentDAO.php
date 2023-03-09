@@ -7,6 +7,7 @@ use SQLDAO\IModels as IModels;
 // use SQLDAO\OwnerDAO as OwnerDAO;
 // use SQLDAO\ReservationDAO as ReservationDAO;
 use Models\Payment as Payment;
+use PaymentNotFoundException;
 
 class PaymentDAO implements IModels
 {

@@ -34,7 +34,7 @@ class OwnerController
         }
     }
 
-    public function HomeOwner()
+    public function HomeOwner($alert = null)
     {
         try {
             $owner_DAO = new OwnerDAO();

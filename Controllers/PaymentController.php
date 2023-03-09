@@ -14,6 +14,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as MailerException;
 use PHPMailer\PHPMailer\SMTP;
 use FPDF as FPDF;
+use GuardianNotFoundException;
+use Models\Reservation;
+use OwnerNotFoundException;
+use PaymentNotFoundException;
+use ReservationNotFoundException;
 
 class PaymentController
 {
@@ -22,19 +27,158 @@ class PaymentController
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
         require_once(ROOT . "/Utils/fpdf/fpdf.php");
+        require_once(ROOT . "/Exceptions/PaymentNotFoundException.php");
+        require_once(ROOT . "/Exceptions/ReservationNotFoundException.php");
+        require_once(ROOT . "/Exceptions/GuardianNotFoundException.php");
     }
 
-    public function SendEmailPayment($reservationId)
+    public function ShowPayment($reservation_id) //Encripted
     {
-        $reservationId = decrypt($reservationId);
+        try {
+            $paymentDAO = new PaymentDAO();
 
+            $reservation_id = decrypt($reservation_id);
+
+            $reservation_id ? null : throw new ReservationNotFoundException();
+
+            $payment = $paymentDAO->GetByReservationId($reservation_id);
+
+            return require_once(VIEWS_PATH . "show_payment.php");
+        } catch (ReservationNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        }
+    }
+
+    public function ShowMakePayment($reservation_id) //Encripted
+    {
+
+        try {
+            $reservationDAO = new ReservationDAO;
+
+            $reservation_id = decrypt($reservation_id);
+
+            $reservation_id ? null : throw new ReservationNotFoundException();
+
+            $reservation = $reservationDAO->getById($reservation_id);
+
+            if ($reservation->getOwner_id() != $_SESSION["id"]) {
+                header("location: " . FRONT_ROOT . "/Owner/ViewReservationsOwner");
+            }
+
+            $encryptedPrice = encrypt($reservation->getPrice() / 2);
+            $encryptedReservation_id = encrypt($reservation->getId());
+            $encryptedOwner_id = encrypt($reservation->getOwner_id());
+            $encryptedGuardian_id = encrypt($reservation->getGuardian_id());
+
+            return require_once(VIEWS_PATH . "ShowMakePayment.php");
+        } catch (ReservationNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        }
+    }
+
+    public function ShowPaymentCupon($reservation_id) //Encripted
+    {
+
+        $reservationDAO = new ReservationDAO;
+        $guardianDAO = new GuardianDAO;
+        $ownerDAO = new OwnerDAO;
+
+        try {
+
+            $reservation_id = decrypt($reservation_id);
+
+            $reservation_id ? null : throw new ReservationNotFoundException();
+
+            $reservation = $reservationDAO->getById($reservation_id);
+
+            $guardian = $guardianDAO->getById($reservation->getGuardian_id());
+
+            $owner = $ownerDAO->getById($reservation->getOwner_id());
+
+            $coupon["guardianName"] = $guardian->getName() . " " . $guardian->getLast_name();
+            $coupon["ownerName"] = $owner->getName() . " " . $owner->getLast_name();
+            $coupon["guardianCUIL"] = $guardian->getType_data()->getCuil();
+            $coupon["ownerDNI"] = $owner->getType_data()->getDni();
+            $coupon["import"] = $reservation->getPrice() / 2;
+            $coupon["daysAmount"] = count($reservation->getDates());
+            $coupon["petsAmount"] = count($reservation->getPets());
+
+            return require_once(VIEWS_PATH . "paymentcupon.php");
+        } catch (ReservationNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (OwnerNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (GuardianNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        }
+    }
+
+    public function MakePayment($price, $reservation_id, $owner_id, $guardian_id) //Encripted
+    {
         try {
 
             $paymentDAO = new PaymentDAO();
 
-            $reservationId ? null : throw new Exception("Reservation not found");
+            //Crear el pago (agregarlo)
+
+            $decryptedPrice = decrypt($price);
+            $decryptedReservation_id = decrypt($reservation_id);
+            $decryptedOwner_id = decrypt($owner_id);
+            $decryptedGuardian_id = decrypt($guardian_id);
+
+            if (!($decryptedPrice && $decryptedReservation_id && $decryptedOwner_id && $decryptedGuardian_id)) {
+                throw new Exception("Payment arguments error");
+            }
+
+            $paymentExist = $paymentDAO->GetByReservationId($decryptedReservation_id);
+
+            if ($paymentExist) {
+                header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&alert="This reservation has been already paid"');
+            }
+
+            $paymentDAO = new PaymentDAO;
+            $payment = new Payment;
+            $payment->setAmount($decryptedPrice);
+            $payment->setReservation_id($decryptedReservation_id);
+            $payment->setOwner_id($decryptedOwner_id);
+            $payment->setGuardian_id($decryptedGuardian_id);
+            $payment->setPayment_number(random_int(0, 999999999));
+
+            $paymentDAO->Add($payment);
+
+            $reservationDAO = new ReservationDAO;
+
+            $reservationDAO->updateState($decryptedReservation_id, "Paid");
+
+            header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id=$reservation_id");
+        } catch (PaymentNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (Exception $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        }
+    }
+
+    public function SendEmailPayment($reservationId)
+    {
+        try {
+
+            $paymentDAO = new PaymentDAO();
+
+            $reservationId = decrypt($reservationId);
+
+            $reservationId ? null : throw new ReservationNotFoundException();
 
             $payment = $paymentDAO->GetByReservationId($reservationId);
+
+            if (!$payment) {
+                throw new PaymentNotFoundException();
+            }
 
             $ownerDAO = new OwnerDAO();
             $owner = $ownerDAO->GetById($_SESSION["id"]);
@@ -103,8 +247,14 @@ class PaymentController
             $mail->send(); //Se envía el Mail
 
             return header("location: " . FRONT_ROOT . "/Owner/ViewReservationsOwner");
+        } catch (ReservationNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (PaymentNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (OwnerNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
         }
     }
 
@@ -188,129 +338,15 @@ class PaymentController
             $mail->addAttachment(ROOT . '/PHPMailer/PHPMailer/paymentCoupon.pdf'); //Se agrega el PDF
 
             //$mail->send(); //Se envía el Mail
+
+        } catch (ReservationNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (GuardianNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
+        } catch (OwnerNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-    }
-
-    public function ShowPayment($reservation_id) //Encripted
-    {
-        try {
-            $paymentDAO = new PaymentDAO();
-
-            $reservation_id = decrypt($reservation_id);
-
-            $reservation_id ? null : throw new Exception("Decrypt Error");
-
-            $payment = $paymentDAO->GetByReservationId($reservation_id);
-
-            return require_once(VIEWS_PATH . "show_payment.php");
-        } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-        }
-    }
-
-    public function ShowMakePayment($reservation_id) //Encripted
-    {
-
-        try {
-            $reservationDAO = new ReservationDAO;
-
-            $reservation_id = decrypt($reservation_id);
-
-            $reservation_id ? null : throw new Exception("Decrypt Error");
-
-            $reservation = $reservationDAO->getById($reservation_id);
-
-            if ($reservation->getOwner_id() != $_SESSION["id"]) {
-                header("location: " . FRONT_ROOT . "/Owner/ViewReservationsOwner");
-            }
-
-            $encryptedPrice = encrypt($reservation->getPrice() / 2);
-            $encryptedReservation_id = encrypt($reservation->getId());
-            $encryptedOwner_id = encrypt($reservation->getOwner_id());
-            $encryptedGuardian_id = encrypt($reservation->getGuardian_id());
-
-            return require_once(VIEWS_PATH . "ShowMakePayment.php");
-        } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-        }
-    }
-
-    public function MakePayment($price, $reservation_id, $owner_id, $guardian_id) //Encripted
-    {
-        try {
-
-            $paymentDAO = new PaymentDAO();
-
-            //Crear el pago (agregarlo)
-
-            $decryptedPrice = decrypt($price);
-            $decryptedReservation_id = decrypt($reservation_id);
-            $decryptedOwner_id = decrypt($owner_id);
-            $decryptedGuardian_id = decrypt($guardian_id);
-
-            if (!($decryptedPrice && $decryptedReservation_id && $decryptedOwner_id && $decryptedGuardian_id)) {
-                throw new Exception("Decrypt Error");
-            }
-
-            $paymentExist = $paymentDAO->GetByReservationId($decryptedReservation_id);
-
-            if ($paymentExist) {
-                header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&alert="This reservation has been already paid"');
-            }
-
-            $paymentDAO = new PaymentDAO;
-            $payment = new Payment;
-            $payment->setAmount($decryptedPrice);
-            $payment->setReservation_id($decryptedReservation_id);
-            $payment->setOwner_id($decryptedOwner_id);
-            $payment->setGuardian_id($decryptedGuardian_id);
-            $payment->setPayment_number(random_int(0, 999999999));
-
-            $paymentDAO->Add($payment);
-
-            $reservationDAO = new ReservationDAO;
-
-            $reservationDAO->updateState($decryptedReservation_id, "Paid");
-
-            header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id=$reservation_id");
-        } catch (Exception $e) {
-            header("location: " . FRONT_ROOT . "Auth/ShowLogin");
-        }
-    }
-
-
-    public function ShowPaymentCupon($reservation_id) //Encripted
-    {
-
-        $reservationDAO = new ReservationDAO;
-        $guardianDAO = new GuardianDAO;
-        $ownerDAO = new OwnerDAO;
-
-        try {
-
-            $reservation_id = decrypt($reservation_id);
-
-            $reservation_id ? null : throw new Exception("Decrypt Error");
-
-            $reservation = $reservationDAO->getById($reservation_id);
-
-            $guardian = $guardianDAO->getById($reservation->getGuardian_id());
-
-            $owner = $ownerDAO->getById($reservation->getOwner_id());
-
-            $coupon["guardianName"] = $guardian->getName() . " " . $guardian->getLast_name();
-            $coupon["ownerName"] = $owner->getName() . " " . $owner->getLast_name();
-            $coupon["guardianCUIL"] = $guardian->getType_data()->getCuil();
-            $coupon["ownerDNI"] = $owner->getType_data()->getDni();
-            $coupon["import"] = $reservation->getPrice() / 2;
-            $coupon["daysAmount"] = count($reservation->getDates());
-            $coupon["petsAmount"] = count($reservation->getPets());
-
-            return require_once(VIEWS_PATH . "paymentcupon.php");
-        } catch (Exception $e) {
-            echo $e->getMessage();
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
         }
     }
 }

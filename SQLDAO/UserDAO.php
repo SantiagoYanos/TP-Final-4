@@ -6,6 +6,7 @@ use \Exception as Exception;
 use SQLDAO\IModels as IModels;
 use Models\User as User;
 use SQLDAO\Connection as Connection;
+use UserNotFoundException;
 
 class UserDAO implements IModels
 {
@@ -47,7 +48,7 @@ class UserDAO implements IModels
             $resultSet = $this->connection->Execute($query, $parameters);
 
             if (!$resultSet[0]) {
-                return null;
+                throw new UserNotFoundException();
             }
 
             $UserSQL = $this->LoadData($resultSet[0]);
@@ -124,7 +125,7 @@ class UserDAO implements IModels
             $resultSet = $this->connection->Execute($query, $parameters);
 
             if (!$resultSet[0]) {
-                return null;
+                throw new UserNotFoundException();
             }
 
             return $resultSet[0];

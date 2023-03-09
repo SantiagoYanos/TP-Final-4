@@ -379,6 +379,67 @@ class ReservationDAO implements IModels
         }
     }
 
+    //Devuelve un array con las Ids de las mascotas que pertenecen a reservas Pendientes (Reserva pedida) o Aceptadas (Reservas aceptadas) por un guardian de ciertas fechas (arrayDates).
+    public function getPetsIdsPendingByDates($guardian_id, $arrayDates)
+    {
+        $dates = '"' . implode('","', $arrayDates) . '"';
+
+        $query = 'SELECT p.pet_id FROM reservations r INNER JOIN reservations_x_dates rd ON r.reservation_id = rd.reservation_id 
+        INNER JOIN reservations_x_pets rp ON r.reservation_id = rp.reservation_id
+        INNER JOIN pets p ON rp.pet_id = p.pet_id
+        WHERE r.active=1 AND rd.date IN (' . $dates . ') AND r.guardian_id=:guardianId
+        AND r.state != "Rejected" AND r.state != "Canceled"
+        GROUP BY p.pet_id;';
+
+        $parameters["guardianId"] = $guardian_id;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query, $parameters);
+
+        if (!$resultSet) {
+            return null;
+        }
+
+        $petsIds = array_map(function ($pet) {
+            return $pet["pet_id"];
+        }, $resultSet);
+
+        return $petsIds;
+    }
+
+    //Retorna las Pets que se encuentran en reservas Aceptadas por el guardian entre las fechas recibidas (arrayDates).
+    public function getPetsReservedByDates($guardian_id, $arrayDates)
+    {
+        $petDAO = new PetDAO();
+
+        $dates = '"' . implode('","', $arrayDates) . '"';
+
+        $query = 'SELECT p.* FROM reservations r INNER JOIN reservations_x_dates rd ON r.reservation_id = rd.reservation_id 
+        INNER JOIN reservations_x_pets rp ON r.reservation_id = rp.reservation_id
+        INNER JOIN pets p ON rp.pet_id = p.pet_id
+        WHERE r.active=1 AND rd.date IN (' . $dates . ') AND r.guardian_id=:guardianId
+        AND (r.state = "Payment pending" || r.state = "Paid")
+        GROUP BY p.pet_id;';
+
+        $parameters["guardianId"] = $guardian_id;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query, $parameters);
+
+        if (!$resultSet) {
+            return null;
+        }
+
+        $reservedPets = array_map(function ($pet) use ($petDAO) {
+
+            return $petDAO->LoadData($pet);
+        }, $resultSet);
+
+        return $reservedPets;
+    }
+
     public function LoadData($resultSet)
     {
         $ReservationSQL = new Reservation();

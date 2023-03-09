@@ -7,6 +7,7 @@ use SQLDAO\UserDAO as UserDAO;
 use Models\User as User;
 use \Exception as Exception;
 use Models\Message as Message;
+use UserNotFoundException;
 
 class ChatController
 {
@@ -14,6 +15,7 @@ class ChatController
     {
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
+        require_once(ROOT . "/Exceptions/UserNotFoundException.php");
 
         /*if ($_SESSION["type"] == "guardian") {
             header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
@@ -74,8 +76,10 @@ class ChatController
             //return require_once(VIEWS_PATH . "PrettyChat.php");
 
             return require_once(VIEWS_PATH . "chatV2.php");
+        } catch (UserNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            echo $e->getMessage();
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 
@@ -89,7 +93,7 @@ class ChatController
 
             $decryptedUserId = decrypt($userId);
 
-            $decryptedUserId ? null : throw new Exception("User not found");
+            $decryptedUserId ? null : throw new UserNotFoundException();
 
             $message->setDescription($description);
             $message->setReceiver($decryptedUserId);
@@ -99,8 +103,10 @@ class ChatController
             $messageDAO->Add($message);
 
             header("location: " . FRONT_ROOT . "Chat/ShowChat" . "?id=" . $userId);
+        } catch (UserNotFoundException $e) {
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
-            echo $e->getMessage();
+            return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         }
     }
 }
