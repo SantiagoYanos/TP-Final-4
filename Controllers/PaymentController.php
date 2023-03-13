@@ -2,11 +2,12 @@
 
 namespace Controllers;
 
+use SQLDAO\UserDAO;
 use SQLDAO\GuardianDAO;
 use SQLDAO\ReservationDAO as ReservationDAO;
 use SQLDAO\PaymentDAO as PaymentDAO;
 use SQLDAO\OwnerDAO as OwnerDAO;
-
+use Models\User;
 use Models\Payment;
 use Exception as Exception;
 use Models\message;
@@ -30,6 +31,7 @@ class PaymentController
         require_once(ROOT . "/Exceptions/PaymentNotFoundException.php");
         require_once(ROOT . "/Exceptions/ReservationNotFoundException.php");
         require_once(ROOT . "/Exceptions/GuardianNotFoundException.php");
+        require_once(ROOT . "/Exceptions/OwnerNotFoundException.php");
     }
 
     public function ShowPayment($reservation_id) //Encripted
@@ -181,8 +183,10 @@ class PaymentController
             }
 
             $ownerDAO = new OwnerDAO();
-            $owner = $ownerDAO->GetById($_SESSION["id"]);
-            $email = $owner->getEmail();
+
+            $userDAO = new UserDAO();
+            $user = $userDAO->GetById($_SESSION["id"]);
+            $email = $user->getEmail();
 
             //----------------------------- CREACION MAIL --------------------------
 
