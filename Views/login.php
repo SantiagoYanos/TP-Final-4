@@ -19,7 +19,6 @@
 
     <div class="top-space"></div>
 
-
     <div class="center">
         <h1>PET HERO</h1>
         <h2>WELCOME</h2>
