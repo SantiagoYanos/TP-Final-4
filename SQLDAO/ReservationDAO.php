@@ -440,6 +440,28 @@ class ReservationDAO implements IModels
         return $reservedPets;
     }
 
+    function hasReservationInCommon($guardian_id, $owner_id)
+    {
+
+        $query = "SELECT count(reservation_id) as 'cantidad' FROM " . $this->tableName . " WHERE guardian_id=:guardian_id AND owner_id=:owner_id AND active=1;";
+
+        $parameters["guardian_id"] = $guardian_id;
+
+        $parameters["owner_id"] = $owner_id;
+
+        $this->connection = Connection::GetInstance();
+
+        $resultSet = $this->connection->Execute($query, $parameters);
+
+        $result = false;
+
+        if ($resultSet && $resultSet[0]["cantidad"] != 0) {
+            $result = true;
+        }
+
+        return $result;
+    }
+
     public function LoadData($resultSet)
     {
         $ReservationSQL = new Reservation();

@@ -95,7 +95,6 @@ class OwnerController
 
             $user->setBirth_date($birth_date);
 
-
             $owner = new Owner();
 
             $owner->setDni($dni);
@@ -166,6 +165,7 @@ class OwnerController
             $guardianDAO = new GuardianDAO();
             $PetDAO = new PetDAO();
             $reviewDAO = new ReviewDAO();
+            $reservationDAO = new ReservationDAO();
 
             $id = decrypt($id);
 
@@ -179,6 +179,8 @@ class OwnerController
             $ratingPercent = (($guardian->getType_Data()->getReputation() * 100) / 5);
 
             $reviewsAmount = $reviewDAO->calculateRating($guardian->getId())["quantity"];
+
+            $reservationInCommon = $reservationDAO->hasReservationInCommon($id, $_SESSION["id"]);
 
             switch ($back) {
                 case "reservationsList":
