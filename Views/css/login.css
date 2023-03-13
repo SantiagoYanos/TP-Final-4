@@ -3,11 +3,28 @@
     background-repeat:no-repeat;
 }*/
 
-body {
-    background-color: #f0f0f0;
-    background-image: url("../images/ducky.jpg");
+
+
+  :root {
+    --gradient: linear-gradient(
+      45deg,
+      #845ec2,
+      #d65db1,
+      #ff6f91,
+      #ff9671,
+      #ffc75f,
+      #f9f871
+    );
+  }
+  body {
+    /*background-color: #83be22;*/
+    /*background-image: url("../images/ducky.jpg");*/
     font-family: Arial, sans-serif;
     background-repeat:no-repeat;
+    background-image: var(--gradient);
+    background-size: 400%;
+    animation: bg-animation 5s infinite alternate;
+    height: 97.1vh;
   }
   
   .center {
@@ -19,6 +36,10 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
 
+  .center form{
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
   h1 {
     font-size: 48px;
     color: #3c3c3c;
@@ -86,7 +107,15 @@ body {
   a:hover {
     color: #0d8bf1;
   }
+  @keyframes bg-animation{
+    0% {
+      background-position: left;
+    }
   
+    100% {
+      background-position: right;
+    }
+  }
   
   
   
