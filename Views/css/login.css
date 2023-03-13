@@ -22,15 +22,15 @@
     font-family: Arial, sans-serif;
     background-repeat:no-repeat;
     background-image: var(--gradient);
-    background-size: 400%;
+    background-size: cover;
     animation: bg-animation 5s infinite alternate;
-    height: 97.1vh;
+    margin: 0;
+    height: 100vh;
   }
   
   .center {
-    
     max-width: 400px;
-    margin: 20px auto;
+    margin: auto;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -115,6 +115,10 @@
     100% {
       background-position: right;
     }
+  }
+
+  .top-space {
+    height: 10%;
   }
   
   

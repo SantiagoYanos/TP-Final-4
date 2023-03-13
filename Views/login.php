@@ -16,6 +16,10 @@
 <a href=<?php echo FRONT_ROOT . "Auth/ShowChooseSide" ?>></a>
 
 <body>
+
+    <div class="top-space"></div>
+
+
     <div class="center">
         <h1>PET HERO</h1>
         <h2>WELCOME</h2>
