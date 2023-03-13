@@ -158,7 +158,7 @@ class PaymentController
 
             $reservationDAO->updateState($decryptedReservation_id, "Paid");
 
-            header("location: " . FRONT_ROOT . "Payment/ShowPayment?reservation_id=$reservation_id");
+            header("location: " . FRONT_ROOT . 'Payment/ShowPayment?reservation_id="' . $reservation_id . '"');
         } catch (PaymentNotFoundException $e) {
             return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {

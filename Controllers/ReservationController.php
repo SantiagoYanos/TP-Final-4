@@ -396,7 +396,7 @@ class ReservationController
 
             if ($state == "Pending" || $state == "Payment pending") {
                 $reservationDAO->updateState($reservation_id, "Canceled");
-                header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&rejected=$canceled=&alert="Reservation canceled"');
+                header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&rejected=&canceled=&alert="Reservation canceled"');
             }
         } catch (ReservationNotFoundException $e) {
             return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
