@@ -1,4 +1,92 @@
-body{
+/*body{
     background-image: url("../images/ducky.jpg");
     background-repeat:no-repeat;
-}
+}*/
+
+body {
+    background-color: #f0f0f0;
+    background-image: url("../images/ducky.jpg");
+    font-family: Arial, sans-serif;
+    background-repeat:no-repeat;
+  }
+  
+  .center {
+    
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 48px;
+    color: #3c3c3c;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #3c3c3c;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+
+  button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #2196f3;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  button:hover {
+    background-color: #0d8bf1;
+  }
+
+  p {
+    font-size: 14px;
+    color: #3c3c3c;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  a {
+    color: #2196f3;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #0d8bf1;
+  }
+  
+  
+  
+  
