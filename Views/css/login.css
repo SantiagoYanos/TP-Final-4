@@ -22,16 +22,18 @@
     font-family: Arial, sans-serif;
     background-repeat:no-repeat;
     background-image: var(--gradient);
-    background-size: 400%;
+    /*background-size: 400%;*/
     animation: bg-animation 5s infinite alternate;
-    height: 97.1vh;
+    height:  100vh ;
+    margin: 0px;
+    background-size: cover;
   }
   
   .center {
     
     max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
+    margin:  auto;
+    padding:  auto;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
