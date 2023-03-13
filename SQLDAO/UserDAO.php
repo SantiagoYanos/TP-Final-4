@@ -52,7 +52,7 @@ class UserDAO implements IModels
             }
 
             $UserSQL = $this->LoadData($resultSet[0]);
-
+                
             return $UserSQL;
         } catch (Exception $e) {
             throw $e;
