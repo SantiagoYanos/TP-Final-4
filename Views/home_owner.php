@@ -94,8 +94,6 @@
         <a href=<?php echo FRONT_ROOT . "Owner/ShowEdit" ?>><button class="btn btn-info float-end btn-outline-dark">Edit</button></a>
     </div>
 
-    <!-- Función alertMessage - HECHO -->
-
     <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
         <button class="btn btn-dark" type="submit" onclick="alertMessage('Goodbye!')">Logout</button>
 

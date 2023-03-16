@@ -46,14 +46,14 @@
         <b>0 Stars</b>
         <b class="float-end">5 Stars</b>
 
-        <!-- Traer y calcular la reputación desde el servidor - HECHO -->
+        <!-- Traer y calcular la reputación desde el servidor -->
 
         <div class="progress mb-3">
             <div class="progress-bar" style="width:<?php echo $ratingPercent ?>%"></div>
         </div>
 
         <b>
-            <!-- Mostrar el porcentaje de reviews a escala de 100% y la cantidad. Ex. 87% (15 Reviews) - HECHO -->
+            <!-- Mostrar el porcentaje de reviews a escala de 100% y la cantidad. Ex. 87% (15 Reviews) -->
             <?php echo "(" . number_format((float)$ratingPercent, 1, ',', '') . "%) " . $reviewsAmount . " Reviews" ?>
         </b>
 
@@ -122,14 +122,11 @@
         </div>
 
         <span>
-            <!-- ID a la vista - HECHO -->
 
             <form action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=POST style="display:inline">
                 <input type="hidden" name="guardianId" value="<?php echo encrypt($guardian->getId()); ?>">
                 <button class="btn btn-warning mt-3">View Reviews</button>
             </form>
-
-            <!-- ID a la vista - HECHO -->
 
             <?php if ($reservationInCommon == true) { ?>
 
@@ -168,8 +165,6 @@
                         <?php
                         $cont = 0;
 
-                        // Chequear ese input // ID a la vista
-
                         foreach ($PetList as $pet) {
                             echo '<input type="checkbox" name="pets_ids[' . $cont . ']" value=' . encrypt($pet->getId()) . " > " . "<b class='ms-2'>" . $pet->getName() . "</b>" . "</option> <br>";
                             $cont++;
@@ -204,8 +199,6 @@
 
                         </section>
 
-                        <!-- Funcion calendario? - HECHO -->
-
                         <script>
                             crearDatepicker("datepicker", null, 'date("Y-m-d")');
                         </script>
@@ -213,8 +206,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- GuardianID a la vista -->
 
             <input type="hidden" name="guardian_id" value="<?php echo encrypt($guardian->getID()); ?>"></input>
 
@@ -224,16 +215,11 @@
 
         <script type="text/javascript" src="../Views/js/datepicker_manager.js"></script>
 
-
-        <!-- Mirar funcion availableDates - HECHO -->
-
         <script>
             const availableDatesJson = '<?php echo $availableDatesJson ?>'
 
             InitializeAvailableDates(availableDatesJson);
         </script>
-
-        <!-- AlertMessage - HECHO -->
 
         <script>
             alertMessage(<?php echo $alert; ?>)

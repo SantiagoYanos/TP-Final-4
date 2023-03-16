@@ -26,8 +26,6 @@
                 </tr>
             </thead>
 
-            <!-- Id a la vista -->
-
             <tbody>
                 <?php foreach ($total as $review) { ?>
                     <tr>
@@ -89,8 +87,6 @@
                 <input type="text" name="comment"></br>
             </div>
 
-            <!-- Se ve la ID -->
-
             <input type="hidden" name="guardianId" value="<?php echo $review->getGuardianId() ?>"></input>
 
 
@@ -103,7 +99,6 @@
 
     <div>
         <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button>Back</button></a>
-        >>>>>>> e5e3a3b699e6ff81423717de7244f8d20331906d
     </div>
 
 </body>

@@ -23,7 +23,8 @@
         <h1>PET HERO</h1>
         <h2>WELCOME</h2>
         <form action="<?php echo FRONT_ROOT . "Auth/Login" ?>" method="post">
-            <!-- formulario  login-->
+
+            <!-- Formulario  login-->
             <div class="control-group">
 
                 <input type="email" name="email" placeholder="Email">

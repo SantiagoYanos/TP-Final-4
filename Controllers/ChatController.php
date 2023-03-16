@@ -16,13 +16,9 @@ class ChatController
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
         require_once(ROOT . "/Exceptions/UserNotFoundException.php");
-
-        /*if ($_SESSION["type"] == "guardian") {
-            header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-        }*/
     }
 
-    public function ShowChat($idReceiver) //Encripted
+    public function ShowChat($idReceiver)
     {
         $messageDAO = new MessageDAO;
         $userDAO = new UserDAO;
@@ -50,30 +46,14 @@ class ChatController
             $encryptedId = encrypt($idReceiver);
 
             if ($_SESSION["type"] == "guardian") {
-                //$backLink = FRONT_ROOT . "Guardian/HomeGuardian";
+
                 $receiverLink = FRONT_ROOT . "Guardian/ViewOwnerProfile";
                 $reservationsLink = FRONT_ROOT . "Guardian/ViewReservations";
             } else {
-                //$backLink = FRONT_ROOT . "Owner/HomeOwner";
+
                 $receiverLink = FRONT_ROOT . "Owner/ViewGuardianProfile";
                 $reservationsLink = FRONT_ROOT . "Owner/ViewReservationsOwner";
             }
-
-            // $sended=$messageDAO->GetByIds($_SESSION["id"],$idReceiver);
-            // $received=$messageDAO->GetByIds($idReceiver,$_SESSION["id"]);
-
-            // $total = array_merge($sended, $received);
-
-            // usort($total, function($a, $b) {
-
-            //     if ($a->getDate() == $b->getDate())
-            //     {
-            //         return 0;
-            //     }
-            //     return $a->getDate() < $b->getDate() ? -1 : 1;
-            // });
-
-            //return require_once(VIEWS_PATH . "PrettyChat.php");
 
             return require_once(VIEWS_PATH . "chatV2.php");
         } catch (UserNotFoundException $e) {
@@ -83,7 +63,7 @@ class ChatController
         }
     }
 
-    public function sendMessage($description, $userId) //Encripted
+    public function sendMessage($description, $userId)
     {
         $messageDAO = new MessageDAO;
 
@@ -98,7 +78,6 @@ class ChatController
             $message->setDescription($description);
             $message->setReceiver($decryptedUserId);
             $message->setSender($_SESSION["id"]);
-            //$message->setDate(date("Y-m-d-H-i-s") );
 
             $messageDAO->Add($message);
 

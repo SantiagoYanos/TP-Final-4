@@ -14,14 +14,10 @@ class ReviewController
     {
         require_once(ROOT . "/Utils/validateSession.php");
         require_once(ROOT . "/Utils/encrypt.php");
-
-        /*if ($_SESSION["type"] == "guardian") {
-            header("location: " . FRONT_ROOT . "Guardian/HomeGuardian");
-        }*/
     }
 
 
-    public function ShowReviews($guardianId) //Encrypted
+    public function ShowReviews($guardianId)
     {
         $reviewDAO = new ReviewDAO;
         $userDAO = new UserDAO;
@@ -52,14 +48,13 @@ class ReviewController
                 }
             }
 
-            //return require_once(VIEWS_PATH . "view_reviewsV2.php");
             return require_once(VIEWS_PATH . "view_reviewsV3.php");
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
 
-    public function makeReview($comment, $guardianId, $rating) //Encripted
+    public function makeReview($comment, $guardianId, $rating)
     {
         $reviewDAO = new ReviewDAO;
 
@@ -86,7 +81,7 @@ class ReviewController
         }
     }
 
-    public function editReview($comment, $guardianId, $rating, $oldReviewId) //Encrypted
+    public function editReview($comment, $guardianId, $rating, $oldReviewId)
     {
         $reviewDAO = new ReviewDAO;
 

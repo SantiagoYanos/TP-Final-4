@@ -46,12 +46,8 @@
                                 <input type="text" class="form-control" name="comment">
                             </div>
 
-                            <!-- Id a la vista - HECHO -->
-
                             <input type="hidden" name="guardianId" value="<?php echo $encryptedId ?>">
                             <br>
-
-                            <!-- Id a la vista - HECHO -->
 
                             <?php if ($ownerReview) { ?>
                                 <input type="hidden" name="oldReviewId" value=<?php echo encrypt($ownerReview->getId()); ?>></input>

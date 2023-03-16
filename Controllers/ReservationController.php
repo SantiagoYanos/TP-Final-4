@@ -29,24 +29,13 @@ class ReservationController
         require_once(ROOT . "/Exceptions/ReservationNotFoundException.php");
     }
 
-    /*public function SeeProfile($guardian_id){
-        $guardianDAO = new GuardianDAO();
-        $petDAO = new PetDAO();
-
-        $petList = $petDAO->GetPetsByOwner($_SESSION["id"]);
-
-        $guardian = $guardianDAO->GetById($_POST["guardian_id"]);
-        require_once(VIEWS_PATH . "owner_GuardianProfile.php");
-    }*/
-
-    public function MakeReservation($guardian_id, $reservation_dates = null, $pets_ids = []) //Encripted
+    public function MakeReservation($guardian_id, $reservation_dates = null, $pets_ids = [])
     {
-
         //Seleccionar Pets
         //Seleccionar Fechas
         //Las Pets seleccionadas deben tener la misma raza. (El tamaño puede variar). LISTO
         //El Guardian debe poder soportar los tamaños de las mascotas. LISTO
-        //Check Fechas disponibles para el guardian (Fechas válidas). FALTA
+        //Check Fechas disponibles para el guardian (Fechas válidas). LISTO
         //No se puede hacer el mismo pedido de reserva 2 veces. LISTO 
 
         //Si el usuario es un guardian se redirige al inicio... (Sólo un Owner puede hacer una reserva)
@@ -92,7 +81,7 @@ class ReservationController
                 $flag = 4;
             }
 
-            //------------- Chequear si el guardian ya tiene una reserva con esas pets seleccionadas ------------- (Actualizado)
+            //------------- Chequear si el guardian ya tiene una reserva con esas pets seleccionadas -------------
 
             //Desencriptar las ids de pets...
 
@@ -122,38 +111,6 @@ class ReservationController
 
             //------------------------------------------------------------------------------------------------------
 
-            /*
-
-            //Se obtienen todas las reservas en las fechas seleccionadas
-            $reservationList = $reservationDAO->GetAllByDates($guardian_id, $reservation_dates_array);
-
-            //Desencriptar las ids de pets...
-
-            $pets_ids = array_map(function ($petId) {
-                $decryptedPet = decrypt($petId);
-
-                $decryptedPet ? null : throw new PetNotFoundException();
-
-                return $decryptedPet;
-            }, $pets_ids);
-
-            //Saber si ya hay una reserva con esa pet;
-
-            foreach ($reservationList as $reservation) {
-                foreach ($reservation->getPets() as $pet) {
-                    foreach ($pets_ids as $pet_id) {
-                        if ($pet->getId() == $pet_id) {
-                            $flag = 2;
-                            break 3;
-                        }
-                    }
-                }
-            }
-
-            */
-
-            //------------------------------------------------------------------------------------------------------
-
             ///// ----------------- Chequear size de las Pets -------------------------------------
 
             //Checkeo que los tamaños de las pets sean soportadas por el guardian
@@ -162,25 +119,6 @@ class ReservationController
 
             $guardianPetSizeDog = $petSizesEnum[$guardian_user->getType_Data()->getPreferred_size()];
             $guardianPetSizeCat = $petSizesEnum[$guardian_user->getType_Data()->getPreferred_size_Cat()];
-
-            // if ($guardianPetSizeCat == "big") {
-            //     $guardianPetSizeCat = 1;
-            // }
-            // if ($guardianPetSizeCat == "medium") {
-            //     $guardianPetSizeCat = 2;
-            // }
-            // if ($guardianPetSizeCat == "small") {
-            //     $guardianPetSizeCat = 3;
-            // }
-            // if ($guardianPetSize == "big") {
-            //     $guardianPetSize = 1;
-            // }
-            // if ($guardianPetSize == "medium") {
-            //     $guardianPetSize = 2;
-            // }
-            // if ($guardianPetSize == "small") {
-            //     $guardianPetSize = 3;
-            // }
 
             $petList = array();
 
@@ -319,7 +257,6 @@ class ReservationController
                 }
 
                 //Agrega a un array la mascota de las reservas ya existentes - Múltiples mascotas
-                //array_push($petList, $pet);
 
                 //Agrega al array la primer mascota de nuestra nueva Reserva que queremos hacer
                 array_push($petList, $reservation->getPets()[0]);
@@ -349,7 +286,7 @@ class ReservationController
         }
     }
 
-    public function rejectReservation($reservation_id) //Encripted
+    public function rejectReservation($reservation_id)
     {
         try {
 

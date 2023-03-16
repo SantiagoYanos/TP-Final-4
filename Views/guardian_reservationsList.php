@@ -84,16 +84,7 @@
             ?>
                 <tr>
 
-                    <!-- Se muestra la ID de la reserva ! - HECHO -->
-
-                    <!-- <td><?php // echo $reservation->GetId() 
-                                ?></td> -->
-
                     <td><?php echo $idCont ?></td>
-
-                    <!-- HACER UN FORM PARA NO MOSTRAR LA ID AL AIRE | O ENCRIPTAR LA ID -->
-
-                    <!-- Id a la vista - HECHO -->
 
                     <td>
 
@@ -133,8 +124,6 @@
 
                                     </section>
 
-                                    <!-- Meterlo en una función (o un a archivo calendario.js) - HECHO -->
-
                                     <?php $reservationDates =  "['" . join("','", $reservation->getDates()) . "']"; ?>
 
                                     <script>
@@ -153,8 +142,6 @@
                     <td>
                         <?php
                         switch ($reservation->getState()) {
-
-                                //No usar las ID's de las reservas directamente (En ninguno de los 3 casos) - HECHO
 
                             case "Pending" ?>
 
@@ -189,8 +176,6 @@
 
                 </tr>
 
-                <!-- No usar las ID's de las reservas directamente (de vuelta) - HECHO -->
-
                 <tr class="collapse" id="pets-<?php echo $idCont ?>">
                     <td colspan="8">
                         <table class="table table-bordered">
@@ -204,16 +189,12 @@
                                 <?php foreach ($reservation->getPets() as $pet) {
                                 ?>
 
-                                    <!-- No usar la id de pets (No se puede cambiar) -->
-
                                     <tr>
                                         <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getPet_img(); ?> " alt="pet_photo" height="100" width="100"> </td>
                                         <td><?php echo $pet->getName() ?> </td>
                                         <td><?php echo $pet->getBreed() ?> </td>
                                         <td><?php echo ucfirst($pet->getType()) ?> </td>
                                         <td>
-
-                                            <!-- Arreglar switch con un utils Size - HECHO -->
 
                                             <!-- Big | Medium | Small | Undefined -->
 
@@ -222,7 +203,6 @@
                                         </td>
                                         <td><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
                                         <td><?php echo $pet->getObservation() ?> </td>
-                                        <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
                                         <td> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
                 <?php
@@ -245,8 +225,6 @@
 </table>
 
 <a href=<?php echo FRONT_ROOT . "Guardian/HomeGuardian" ?>><button class="btn btn-dark mt-3">Back</button></a>
-
-<!-- Juntar el alert con el archivo alertMessage - HECHO -->
 
 <script>
     alertMessage(<?php echo $alert; ?>)

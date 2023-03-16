@@ -48,9 +48,6 @@ class GuardianDAO implements IModels
             $parametersGuardian["cuil"] = $GuardianSQL->getCuil();
             $parametersGuardian["preferred_size_dog"] = $GuardianSQL->getPreferred_size();
             $parametersGuardian["preferred_size_cat"] = $GuardianSQL->getPreferred_size_cat();
-            //$parametersGuardian["reputation"] = $GuardianSQL->getReputation();
-            //$parametersGuardian["available_date"] = $GuardianSQL->getAvailable_date();
-            //$parametersGuardian["price"] = $GuardianSQL->getPrice();
 
             $this->connection->ExecuteNonQuery($queryGuardian, $parametersGuardian);
         } catch (Exception $e) {
@@ -182,7 +179,6 @@ class GuardianDAO implements IModels
             // $parameters2["datesString"] = $datesString;
 
             $queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (:id, '" . $datesString . "')";
-            //$queryInsert = "INSERT INTO available_dates (guardian_id, date) VALUES (:id,   :datesString )";
 
             $this->connection->ExecuteNonQuery($queryInsert, $parameters2);
         } catch (Exception $ex) {

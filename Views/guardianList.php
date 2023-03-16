@@ -44,8 +44,6 @@
           <th>Dog size</th>
           <td>
 
-            <!-- Quizas se puedan arreglar los selected? - HECHO !-->
-
             <select class="form-select" name="preferred_size" id="preferred_size" value="<?php echo $preferred_size ?>">
 
               <?php createOptionsByIndex($preferred_size, $petSizesEnum); ?>
@@ -57,8 +55,6 @@
         <tr>
           <th>Cat size</th>
           <td>
-
-            <!-- Quizas se puedan arreglar los selected? x2 - HECHO !-->
 
             <select class="form-select" name="preferred_size_cat" id="preferred_size_cat" value="<?php echo $preferred_size_cat ?>">
 
@@ -91,12 +87,6 @@
       </span>
     </div>
 
-    <?php
-
-    //Meter todo esto en un archivo script calendario.js (Fijarse porque usa una función autoejecutada) - HECHO
-
-    ?>
-
     <?php $dates =  "['" . join("','", $stringDates) . "']"; ?>
 
     <script>
@@ -121,8 +111,6 @@
       <th>Make Reservation</th>
     </thead>
 
-    <!--GUARDIAN ES USER!!!!!-->
-
     <tbody>
       <?php
       foreach ($guardians as $guardian) {
@@ -143,8 +131,6 @@
           <td><?php echo ucfirst($guardian->getType_data()->getPreferred_size_cat()) ?></td>
           <td>$<?php echo $guardian->getType_data()->GetPrice() ?></td>
 
-          <!-- ID a la vista (guardian ID) - HECHO -->
-
           <form action=<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?> method=POST>
             <input type="hidden" name="id" value="<?php echo encrypt($guardian->getID()) ?>"></input>
             <input type="hidden" name="back" value="guardianList">
@@ -159,9 +145,6 @@
   <form action=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>>
     <button class="btn btn-dark" type="submit">Back</button>
   </form>
-
-
-  <!-- Mejor que use la función alertMessage - HECHO -->
 
   <script>
     alertMessage(<?php echo $alert; ?>)

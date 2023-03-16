@@ -33,8 +33,6 @@
         <b>0 Stars</b>
         <b class="float-end">5 Stars</b>
 
-        <!-- Calcular reputation en el servidor -->
-
         <div class="progress mb-3">
             <div class="progress-bar" style="width:<?php echo (($user_guardian->getType_Data()->getReputation() * 100) / 5) ?>%"></div>
         </div>
@@ -58,35 +56,6 @@
                     <button type="submit">Save Dates Changes</button>
                 </form>
             </section>
-
-            <!-- Calendario función - HECHO -->
-
-            <?php
-
-            // $calendario = "<script type='text/javascript'>
-            // $(function() {
-            //     $('#datepicker').datepicker({
-
-            //         multidate: true,
-            //         format: 'yyyy-mm-dd'
-
-            //     });
-
-            //     ";
-
-            // if ($user_guardian->getType_data()->getAvailable_date()) {
-
-            //     //Cambiarlo con truco JSON (o función);
-            //     $calendario = $calendario . "$('#datepicker').datepicker('setDates',['" . join("','", $user_guardian->getType_data()->getAvailable_date()) . "'])";
-            // }
-
-            // $calendario = $calendario . "
-            //     });
-            // </script>";
-
-            // echo $calendario;
-
-            ?>
 
             <?php $dates =  "['" . join("','", $user_guardian->getType_data()->getAvailable_date()) . "']"; ?>
 
@@ -175,7 +144,7 @@
             </div>
         </form>
 
-        <!--<a href-<?php require_once VIEWS_PATH . "guardianList.php" ?>><button class="float-end mt-2">Back</button></a>>-->
+        <?php require_once VIEWS_PATH . "guardianList.php" ?>
 
 </body>
 

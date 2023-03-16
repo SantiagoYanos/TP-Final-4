@@ -34,7 +34,7 @@ class PaymentController
         require_once(ROOT . "/Exceptions/OwnerNotFoundException.php");
     }
 
-    public function ShowPayment($reservation_id) //Encripted
+    public function ShowPayment($reservation_id)
     {
         try {
             $paymentDAO = new PaymentDAO();
@@ -53,7 +53,7 @@ class PaymentController
         }
     }
 
-    public function ShowMakePayment($reservation_id) //Encripted
+    public function ShowMakePayment($reservation_id)
     {
 
         try {
@@ -82,7 +82,7 @@ class PaymentController
         }
     }
 
-    public function ShowPaymentCupon($reservation_id) //Encripted
+    public function ShowPaymentCupon($reservation_id)
     {
 
         $reservationDAO = new ReservationDAO;
@@ -121,7 +121,7 @@ class PaymentController
         }
     }
 
-    public function MakePayment($price, $reservation_id, $owner_id, $guardian_id) //Encripted
+    public function MakePayment($price, $reservation_id, $owner_id, $guardian_id)
     {
         try {
 

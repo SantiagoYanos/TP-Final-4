@@ -47,15 +47,6 @@ class PaymentDAO implements IModels
             return null;
         }
 
-        // $paymentArray = array();
-
-        // $paymentArray["amount"] = $resultSet[0]["amount"];
-        // $paymentArray["date"] = $resultSet[0]["date"];
-        // $paymentArray["payment_number"] = $resultSet[0]["payment_number"];
-        // $paymentArray["owner_name"] = $resultSet[0]["owner_name"];
-        // $paymentArray["guardian_name"] = $resultSet[0]["guardian_name"];
-        // $paymentArray["price"] = $resultSet[0]["price"];
-
         $PaymentSQL = $this->LoadData($resultSet[0]);
 
         return $PaymentSQL;
@@ -100,15 +91,6 @@ class PaymentDAO implements IModels
         if (!$resultSet || $resultSet == []) {
             return null;
         }
-
-        // $paymentArray = array();
-
-        // $paymentArray["amount"] = $resultSet[0]["amount"];
-        // $paymentArray["date"] = $resultSet[0]["date"];
-        // $paymentArray["payment_number"] = $resultSet[0]["payment_number"];
-        // $paymentArray["owner_name"] = $resultSet[0]["owner_name"];
-        // $paymentArray["guardian_name"] = $resultSet[0]["guardian_name"];
-        // $paymentArray["price"] = $resultSet[0]["price"];
 
         $PaymentSQL = $this->LoadData($resultSet[0]);
 

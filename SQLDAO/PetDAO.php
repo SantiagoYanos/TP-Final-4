@@ -125,26 +125,6 @@ class PetDAO implements IModels
                 return null;
             }
             return $resultSet[0]["id_pet"];
-
-
-            /*
-            $PetDAO = new PetDAO();
-
-            $pet = $PetDAO->GetById($PetSQL->getId());
-            
-            if (!$pet) {
-                return null;
-            }
-            
-            $queryPetMultimedia = "INSERT INTO " . "pet_multimedia" . " (file_path, pet_id, description ) VALUES (:file_path, :pet_id, :description);";
-
-            $parametersMultimedia["file_path"] = $PetSQL->getVaccination_plan();
-            $parametersMultimedia["pet_id"] = $pet->getId();
-            $parametersMultimedia["description"] = "vaccination_note";
-            
-
-            $this->connection->ExecuteNonQuery($queryPetMultimedia, $parametersMultimedia);
-            */
         } catch (Exception $e) {
             throw $e;
         }

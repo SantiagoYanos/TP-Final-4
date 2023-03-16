@@ -23,7 +23,6 @@
             <div class="row align-items-center upperButtons" name="upperButtons">
 
                 <span>
-                    <!-- <button class="btn btn-dark" onclick="history.go(-1);">Back</button>-->
 
                     <form action=<?php echo $receiverLink ?> method=POST style="display:inline">
 
@@ -100,8 +99,6 @@
             <form class="messageForm" action=<?php echo FRONT_ROOT . "Chat/SendMessage" ?> method="post">
 
                 <div class="row align-items-center userInputs" name="userInputs">
-
-                    <!-- Id a la vista - HECHO -->
 
                     <input type="hidden" name="userId" value="<?php echo $encryptedId ?>"></input>
 

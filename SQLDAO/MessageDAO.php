@@ -64,33 +64,6 @@ class MessageDAO
         return $MessageSQL;
     }
 
-    // public function GetByIds($senderId, $receiverId)
-    // {
-    //     try {
-
-    //         $messageList = array();
-
-    //         $query = "SELECT * FROM " . $this->tableName . " WHERE sender_id=:senderId AND receiver_id=:receiverId AND active=true ";
-
-    //         $parameters["senderId"] = $senderId;
-    //         $parameters["receiverId"] = $receiverId;
-
-    //         $this->connection = Connection::GetInstance();
-    //         $resultSet = $this->connection->Execute($query, $parameters);
-
-    //         foreach ($resultSet as $row) {
-
-    //             $messageSQL = $this->LoadData($row);
-
-    //             array_push($messageList, $messageSQL);
-    //         }
-
-    //         return $messageList;
-    //     } catch (Exception $e) {
-    //         throw $e;
-    //     }
-    // }
-
     public function GetByIdsV2($senderId, $receiverId)
     {
         try {

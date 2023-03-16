@@ -35,14 +35,14 @@
         <b>0 Stars</b>
         <b class="float-end">5 Stars</b>
 
-        <!-- Traer la reputación transformada desde el servidor - HECHO -->
+        <!-- Traer la reputación transformada desde el servidor -->
 
         <div class="progress mb-3">
             <div class="progress-bar" style="width:<?php echo $ratingPercent ?>%"></div>
         </div>
 
         <b>
-            <!-- Mostrar el porcentaje de reviews a escala de 100% y la cantidad. Ex. 87% (15 Reviews) - HECHO -->
+            <!-- Mostrar el porcentaje de reviews a escala de 100% y la cantidad. Ex. 87% (15 Reviews) -->
             <?php echo "(" . number_format((float)$ratingPercent, 1, ',', '') . "%) " . $reviewsAmount . " Reviews" ?>
         </b>
 
@@ -65,8 +65,6 @@
                 </form>
             </section>
 
-            <!-- Funcion calendario... - HECHO -->
-
             <?php $dates =  "['" . join("','", $user->getType_data()->getAvailable_date()) . "']"; ?>
 
             <script>
@@ -81,8 +79,6 @@
             <a href=<?php echo FRONT_ROOT . "Guardian/ViewReservations" ?>><button class="btn pl-1 visualizeReservationsButton">Visualize Reservations</button></a>
 
             <form class="formShowReviews" action=<?php echo FRONT_ROOT . "Review/ShowReviews" ?> method=POST>
-
-                <!-- Id a la vista - HECHO -->
 
                 <input type="hidden" name="guardianId" value="<?php echo encrypt($user->getId()); ?>">
                 <button class="btn btn-warning ms-2">View Reviews</button>
@@ -165,8 +161,6 @@
 
         <form action=<?php echo FRONT_ROOT . "Auth/logOut" ?> method="post">
             <button type="submit" class="btn btn-dark mt-2" onclick="alertMessage('Goodbye!')">Logout</button>
-
-            <!-- Only alertMessage - HECHO -->
 
         </form>
 

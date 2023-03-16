@@ -82,8 +82,6 @@
                 <tr>
                     <td><?php echo $idCont ?></td>
 
-                    <!-- Agregar boton de ver Owner - HECHO -->
-
                     <td>
                         <form action="<?php echo FRONT_ROOT . "Owner/ViewGuardianProfile" ?>" method=POST>
 
@@ -96,8 +94,6 @@
                     </td>
                     <td>$<?php echo $reservation->getPrice() ?></td>
                     <td>
-
-                        <!-- ID de reserva - HECHO -->
                         <a class="btn btn-warning" data-bs-toggle="collapse" href="#pets-<?php echo $idCont ?>" role="button" aria-expanded="false" aria-controls="collapseExample">
                             Show Pets
                         </a>
@@ -122,8 +118,6 @@
 
                                     </section>
 
-                                    <!-- Calendario - HECHO -->
-
                                     <?php $reservationDates =  "['" . join("','", $reservation->getDates()) . "']"; ?>
 
                                     <script>
@@ -145,7 +139,6 @@
                         ?>
                                 <form action="<?php echo  FRONT_ROOT . "Payment/ShowPaymentCupon" ?> " method="post">
 
-                                    <!-- Id a la vista - HECHO -->
                                     <button class="btn btn-success" type="submit"> Pay </button> <input type="hidden" name="reservation_id" value="<?php echo encrypt($reservation->getId()) ?>"></input>
                                 </form>
                                 <form action="<?php echo FRONT_ROOT . "Reservation/cancelReservation" ?>" method="post">
@@ -157,8 +150,6 @@
 
                                 break; ?>
 
-
-                                <!-- Id a la vista - HECHO -->
                             <?php
                             case "Paid":
                             ?><form action="<?php echo  FRONT_ROOT . "Payment/ShowPayment" ?> " method="post">
@@ -177,14 +168,12 @@
                         <?php } ?>
                     </td>
                     <td>
-                        <!-- Id a la vista - HECHO -->
                         <form action="<?php echo  FRONT_ROOT . "Chat/ShowChat" ?> " method="post">
                             <button class="btn viewChatButton" type="submit"> View Chat </button> <input type="hidden" name="idReceiver" value="<?php echo encrypt($reservation->getGuardian_id()) ?>"></input>
                         </form>
                     </td>
                 </tr>
 
-                <!-- Id a la vista - HECHO -->
                 <tr class="collapse" id="pets-<?php echo $idCont ?>">
                     <td colspan="8">
                         <table class="table table-bordered petsTable">
@@ -204,17 +193,12 @@
                                         <td class="petTableColumn"><?php echo ucfirst($pet->getType()) ?> </td>
                                         <td class="petTableColumn">
 
-                                            <!-- Hacer funcion switch - HECHO -->
-
                                             <?php ShowValuePetSize($pet->getSize()) ?>
 
                                         </td>
 
-                                        <!-- Id a la vista (posiblemente dejarlo así) - HECHO -->
-
                                         <td class="petTableColumn"><img src="<?php echo "../" . IMG_PATH .  $pet->getId() . "/" . $pet->getVaccination_plan(); ?> " alt="vac note" height="100" width="100"></td>
                                         <td class="petTableColumn"><?php echo $pet->getObservation() ?> </td>
-                                        <!--<td> <iframe width="786" height="442" src="https://www.youtube.com/embed/A6dhKpvhNKY?autoplay=1&controls=0&" </iframe> </td>-->
                                         <td class="petTableColumn"> <a class="btn btn-primary" href=" <?php echo $pet->getPet_video();   ?>" target="_blank" alt="pet video"> Video </a> </td>
                     </td>
 
@@ -240,8 +224,6 @@
 <br>
 
 <a href=<?php echo FRONT_ROOT . "Owner/HomeOwner" ?>><button class="btn btn-dark ">Back</button></a>
-
-<!-- alertMessage - HECHO -->
 
 <script>
     alertMessage(<?php echo $alert; ?>)

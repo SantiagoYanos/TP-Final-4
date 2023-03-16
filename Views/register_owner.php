@@ -51,9 +51,6 @@
                 <label for="birthdate">Birthdate: </label>
             </div>
 
-            <!--<input type="checkbox" name="terms_conditions" value="terms_conditions"></input>-->
-            <!--<a href="/tp-final-4/images/rick-roll.gif">I agree to the terms and conditions</a></br>-->
-
             <button style="margin-bottom:15px" type="submit">Register</button>
 
         </form>

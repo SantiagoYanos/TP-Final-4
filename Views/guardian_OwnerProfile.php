@@ -62,8 +62,6 @@
 
     </div>
 
-    <!-- Id a la vista - HECHO -->
-
     <form action=<?php echo FRONT_ROOT . "Chat/ShowChat" ?> method=POST style="display:inline">
         <input type="hidden" name="idReceiver" value=<?php echo encrypt($owner->getId()); ?>></input>
         <input type="submit" class="btn btn-primary mt-3 viewChatButton" value="View Chat">
