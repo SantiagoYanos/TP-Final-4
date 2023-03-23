@@ -104,7 +104,7 @@
 
                     <div class="col-9">
 
-                        <textarea class="form-control m-2 messageTextArea" id="newMessage" name="description" rows="4" placeholder="Insert your message"></textarea>
+                        <textarea class="form-control m-2 messageTextArea" id="newMessage" name="description" rows="4" placeholder="Insert your message" required></textarea>
 
                     </div>
 

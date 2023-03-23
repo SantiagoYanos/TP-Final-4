@@ -29,13 +29,11 @@ create table owners(
     constraint fk_owner_user_id foreign key (user_id) references users(user_id) ON DELETE CASCADE,
 
     constraint unq_dni unique (dni)
-    /*constraint chk_birth_date check ( birth_date<=now() )*/
 );
 
 create table guardians(
     user_id bigint NOT NULL,
     cuil varChar(150) not null,
-    reputation float not null default 3,
     preferred_size_dog int,
     preferred_size_cat int,
     price float,
@@ -46,7 +44,6 @@ create table guardians(
     CONSTRAINT fk_preferred_size_dog FOREIGN KEY (preferred_size_dog) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
     CONSTRAINT fk_preferred_size_cat FOREIGN KEY (preferred_size_cat) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
     constraint unq_cuil unique (cuil),
-    /*constraint chk_birth_date check ( birth_date<=now() ),*/
     constraint chk_price check (price>=0)
 );
 
@@ -77,33 +74,18 @@ create table pets(
     constraint fk_owner_id foreign key (owner_id) references owners(user_id) on delete cascade
 );
 
-create table pet_multimedia(
-    file_id bigint auto_increment,
-    file_path text not null,
-    pet_id bigint not null,
-    description varchar(150) not null,
-
-    constraint pk_pet_multimedia primary key (file_id),
-    constraint fk_pet_id foreign key (pet_id) references pets (pet_id) on delete cascade
-
-);
-
 create table reservations(
     reservation_id bigint not null auto_increment,
     price bigint not null,
-
     guardian_id bigint not null,
     owner_id bigint not null,
     active boolean not null default 1,
     state varchar(50) not null,
-
     constraint pk_reservations primary key (reservation_id),
     constraint fk_guardian foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE,
     constraint fk_owner foreign key (owner_id) references owners (user_id) ON DELETE CASCADE
 
 );
-
-
 
 create table reservations_x_pets(
     reservation_x_pets_id bigint not null auto_increment,
@@ -112,7 +94,7 @@ create table reservations_x_pets(
 
     constraint pk_reservations_x_pets primary key (reservation_x_pets_id),
     constraint fk_reservation_id foreign key (reservation_id) references reservations(reservation_id),
-    constraint fk_pet foreign key (pet_id) references pets(pet_id)
+    constraint fk_pet foreign key (pet_id) references pets(pet_id) ON DELETE CASCADE
 
 );
 
@@ -141,7 +123,6 @@ create table payments(
     CONSTRAINT unq_reservation_id UNIQUE (reservation_id)
 );
 
-
 create table reviews(
     review_id bigint auto_increment,
     comment varchar(250),
@@ -151,12 +132,10 @@ create table reviews(
     date date not null,
     active boolean not null default 1,
 
-
     constraint pk_review primary key (review_id),
     constraint fk_review_owner_id foreign key (review_owner_id) references users (user_id),
     constraint fk_review_guardian_id foreign key (review_guardian_id) references users (user_id)
 );
-
 
 create table messages(
     message_id bigint auto_increment,
@@ -171,16 +150,9 @@ create table messages(
     constraint fk_receiver_id foreign key (receiver_id) references users (user_id)
 );
 
-
-INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Santiago", "Yanosky", "costa 12222", "02235887965", "santi@gmail.com", "elmascapito", '2002-11-13');
-INSERT INTO users (name, last_name, adress, phone, email, password, birth_date) VALUES ("Agus", "Kumar", "basural 5555", "02235 1256987", "agus@gmail.com", "elmascapoto", '1999-11-12');
-
 INSERT INTO pet_sizes(name) VALUES ("big");
 INSERT INTO pet_sizes(name) VALUES ("medium");
 INSERT INTO pet_sizes(name) VALUES ("small");
-
-INSERT INTO guardians (user_id, cuil, reputation, preferred_size_dog, preferred_size_cat, price) VALUES (1, "5555555", 3.2, 1, 2, 5000);
-INSERT INTO owners (user_id, dni) VALUES (2, 52555633);
 
 CREATE PROCEDURE insertPet(IN p_name varchar(150), IN p_pet_type varchar(150), IN p_pet_size int, IN p_pet_breed varchar(150), IN p_observations varchar(250), IN p_owner_id bigint, IN p_vaccination_plan varchar(250), IN p_pet_img varchar(250), IN p_pet_video varchar(250))
 BEGIN
@@ -207,8 +179,6 @@ END;
 INSERT INTO payments (amount, date, reservation_id, owner_id, guardian_id, payment_number) VALUES (10, now(), 36, 2, 1, 1023456);
 
 /* Tipos de pagos */
-
-/* Card | Cash | ? */ 
 
 /* Obtener payment por id */
 

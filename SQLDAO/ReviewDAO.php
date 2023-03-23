@@ -107,8 +107,6 @@ class ReviewDAO
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query, $parameters);
 
-
-
             return $resultSet[0];
         } catch (Exception $e) {
             throw $e;

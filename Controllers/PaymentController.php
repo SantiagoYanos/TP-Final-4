@@ -248,7 +248,13 @@ class PaymentController
 
             $mail->addAttachment(ROOT . '/PHPMailer/PHPMailer/paymentReceipt.pdf'); //Se agrega el PDF
 
-            $mail->send(); //Se envía el Mail
+            //$mail->send(); //Se envía el Mail
+
+            if ($_SESSION["type"] == "owner") {
+                return header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&rejected=&canceled=&alert="Receipt Sent!"');
+            } else {
+                return header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&rejected=&canceled=&alert="Receipt Sent!"');
+            }
 
             return header("location: " . FRONT_ROOT . "/Owner/ViewReservationsOwner");
         } catch (ReservationNotFoundException $e) {

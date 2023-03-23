@@ -90,7 +90,7 @@ class GuardianDAO implements IModels
         try {
             $GuardianSQLList = array();
 
-            $query = "SELECT u.*, t.cuil, t.reputation, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
+            $query = "SELECT u.*, t.cuil, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
             FROM " . $this->tableName  . " t 
             INNER JOIN users u ON t.user_id=u.user_id
             INNER JOIN pet_sizes psd ON psd.pet_size_id=t.preferred_size_dog
@@ -125,7 +125,7 @@ class GuardianDAO implements IModels
 
         try {
             $query =
-                "SELECT u.*, t.cuil, t.reputation, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
+                "SELECT u.*, t.cuil, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
             FROM " . $this->tableName  . " t 
             INNER JOIN users u ON t.user_id=u.user_id
             INNER JOIN pet_sizes psd ON psd.pet_size_id=t.preferred_size_dog
@@ -211,7 +211,7 @@ class GuardianDAO implements IModels
         }
     }
 
-    public function SearchGuardiansByFilters($filters)
+    public function SearchGuardiansByFilters($filters, $rating)
     {
 
         $available_dates = array_pop($filters);
@@ -222,9 +222,6 @@ class GuardianDAO implements IModels
 
                 case "name":
                     return "u.name LIKE '%" . $filter[1] . "%'";
-                    break;
-                case "reputation":
-                    return "t.reputation >= " . $filter[1];
                     break;
                 case "preferred_size_dog":
                     return "t.preferred_size_dog = " . $filter[1];
@@ -246,7 +243,7 @@ class GuardianDAO implements IModels
 
         try {
 
-            $query = "SELECT u.*, t.cuil, t.reputation, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
+            $query = "SELECT u.*, t.cuil, t.price, psd.name as preferred_size_dog, psc.name as preferred_size_cat 
             
         FROM " .  $this->tableName  . " t 
         INNER JOIN users u ON t.user_id=u.user_id
@@ -285,6 +282,23 @@ class GuardianDAO implements IModels
 
                 array_push($GuardianSQLList, $UserSQL);
             };
+
+            //Filtro por reputación.
+
+            if ($rating) {
+                $GuardianSQLList = array_filter($GuardianSQLList, function ($guardian) use ($rating) {
+
+                    $guardianReputation = $guardian->getType_Data()->getReputation();
+
+                    if ($guardianReputation) {
+                        return $guardianReputation >= $rating;
+                    } else {
+                        return false;
+                    }
+                });
+
+                $GuardianSQLList = array_values($GuardianSQLList); //Reorderding array
+            }
 
             return $GuardianSQLList;
         } catch (Exception $ex) {

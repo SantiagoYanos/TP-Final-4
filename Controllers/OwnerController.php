@@ -119,10 +119,6 @@ class OwnerController
                 array_push($filters, ["name", $name]);
             }
 
-            if ($rating != null) {
-                array_push($filters, ["reputation", $rating]);
-            }
-
             if ($preferred_size != null && $preferred_size != "*") {
                 array_push($filters, ["preferred_size_dog", $preferred_size]);
             }
@@ -148,7 +144,7 @@ class OwnerController
             array_push($filters, ["available_dates", $stringDates]);
 
             if ($filters != []) {
-                $guardians = $guardian_DAO->SearchGuardiansByFilters($filters);
+                $guardians = $guardian_DAO->SearchGuardiansByFilters($filters, $rating);
             } else {
                 $guardians = $guardian_DAO->GetAll();
             }
