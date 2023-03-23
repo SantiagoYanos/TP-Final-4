@@ -81,7 +81,9 @@ class ChatController
 
             $messageDAO->Add($message);
 
-            header("location: " . FRONT_ROOT . "Chat/ShowChat" . "?id=" . $userId);
+            header("location: " . FRONT_ROOT . "Chat/ShowChat" . '?idReceiver=' . $userId); //
+
+            //header("location: " . FRONT_ROOT . "Chat/ShowChat" . '?idReceiver=' . $userId);
         } catch (UserNotFoundException $e) {
             return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());
         } catch (Exception $e) {
