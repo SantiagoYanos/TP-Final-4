@@ -6,7 +6,7 @@ function encrypt($toEncrypt)
 
         $encryptedCode = base64_encode($toEncrypt);
 
-        return openssl_encrypt($encryptedCode, "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
+        return openssl_encrypt($encryptedCode, "AES-128-CBC", SECRET, 0, $_SESSION["token"]);
     } else {
         return null;
     }
@@ -14,7 +14,7 @@ function encrypt($toEncrypt)
 
 function decrypt($toDecrypt)
 {
-    $decrypted = openssl_decrypt($toDecrypt, "aes-128-cbc", SECRET, 0, $_SESSION["token"]);
+    $decrypted = openssl_decrypt($toDecrypt, "AES-128-CBC", SECRET, 0, $_SESSION["token"]);
 
     if ($decrypted) {
         return base64_decode($decrypted);
