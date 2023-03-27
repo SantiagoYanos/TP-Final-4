@@ -248,7 +248,7 @@ class PaymentController
 
             $mail->addAttachment(ROOT . '/PHPMailer/PHPMailer/paymentReceipt.pdf'); //Se agrega el PDF
 
-            //$mail->send(); //Se envía el Mail
+            $mail->send(); //Se envía el Mail
 
             if ($_SESSION["type"] == "owner") {
                 return header("location: " . FRONT_ROOT . 'Owner/ViewReservationsOwner?state=&rejected=&canceled=&alert="Receipt Sent!"');
@@ -347,7 +347,7 @@ class PaymentController
 
             $mail->addAttachment(ROOT . '/PHPMailer/PHPMailer/paymentCoupon.pdf'); //Se agrega el PDF
 
-            //$mail->send(); //Se envía el Mail
+            $mail->send(); //Se envía el Mail
 
         } catch (ReservationNotFoundException $e) {
             return header("location: " . FRONT_ROOT . "Error/ShowError?error=" . $e->getMessage());

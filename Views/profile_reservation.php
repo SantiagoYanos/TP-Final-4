@@ -117,8 +117,6 @@
                         <td><?php echo $user_guardian->getType_Data()->getPrice() ?></td>
                     </tr>
 
-
-
                 </tbody>
 
             </table>

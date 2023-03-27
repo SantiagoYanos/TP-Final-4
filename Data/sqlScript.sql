@@ -172,6 +172,8 @@ BEGIN
 
 END;
 
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
 /* ------------------------------------------------ PAYMENTS ------------------------------------------ *
 
 /* Insertar un payment */
@@ -189,11 +191,6 @@ INNER JOIN users uo ON uo.user_id = p.owner_id
 INNER JOIN users ug ON ug.user_id = p.guardian_id
 INNER JOIN reservations r ON r.reservation_id = p.reservation_id
 WHERE p.payment_id = 2;
-
-/* Falta fecha de vencimiento!!  NO VA*/
-/* Falta numero de tarjeta!! */
-/* Falta tipo de tarjeta? */
-
 
 /* Obtener payment(s) por reserva */
 
