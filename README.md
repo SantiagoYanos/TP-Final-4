@@ -1,0 +1,228 @@
+# TP: Pet Hero
+
+*Objetivo*: Aplicación de reserva de cuidado de mascotas.
+
+## Grupo
+
+- Agustin Gonzalez Kumar
+- Manuel Grassi
+- Santiago Yanosky
+
+## Stack
+
+- PHP
+- MySQL
+- HTML / CSS
+- JavaScript
+- Bootstrap
+
+### Config/Config.php
+
+```php
+<?php
+
+namespace Config;
+
+define("ROOT", dirname(__DIR__) . "/");
+
+define("FRONT_ROOT", "/TP-Pet-Hero/"); //Project's main folder
+define("VIEWS_PATH", "Views/");
+define("CSS_PATH", FRONT_ROOT . VIEWS_PATH . "css/");
+define("JS_PATH", FRONT_ROOT . VIEWS_PATH . "js/");
+define("IMG_PATH", VIEWS_PATH . "images/pets/");
+
+//Data
+define("DB_HOST", "localhost");
+define("DB_NAME", "database_name");
+define("DB_USER", "root");
+define("DB_PASS", "database_password");
+
+//Token
+define("SECRET", "YourSecret");
+
+//Email
+define("EMAIL_USERNAME", "example@gmail.com");
+define("EMAIL_PASSWORD", "email_password");
+
+//PDF
+define("FPDF_FONTPATH", ROOT . "/Utils/fpdf/font");
+
+```
+
+### Database Creation Script (MYSQL)
+
+```sql
+create database pet_hero;
+use pet_hero;
+
+CREATE TABLE pet_sizes(
+    pet_size_id int auto_increment,
+    name varChar(50) not null,
+    CONSTRAINT pk_pet_size_id PRIMARY KEY (pet_size_id)
+);
+
+CREATE TABLE users(
+    user_id bigint auto_increment,
+    name varChar(150) NOT NULL,
+    last_name varChar(150) NOT NULL,
+    adress varChar(150) NOT NULL,
+    phone varChar(50) NOT NULL,
+    email varChar(150) NOT NULL,
+    password varChar(150) NOT NULL,
+    birth_date date NOT NULL,
+    active boolean not null default 1,
+    CONSTRAINT pk_user_id PRIMARY KEY (user_id),
+    CONSTRAINT unq_email UNIQUE (email)
+);
+
+create table owners(
+    user_id bigint NOT NULL,
+    dni varChar(150) not null,
+
+    constraint pk_owner_user_id primary key (user_id),
+    constraint fk_owner_user_id foreign key (user_id) references users(user_id) ON DELETE CASCADE,
+
+    constraint unq_dni unique (dni)
+);
+
+create table guardians(
+    user_id bigint NOT NULL,
+    cuil varChar(150) not null,
+    preferred_size_dog int,
+    preferred_size_cat int,
+    price float,
+
+    constraint pk_guardian_user_id primary key (user_id),
+    CONSTRAINT fk_guardian_user_id foreign KEY (user_id) references users(user_id) ON DELETE CASCADE,
+
+    CONSTRAINT fk_preferred_size_dog FOREIGN KEY (preferred_size_dog) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
+    CONSTRAINT fk_preferred_size_cat FOREIGN KEY (preferred_size_cat) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
+    constraint unq_cuil unique (cuil),
+    constraint chk_price check (price>=0)
+);
+
+create table available_dates(
+	guardian_id bigint not null,
+    date date not null,
+    
+    constraint pk_available_dates primary key (guardian_id, date),
+    constraint fk_guardian_id foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE
+);
+
+create table pets(
+    pet_id bigint auto_increment,
+    name varchar(150) not null,
+    pet_type varchar(150) not null,
+    pet_size int,
+    pet_breed varchar(150) not null default 'Unknown',
+    observations varchar(250) default '',
+    owner_id bigint not null,
+    vaccination_plan varchar(250),
+    pet_img varchar(250),
+    pet_video varchar(250),
+    active boolean not null default 1,
+
+    constraint pk_pet primary key (pet_id),
+    CONSTRAINT fk_pet_size FOREIGN key (pet_size) REFERENCES pet_sizes(pet_size_id) ON DELETE SET NULL,
+    constraint fk_owner_id foreign key (owner_id) references owners(user_id) on delete cascade
+);
+
+create table reservations(
+    reservation_id bigint not null auto_increment,
+    price bigint not null,
+    guardian_id bigint not null,
+    owner_id bigint not null,
+    active boolean not null default 1,
+    state varchar(50) not null,
+    constraint pk_reservations primary key (reservation_id),
+    constraint fk_guardian foreign key (guardian_id) references guardians (user_id) ON DELETE CASCADE,
+    constraint fk_owner foreign key (owner_id) references owners (user_id) ON DELETE CASCADE
+
+);
+
+create table reservations_x_pets(
+    reservation_x_pets_id bigint not null auto_increment,
+    reservation_id bigint not null,
+    pet_id bigint not null,
+
+    constraint pk_reservations_x_pets primary key (reservation_x_pets_id),
+    constraint fk_reservation_id foreign key (reservation_id) references reservations(reservation_id),
+    constraint fk_pet foreign key (pet_id) references pets(pet_id) ON DELETE CASCADE
+
+);
+
+create table reservations_x_dates(
+    date date not null,
+    reservation_id bigint not null,
+
+    constraint pk_available_dates_reservation primary key (date, reservation_id),
+    constraint fk_id_reservation foreign key (reservation_id) references reservations (reservation_id) ON DELETE CASCADE
+);
+
+create table payments(
+    payment_id bigint auto_increment,
+    amount float not null,
+    date date not null,
+    reservation_id bigint not null,
+    owner_id bigint not null,
+    guardian_id bigint not null,
+    active boolean not null  default 1,
+    payment_number int not null,
+    constraint pk_payments primary key (payment_id),
+    constraint fk_payment_guardian foreign key (guardian_id) references users(user_id),
+    constraint fk_payment_owner foreign key (owner_id) references users(user_id),
+    constraint fk_payment_reservation foreign key (reservation_id) references reservations (reservation_id),
+    constraint chk_negative_amount check ( amount>=0 ),
+    CONSTRAINT unq_reservation_id UNIQUE (reservation_id)
+);
+
+create table reviews(
+    review_id bigint auto_increment,
+    comment varchar(250),
+    rating int not null,
+    review_owner_id bigint not null,
+    review_guardian_id bigint not null,
+    date date not null,
+    active boolean not null default 1,
+
+    constraint pk_review primary key (review_id),
+    constraint fk_review_owner_id foreign key (review_owner_id) references users (user_id),
+    constraint fk_review_guardian_id foreign key (review_guardian_id) references users (user_id)
+);
+
+create table messages(
+    message_id bigint auto_increment,
+    description varchar(250),
+    sender_id bigint not null,
+    receiver_id bigint not null,
+    date datetime not null,
+    active boolean not null default 1,
+
+    constraint pk_message primary key (message_id),
+    constraint fk_sender_id foreign key (sender_id) references users (user_id),
+    constraint fk_receiver_id foreign key (receiver_id) references users (user_id)
+);
+
+INSERT INTO pet_sizes(name) VALUES ("big");
+INSERT INTO pet_sizes(name) VALUES ("medium");
+INSERT INTO pet_sizes(name) VALUES ("small");
+
+CREATE PROCEDURE insertPet(IN p_name varchar(150), IN p_pet_type varchar(150), IN p_pet_size int, IN p_pet_breed varchar(150), IN p_observations varchar(250), IN p_owner_id bigint, IN p_vaccination_plan varchar(250), IN p_pet_img varchar(250), IN p_pet_video varchar(250))
+BEGIN
+
+    INSERT INTO pets (name, pet_type, pet_size, pet_breed, observations, owner_id, vaccination_plan, pet_img, pet_video) VALUES (p_name, p_pet_type, p_pet_size, p_pet_breed, p_observations, p_owner_id, p_vaccination_plan, p_pet_img, p_pet_video);
+
+    SELECT last_insert_id() as id_pet;
+
+END;
+
+CREATE PROCEDURE create_Reservation(IN p_price bigint, IN p_guardian_id bigint, IN p_owner_id bigint)
+BEGIN
+    
+    INSERT INTO reservations (price, guardian_id, owner_id, state) VALUES (p_price, p_guardian_id, p_owner_id, 'Pending');
+
+    SELECT last_insert_id() as id_reservation;
+
+END;
+```
+	
