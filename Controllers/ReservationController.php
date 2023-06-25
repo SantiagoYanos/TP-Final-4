@@ -277,6 +277,9 @@ class ReservationController
                 //No se encontraron mascotas ya reservadas en las fechas pedidas.
                 $reservationDAO->updateState($reservation->getId(), "Payment pending");
 
+                ////Mandar Cupon////
+                $payment->SendEmailCoupon($user->getEmail(), $reservation_id);
+
                 header("location: " . FRONT_ROOT . 'Guardian/ViewReservations?state=&rejected=&canceled=&alert="Reservation accepted"');
             }
         } catch (ReservationNotFoundException $e) {
